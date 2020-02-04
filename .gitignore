@@ -1,18 +1,13 @@
 # Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+bin-debug/*
+bin-release/*
+Gateway/*
+Hub 1.12.2/*
+Hub 1.15.2/*
+Archive Scripts/*
 
-# Other files and folders
-.settings/
+# File-types
+*.old
 
 # Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+.exe
