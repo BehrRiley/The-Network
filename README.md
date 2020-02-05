@@ -1,7 +1,11 @@
-# :taco: Table of Contents :taco:
+# :taco: Table of Contents - Scripts :taco:
 - [Scripts](../scripts/)
     - [x] Complete / Consistent
     - [ ] Revisit
+    - [Hub%201.15.2]() | Main Compatible Hub
+
+
+
     - [Quests](../scripts/Quests) | Quest Handling scripts
         - [ ] [Shield of Arrav](../scripts/Quests/Shield%20of%20Arrav.dsc)
     - [commands](../scripts/commands)
