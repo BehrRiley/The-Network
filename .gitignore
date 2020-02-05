@@ -19,6 +19,7 @@ Hub 1.15.2/plugins/*
 
 !Hub 1.15.2/plugins/denizen
 !Hub 1.15.2/plugins/denizen/
+Hub 1.15.2/plugins/denizen/data
 
 # Hub 1.12.2
 !Hub 1.12.2/**.jar
