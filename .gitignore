@@ -3,13 +3,12 @@ bin-debug/*
 bin-release/*
 
 # Restricted Folders
-Gateway/*
-Hub 1.12.2/*
 Archive Data/*
 Archive Scripts/*
 
 # Server Restricted Folders
 # Gateway
+Gateway/*
 !*Gateway/**.jar
 
 # Hub 1.15.2
