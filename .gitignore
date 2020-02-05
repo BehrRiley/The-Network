@@ -14,9 +14,11 @@ Archive Scripts/*
 !*Hub 1.15.2/**.jar
 !Hub 1.15.2/plugins
 Hub 1.15.2/plugins/*
-!Hub 1.15.2/plugins/**.jar
+# plugin jars
+#!Hub 1.15.2/plugins/**.jar
 
 !Hub 1.15.2/plugins/denizen
+!Hub 1.15.2/plugins/denizen/
 #!Hub 1.15.2/plugins
 #!Hub 1.15.2/plugins/Denizen/
 
