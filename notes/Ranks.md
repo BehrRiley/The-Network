@@ -1,3 +1,4 @@
+### Ranks
 - Coordinator
   - Industrialization
   - Mechanization
@@ -17,3 +18,4 @@
   - Patron
   - Visitor
   - Silent
+  ------
