@@ -5,12 +5,12 @@ bin-release/*
 # Restricted Folders
 Gateway/*
 Hub 1.12.2/*
-Hub 1.15.2/*
 Archive Data/*
 Archive Scripts/*
 
 # Server Restricted Folders
 # Hub 1.15.2
+Hub 1.15.2/*
 !*Hub 1.15.2/**.jar
 !Hub 1.15.2/plugins
 Hub 1.15.2/plugins/*
@@ -19,8 +19,6 @@ Hub 1.15.2/plugins/*
 
 !Hub 1.15.2/plugins/denizen
 !Hub 1.15.2/plugins/denizen/
-#!Hub 1.15.2/plugins
-#!Hub 1.15.2/plugins/Denizen/
 
 # Hub 1.12.2
 !Hub 1.12.2/**.jar
