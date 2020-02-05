@@ -9,6 +9,9 @@ Archive Data/*
 Archive Scripts/*
 
 # Server Restricted Folders
+# Gateway
+!*Gateway/**.jar
+
 # Hub 1.15.2
 Hub 1.15.2/*
 !*Hub 1.15.2/**.jar
@@ -16,16 +19,20 @@ Hub 1.15.2/*
 Hub 1.15.2/plugins/*
 # plugin jars
 #!Hub 1.15.2/plugins/**.jar
-
 !Hub 1.15.2/plugins/denizen
 !Hub 1.15.2/plugins/denizen/
 Hub 1.15.2/plugins/denizen/data
 
 # Hub 1.12.2
-!Hub 1.12.2/**.jar
-
-# Server Restricted Files
-# Hub 1.15.2
+Hub 1.12.2/*
+!*Hub 1.12.2/**.jar
+!Hub 1.12.2/plugins
+Hub 1.12.2/plugins/*
+# plugin jars
+#!Hub 1.12.2/plugins/**.jar
+!Hub 1.12.2/plugins/denizen
+!Hub 1.12.2/plugins/denizen/
+Hub 1.12.2/plugins/denizen/data
 
 # File-types
 *.old
