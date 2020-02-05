@@ -3,43 +3,12 @@
     - [x] Complete / Consistent
     - [ ] Revisit
     - [Hub 1.15.2](Hub%201.15.2/plugins/Denizen/scripts) | Main Compatible Hub
-    - [Quests](../scripts/Quests) | Quest Handling scripts
-        - [ ] [Shield of Arrav](../scripts/Quests/Shield%20of%20Arrav.dsc)
-    - [commands](../scripts/commands)
-        - [X] [Back](Hub%201.15.2/plugins/Denizen/scripts/Commands/Essentials%20Back.dsc) | returns you to where you teleported from
-        - [ ] [NpcSkinLoader](../scripts/commands/NpcSkinLoader.dsc) | loads NPC skin from URL
-        - [ ] [NpcSkinSaver](../scripts/commands/NpcSkinSaver.dsc) | saving NPC skins for assignment loading, prevents re-loading consistently
-    - [data](../scripts/data)
-        - [ ] [formatting](../scripts/data/formatting.dsc) | all formatting scripts
-        - [ ] [inventories](../scripts/data/inventories.dsc) | all inventory scripts - major rewrite for magic spellbooks
-        - [ ] [iQUOP](../scripts/NPCs/iQUOP.dsc) | custom item texture procedure - major rewrite
-        - [ ] [items](../scripts/NPCs/items.dsc) | all custom item scripts
-    - [mechanics](../scripts/mechanics)
-        - [ ] [Banking](../scripts/mechanics/Banking.dsc) | Player & Admin Banking System
-        - [ ] BehrEdit | World Edit Features
-        - [ ] [Combat](../scripts/mechanics/Combat.dsc) | Combat Algorithm - Major Rewrite
-        - [ ] [DialogueOptionBuilders](../scripts/mechanics/DialogueOptionBuilders.dsc)
-        - [ ] [Experience](../scripts/mechanics/Experience.dsc) | Skill Experience Algorithm
-        - [ ] [NPCMonitors](../scripts/mechanics/NPCMonitors.dsc) | Temporary Project for verifying ease between removing options from lists
-        - [ ] [PlayerDataManager](../scripts/mechanics/PlayerDataManager.dsc) | for YAML referencing additional custom player data
-        - [ ] [Thieving](../scripts/mechanics/Thieving.dsc) | Theiving skill - major rewrite
-        - [ ] [Colorize](../scripts/mechanics/Colorize.dsc)
-    - [NPCs](../scripts/NPCs)
-        - [Generic](../scripts/Quests/Generic) | Standard or recurring, generic NPCs
-            - [ ] [Banker](../scripts/NPCs/!Banker.dsc)
-            - [ ] [Man](../scripts/NPCs/!Man.dsc)
-        - [Tutorial](../scripts/Quests/Tutorial) | Tutorial Specific NPCs and related Tutorial Scripts
-            - [ ] [Gielinor%20Guide](../scripts/NPCs/Tutorial/Gielinor%20Guide.dsc)
-            - [ ] [TutorialHandler](../scripts/NPCs/Tutorial/TutorialHandler.dsc)
-        - [ ] [Template](../scripts/NPCs/!Template.dsc)
-        - [ ] [Hans](../scripts/NPCs/Hans.dsc)
-        - [ ] [Baraek](../scripts/NPCs/Baraek.dsc)
-        - [ ] [Charlie%20The%20Tramp](../scripts/NPCs/Charlie%20The%20Tramp.dsc)
-        - [ ] [Johnny%20The%20Beard](../scripts/NPCs/Johnny%20The%20Beard.dsc)
-        - [ ] [Katrine](../scripts/NPCs/Katrine.dsc)
-        - [ ] [Reldo](../scripts/NPCs/Reldo.dsc)
-        - [ ] [Straven](../scripts/NPCs/Straven.dsc)
-        - [ ] [Weaponmaster](../scripts/NPCs/Weaponmaster.dsc)
+    - [Hub 1.12.2](Hub%201.12.2/plugins/Denizen/scripts) | Compatibility Hub
+    - To-Do:
+        - [Web Host]() | Web Host Server
+        - [Discord]() | Discord Relay Server
+        - [Survival]() | Survival Server - Semi-Vanilla
+    
 
 ## Project Ideas
 ### Procedurally Generating Dungeons
