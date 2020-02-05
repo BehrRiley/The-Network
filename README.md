@@ -6,6 +6,8 @@
     - [BehrEdit]() | WorldEdit Features
     - [BehrBot]() | Discord Command Center
     - [Security]() | Grief Prevention, logging and management
+        - [Player Management]() | Data Control & Management
+        - [Currency Management]() | Monies & Points
 
 - [Hub 1.15.2](Hub%201.15.2/plugins/Denizen/scripts) | Main Compatible Hub
 - [Hub 1.12.2](Hub%201.12.2/plugins/Denizen/scripts) | Compatibility Hub
@@ -16,7 +18,13 @@
     - [Survival+]() | Massively Enhanced Survival Server - Semi-Vanilla, custom generation & difficulty
     - [Creative]() | Creative Server
     - [Gielinor]() | RPG Server - MMORPG based on Oldschool Runescape
+        - [Scripts]() | Game Development, mechanics, Etc
+        - [NPCs]() | NPC Scripting
+        - [Quests]() | Quest Development - Notes, Transcripts, Etc
+        - [Dungeoneering]() | Procedurally Generating Dungeons
+        - [Minigames]() | Minigame Development - Notes, Transcripts, Etc
+        - [Skills]() | Skill Development - Notes, Mechanics, Etc
     ------
     - [WorldPainter]() | Geographic Management & Design
     - [MCEdit]() | Post-Geographic Development, Structual & Constructive
-    - []() |
+    - [Resource]() | Resource Pack - Build & Release
