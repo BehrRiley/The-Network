@@ -26,7 +26,7 @@ Essentials:
             #- bungeerun <bungee.list_servers.exclude[<bungee.server>]> Relay_Chat_Task def:Global|<[Message].escaped>
         on player logs in:
             - wait 1s
-            - run Chat_Channel_Load def:Global
+            #- run Chat_Channel_Load def:Global
             - if <player.has_flag[behrry.essentials.display_name]>:
                 - adjust <player> display_name:<player.flag[behrry.essentials.display_name]>
         on player joins:
