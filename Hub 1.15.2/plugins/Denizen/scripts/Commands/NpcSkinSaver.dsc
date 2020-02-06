@@ -3,6 +3,7 @@
 
 npc_skin_save_command:
     type: command
+    debug: false
     name: saveskin
     usage: /saveskin <&lt>Name<&gt>
     description: Saves ye skin
@@ -13,6 +14,7 @@ npc_skin_save_command:
 
 npc_skin_load_command:
     type: command
+    debug: false
     name: loadskin
     usage: /loadskin <&lt>Name<&gt>
     description: Loads ye skin
@@ -26,6 +28,7 @@ npc_skin_load_command:
 
 npc_skin_validate:
     type: task
+    debug: false
     script:
     - if !<player.has_permission[denizen.saveskin]||<<player.is_op||context.server>>>:
       - narrate "Nope!"
