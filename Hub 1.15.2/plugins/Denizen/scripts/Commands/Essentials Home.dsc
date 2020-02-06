@@ -49,7 +49,7 @@ Home_Command:
         
         - if <context.args.get[1]||null> == remove || <context.args.get[2]||null> == remove:
             - if <player.flag[behrry.essentials.homes.name].contains[<[Name]>]>:
-                - narrate "<proc[Colorize].context[Home Removed.|green]>"
+                - narrate "<&2>H<&a>ome <proc[Colorize].context[[<[Name]>]|yellow]> <&2>R<&a>emoved<&2>."
                 - flag player behrry.essentials.homes.name:<-:<[Name]>
                 - flag player behrry.essentials.homes.location:<-:<[Location]>
             - else:
@@ -58,7 +58,7 @@ Home_Command:
             - if <player.flag[behrry.essentials.homes.name].contains[<[Name]>]>:
                 - flag <player> behrry.essentials.teleport.back:<player.location>
                 - teleport <player> <[Location]>
-                - narrate "<proc[Colorize].context[Teleported to:|green]> <&e><player.flag[behrry.essentials.homes.name].get[<[Ref]>]>"
+                - narrate "<proc[Colorize].context[Teleported to:|green]> <&6>[<&e><player.flag[behrry.essentials.homes.name].get[<[Ref]>]><&6>]"
             - else:
                 - narrate "<proc[Colorize].context[That home does not exist.|red]>"
 
