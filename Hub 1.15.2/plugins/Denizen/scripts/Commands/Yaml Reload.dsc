@@ -2,7 +2,7 @@
 yamlreload_Command:
     type: command
     name: yamlreload
-    debug: true
+    debug: false
     FileDirectories:
         Player: data/pData/<player.uuid>.yml
         QuestData: data/QuestData.yml
