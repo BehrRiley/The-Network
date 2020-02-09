@@ -19,7 +19,11 @@ Essentials:
             - determine passively cancelled
             - if <player.has_flag[Interacting_NPC]>:
                 - stop
-            - define Message "<player.chat_prefix><player.name.display><&r>: <context.message.parse_color>"
+            - define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
+            - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.name.display><&r>"
+            - define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
+            - define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+            - define Message "<[NamePlate]>: <context.message.parse_color>"
             #- discord id:GeneralBot Message channel:623742787615064082 "**[<player.groups.get[1]>]** <player.name.display.strip_color>: <context.message.strip_color>"
             - flag server Behrry.Essentials.ChatHistory.Global:->:<[Message].escaped>
             - announce <[Message]>
@@ -65,3 +69,31 @@ Essentials:
                 - inventory set d:<player.inventory> o:<player.flag[gamemode.inventory.<context.gamemode>].as_list>
             - else:
                 - flag player gamemode.inventory.<context.gamemode>:<player.inventory.list_contents>
+
+Ranks:
+    type: yaml data
+    Moderation:
+        Prefix:
+            CMeme: <&a>☼<&sp>
+            Administrator: ☼<&sp>
+            Moderator: ☼<&sp>
+            Support: ▓<&sp>
+        HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Report Issue|yellow]>"
+        CmdNP: "snp message: "
+    Producers:
+        Prefix:
+            Developer: ▓<&sp>
+            Architect: ▓<&sp>
+            Constructor: ▓<&sp>
+            Builder: ▓<&sp>
+        HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Private Message|yellow]>"
+        CmdNP: "msg <player.name> "
+    Public:
+        Prefix:
+            Sponsor: <&sp>
+            Patron: <&sp>
+            Visitor: <&2>[<&a>New<&2>]<&sp>
+            Silent: <&sp>
+            Muted: <&4>[<&c>Muted<&4>]<&sp>
+        HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Private Message|yellow]>"
+        CmdNP: "msg <player.name> "
