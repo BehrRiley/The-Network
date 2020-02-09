@@ -15,7 +15,7 @@ Nickname_Command:
         - nick
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - if <player.has_flag[behrry.essentials.tabofflinemode]>:
+            - if !<player.has_flag[behrry.essentials.tabofflinemode]>:
                 - if <context.args.size||0> == 0:
                     - determine <server.list_online_players.parse[name].exclude[<player.name>]>
                 - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
