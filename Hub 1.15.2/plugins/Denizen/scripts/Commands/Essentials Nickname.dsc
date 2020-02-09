@@ -11,6 +11,8 @@ Nickname_Command:
     admindescription: Changes a your own or another player's display name.
     usage: /nickname <&lt>Nickname<&gt>
     adminusage: /nickname (Player) <&lt>Nickname<&gt>
+    permission: behrry.essentials.nickname
+    adminpermission: behrry.essentials.nickname.others
     aliases:
         - nick
     tab complete:
