@@ -18,12 +18,12 @@ Command_Error:
     - narrate <proc[MsgHint].context[<[Message]>|<[Command]>|<[Hover]>]>
     - stop
 
-Permission_Verification:
+Admin_Permission_Denied:
   type: task
   debug: false
   script:
     - if <player.flag[Behrry.Essentials.Rank]> > <[Rank]>
-      - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><[Rank]>"
+      - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.yaml_key[adminpermission]>"
       - define Message "<proc[Colorize].context[You don't have permission to do that.|red]>"
       - narrate <proc[HoverMsg].context[<[Message]>|<[Hover]>]>
       - stop
@@ -45,9 +45,9 @@ Player_Verification_Offline:
   type: task
   debug: false
   ErrorProcess:
-    - define Message "<proc[Colorize].context[Player does not exist.|red]>"
-    - define Hover "<&6>Y<&e>ou <&6>E<&e>ntered<&co><&nl><&c>/<context.command.to_lowercase> <context.raw_args>"
-    - narrate <proc[MsgHover].context[<[Message]>|<[Hover]>]>
+    - define Hover "<&6>Y<&e>ou <&6>E<&e>ntered<&e>:<&nl><&c>/<context.command.to_lowercase> <context.raw_args>"
+    - define Text "<proc[Colorize].context[Player does not exist.|red]>"
+    - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
     - stop
   script:
     - if <server.match_player[<[User]>]||null> == null:
