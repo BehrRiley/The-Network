@@ -102,16 +102,6 @@ GMR_Command:
             - inject Command_Syntax Instantly
             
         # - argcheck 2 - Toggle or time?   /c [1] [?]
-        
-
-        # - argcheck 3 - time
-        - if <context.args.get[3]||null> != null:
-            - define Measurement <context.args.get[3].char_at[<context.args.get[3].length>]>
-            - define Duration <context.args.get[3].before[<[Measurement]>]>:
-            - if <[Duration].is_integer> && <list[S|M|H].contains[<[Measurement]>]>:
-                - define Time <duration[<[Duration]><[Measurement]>]>
-
-        # - argcheck 2 - toggle / time
         - if <context.args.get[2]||null> != null:
             - if <list[Open|Close|True|False|On|Off].contains[<context.args.get[2]>]>:
                 - choose <context.args.get[2]>:
@@ -121,6 +111,20 @@ GMR_Command:
                         - define Toggle FALSE
             - else:
                 - inject Command_Syntax Instantly
+                - define Measurement <context.args.get[3].char_at[<context.args.get[3].length>]>
+                - define Duration <context.args.get[3].before[<[Measurement]>]>:
+                - if <[Duration].is_integer> && <list[S|M|H].contains[<[Measurement]>]>:
+                    - define Time <duration[<[Duration]><[Measurement]>]>
+                - else:
+                    - Inject Command_Syntax Instantly
+                    
+        # - argcheck 3 - time
+        - if <context.args.get[3]||null> != null:
+            - define Measurement <context.args.get[3].char_at[<context.args.get[3].length>]>
+            - define Duration <context.args.get[3].before[<[Measurement]>]>:
+            - if <[Duration].is_integer> && <list[S|M|H].contains[<[Measurement]>]>:
+                - define Time <duration[<[Duration]><[Measurement]>]>
+
         - else:
             - if <server.has_flag[behrry.essentials.gamemoderequest.<[Gamemode]>.open]>:
                 - define Toggle FALSE
