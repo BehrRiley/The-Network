@@ -35,6 +35,7 @@ Help_Handler:
                     - foreach next
                 - else:
                     - define CommandList:->:<[Command]>
+
             # Distribute Pages
             - define Count 6
             - define PageCount <[CommandList].size.div[<[Count]>].round_up>
@@ -45,11 +46,22 @@ Help_Handler:
                 - define Math2 "<element[<[Count]>].mul[<[value].sub[1]>].add[<[Count].sub[1]>]>"
                 - define CommandPage<[Value]> "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
                 
-                           # + -------- /Help | Commands | Info -------- +"
-                           # /command <args> (args) | Does this thing here
-                           # + -------- [ ] Previous | Next [ ] -------- +"
+            # Setup Notes
+            # + -------- /Help | Commands | Info -------- +"
+            # /command <args> (args) | Does this thing here
+            # + -------- [ ] Previous | Next [ ] -------- +"
+
+            # Format Body
+            # /command <args> (args) | Does this thing here
+
+
+            # Format Header
+            # + -------- /Help | Commands | Info -------- +"
             - define DP "<element[].pad_left[3].with[x].replace[x].with[<&2>-<&a>-]>"
             - define Header "+ <[DP]> <proc[Colorize].context[/Help | Commands | Info|Green]> <[DP]> +"
+            
+            # Format Footer
+            # + -------- [ ] Previous | Next [ ] -------- +"
             - define Footer "+ <[DP]> <proc[Colorize].context[[x] Previous | Next [y]|Green]> <[DP]> +"
             - if <[HelpPage]> > 1:
                 - define Hover "<proc[Colorize].context[|green]>"
@@ -63,7 +75,7 @@ Help_Handler:
                 - define Text "<6>[<e>symbol<&6>]"
                 - define Command Help "<[HelpPage].sub[1]>"
                 - define Previous "<proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
-            - else if <[HelpPage]> < <[PageCount]> && <[HelpPage]> > 1:
+            - else if <[HelpPage]> <= <[PageCount]> && <[HelpPage]> > 1:
                 - define Hover1 "<proc[Colorize].context[|green]>"
                 - define Text1 "<6>[<e>symbol<&6>]"
                 - define Command1 "Help <[HelpPage].add[1]>"
