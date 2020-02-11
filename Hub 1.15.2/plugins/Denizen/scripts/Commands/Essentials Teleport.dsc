@@ -6,12 +6,6 @@ teleport_Command:
     usage: /teleport <&lt>PlayerName<&gt> (<&lt>PlayerName<&gt>)*
     aliases:
         - tp
-    error:
-        - define Command "<queue.script.yaml_key[aliases].get[1]||<queue.script.yaml_key[Name]>> "
-        - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/tp <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.yaml_key[Use].parsed>"
-        - define Message "<proc[Colorize].context[<[Reason]>|red]>"
-        - narrate <proc[MsgHint].context[<[Message]>|<[Command]>|<[Hover]>]>
-        - stop
     script:
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
@@ -27,7 +21,7 @@ teleport_Command:
             - foreach <context.raw_args.split[<&sp>].get[1].to[<context.args.size.sub[1]>]> as:User:
                 - inject Player_Verification
                 - if <[PlayerList].contains[<[User]>]||false>:
-                    - define reason "<[User].name> was entered more than once."
+                    - define reason "<proc[Player_Display_Simple].context[<[User]>]> was entered more than once."
                     - inject Command_Error Instantly
                 - if <[User]> == <player>:
                     - define reason "You cannot teleport to yourself."
