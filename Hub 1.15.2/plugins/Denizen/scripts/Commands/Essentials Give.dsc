@@ -23,7 +23,7 @@ Give_Command:
           - determine <[list]>
         - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
           - determine <[List].filter[starts_with[<context.args.get[2]>]]>
-          script:
+    script:
         - execute as_server "denizen do_nothing"
 
 Give_Handler:
