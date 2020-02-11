@@ -36,9 +36,13 @@ Help_Handler:
                 - else:
                     - define CommandList:->:<[Command]>
             # Distribute Pages
-            - repeat <[CommandList].size.div[8].round_up>:
-                - define Math1 ""
-                - define Math2 ""
+            - define Count 6
+            - define PageCount <[CommandList].size.div[<[Count]>].round_up>
+            - repeat <[PageCount]>:
+                # 1,9,17,25
+                # a_n=8(n-1)+1
+                - define Math1 "<element[<[Count]>].mul[<[value].sub[1]>].add[1]>"
+                - define Math2 "<element[<[Count]>].mul[<[value].sub[1]>].add[<[Count].sub[1]>]>"
                 - define CommandPage<[Value]> "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
                 
                            # + -------- /Help | Commands | Info -------- +"
@@ -47,19 +51,19 @@ Help_Handler:
             - define DP "<element[].pad_left[3].with[x].replace[x].with[<&2>-<&a>-]>"
             - define Header "+ <[DP]> <proc[Colorize].context[/Help | Commands | Info|Green]> <[DP]> +"
             - define Footer "+ <[DP]> <proc[Colorize].context[[x] Previous | Next [y]|Green]> <[DP]> +"
-            - if <page is higher than 1>:
+            - if <[HelpPage]> > 1:
                 - define Hover "<proc[Colorize].context[|green]>"
                 - define Text "<6>[<e>symbol<&6>]"
                 - define Command "Help <[HelpPage].add[1]>"
                 - define Next "<proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
                 - define Previous "<darkgray>[<gray>symbol<darkgray>"
-            - else if <page is last>:
+            - else if <[HelpPage]> == <[PageCount]>:
                 - define Next <darkgray>[<gray>symbol<darkgray>
                 - define Hover "<proc[Colorize].context[|green]>"
                 - define Text "<6>[<e>symbol<&6>]"
                 - define Command Help "<[HelpPage].sub[1]>"
                 - define Previous "<proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
-            - else if <page is lower than max> && <page is higher than 1>:
+            - else if <[HelpPage]> < <[PageCount]> && <[HelpPage]> > 1:
                 - define Hover1 "<proc[Colorize].context[|green]>"
                 - define Text1 "<6>[<e>symbol<&6>]"
                 - define Command1 "Help <[HelpPage].add[1]>"
