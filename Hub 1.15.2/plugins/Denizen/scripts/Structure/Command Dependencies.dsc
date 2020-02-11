@@ -64,6 +64,6 @@ User_Display_Simple:
   definitions: User
   script:
     - if <[User].has_flag[behrry.essentials.display_name]>:
-      - determine "<[User].name.display> <&6>(<&e><[User].name><&6>)"
+      - determine "<proc[Colorize].context[<[User].name.display>|yellow]> <proc[Colorize].context[<[User].name>)|yellow]>"
     - else:
-      - determine "<&e><[User].name>"
+      - determine "<proc[Colorize].context[<[User].name>|yellow]>"
