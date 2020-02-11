@@ -17,6 +17,7 @@ Help_Handler:
     debug: false
     events:
         on help command:
+            # Verify command syntax
             - determine passively fulfilled
             - if <context.args.get[2]||null> != null:
                 - inject Command_Syntax Instantly
@@ -27,13 +28,19 @@ Help_Handler:
             - else:
                 - inject Command_Syntax Instantly
 
+            # Verify Permissions | Build list
             - define Commands <server.list_scripts.parse[name].filter[ends_with[_Command]]>
             - foreach <[Commands]> as:command:
                 - if !<player.has_permission[<script[<[Command]>_Command].yaml_key[permission]>]>:
                     - foreach next
                 - else:
                     - define CommandList:->:<[Command]>
-                    
+            # Distribute Pages
+            - repeat <[CommandList].size.div[8].round_up>:
+                - define Math1 ""
+                - define Math2 ""
+                - define CommandPage<[Value]> "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
+                
                            # + -------- /Help | Commands | Info -------- +"
                            # /command <args> (args) | Does this thing here
                            # + -------- [ ] Previous | Next [ ] -------- +"
