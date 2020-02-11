@@ -1,8 +1,8 @@
 # | ███████████████████████████████████████████████████████████
-# % ██    //give Command for giving items
+# % ██    /help Command for information on commands
 # | ██
 # % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | offline capabilities
+# $ ██  [ TO-DO   ] ██ 
 Help_Command:
     type: command
     name: help
@@ -35,16 +35,6 @@ Help_Handler:
                     - foreach next
                 - else:
                     - define CommandList:->:<[Command]>
-
-            # Distribute Pages
-            - define Count 6
-            - define PageCount <[CommandList].size.div[<[Count]>].round_up>
-            - repeat <[PageCount]>:
-                # 1,9,17,25
-                # a_n=8(n-1)+1
-                - define Math1 "<element[<[Count]>].mul[<[value].sub[1]>].add[1]>"
-                - define Math2 "<element[<[Count]>].mul[<[value].sub[1]>].add[<[Count].sub[1]>]>"
-                - define CommandPage<[Value]> "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
                 
             # Setup Notes
             # + -------- /Help | Commands | Info -------- +"
@@ -53,7 +43,16 @@ Help_Handler:
 
             # Format Body
             # /command <args> (args) | Does this thing here
-
+            
+            # Distribute Pages
+            - define Lines 6
+            - define PageCount <[CommandList].size.div[<[Lines]>].round_up>
+            - repeat <[PageCount]>:
+                # 1,9,17,25
+                # a_n=8(n-1)+1
+                - define Math1 "<element[<[Lines]>].mul[<[value].sub[1]>].add[1]>"
+                - define Math2 "<element[<[Lines]>].mul[<[value].sub[1]>].add[<[Lines].sub[1]>]>"
+                - define CommandPage<[Value]> "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
 
             # Format Header
             # + -------- /Help | Commands | Info -------- +"
@@ -88,3 +87,13 @@ Help_Handler:
                 - define reason "Invalid Page Number."
                 - inject Command_Error Instantly
             - define Footer <[Footer].replace[[x]].with[<[Previous]>].replace[[y]].with[<[Next]>]>
+            
+            # Print
+            - narrate <[Header]>
+            - foreach <[CommandPage<[HelpPage]>]> as:Command:
+                # <script[<[Command]>_Command].yaml_key[#####]>]>
+                - define Hover "<proc[Colorize].context[Click to Insert:|green]><&nl><proc[Colorize].context[<[Command]>|Yellow]>"
+                - define Text "<proc[Colorize].context[<[Command]>|Yellow]> <lightblue>| <&e><script[<[Command]>_Command].yaml_key[description]>]>"
+                - define Command "<[Command]>"
+                - narrate "<proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>"
+            - narrate <[Footer]>
