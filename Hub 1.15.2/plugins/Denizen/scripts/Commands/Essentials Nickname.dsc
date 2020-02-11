@@ -82,10 +82,6 @@ Nickname_Command:
         - define Command "nick <[User].name.display.escaped.replace[&ss].with[&]>"
         - narrate targets:<[User]> <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
         - if <[AdminRan].exists>:
-            - if <[User].has_flag[behrry.essentials.display_name]>:
-                - narrate targets:<Player> "<[User].name.display> <&6>(<&e><[User].name><&6>)<proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
-            - else:
-                - narrate targets:<Player> "<&e><[User].name><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
-
+            - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
         - adjust <[User]> display_name:<[Nickname].parse_color>
         - flag <[User]> behrry.essentials.display_name:<[Nickname].parse_color>
