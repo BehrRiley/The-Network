@@ -12,10 +12,10 @@ Command_Error:
   type: task
   debug: false
   script:
-    - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias>> "
     - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.yaml_key[Usage].parsed>"
-    - define Message "<proc[Colorize].context[<[Reason]>|red]>"
-    - narrate <proc[MsgHint].context[<[Message]>|<[Command]>|<[Hover]>]>
+    - define Text "<proc[Colorize].context[<[Reason]>|red]>"
+    - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias>> "
+    - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
     - stop
 
 Admin_Permission_Denied:
@@ -57,3 +57,13 @@ Player_Verification_Offline:
         - define User <server.match_offline_player[<[User]>]>
     - else:
       - define User <server.match_player[<[User]>]>
+
+User_Display_Simple:
+  type: procedure
+  debug: false
+  definitions: User
+  script:
+    - if <[User].has_flag[behrry.essentials.display_name]>:
+      - determine "<&r><[User].name.display><&r> <proc[Colorize].context[<[User].name>)|yellow]>"
+    - else:
+      - determine "<proc[Colorize].context[<[User].name>|yellow]>"
