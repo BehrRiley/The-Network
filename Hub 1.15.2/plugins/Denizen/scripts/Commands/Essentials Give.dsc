@@ -9,8 +9,9 @@ Give_Command:
     debug: false
     description: Gives yourself an item.
     admindescription: gives yourself or another player an item.
-    useage: /give <&lt>Item<&gt> (#) (-s)
+    usage: /give <&lt>Item<&gt> (#) (-s)
     adminusage: /give <&lt>Item<&gt> (#) (-s)
+    permission: behrry.essentials.give
     tab complete:
         - if <context.args.size||0> == 0:
           - determine <server.list_online_players.parse[name]>

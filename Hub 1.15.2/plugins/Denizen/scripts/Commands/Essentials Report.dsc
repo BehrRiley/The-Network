@@ -4,6 +4,7 @@ Report_Command:
     debug: false
     description: Reports a bug, an issue, or makes a suggestion directly to the coordinator.
     usage: /report <&lt>message<&gt>
+    permission: behrry.essentials.report
     script:
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly

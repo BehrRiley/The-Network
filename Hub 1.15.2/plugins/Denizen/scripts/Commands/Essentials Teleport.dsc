@@ -4,6 +4,7 @@ teleport_Command:
     debug: false
     description: Teleports you to the first player, or the first player to the second.
     usage: /teleport <&lt>PlayerName<&gt> (<&lt>PlayerName<&gt>)*
+    permission: behrry.essentials.teleport
     aliases:
         - tp
     script:

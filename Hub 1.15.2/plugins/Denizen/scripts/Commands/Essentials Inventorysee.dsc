@@ -12,6 +12,7 @@ inventorysee_Command:
       - invsee
       - inv
     usage: /inventorysee <&lt>Player<&gt>
+    permission: behrry.essentials.inventorysee
     tab complete:
         - if <player.groups.contains[Moderation]>:
             - if !<player.has_flag[behrry.essentials.tabofflinemode]>:

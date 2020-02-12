@@ -1,5 +1,5 @@
 #| this eeds completely overhauled, i feel queasy looking at this trash
-yamlreload_Command:
+yamlreload_Commando:
     type: command
     name: yamlreload
     debug: false

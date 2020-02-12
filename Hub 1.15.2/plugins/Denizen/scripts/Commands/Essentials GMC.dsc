@@ -14,6 +14,7 @@ GMC_Command:
     admindescription: Adjusts another player's or your own gamemode to Creative Mode
     usage: /gmc
     adminusage: /gmc (Player)
+    permission: behrry.essentials.gmc
     tab complete:
         - if <player.flag[Behrry.Essentials.Rank]> < 3:
             - if <context.args.size||0> == 0:

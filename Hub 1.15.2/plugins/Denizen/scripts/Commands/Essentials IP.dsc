@@ -4,6 +4,7 @@ IP_Command:
     debug: false
     description: pulls the specified player's IP address
     usage: /ip <&lt>Player<&gt>
+    permission: behrry.essentials.ip
     aliases:
         - userip
     tab complete:

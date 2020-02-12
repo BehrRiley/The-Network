@@ -1,0 +1,34 @@
+Players:
+  4F:
+    4FBCA51C2C034D4FB1FBF2462609A058:
+      Flags:
+        GAMEMODE:
+          INVENTORY:
+            CREATIVE:
+            - i@red_concrete
+            - i@blue_concrete
+            - i@white_concrete
+Global:
+  Flags:
+    BEHRRY:
+      ESSENTIALS:
+        CHATHISTORY:
+          GLOBAL:
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ Behr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co r'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ Behr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co hi'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ Behr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co hello'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ Behr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co hi'
+          - '&ss&lbhover=SHOW_TEXT&scscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotHoverNP&amprb&dotparsed&rb&ss&lbclick=suggest_command&sc&fsscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotCmdNP&amprb&dotparsed&rbscript&lbRanks&rb&dotyaml_key&lb&ltplayer&dotgroups&dotget&lb1&rb&gt&dotPrefix&dot&ltplayer&dotgroups&dotget&lb2&rb&gt&rb&dotparsedBehr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            a'

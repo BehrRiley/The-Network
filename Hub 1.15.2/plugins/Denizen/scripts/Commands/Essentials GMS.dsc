@@ -9,6 +9,7 @@ GMS_Command:
     description: Adjusts your gamemode to Survival Mode.
     admindescription: Adjusts another player's or your own gamemode to Survival Mode
     usage: /gms
+    permission: behrry.essentials.gms
     adminusage: /gms (Player)
     tab complete:
         - if <player.flag[Behrry.Essentials.Rank]> < 3:

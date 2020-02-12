@@ -14,10 +14,10 @@ tablist:
     events:
       on delta time secondly:
         - foreach <server.list_online_players>:
-          - if <context.second.mod[20]> >= 10:
-            - adjust <[value]> "player_list_name:<[value].chat_prefix><[value].name>"
-          - else:
-            - adjust <[value]> "player_list_name:<[value].chat_prefix><[value].name.display.parse_color>"
+          #- if <context.second.mod[20]> >= 10:
+          #  - adjust <[value]> "player_list_name:<[value].chat_prefix><[value].name>"
+          #- else:
+          #  - adjust <[value]> "player_list_name:<[value].chat_prefix><[value].name.display.parse_color>"
           - define header "<script.yaml_key[header].separated_by[<&nl>].parsed>"
           - define footer "<script.yaml_key[footer].separated_by[<&nl>].parsed>"
           - adjust <[value]> tab_list_info:<[header]>|<[footer]>

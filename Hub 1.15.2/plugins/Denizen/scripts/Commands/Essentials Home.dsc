@@ -8,6 +8,7 @@ Home_Command:
     name: home
     debug: false
     description: Teleports you to a home.
+    permission: behrry.essentials.home
     aliases:
       - h
       - homes

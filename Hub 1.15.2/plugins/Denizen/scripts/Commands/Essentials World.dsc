@@ -4,6 +4,7 @@ World_Command:
     debug: false
     description: Teleports you to the specified world.
     usage: /world <&lt>WorldName<&gt>
+    permission: behrry.essentials.world
     tab complete:
         - if <context.args.size||0> == 0:
             - determine <server.list_worlds.parse[name].exclude[Runescape50px1]>

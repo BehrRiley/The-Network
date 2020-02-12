@@ -4,6 +4,7 @@ Discord_Command:
     debug: false
     description: Gives you the discord link.
     usage: /discord
+    permission: behrry.essentials.discord
     script:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly

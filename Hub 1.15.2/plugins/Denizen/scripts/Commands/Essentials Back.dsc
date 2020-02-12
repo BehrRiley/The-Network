@@ -8,7 +8,8 @@ back_Command:
     name: back
     debug: false
     description: Returns you back to your last location.
-    useage: /back
+    usage: /back
+    permission: behrry.essentials.back
     script:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly

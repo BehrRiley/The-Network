@@ -3,7 +3,7 @@
 # | ██
 # % ██  [ Command ] ██
 # $ ██  [ TO-DO   ] ██ | 
-Nickname_Command:
+TabOffline_Command:
     type: command
     name: tabofflinemode
     debug: false

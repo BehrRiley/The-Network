@@ -2,7 +2,7 @@ RestoreInventory_Command:
   type: command
   name: restoreinventory
   debug: false
-  description:
+  description: Restores a previous inventory for a player after death.
   aliases:
   - rinv
   - restoreinv
@@ -10,6 +10,7 @@ RestoreInventory_Command:
   - invrestore
   - inventoryrestore
   usage: /restoreinv <&lt>PlayerName<&gt>(1-10/Backup)
+  permission: behrry.essentials.inventoryrestore
   script:
     - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
         - inject Command_Syntax Instantly

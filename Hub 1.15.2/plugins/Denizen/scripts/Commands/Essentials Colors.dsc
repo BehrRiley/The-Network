@@ -3,7 +3,8 @@ Colors_Command:
     name: colors
     debug: false
     description: Lists the colors in a click-menu
-    useage: <&6>/<&e>Colors
+    usage: /colors
+    permission: behrry.essentials.colors
     script:
         - if <context.args.get[1]||null> != null
             - Inject Command_Syntax Instantly

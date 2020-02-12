@@ -11,6 +11,7 @@ SetHome_Command:
     aliases:
         - seth
     usage: /sethome <&lt>HomeName<&gt>
+    permission: behrry.essentials.sethome
     tab complete:
         - if <player.has_flag[behrry.essentials.homes.name]>:
             - if <context.raw_args.contains_any[<player.flag[behrry.essentials.homes.name]>]>:
