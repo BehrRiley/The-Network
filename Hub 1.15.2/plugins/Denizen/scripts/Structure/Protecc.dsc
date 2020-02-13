@@ -7,8 +7,8 @@ Deprec_Command:
     type: command
     name: t
     debug: true
-    description: Changes your display name.
-    usage: /nickname <&lt>Nickname<&gt>
+    description: aaa
+    usage: /aaaa
     permission: behrry.essentials.nickname
     aliases:
         - knee
@@ -18,15 +18,15 @@ Deprec_Command:
         - define Size <yaml[<[Key]>].list_keys[<player.location.cursor_on>].size>
         - define Logs "<yaml[<[Key]>].list_keys[<player.location.cursor_on>].sort_by_number[in_hours].get[<[Size].sub[10]>].to[<[Size]>]>"
         - foreach <[Logs].parse[replace[tacosauce].with[.].as_duration]> as:Log:
-            - define Mo <[Log]...pad_left[2].with[0]>
-            - define da <[Log]...pad_left[2].with[0]>
-            - define yy <[Log]...pad_left[2].with[0]>
-            - define hh <[Log]...pad_left[2].with[0]>
-            - define mi <[Log]...pad_left[2].with[0]>
-            - define ss <[Log]...pad_left[2].with[0]>
+            # - define PrintTime [<util.date.time.duration.time.month.pad_left[2].with[0]>/<util.date.time.duration.time.day.pad_left[2].with[0]>/<util.date.time.duration.time.year>]-[<util.date.time.duration.time.hour.pad_left[2].with[0]>:<util.date.time.duration.time.minute.pad_left[2].with[0]>:<util.date.time.duration.time.second.pad_left[2].with[0]>]
+            - define Mo <[Log].time.month.pad_left[2].with[0]>
+            - define da <[Log].time.day.pad_left[2].with[0]>
+            - define yy <[Log].time.year.after[20]>
+            - define hh <[Log].time.hour.pad_left[2].with[0]>
+            - define mi <[Log].time.minute.pad_left[2].with[0]>
+            - define ss <[Log].time.second.pad_left[2].with[0]>
             - define formattedtime [<[mo]>/<[da]>/<[yy]>]-[<[hh]>:<[mi]>:<[ss]>]
             - narrate <[formattedtime]>
-
 #-<util.date.format[[MM:dd:yy]-[KK:mm:hh]]>
 
 
