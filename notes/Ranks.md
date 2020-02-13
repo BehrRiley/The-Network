@@ -12,6 +12,7 @@
   - Developer
   - Architect
   - Constructor
+  - Builder
 
 - Publics
   - Sponsor

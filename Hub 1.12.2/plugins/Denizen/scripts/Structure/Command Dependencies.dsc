@@ -12,9 +12,9 @@ Command_Error:
   type: task
   debug: false
   script:
-    - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.yaml_key[Usage].parsed>"
+    - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.yaml_key[Usage].parsed>"
     - define Text "<proc[Colorize].context[<[Reason]>|red]>"
-    - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias>> "
+    - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias||<context.command>>> "
     - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
     - stop
 

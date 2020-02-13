@@ -9,12 +9,18 @@ Help_Command:
     debug: false
     description: Prints commands and command info.
     usage: /help (#)
+    permission: behrry.essentials.help
+    tab complete:
+        - determine ""
     script:
         - execute as_server "denizen do_nothing"
 
 Help_Handler:
     type: world
     debug: false
+    description: Prints commands and command info.
+    usage: /help (#)
+    permission: behrry.essentials.help
     events:
         on help command:
             # Verify command syntax
@@ -33,8 +39,8 @@ Help_Handler:
             # Verify Console Ran
             - if <context.source_type> == server:
                 - foreach <[Commands]> as:command:
-                    - define Syntax "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed>|Yellow]>"
-                    - define Description "<&b>| <&3><script[<[Command]>].yaml_key[description]>"
+                    - define Syntax "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed||>|Yellow]>"
+                    - define Description "<&b>| <&3><script[<[Command]>].yaml_key[description]||>"
                     - announce to_console "<[Syntax]> <[Description]>"
                 - stop
 
@@ -57,6 +63,9 @@ Help_Handler:
             # Distribute Pages
             - define Lines 8
             - define PageCount <[CommandList].size.div[<[Lines]>].round_up>
+            - if <[HelpPage]> > <[PageCount]>:
+                - define reason "Invalid Page Number."
+                - inject Command_Error Instantly
             - define Math1 "<element[<[Lines]>].mul[<[HelpPage].sub[1]>].add[1]>"
             - define Math2 "<element[<[Lines]>].mul[<[HelpPage].sub[1]>].add[<[Lines]>]>"
             - define CommandPage "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
@@ -89,7 +98,7 @@ Help_Handler:
                 - define Command2 "Help <[HelpPage].add[1]>"
                 - define Next "<proc[MsgCmd].context[<[Hover2]>|<[Text2]>|<[Command2]>]>"
 
-            - else <[HelpPage]> == <[PageCount]>:
+            - else if <[HelpPage]> == <[PageCount]>:
                 - define Hover "<proc[Colorize].context[Click for Page:|green]><&nl><&6>[<&e><&chr[25c0]>-<&6>] <proc[Colorize].context[(<[HelpPage].sub[1]>/<[PageCount]>)|yellow]> <&6>[<&e><&chr[25c0]>-<&6>]"
                 - define Text "<&6>[<&e><&chr[25c0]><&6>]"
                 - define Command "Help <[HelpPage].sub[1]>"

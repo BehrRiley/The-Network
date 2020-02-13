@@ -8,6 +8,18 @@ Players:
             - i@red_concrete
             - i@blue_concrete
             - i@white_concrete
+        BEHRRY:
+          MODERATION:
+            COMMANDLISTENING: 'true'
+          ESSENTIALS:
+            DISPLAY_NAME: B§ae§fhr
+        CLOSEENOUGHFORASANDWICH: 'true'
+  '11':
+    11AAA0BC3AB946FE99F59EF8E61FBB12:
+      Flags:
+        BEHRRY:
+          ESSENTIALS:
+            DISPLAY_NAME: B§be§fhrry
 Global:
   Flags:
     BEHRRY:
@@ -32,3 +44,97 @@ Global:
             &rb&ssa☼ Behr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co hi'
           - '&ss&lbhover=SHOW_TEXT&scscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotHoverNP&amprb&dotparsed&rb&ss&lbclick=suggest_command&sc&fsscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotCmdNP&amprb&dotparsed&rbscript&lbRanks&rb&dotyaml_key&lb&ltplayer&dotgroups&dotget&lb1&rb&gt&dotPrefix&dot&ltplayer&dotgroups&dotget&lb2&rb&gt&rb&dotparsedBehr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
             a'
+          - '&ss&lbhover=SHOW_TEXT&scscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotHoverNP&amprb&dotparsed&rb&ss&lbclick=suggest_command&sc&fsscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotCmdNP&amprb&dotparsed&rbscript&lbRanks&rb&dotyaml_key&lb&ltplayer&dotgroups&dotget&lb1&rb&gt&dotPrefix&dot&ltplayer&dotgroups&dotget&lb2&rb&gt&rb&dotparsedBehr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            a'
+          - '&ss&lbhover=SHOW_TEXT&scscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotHoverNP&amprb&dotparsed&rb&ss&lbclick=suggest_command&sc&fsscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotCmdNP&amprb&dotparsed&rbscript&lbRanks&rb&dotyaml_key&lb&ltplayer&dotgroups&dotget&lb1&rb&gt&dotPrefix&dot&ltplayer&dotgroups&dotget&lb2&rb&gt&rb&dotparsedBehr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            a'
+          - '&ss&lbhover=SHOW_TEXT&scscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotHoverNP&amprb&dotparsed&rb&ss&lbclick=suggest_command&sc&fsscript&amplbRanks&amprb&dotyaml_key&amplb&ltplayer&dotgroups&dotget&amplb1&amprb&gt&dotCmdNP&amprb&dotparsed&rbscript&lbRanks&rb&dotyaml_key&lb&ltplayer&dotgroups&dotget&lb1&rb&gt&dotPrefix&dot&ltplayer&dotgroups&dotget&lb2&rb&gt&rb&dotparsedBehrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            BIG HOWDY'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehrry&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6P&ampsserivate
+            &ampss6M&ampsseessage&rb&ss&lbclick=suggest_command&sc&fsmsg Behrry &rb
+            Behrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co ahem'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehrry&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6P&ampsserivate
+            &ampss6M&ampsseessage&rb&ss&lbclick=suggest_command&sc&fsmsg Behrry &rbscript&lbRanks&rb&dotyaml_key&lb&ltplayer&dotgroups&dotget&lb1&rb&gt&dotPrefix&dot&ltplayer&dotgroups&dotget&lb2&rb&gt&rb&dotparsedBehrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            ahem'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehrry&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6P&ampsserivate
+            &ampss6M&ampsseessage&rb&ss&lbclick=suggest_command&sc&fsmsg Behrry &rbBehrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            ahem'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehrry&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6P&ampsserivate
+            &ampss6M&ampsseessage&rb&ss&lbclick=suggest_command&sc&fsmsg Behrry &rbBehrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            hello'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehrry&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6P&ampsserivate
+            &ampss6M&ampsseessage&rb&ss&lbclick=suggest_command&sc&fsmsg Behrry &rbB&ssde&ssfhrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            aa'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehrry&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6P&ampsserivate
+            &ampss6M&ampsseessage&rb&ss&lbclick=suggest_command&sc&fsmsg Behrry &rbB&ssbe&ssfhrry&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co
+            aaa'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ Behr_Riley&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co a'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ B&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co a'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssfB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co a'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ B&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co woe'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co a'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co r'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co r'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co37&ss3&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ss3&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb-&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb-&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb-&lb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb-&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb-&lb&ssaBehr_Riley&ssb&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb-&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb-&lb&ssaBehr_Riley&ssb&rb-&lb&ssePlaced&ssb&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb-&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb-&lb&ssaBehr_Riley&ssb&rb-&lb&ssePlaced&ssb&rb-&lb&sseConcrete&ssb&rb'

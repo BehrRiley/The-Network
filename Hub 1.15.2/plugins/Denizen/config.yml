@@ -59,7 +59,7 @@ Scripts:
 # Whether to spawn NPCs with given traits, and what settings to have by default
 Traits:
   Health:
-    Enabled: false
+    Enabled: true
     # Whether to block drops from NPCs that have the health trait by default.
     Block drops: false
     Respawn:
@@ -69,7 +69,7 @@ Traits:
       Delay: 10s
     Animated death:
       # Whether the NPC should play a death animation by default.
-      Enabled: false
+      Enabled: true
 
 # Whether triggers are on by default, and their individual settings
 Triggers:
@@ -93,10 +93,10 @@ Triggers:
     Enabled: true
     Cooldown: 2s
   Damage:
-    Enabled: false
+    Enabled: true
     Cooldown: 0.5s
   Proximity:
-    Enabled: false
+    Enabled: true
     Cooldown: 1s
     Range: 10
 

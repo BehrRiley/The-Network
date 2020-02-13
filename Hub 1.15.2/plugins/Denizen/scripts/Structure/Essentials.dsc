@@ -74,10 +74,10 @@ Ranks:
     type: yaml data
     Moderation:
         Prefix:
-            CMeme: <&a>☼<&sp>
-            Administrator: ☼<&sp>
-            Moderator: ☼<&sp>
-            Support: ▓<&sp>
+            CMeme: <&a>☼<&sp><&r>
+            Administrator: ☼<&sp><&r>
+            Moderator: ☼<&sp><&r>
+            Support: ▓<&sp><&r>
         HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Report Issue|yellow]>"
         CmdNP: "snp message: "
     Producers:
@@ -90,10 +90,10 @@ Ranks:
         CmdNP: "msg <player.name> "
     Public:
         Prefix:
-            Sponsor: <&sp>
-            Patron: <&sp>
-            Visitor: <&2>[<&a>New<&2>]<&sp>
-            Silent: <&sp>
-            Muted: <&4>[<&c>Muted<&4>]<&sp>
+            Sponsor: ""
+            Patron: ""
+            Visitor: <&2>[<&a>New<&2>]<&sp><&r>
+            Silent: ""
+            Muted: <&4>[<&c>Muted<&4>]<&sp><&r>
         HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Private Message|yellow]>"
         CmdNP: "msg <player.name> "
