@@ -15,7 +15,7 @@ Deprec_Command:
     tab complete:
     script:
         # | The main file is the Chunk
-        - define Key <player.location.cursor_on.chunk>
+        - define Key <player.location.cursor_on.chunk.after[@]>
         # | The spot we're reading is the block's location
         # + we're using the block we're looking at for reference until a stick is made
         # + idea - highlight blocks with particles like BehrEdit selections, click for info on that block
@@ -24,7 +24,7 @@ Deprec_Command:
         - define Size <yaml[<[Key]>].list_keys[<[Loc]>].size>
         # | select the last ten logs after sorting the timestamps
         # + chat controls can flip between pages
-        - define Logs "<yaml[<[Key]>].list_keys[<[Loc]>].sort_by_number[in_hours].get[<[Size].sub[10]>].to[<[Size]>]>"
+        - define Logs "<yaml[<[Key]>].list_keys[<[Loc]>].parse[replace[tacosauce].with[.].as_duration].sort_by_number[in_ticks].get[<[Size].sub[10]>].to[<[Size]>]>"
         
         # | Formatting the timestamps for prints
         - foreach <[Logs].parse[replace[tacosauce].with[.].as_duration]> as:Log:
@@ -37,22 +37,37 @@ Deprec_Command:
             - define mi <[Log].time.minute.pad_left[2].with[0]>
             - define ss <[Log].time.second.pad_left[2].with[0]>
             # [<[mo]>/<[da]>/<[yy]>]-[<[hh]>:<[mi]>:<[ss]>]
-            - define TimePrint "<&b>[<&3><[mo]><&b>/<&3><[da]><&b>/<&3><[yy]><&b>]-[<&3><[hh]><&b>:<&3><[mi]><&b>:<&3><[ss]><&b>]"
-            - define Hover "<&6>O<&e>ccured<&6>: <&a> <[Log].sub[<util.date.time.duration>].formatted> ago<&nl><proc[Colorize].context[Shift+Click to Insert:|green]><&nl><[TimePrint]>"
-            - define Text "<[TimePrint]>"
-            - define Insert "[<[mo]>/<[da]>/<[yy]>]-[<[hh]>:<[mi]>:<[ss]>]"
-            - narrate <[formattedtime]>
+            # define TimePrint "<&b>[<&3><[mo]><&b>/<&3><[da]><&b>/<&3><[yy]><&b>]-[<&3><[hh]><&b>:<&3><[mi]><&b>:<&3><[ss]><&b>]"
+            - define Timestamp [<[mo]>/<[da]>/<[yy]>]-[<[hh]>:<[mi]>:<[ss]>]
+            - define TimePrint <proc[Colorize].context[<[Timestamp]>|BlueInverted]>
+            - define Hover1 "<&6>O<&e>ccured<&6>: <&a> <util.date.time.duration.sub[<[Log]>].formatted> ago<&nl><proc[Colorize].context[[Click] to Document<&nl>[Shift] + [Click] to Insert:|green]><&nl><[TimePrint]>"
+            - define Text1 "<[TimePrint]>"
+            - define Command1 "Placeholder"
+            - define Insert1 "[<[mo]>/<[da]>/<[yy]>]-[<[hh]>:<[mi]>:<[ss]>]"
+            - Define TimeKey <proc[MsgCmdIns].context[<[Hover1]>|<[Text1]>|<[Command1]>|<[Insert1]>]>
 
             # | Fix the Log for the next key
             - define nextkey <[Log].replace[.].with[tacosauce]>
-            - define PlayerKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>]>
+            - define PlayerKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[1].as_player>
             
             # | For the Player Text
-            - define Hover "<proc[Colorize].context[Click to Document|Green]>
-            - define Text "<&b>[<&a>[<[PlayerName]><&b>]"
-            - define Command "help"
-            - define Player <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+            - define Hover2 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><proc[Colorize].context[[Click] to Document<&nl>[Shift] + [Click] to Manage|Green]>
+            - define Text2 "<&b>[<&a><[PlayerKey].name><&b>]"
+            - define Command2 "placeholder"
+            - define Insert2 "/mod <[PlayerKey].name> "
+            - define Player <proc[MsgCmdIns].context[<[Hover2]>|<[Text2]>|<[Command2]>|<[Insert2]>]>
 
+            # | For the objects
+            - define ActionKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[2]>
+            - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
+            - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+
+            - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
+            - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[OldMaterialKey]><&b>]"
+            - define Command3 "placeholder"
+            - define Action <proc[MsgCmd].context[<[Hover3]>|<[Text3]>|<[Command3]>]>
+            
+            - narrate <[TimeKey]><&b>-<[Player]>-<[Action]>
 Protecc_Handler:
     type: world
     debug: true
@@ -60,22 +75,69 @@ Protecc_Handler:
         on player breaks block:
             - define Chunk <context.location.chunk.after[ch@]>
             # - data | 1) Location | 2) Time | 3) Player | 4) Action | 5) Old Material | 6) New Material
-            - define Data <list[<context.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|broke|m@air|<context.material>]>
+            - define Data <list[<context.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|Broke|<context.material.name>|air]>
             - if !<server.has_file[data/ProteccData/<[Chunk]>.yml]>:
                 - yaml id:<[Chunk]> create
-            - yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>:->:<[Data].get[3]>|<[Data].get[4]>|<[Data].get[5]>|<[Data].get[6]>
+            - yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>:|:<[Data].get[3]>|<[Data].get[4]>|<[Data].get[5]>|<[Data].get[6]>
             - yaml id:<[Chunk]> savefile:data/ProteccData/<[Chunk]>.yml
-
 
         on player places block:
             - define Chunk <context.location.chunk.after[ch@]>
             # - data | 1) Location | 2) Time | 3) Player | 4) Action | 5) Old Material | 6) New Material
-            - define Data <list[<context.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|placed|<context.material>|<context.old_material>]>
+            - define Data <list[<context.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|Placed|<context.material.name>|<context.old_material.name>]>
             - if !<server.has_file[data/ProteccData/<[Chunk]>.yml]>:
                 - yaml id:<[Chunk]> create
-            - yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>:->:<[Data].get[3]>|<[Data].get[4]>|<[Data].get[5]>|<[Data].get[6]>
-            #- yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>.0:<[Data].get[3]>
-            #- yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>.1:<[Data].get[4]>
-            #- yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>.2:<[Data].get[5]>
-            #- yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>.3:<[Data].get[6]>
+            - yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>:|:<[Data].get[3]>|<[Data].get[4]>|<[Data].get[5]>|<[Data].get[6]>
             - yaml id:<[Chunk]> savefile:data/ProteccData/<[Chunk]>.yml
+
+        #-chest|trapped_chest|*_shulker*|shulker_box:
+        on player opens inventory:
+            # - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents
+            - flag <player> "Protecc.Recording_Inventory:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|Opened Inventory|<context.inventory.list_contents.escaped>"
+        on player closes inventory:
+            - if <player.has_flag[Protecc.Recording_Inventory]>:
+                - if <player.flag[Protecc.Recording_Inventory].get[1].as_inventory.location> == <context.inventory.location>:
+                    - define OpenData:|:<player.flag[Protecc.Recording_Inventory].get[5].unescaped>
+                    - define CloseData:|:<context.inventory.list_contents>
+
+                    - foreach <[OpenData]> as:Item:
+                        - define "BeforeList:|:<[Item].material.name>/<inventory[blank_inventory].include[<[OpenData].after[li@]>].quantity.material[<[Item].material.name>]>"
+                    - foreach <[CloseData]> as:Item:
+                        - define "AfterList:|:<[Item].material.name>/<context.inventory.quantity.material[<[Item].material.name>]>"
+
+                    # -Take List
+                    - foreach <[BeforeList].deduplicate> as:Item:
+                        - if <[item].before[/]> == air:
+                            - foreach next
+                        - define Math <[BeforeList].deduplicate.map_get[<[Item].before[/]>].sub[<[AfterList].deduplicate.map_get[<[Item].before[/]>]>]>
+                        - if <[Math]> <= 0:
+                            - foreach next
+                        - define RemoveList:->:<[Item].before[/]>/<[Math]>
+                    # -Deposit List
+                    - foreach <[AfterList].deduplicate> as:Item:
+                        - if <[item].before[/]> == air:
+                            - foreach next
+                        - define Math <[AfterList].deduplicate.map_get[<[Item].before[/]>].sub[<[BeforeList].deduplicate.map_get[<[Item].before[/]>]>]>
+                        - if <[Math]> <= 0:
+                            - foreach next
+                        - define DepositList:->:<[Item].before[/]>/<[Math]>
+                    # - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited
+                    - define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>
+                    - if <[RemoveList].Size||0> != 0 && <[DepositList].size||0> != 0:
+                        - define "Key:->:Removed and Deposited"
+                    - else if <[RemoveList].size||0> != 0:
+                        - define "Key:->:Removed"
+                    - else if <[DepositList].size||0> != 0:
+                        - define "Key:->:Deposited"
+                    - else:
+                        - define "Key:->:Opened"
+                    - define Key:->:<[OpenData].escaped>|<[CloseData].escaped>|<[RemoveList].escaped||null>|<[DepositList].escaped||null>
+                    - narrate <[Key]>
+
+                    - flag <player> Protecc.Recording_Inventory:!
+        on player right clicks orange_shulker_box with stick:
+            - determine passively cancelled
+            - define Inventory <player.location.cursor_on.inventory>
+            - foreach <[Inventory].list_contents> as:item:
+                - define "List:|:<[Inventory].quantity.material[<[Item].material.name>]> <[Item].material.name>"
+            - narrate "- <[List].deduplicate.exclude[0 air].separated_by[<&nl>- ]>"

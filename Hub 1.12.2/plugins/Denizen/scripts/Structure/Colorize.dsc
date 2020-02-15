@@ -7,6 +7,9 @@ Colorize:
             - case "Blue":
                 - define 1 <&3>
                 - define 2 <&b>
+            - case "BlueInverted":
+                - define 1 <&b>
+                - define 2 <&3>
             - case "Green":
                 - define 1 <&2>
                 - define 2 <&a>
