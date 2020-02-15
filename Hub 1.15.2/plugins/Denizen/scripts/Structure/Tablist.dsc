@@ -17,7 +17,7 @@ tablist:
           - if <context.second.mod[20]> >= 10:
             - adjust <[value]> "player_list_name:<&sp><[value].name>"
           - else:
-            - adjust <[value]> "player_list_name:<&sp><[Value].name.display>"
+            - adjust <[value]> "player_list_name:<&sp><[Value].display_name>"
           - define header "<script.yaml_key[header].separated_by[<&nl>].parsed>"
           - define footer "<script.yaml_key[footer].separated_by[<&nl>].parsed>"
           - adjust <[value]> tab_list_info:<[header]>|<[footer]>

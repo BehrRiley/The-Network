@@ -100,40 +100,61 @@ Protecc_Handler:
                     - define OpenData:|:<player.flag[Protecc.Recording_Inventory].get[5].unescaped>
                     - define CloseData:|:<context.inventory.list_contents>
 
-                    - foreach <[OpenData]> as:Item:
-                        - define "BeforeList:|:<[Item].material.name>/<inventory[blank_inventory].include[<[OpenData].after[li@]>].quantity.material[<[Item].material.name>]>"
-                    - foreach <[CloseData]> as:Item:
-                        - define "AfterList:|:<[Item].material.name>/<context.inventory.quantity.material[<[Item].material.name>]>"
+                    - define RemoveList:|:<inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[i@air]>
+                    - define DepositList:|:<context.inventory.exclude[<[OpenData]>].list_contents.exclude[i@air]>
 
-                    # -Take List
-                    - foreach <[BeforeList].deduplicate> as:Item:
-                        - if <[item].before[/]> == air:
-                            - foreach next
-                        - define Math <[BeforeList].deduplicate.map_get[<[Item].before[/]>].sub[<[AfterList].deduplicate.map_get[<[Item].before[/]>]>]>
-                        - if <[Math]> <= 0:
-                            - foreach next
-                        - define RemoveList:->:<[Item].before[/]>/<[Math]>
-                    # -Deposit List
-                    - foreach <[AfterList].deduplicate> as:Item:
-                        - if <[item].before[/]> == air:
-                            - foreach next
-                        - define Math <[AfterList].deduplicate.map_get[<[Item].before[/]>].sub[<[BeforeList].deduplicate.map_get[<[Item].before[/]>]>]>
-                        - if <[Math]> <= 0:
-                            - foreach next
-                        - define DepositList:->:<[Item].before[/]>/<[Math]>
+                    #- narrate <&a><[RemoveList]>
+                    #- narrate <&e><[DepositList]>
+                    
                     # - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited
-                    - define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>
-                    - if <[RemoveList].Size||0> != 0 && <[DepositList].size||0> != 0:
-                        - define "Key:->:Removed and Deposited"
-                    - else if <[RemoveList].size||0> != 0:
-                        - define "Key:->:Removed"
-                    - else if <[DepositList].size||0> != 0:
-                        - define "Key:->:Deposited"
+                    - define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|<[OpenData].escaped>|<[CloseData].escaped>|<&a><[RemoveList]>|<&e><[DepositList]>
+                    
+                    - if <[RemoveList].Size> != 0 && <[DepositList].size> != 0:
+                        - define Key "<[Key].insert[Removed and Deposited].at[4]>"
+                    - else if <[RemoveList].size> != 0:
+                        - define Key <[Key].insert[Removed].at[4]>
+                    - else if <[DepositList].size> != 0:
+                        - define Key <[Key].insert[Deposited].at[4]>
                     - else:
-                        - define "Key:->:Opened"
-                    - define Key:->:<[OpenData].escaped>|<[CloseData].escaped>|<[RemoveList].escaped||null>|<[DepositList].escaped||null>
-                    - narrate <[Key]>
+                        - define Key <[Key].insert[Opened].at[4]>
 
+                    - narrate "- <[Key].separated_by[<&nl> -]>"
+
+                    #
+                    #- foreach <[OpenData]> as:Item:
+                    #    - define "BeforeList:|:<[Item].material.name>/<inventory[blank_inventory].include[<[OpenData].after[li@]>].quantity.material[<[Item].material.name>]>"
+                    #- foreach <[CloseData]> as:Item:
+                    #    - define "AfterList:|:<[Item].material.name>/<context.inventory.quantity.material[<[Item].material.name>]>"
+                    #
+                    ## -Take List
+                    #- foreach <[BeforeList].deduplicate> as:Item:
+                    #    - if <[item].before[/]> == air:
+                    #        - foreach next
+                    #    - define Math <[BeforeList].deduplicate.map_get[<[Item].before[/]>].sub[<[AfterList].deduplicate.map_get[<[Item].before[/]>]>]>
+                    #    - if <[Math]> <= 0:
+                    #        - foreach next
+                    #    - define RemoveList:->:<[Item].before[/]>/<[Math]>
+                    ## -Deposit List
+                    #- foreach <[AfterList].deduplicate> as:Item:
+                    #    - if <[item].before[/]> == air:
+                    #        - foreach next
+                    #    - define Math <[AfterList].deduplicate.map_get[<[Item].before[/]>].sub[<[BeforeList].deduplicate.map_get[<[Item].before[/]>]>]>
+                    #    - if <[Math]> <= 0:
+                    #        - foreach next
+                    #    - define DepositList:->:<[Item].before[/]>/<[Math]>
+                    ## - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited
+                    #- define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>
+                    #- if <[RemoveList].Size||0> != 0 && <[DepositList].size||0> != 0:
+                    #    - define "Key:->:Removed and Deposited"
+                    #- else if <[RemoveList].size||0> != 0:
+                    #    - define "Key:->:Removed"
+                    #- else if <[DepositList].size||0> != 0:
+                    #    - define "Key:->:Deposited"
+                    #- else:
+                    #    - define "Key:->:Opened"
+                    #- define Key:->:<[OpenData].escaped>|<[CloseData].escaped>|<[RemoveList].escaped||null>|<[DepositList].escaped||null>
+                    #- narrate <[Key]>
+                    #
                     - flag <player> Protecc.Recording_Inventory:!
         on player right clicks orange_shulker_box with stick:
             - determine passively cancelled
