@@ -40,7 +40,7 @@ runSpeed_Command:
             - define Speed <context.args.get[1]>
 
         - if !<[Speed].is_integer>:
-            - if <list[Lightspeed|ludicrous|Plad].contains[<[Speed]>]>
+            - if <list[Lightspeed|ludicrous|Plad].contains[<[Speed]>]>:
                 - if <[Speed]> == Default:
                     - define Speed 2
                 - else:
