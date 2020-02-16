@@ -20,11 +20,11 @@ Essentials:
             - if <player.has_flag[Interacting_NPC]>:
                 - stop
             - define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
-            - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.name.display><&r>"
+            - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.display_name><&r>"
             - define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
             - define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
             - define Message "<[NamePlate]>: <context.message.parse_color>"
-            #- discord id:GeneralBot Message channel:623742787615064082 "**[<player.groups.get[1]>]** <player.name.display.strip_color>: <context.message.strip_color>"
+            #- discord id:GeneralBot Message channel:623742787615064082 "**[<player.groups.get[1]>]** <player.display_name.strip_color>: <context.message.strip_color>"
             - flag server Behrry.Essentials.ChatHistory.Global:->:<[Message].escaped>
             - announce <[Message]>
             #- bungeerun <bungee.list_servers.exclude[<bungee.server>]> Relay_Chat_Task def:Global|<[Message].escaped>
@@ -35,7 +35,7 @@ Essentials:
                 - adjust <player> display_name:<player.flag[behrry.essentials.display_name]>
         on player joins:
             - wait 1s
-            - determine "<player.name.display> <proc[Colorize].context[joined the server.|green]>"
+            - determine "<player.display_name> <proc[Colorize].context[joined the server.|green]>"
         on hanging breaks:
             - if <context.entitiy||> == <server.match_player[behr]||>:
                 - stop
