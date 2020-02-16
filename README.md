@@ -23,7 +23,7 @@
         - [ ] Teleport
         - [ ] World
     - [BehrEdit]() | WorldEdit Features
-    - [BehrBot]() | Discord Command Center
+    - [BehrBot]() | Discord Command Center | Data & Memory Storage
     - [Security]() | Grief Prevention, logging and management
         - [Player Management]() | Data Control & Management
         - [Currency Management]() | Monies & Points
