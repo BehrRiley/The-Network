@@ -1,8 +1,8 @@
 # | ███████████████████████████████████████████████████████████
-# % ██    /
+# % ██    /commandspy - Relays player commands to you
 # | ██
 # % ██  [ Command ] ██
-# % ██  [  TO-DO  ] ██ | Hide the passwords obviously
+# % ██  [  TO-DO  ] ██ | Hide the passwords obviously || actually maybe not, need a sudo command to replace that jank password
 CommandSpy_Command:
   type: command
   name: commandspy
