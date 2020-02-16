@@ -3,6 +3,25 @@
     - [x] Complete / Consistent
     - [ ] Revisit
     - [Essentials]() | Main global commands
+        - [x] Back
+        - [x] Colors
+        - [ ] DeathBack
+        - [x] Discord
+        - [ ] Give
+        - [ ] GMA
+        - [ ] GMC
+        - [ ] GMS
+        - [ ] GMSP
+        - [ ] Head
+        - [x] Home
+        - [ ] InventorySee
+        - [ ] IP
+        - [ ] Nickname
+        - [ ] Report
+        - [ ] Restoreinventory
+        - [x] SetHome
+        - [ ] Teleport
+        - [ ] World
     - [BehrEdit]() | WorldEdit Features
     - [BehrBot]() | Discord Command Center
     - [Security]() | Grief Prevention, logging and management
