@@ -41,8 +41,11 @@ FlySpeed_Command:
 
         - if !<[Speed].is_integer>:
             - if <list[Lightspeed|ludicrous|Plad].contains[<[Speed]>]>
-                - define Reason "Fly speeds are numbers."
-                - inject Command_Error Instantly
+                - if <[Speed]> == Default:
+                    - define Speed 1
+                - else:
+                    - define Reason "Fly speeds are numbers."
+                    - inject Command_Error Instantly
             - else:
                 - choose <[Speed]>:
                     - case Lightspeed:
