@@ -14,6 +14,7 @@ TabOffline_Command:
         - taboffline
         - taboff
         - tomode
+        - offlinetab
     script:
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
