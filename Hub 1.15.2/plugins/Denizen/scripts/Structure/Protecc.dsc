@@ -99,15 +99,20 @@ Protecc_Handler:
                 - if <player.flag[Protecc.Recording_Inventory].get[1].as_inventory.location> == <context.inventory.location>:
                     - define OpenData:|:<player.flag[Protecc.Recording_Inventory].get[5].unescaped>
                     - define CloseData:|:<context.inventory.list_contents>
+                    
+                    - narrate <&b><inventory[blank_inventory].list_contents>
+                    - narrate <&c><inventory[blank_inventory].include[<[OpenData]>].list_contents>
+                    - narrate <&b><inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents>
+                    - narrate <&c><inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[air]><&nl>
 
-                    - define RemoveList:|:<inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[i@air]>
-                    - define DepositList:|:<context.inventory.exclude[<[OpenData]>].list_contents.exclude[i@air]>
+                    - define RemoveList:|:<inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[air]>
+                    - define DepositList:|:<context.inventory.exclude[<[OpenData]>].list_contents.exclude[air]>
 
                     #- narrate <&a><[RemoveList]>
                     #- narrate <&e><[DepositList]>
                     
                     # - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited
-                    - define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|<[OpenData].escaped>|<[CloseData].escaped>|<&a><[RemoveList]>|<&e><[DepositList]>
+                    - define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|<[OpenData].escaped>|<[CloseData].escaped>|<&a><[RemoveList]><&r>|<&e><[DepositList]>
                     
                     - if <[RemoveList].Size> != 0 && <[DepositList].size> != 0:
                         - define Key "<[Key].insert[Removed and Deposited].at[4]>"
@@ -118,7 +123,7 @@ Protecc_Handler:
                     - else:
                         - define Key <[Key].insert[Opened].at[4]>
 
-                    - narrate "- <[Key].separated_by[<&nl> -]>"
+                    - narrate "- <[Key].separated_by[<&nl> -].unescaped>"
 
                     #
                     #- foreach <[OpenData]> as:Item:
@@ -162,3 +167,30 @@ Protecc_Handler:
             - foreach <[Inventory].list_contents> as:item:
                 - define "List:|:<[Inventory].quantity.material[<[Item].material.name>]> <[Item].material.name>"
             - narrate "- <[List].deduplicate.exclude[0 air].separated_by[<&nl>- ]>"
+        on player changes sign:
+        - narrate "<context.location> returns the LocationTag of the sign."
+        - narrate "<context.new> returns the new sign text as a ListTag."
+        - narrate "<context.old> returns the old sign text as a ListTag."
+        - narrate "<context.material> returns the MaterialTag of the sign."
+
+        
+        on player enters <notable cuboid>:
+            - narrate "<context.from> returns the block location moved from."
+            - narrate "<context.to> returns the block location moved to."
+            - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
+            - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
+        on player exits <notable cuboid>:
+            - narrate "<context.from> returns the block location moved from."
+            - narrate "<context.to> returns the block location moved to."
+            - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
+            - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
+        on player enters notable cuboid:
+            - narrate "<context.from> returns the block location moved from."
+            - narrate "<context.to> returns the block location moved to."
+            - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
+            - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
+        on player exits notable cuboid:
+            - narrate "<context.from> returns the block location moved from."
+            - narrate "<context.to> returns the block location moved to."
+            - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
+            - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
