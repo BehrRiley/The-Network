@@ -30,9 +30,9 @@ MaxHealth_Command:
         - if !<[NewHealth].is_integer>:
             - define Reason "Health is measured as a number."
             - inject Command_Error Instantly
-        - if <[NewHealth]> < 1
+        - if <[NewHealth]> < 1:
             - define Reason "Health cannot be negative or below 1."
-            - inject Command_Error Instantly        
+            - inject Command_Error Instantly
         - if <[NewHealth]> > 100:
             - define Reason "Health can range up to 100."
             - inject Command_Error Instantly

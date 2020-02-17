@@ -3,4 +3,5 @@ Uperms_Fix:
     debug: false
     events:
         on console output:
-            - determine cancelled
+            - if "<context.message.contains[#playerInGroup null]>":
+                - determine cancelled

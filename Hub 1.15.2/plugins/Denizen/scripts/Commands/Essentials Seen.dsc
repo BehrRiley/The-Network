@@ -15,7 +15,7 @@ Seen_Command:
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <server.list_players.parse[name].filter[starts_with[<context.args.get[1]>]]>
     script:
-        - if <context.args.get[1]||null> != null:
+        - if <context.args.size> != 1:
             - inject Command_Syntax Instantly
             
         - define User <context.args.get[1]>

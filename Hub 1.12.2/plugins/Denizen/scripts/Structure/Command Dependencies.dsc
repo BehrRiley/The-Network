@@ -60,10 +60,10 @@ Player_Verification_Offline:
 
 User_Display_Simple:
   type: procedure
-  debug: false
+  debug: true
   definitions: User
   script:
     - if <[User].has_flag[behrry.essentials.display_name]>:
-      - determine "<&r><[User].display_name><&r> <proc[Colorize].context[(<[User].name>)|yellow]>"
+      - determine "<&r><[User].display_name||<[User].flag[behrry.essentials.display_name]>><&r> <proc[Colorize].context[(<[User].name>)|yellow]>"
     - else:
       - determine "<proc[Colorize].context[<[User].name>|yellow]>"

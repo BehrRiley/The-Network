@@ -24,11 +24,27 @@ Playtime_Command:
         - else:
             - define User <context.args.get[1]>
             - inject Player_Verification_Offline Instantly
-            
-        - define PDays "<&6><[User].statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f><&o>"
-        - define PHours "<&6><[User].statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f><&o>"
-        - define PMinutes "<&6><[User].statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f><&o>"
-        - define FirstDays "<&6><util.date.time.duration.sub[<[User].first_played>].in_days.round_down><&f><&o>"
+        - if <[User].is_online>:
+            - define PDays "<&e><[User].statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>"
+            - define PHours "<&e><[User].statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>"
+            - define PMinutes "<&e><[User].statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>"
+            - define FirstDays "<&e><util.date.time.duration.sub[<[User].first_played>].in_days.round_down><&f>"
+        - else:
+            - define PDays <[User].flag[behrry.essentials.lastPDays]>
+            - define PHours <[User].flag[behrry.essentials.lastPHours]>
+            - define PMinutes <[User].flag[behrry.essentials.lastPMinutes]>
+            - define FirstDays <[User].flag[behrry.essentials.lastFirstDays]>
 
-        - Define Text "<&2>P<&a>laytime<&2>: <[PDays]> <&2>d<&a>ays<&2>, <[PHours]> <&2>h<&a>ours<&2>, <[PMinutes]> <&2>m<&a>inute<&2>s <&b><&pipe> <&2>F<&a>irst <&2>L<&a>ogin:<[FirstDays]> <&2>d<&a>ays <&2>a<&a>go<&2>."
+
+        - Define Text "<proc[User_Display_Simple].context[<[User]>]> <&2>P<&a>laytime<&2>: <[PDays]> <&2>d<&a>ays<&2>, <[PHours]> <&2>h<&a>ours<&2>, <[PMinutes]> <&2>m<&a>inute<&2>s <&b><&pipe> <&2>F<&a>irst <&2>L<&a>ogin: <[FirstDays]> <&2>d<&a>ays <&2>a<&a>go<&2>."
         - narrate <[Text]>
+
+Playtime_Handler:
+    type: world
+    debug: false
+    events:
+        on player quits:
+        - flag <player> behrry.essentials.lastPDays:<&e><player.statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>
+        - flag <player> behrry.essentials.lastPHours:<&e><player.statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>
+        - flag <player> behrry.essentials.lastPMinutes:<&e><player.statistic[PLAY_ONE_MINUTE].div[1200].round_down.mod[60]><&f>
+        - flag <player> behrry.essentials.lastFirstDays:<&e><util.date.time.duration.sub[<player.first_played>].in_days.round_down><&f>

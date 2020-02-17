@@ -13,6 +13,9 @@ Suicide_Command:
     script:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
+        - if <list[spectator|creative].contains[<player.gamemode>]>:
+            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+            - stop
         - while <player.health> > 0:
             - adjust <player> no_damage_duration:1t
             - hurt <player> 1
