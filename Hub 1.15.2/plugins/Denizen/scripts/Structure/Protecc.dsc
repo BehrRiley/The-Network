@@ -3,9 +3,9 @@
 # | ██
 # % ██  [ Command ] ██
 # $ ██  [ TO-DO   ] ██
-Deprec_Command:
+Prospect_Command:
     type: command
-    name: t
+    name: prospect
     debug: true
     description: aaa
     usage: /aaaa
@@ -123,7 +123,7 @@ Deprec_Command:
             - define Command3 "placeholder"
             - define Action <proc[MsgCmd].context[<[Hover3]>|<[Text3]>|<[Command3]>]>
             - narrate <[TimeKey]><&b>-<[Player]>-<[Action]>
-Protecc_Handler:
+Prospecting_Handler:
     type: world
     debug: true
     events:
@@ -224,3 +224,20 @@ Protecc_Handler:
             - narrate "<context.to> returns the block location moved to."
             - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
             - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
+            
+            
+# | ███████████████████████████████████████████████████████████
+# % ██    Protecc Handler
+# | ██
+# % ██  [ Command ] ██
+# $ ██  [ TO-DO   ] ██
+Protecc_Handler:
+    type: world
+    debug: true
+    events:
+        on player right clicks with ProteccStick:
+            - flag <player> Protecc.RightMarker:<context.location>
+        on player left clicks with ProteccStick:
+            - flag <player> Protecc.LeftMarker:<context.location>
+
+
