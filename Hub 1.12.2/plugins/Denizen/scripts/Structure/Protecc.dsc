@@ -27,6 +27,7 @@ Deprec_Command:
         - define Logs "<yaml[<[Key]>].list_keys[<[Loc]>].parse[replace[tacosauce].with[.].as_duration].sort_by_number[in_ticks].get[<[Size].sub[10]>].to[<[Size]>]>"
         
         # | Formatting the timestamps for prints
+        - narrate <&b>+<&3>-----------------<&b>ProteccData<&3>-----------------<&b>+
         - foreach <[Logs].parse[replace[tacosauce].with[.].as_duration]> as:Log:
             # define PrintTime [<util.date.time.duration.time.month.pad_left[2].with[0]>/<util.date.time.duration.time.day.pad_left[2].with[0]>/<util.date.time.duration.time.year>]-[<util.date.time.duration.time.hour.pad_left[2].with[0]>:<util.date.time.duration.time.minute.pad_left[2].with[0]>:<util.date.time.duration.time.second.pad_left[2].with[0]>]
             # define PrintTime <util.date.format[[MM:dd:yy]-[KK:mm:hh]]>
@@ -59,14 +60,68 @@ Deprec_Command:
 
             # | For the objects
             - define ActionKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[2]>
-            - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
-            - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+            - choose <[ActionKey]>:
+                - case "Placed" "Broke":
+                    - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
+                    - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
 
-            - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
-            - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[OldMaterialKey]><&b>]"
+                    - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
+                    - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[OldMaterialKey]><&b>]"
+                - case "Exchanged" "Removed" "Deposited" "Opened":
+                    - define ContentsBefore <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3].unescaped>
+                    - define ContentsAfter <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4].unescaped>
+                    - define Removed <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[5].unescaped>
+                    - define Deposited <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[6].unescaped>
+                    - define Block <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[7]>
+
+                    - define RemovedNote:!
+                    - repeat <[Removed].size.min[4]>:
+                        - if <[Removed].size> == 0:
+                            - repeat stop
+                        - if <[Value]> == 4:
+                            - if <[Removed].size> > 4:
+                                - define RemovedNote:->:<&6>(<&a>+<[Removed].size.sub[3]><&2>x<&6>)...
+                            - else:
+                                - define RemovedNote:->:<&a><[Removed].get[<[Value]>].material.name.replace[_].with[<&sp>].to_titlecase><&sp><&2>x<&e><[Removed].get[<[Value]>].quantity>
+                        - else:
+                            - if <[Removed].size> >= <[Value]>:
+                                - define RemovedNote:->:<&a><[Removed].get[<[Value]>].material.name.replace[_].with[<&sp>].to_titlecase><&sp><&2>x<&e><[Removed].get[<[Value]>].quantity>
+                            - else:
+                                - repeat stop
+                    - define DepositedNote:!
+                    - repeat <[Deposited].size.min[4]>:
+                        
+                        - if <[Deposited].size> == 0:
+                            - repeat stop
+                        - if <[Value]> == 4:
+                            - if <[Deposited].size> > 4:
+                                - define DepositedNote:->:<&6>(<&a>+<[Deposited].size.sub[3]><&2>x<&6>)...
+                            - else:
+                                - define DepositedNote:->:<&a><[Deposited].get[<[Value]>].material.name.replace[_].with[<&sp>].to_titlecase><&sp><&2>x<&e><[Deposited].get[<[Value]>].quantity>
+                        - else:
+                            - if <[Deposited].size> >= <[Value]>:
+                                - define DepositedNote:->:<&a><[Deposited].get[<[Value]>].material.name.replace[_].with[<&sp>].to_titlecase><&sp><&2>x<&e><[Deposited].get[<[Value]>].quantity>
+                            - else:
+                                - repeat stop
+                            
+
+                    - choose <[ActionKey]>:
+                        - case "Exchanged":
+                            - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]>"
+                            - define SubAction "<proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
+                        - case "Removed":
+                            - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]>"
+                        - case "Deposited":
+                            - define SubAction "<proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
+                        - case "Opened":
+                            - define SubAction "<proc[Colorize].context[Opened and Viewed|yellow]>"
+                    #- define SubAction Placeholder
+
+                    - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> inventory<&nl><[SubAction]>"
+                    - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[Block].to_titlecase><&b>]"
+            
             - define Command3 "placeholder"
             - define Action <proc[MsgCmd].context[<[Hover3]>|<[Text3]>|<[Command3]>]>
-            
             - narrate <[TimeKey]><&b>-<[Player]>-<[Action]>
 Protecc_Handler:
     type: world
@@ -93,73 +148,48 @@ Protecc_Handler:
         #-chest|trapped_chest|*_shulker*|shulker_box:
         on player opens inventory:
             # - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents
-            - flag <player> "Protecc.Recording_Inventory:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|Opened Inventory|<context.inventory.list_contents.escaped>"
-        on player closes inventory:
+            - if <context.inventory.location||null> == null:
+                - stop
             - if <player.has_flag[Protecc.Recording_Inventory]>:
-                - if <player.flag[Protecc.Recording_Inventory].get[1].as_inventory.location> == <context.inventory.location>:
+                - flag <player> Protecc.Recording_Inventory:!
+            - flag <player> "Protecc.Recording_Inventory:|:<context.inventory.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|Opened Inventory|<context.inventory.list_contents.escaped>"
+        on player closes inventory:
+            - if <context.inventory.location||null> == null:
+                - stop
+            - if <player.has_flag[Protecc.Recording_Inventory]>:
+                - if <player.flag[Protecc.Recording_Inventory].get[1].as_location> == <context.inventory.location>:
+                    - define Chunk <context.inventory.location.chunk.after[ch@]>
                     - define OpenData:|:<player.flag[Protecc.Recording_Inventory].get[5].unescaped>
                     - define CloseData:|:<context.inventory.list_contents>
-                    
-                    - narrate <&b><inventory[blank_inventory].list_contents>
-                    - narrate <&c><inventory[blank_inventory].include[<[OpenData]>].list_contents>
-                    - narrate <&b><inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents>
-                    - narrate <&c><inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[air]><&nl>
+                    - if <[OpenData].size> > 0:
+                        - define RemoveList:|:<inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[i@air]>
+                        - define DepositList:|:<context.inventory.exclude[<[OpenData]>].list_contents.exclude[i@air]>
+                    - else:
+                        - if <[CloseData].size> == 0:
+                            - define RemoveList li@
+                        - else:
+                            - define RemoveList:|:<inventory[blank_inventory].exclude[<[CloseData]>].list_contents.exclude[i@air]>
+                        - define DepositList:|:<context.inventory.list_contents.exclude[i@air]>
 
-                    - define RemoveList:|:<inventory[blank_inventory].include[<[OpenData]>].exclude[<[CloseData]>].list_contents.exclude[air]>
-                    - define DepositList:|:<context.inventory.exclude[<[OpenData]>].list_contents.exclude[air]>
-
-                    #- narrate <&a><[RemoveList]>
-                    #- narrate <&e><[DepositList]>
                     
-                    # - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited
-                    - define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|<[OpenData].escaped>|<[CloseData].escaped>|<&a><[RemoveList]><&r>|<&e><[DepositList]>
+                    
+                    # - data | 1) Inventory Location | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited | 9) Block Type
+                    - define Data:|:<context.inventory.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|<[OpenData].escaped>|<[CloseData].escaped>|<[RemoveList].escaped>|<[DepositList].escaped>|<context.inventory.inventory_type>
                     
                     - if <[RemoveList].Size> != 0 && <[DepositList].size> != 0:
-                        - define Key "<[Key].insert[Removed and Deposited].at[4]>"
+                        - define Data "<[Data].insert[Exchanged].at[4]>"
                     - else if <[RemoveList].size> != 0:
-                        - define Key <[Key].insert[Removed].at[4]>
+                        - define Data <[Data].insert[Removed].at[4]>
                     - else if <[DepositList].size> != 0:
-                        - define Key <[Key].insert[Deposited].at[4]>
+                        - define Data <[Data].insert[Deposited].at[4]>
                     - else:
-                        - define Key <[Key].insert[Opened].at[4]>
+                        - define Data <[Data].insert[Opened].at[4]>
 
-                    - narrate "- <[Key].separated_by[<&nl> -].unescaped>"
+                    - if !<server.has_file[data/ProteccData/<[Chunk]>.yml]>:
+                        - yaml id:<[Chunk]> create
+                    - yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>:|:<[Data].get[3].to[9]>
+                    - yaml id:<[Chunk]> savefile:data/ProteccData/<[Chunk]>.yml
 
-                    #
-                    #- foreach <[OpenData]> as:Item:
-                    #    - define "BeforeList:|:<[Item].material.name>/<inventory[blank_inventory].include[<[OpenData].after[li@]>].quantity.material[<[Item].material.name>]>"
-                    #- foreach <[CloseData]> as:Item:
-                    #    - define "AfterList:|:<[Item].material.name>/<context.inventory.quantity.material[<[Item].material.name>]>"
-                    #
-                    ## -Take List
-                    #- foreach <[BeforeList].deduplicate> as:Item:
-                    #    - if <[item].before[/]> == air:
-                    #        - foreach next
-                    #    - define Math <[BeforeList].deduplicate.map_get[<[Item].before[/]>].sub[<[AfterList].deduplicate.map_get[<[Item].before[/]>]>]>
-                    #    - if <[Math]> <= 0:
-                    #        - foreach next
-                    #    - define RemoveList:->:<[Item].before[/]>/<[Math]>
-                    ## -Deposit List
-                    #- foreach <[AfterList].deduplicate> as:Item:
-                    #    - if <[item].before[/]> == air:
-                    #        - foreach next
-                    #    - define Math <[AfterList].deduplicate.map_get[<[Item].before[/]>].sub[<[BeforeList].deduplicate.map_get[<[Item].before[/]>]>]>
-                    #    - if <[Math]> <= 0:
-                    #        - foreach next
-                    #    - define DepositList:->:<[Item].before[/]>/<[Math]>
-                    ## - data | 1) Inventory | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited
-                    #- define Key:|:<context.inventory>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>
-                    #- if <[RemoveList].Size||0> != 0 && <[DepositList].size||0> != 0:
-                    #    - define "Key:->:Removed and Deposited"
-                    #- else if <[RemoveList].size||0> != 0:
-                    #    - define "Key:->:Removed"
-                    #- else if <[DepositList].size||0> != 0:
-                    #    - define "Key:->:Deposited"
-                    #- else:
-                    #    - define "Key:->:Opened"
-                    #- define Key:->:<[OpenData].escaped>|<[CloseData].escaped>|<[RemoveList].escaped||null>|<[DepositList].escaped||null>
-                    #- narrate <[Key]>
-                    #
                     - flag <player> Protecc.Recording_Inventory:!
         on player right clicks orange_shulker_box with stick:
             - determine passively cancelled
@@ -168,10 +198,10 @@ Protecc_Handler:
                 - define "List:|:<[Inventory].quantity.material[<[Item].material.name>]> <[Item].material.name>"
             - narrate "- <[List].deduplicate.exclude[0 air].separated_by[<&nl>- ]>"
         on player changes sign:
-        - narrate "<context.location> returns the LocationTag of the sign."
-        - narrate "<context.new> returns the new sign text as a ListTag."
-        - narrate "<context.old> returns the old sign text as a ListTag."
-        - narrate "<context.material> returns the MaterialTag of the sign."
+            - narrate "<context.location> returns the LocationTag of the sign."
+            - narrate "<context.new> returns the new sign text as a ListTag."
+            - narrate "<context.old> returns the old sign text as a ListTag."
+            - narrate "<context.material> returns the MaterialTag of the sign."
 
         
         on player enters <notable cuboid>:
