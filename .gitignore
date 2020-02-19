@@ -19,8 +19,9 @@ Hub 1.15.2/plugins/*
 # plugin jars
 #!Hub 1.15.2/plugins/**.jar
 !Hub 1.15.2/plugins/denizen
-!Hub 1.15.2/plugins/denizen/
+Hub 1.15.2/plugins/denizen/notables.yml
 Hub 1.15.2/plugins/denizen/saves.yml
+!Hub 1.15.2/plugins/denizen/
 Hub 1.15.2/plugins/denizen/data
 
 # Hub 1.12.2
@@ -39,5 +40,6 @@ Hub 1.12.2/plugins/denizen/data
 
 # Executables
 .exe
-# Hub 1.12.2/plugins/Denizen/scripts/Structure/PluginFix.dsc
+Hub 1.12.2/plugins/Denizen/scripts/Structure/PluginFix.dsc
+
 
