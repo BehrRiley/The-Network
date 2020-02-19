@@ -20,6 +20,10 @@ Deprec_Command:
         # + we're using the block we're looking at for reference until a stick is made
         # + idea - highlight blocks with particles like BehrEdit selections, click for info on that block
         - define Loc <player.location.cursor_on>
+        # | Check if the data can be found
+        - if <yaml[<[Key]>].list_keys[<[Loc]>]||null> == null:
+            - narrate "<proc[Colorize].context[No Block Data Found.|BlueInverted]>"
+            - stop
         # | determine number of logs on the referenced block
         - define Size <yaml[<[Key]>].list_keys[<[Loc]>].size>
         # | select the last ten logs after sorting the timestamps
@@ -62,8 +66,12 @@ Deprec_Command:
             - define ActionKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[2]>
             - choose <[ActionKey]>:
                 - case "Placed" "Broke":
-                    - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
-                    - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+                    - if <[ActionKey]> == "Broke":
+                        - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
+                        - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+                    - else:
+                        - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+                        - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
 
                     - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
                     - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[OldMaterialKey]><&b>]"
@@ -104,18 +112,15 @@ Deprec_Command:
                             - else:
                                 - repeat stop
                             
-
                     - choose <[ActionKey]>:
                         - case "Exchanged":
-                            - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]>"
-                            - define SubAction "<proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
+                            - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]><&nl><proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
                         - case "Removed":
                             - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]>"
                         - case "Deposited":
                             - define SubAction "<proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
                         - case "Opened":
                             - define SubAction "<proc[Colorize].context[Opened and Viewed|yellow]>"
-                    #- define SubAction Placeholder
 
                     - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> inventory<&nl><[SubAction]>"
                     - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[Block].to_titlecase><&b>]"
