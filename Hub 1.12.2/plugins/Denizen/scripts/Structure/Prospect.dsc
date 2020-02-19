@@ -10,8 +10,6 @@ Prospect_Command:
     description: Prospects actions at a location
     usage: /prospect (on/off)
     permission: behrry.protecc.prospect
-    aliases:
-        - t
     Activate:
         - if <player.has_flag[behrry.protecc.prospecting]>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
@@ -70,6 +68,15 @@ Prospect_Handler:
     type: world
     debug: false
     events:
+        on chunk unloads:
+            - define Chunk <context.chunk.after[@]>
+            - if <server.has_file[data/ProteccData/<[Chunk]>.yml]>:
+                - yaml id:<[Chunk]> savefile:data/ProteccData/<[Chunk]>.yml
+                - yaml id:<[Chunk]> unload
+        on chunk loads:
+            - define Chunk <context.chunk.after[@]>
+            - if <server.has_file[data/ProteccData/<[Chunk]>.yml]>:
+                - yaml id:<[Chunk]> load:data/ProteccData/<[Chunk]>.yml
         on player clicks with Moderator_Prospector:
             - determine passively cancelled
             - define Loc <player.flag[behrry.protecc.selection]||<player.location.cursor_on>>
@@ -94,6 +101,8 @@ Prospect_Handler:
             - define Data <list[<context.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|Broke|<context.material.name>|air]>
             - if !<server.has_file[data/ProteccData/<[Chunk]>.yml]>:
                 - yaml id:<[Chunk]> create
+            - if <yaml[<[Chunk]>].list_keys[].size||null> == null:
+                - yaml id:<[Chunk]> load:data/ProteccData/<[Chunk]>.yml
             - yaml id:<[Chunk]> set <[Data].get[1]>.<[Data].get[2]>:|:<[Data].get[3]>|<[Data].get[4]>|<[Data].get[5]>|<[Data].get[6]>
             - yaml id:<[Chunk]> savefile:data/ProteccData/<[Chunk]>.yml
 
