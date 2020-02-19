@@ -55,15 +55,23 @@ Essentials:
             - if <[YamlSize]> > 9:
                 - foreach <yaml[<player]>].read[<[Key]>].get[1].to[<[YamlSize].sub[9]>]>:
                     - yaml id:<player> set <[Key]>:<-:<[Value]>
-            - yaml id:<player> set <[Key]>:->:<[UID].add[1]>Lasagna<context.inventory.list_contents>
+            - yaml id:<player> set <[Key]>:->:<[UID].add[1]>Lasagna<player.inventory.list_contents>
             - yaml id:<player> savefile:data/pData/<player.uuid>.yml
+        on player respawns:
+            - if <player.flag[settings.essentials.bedspawn]||false> == true:
+                - determine passively <player.bed_spawn>
+            - else:
+                - determine passively <player.world.spawn_location>
         on pl command:
             - determine passively fulfilled
             - narrate "Plguins (5): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>, <&a>Depenizen<&f>"
         on resource pack status:
             - narrate targets:<server.match_player[behr]> "<context.status>"
         on player changes gamemode:
-            - flag player gamemode.inventory.<player.gamemode>:!|:<player.inventory.list_contents>
+            - if <player.has_flag[gamemode.inventory.changebypass]>:
+                - flag player gamemode.inventory.changebypass:!
+            - else:
+                - flag player gamemode.inventory.<player.gamemode>:!|:<player.inventory.list_contents>
             - inventory clear
             - if <player.has_flag[gamemode.inventory.<context.gamemode>]>:
                 - inventory set d:<player.inventory> o:<player.flag[gamemode.inventory.<context.gamemode>].as_list>
