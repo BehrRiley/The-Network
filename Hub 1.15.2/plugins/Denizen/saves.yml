@@ -13,13 +13,18 @@ Players:
             COMMANDLISTENING: 'true'
           ESSENTIALS:
             DISPLAY_NAME: B§ae§fhr
-        CLOSEENOUGHFORASANDWICH: 'true'
+            LASTSEENDAYS: d@1.5819093116E9s
+            LASTSEENHOURS: d@1.5819093116E9s
+            LASTSEENMINUTES: d@1.5819093116E9s
   '11':
     11AAA0BC3AB946FE99F59EF8E61FBB12:
       Flags:
         BEHRRY:
           ESSENTIALS:
             DISPLAY_NAME: B§be§fhrry
+            LASTSEENDAYS: d@1.58190894515E9s
+            LASTSEENHOURS: d@1.58190894515E9s
+            LASTSEENMINUTES: d@1.58190894515E9s
 Global:
   Flags:
     BEHRRY:
@@ -138,3 +143,15 @@ Global:
             &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
             &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
             &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &ssb&lb&ss305&ssb&co&ss320&ssb&co&ss337&ssb&rb-&lb&ss302&ssb&fs&ss324&ssb&fs&ss320&ssb&rb-&lb&ssaBehr_Riley&ssb&rb-&lb&ssePlaced&ssb&rb-&lb&sseConcrete&ssb&rb'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &sscP&ssal&ssca&ssad'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &sscP&ssal&ssca&ssad&ssc&dot&ssa&dot&ssc&gt'
+          - '&ss&lbhover=SHOW_TEXT&sc&ampss2R&ampssaeal &ampss2N&ampssaame&ampss2&co
+            &ampsseBehr_Riley&nl&ampss6C&ampsselick &ampss6t&ampsseo &ampss6R&ampsseeport
+            &ampss6I&ampssessue&rb&ss&lbclick=suggest_command&sc&fssnp message&co
+            &rb&ssa☼ &ssrB&ssae&ssfhr&ssr&ss&lb&fsclick&rb&ss&lb&fshover&rb&co &sscP&ssal&ssca&ssad&ssc&dot&ssa&dot&ssc&dot'
