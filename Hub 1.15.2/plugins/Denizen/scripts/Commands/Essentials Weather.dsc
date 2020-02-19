@@ -6,8 +6,8 @@ Weather_Command:
     type: command
     name: weather
     debug: false
-    description: turns on or off gamemode requesting for the specific gamemode
-    usage: /weather <&lt>Gamemode<&gt> (On/Off) (Time)
+    description: Adjusts the weather.
+    usage: /weather <&lt>Weather<&gt>
     permission: behrry.essentials.weather
     tab complete:
         - define Arg1 <list[sunny|storm|thunder]>
