@@ -7,7 +7,7 @@ Ping_Command:
     name: ping
     debug: false
     description: shows yours, or another player's ping
-    usage: /ping
+    usage: /ping (player)
     permission: behrry.essentials.ping
     tab complete:
         - if <context.args.size||0> == 0:
