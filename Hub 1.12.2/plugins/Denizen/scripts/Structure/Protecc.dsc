@@ -3,13 +3,13 @@
 # | ██
 # % ██  [ Command ] ██
 # $ ██  [ TO-DO   ] ██
-Deprec_Command:
+Prospect_Command:
     type: command
-    name: t
+    name: Prospect
     debug: true
-    description: aaa
-    usage: /aaaa
-    permission: behrry.essentials.nickname
+    description: Prospects actions at a location
+    usage: /prospect (on/off)
+    permission: behrry.protecc.prospect
     aliases:
         - knee
     tab complete:
@@ -20,6 +20,10 @@ Deprec_Command:
         # + we're using the block we're looking at for reference until a stick is made
         # + idea - highlight blocks with particles like BehrEdit selections, click for info on that block
         - define Loc <player.location.cursor_on>
+        # | Check if the data can be found
+        - if <yaml[<[Key]>].list_keys[<[Loc]>]||null> == null:
+            - narrate "<proc[Colorize].context[No Block Data Found.|BlueInverted]>"
+            - stop
         # | determine number of logs on the referenced block
         - define Size <yaml[<[Key]>].list_keys[<[Loc]>].size>
         # | select the last ten logs after sorting the timestamps
@@ -62,8 +66,12 @@ Deprec_Command:
             - define ActionKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[2]>
             - choose <[ActionKey]>:
                 - case "Placed" "Broke":
-                    - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
-                    - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+                    - if <[ActionKey]> == "Broke":
+                        - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
+                        - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+                    - else:
+                        - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
+                        - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
 
                     - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
                     - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[OldMaterialKey]><&b>]"
@@ -104,18 +112,15 @@ Deprec_Command:
                             - else:
                                 - repeat stop
                             
-
                     - choose <[ActionKey]>:
                         - case "Exchanged":
-                            - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]>"
-                            - define SubAction "<proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
+                            - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]><&nl><proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
                         - case "Removed":
                             - define SubAction "<proc[Colorize].context[Remove List:|yellow]><&nl><&a><[RemovedNote].separated_by[<&nl>]>"
                         - case "Deposited":
                             - define SubAction "<proc[Colorize].context[Deposit List:|yellow]><&nl><&a><[DepositedNote].separated_by[<&nl>]>"
                         - case "Opened":
                             - define SubAction "<proc[Colorize].context[Opened and Viewed|yellow]>"
-                    #- define SubAction Placeholder
 
                     - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> inventory<&nl><[SubAction]>"
                     - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[Block].to_titlecase><&b>]"
@@ -123,7 +128,7 @@ Deprec_Command:
             - define Command3 "placeholder"
             - define Action <proc[MsgCmd].context[<[Hover3]>|<[Text3]>|<[Command3]>]>
             - narrate <[TimeKey]><&b>-<[Player]>-<[Action]>
-Protecc_Handler:
+Prospect_Handler:
     type: world
     debug: true
     events:
@@ -203,7 +208,10 @@ Protecc_Handler:
             - narrate "<context.old> returns the old sign text as a ListTag."
             - narrate "<context.material> returns the MaterialTag of the sign."
 
-        
+Protecc_Handler:
+    type: world
+    debug: true
+    events:
         on player enters <notable cuboid>:
             - narrate "<context.from> returns the block location moved from."
             - narrate "<context.to> returns the block location moved to."
@@ -224,3 +232,19 @@ Protecc_Handler:
             - narrate "<context.to> returns the block location moved to."
             - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
             - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
+
+
+
+# | ███████████████████████████████████████████████████████████
+# % ██    Protecc Handler
+# | ██
+# % ██  [ Command ] ██
+# $ ██  [ TO-DO   ] ██
+Protecc_Handler:
+    type: world
+    debug: true
+    events:
+        on player right clicks with ProteccStick:
+            - flag <player> Protecc.RightMarker:<context.location>
+        on player left clicks with ProteccStick:
+            - flag <player> Protecc.LeftMarker:<context.location>
