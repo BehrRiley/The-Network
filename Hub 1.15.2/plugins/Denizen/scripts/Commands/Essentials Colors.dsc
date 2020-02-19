@@ -9,7 +9,7 @@ Colors_Command:
         - if <context.args.get[1]||null> != null
             - Inject Command_Syntax Instantly
         - define Colors <list[&0|&1|&2|&3|&4|&5|&6|&7|&8|&9|&a|&b|&c|&d|&e|&f]>
-        - narrate "<&2>+<element[<&a>Shift-Click To Insert].pad_left[28].with[-]><&2>-----+""
+        - narrate "<&2>+<element[<&a>Shift-Click To Insert].pad_left[28].with[-]><&2>-----+"
         - repeat 2:
             - define Text<[value]> li@
             - foreach <[Colors].get[<[value].add[<[value].sub[1].mul[7]>]>].to[<[value].add[<[value].sub[1].mul[8]>].add[7]>]> as:Color:
