@@ -38,3 +38,5 @@ Hub 1.12.2/plugins/denizen/data
 
 # Executables
 .exe
+Hub 1.12.2/plugins/Denizen/scripts/Structure/PluginFix.dsc
+Hub 1.15.2/plugins/Denizen/saves.yml
