@@ -207,7 +207,7 @@ Prospect_Reader_Task:
             - define PlayerKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[1].as_player>
             
             # | For the Player Text
-            - define Hover2 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><proc[Colorize].context[[Click] to Document<&nl>[Shift] + [Click] to Manage|Green]>
+            - define Hover2 "<&6>P<&e>layer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><proc[Colorize].context[[Click] to Document<&nl>[Shift] + [Click] to Manage|Green]>
             - define Text2 "<&b>[<&a><[PlayerKey].name><&b>]"
             - define Command2 "placeholder"
             - define Insert2 "/mod <[PlayerKey].name> "
@@ -224,7 +224,7 @@ Prospect_Reader_Task:
                         - define NewMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[3]>
                         - define OldMaterialKey <yaml[<[Key]>].read[<[Loc]>.<[NextKey]>].get[4]>
 
-                    - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
+                    - define Hover3 "<&6>P<&e>layer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> block<&nl><proc[Colorize].context[Old Material:|yellow]> <&a><[OldMaterialKey]><&nl><proc[Colorize].context[New Material:|yellow]> <&a><[NewMaterialKey]>"
                     
                     - if <[ActionKey]> == "Broke":
                         - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[OldMaterialKey]><&b>]"
@@ -277,7 +277,7 @@ Prospect_Reader_Task:
                         - case "Opened":
                             - define SubAction "<proc[Colorize].context[Opened and Viewed|yellow]>"
 
-                    - define Hover3 "<&6>P<&e>ayer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> inventory<&nl><[SubAction]>"
+                    - define Hover3 "<&6>P<&e>layer<&6>: <proc[User_Display_Simple].context[<[PlayerKey]>]><&nl><&6>A<&e>ction<&6>: <&a><[ActionKey]> inventory<&nl><[SubAction]>"
                     - define Text3 "[<&e><[ActionKey]><&b>]-[<&e><[Block].to_titlecase><&b>]"
             
             - define Command3 "placeholder"
