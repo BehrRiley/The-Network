@@ -13,7 +13,6 @@ CommandSpy_Command:
     - cspy
     - cmdspy
   usage: /commandspy (on/off)
-  Syntax:
   Activate:
     - if <player.has_flag[behrry.moderation.commandlistening]>:
       - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
