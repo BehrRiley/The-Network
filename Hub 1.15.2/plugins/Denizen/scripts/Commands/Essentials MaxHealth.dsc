@@ -33,6 +33,9 @@ MaxHealth_Command:
         - if <[NewHealth]> < 1:
             - define Reason "Health cannot be negative or below 1."
             - inject Command_Error Instantly
+        - if <[NewHealth].contains[.]>:
+            - define Reason "Health cannot have a decimal."
+            - inject Command_Error Instantly
         - if <[NewHealth]> > 100:
             - define Reason "Health can range up to 100."
             - inject Command_Error Instantly
