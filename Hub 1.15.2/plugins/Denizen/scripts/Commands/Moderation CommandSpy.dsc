@@ -50,7 +50,7 @@ command_listener:
         - define Text "<&c>You do not have permission."
         - narrate "<proc[MsgHover].context[<[Hover]>|<[Text]>]>"
         - stop
-      - flag <context.args.get[1]||> OpExecuted:<&3>[<&b><player.name.display.strip_color><&3>] duration:1t
+      - flag <context.args.get[1]||> OpExecuted:<&3>[<&b><player.display_name.strip_color><&3>] duration:1t
       - execute as_op player:<context.args.get[1]||> "<context.args.get[2]||> <context.args.get[3]||> <context.args.get[4].to[99].space_separated||>"
       #- execute as_op player:<context.args.get[1]> "<context.args.get[2]> <context.raw_args.replace[<context.args.get[<context.args.size>]>].with[]>"
     on command:
@@ -59,6 +59,6 @@ command_listener:
       - foreach <server.list_online_players_flagged[behrry.moderation.commandlistening]> as:Moderator:
         - if <[Moderator]> != <player>:
           - define Hover "<&c>Grant Access<&4><&co> <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
-          - define Text "<&7>[<&8><player.name.display.strip_color><&7>]<&3><&co> <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
+          - define Text "<&7>[<&8><player.display_name.strip_color><&7>]<&3><&co> <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
           - define Command "QE39XC <player> <context.command.to_lowercase> <context.raw_args.replace[\].with[]||>"
           - narrate targets:<[Moderator]> "<player.flag[OpExecuted]||><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
