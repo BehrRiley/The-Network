@@ -5,11 +5,11 @@
 # $ ██  [ TO-DO   ] ██
 Prospect_Command:
     type: command
-    name: prospect
+    name: Prospect
     debug: true
-    description: aaa
-    usage: /aaaa
-    permission: behrry.essentials.nickname
+    description: Prospects actions at a location
+    usage: /prospect (on/off)
+    permission: behrry.protecc.prospect
     aliases:
         - knee
     tab complete:
@@ -128,7 +128,7 @@ Prospect_Command:
             - define Command3 "placeholder"
             - define Action <proc[MsgCmd].context[<[Hover3]>|<[Text3]>|<[Command3]>]>
             - narrate <[TimeKey]><&b>-<[Player]>-<[Action]>
-Prospecting_Handler:
+Prospect_Handler:
     type: world
     debug: true
     events:
@@ -208,7 +208,10 @@ Prospecting_Handler:
             - narrate "<context.old> returns the old sign text as a ListTag."
             - narrate "<context.material> returns the MaterialTag of the sign."
 
-        
+Protecc_Handler:
+    type: world
+    debug: true
+    events:
         on player enters <notable cuboid>:
             - narrate "<context.from> returns the block location moved from."
             - narrate "<context.to> returns the block location moved to."
@@ -229,8 +232,9 @@ Prospecting_Handler:
             - narrate "<context.to> returns the block location moved to."
             - narrate "<context.cuboids> returns a list of cuboids entered/exited (when no cuboid is specified in the event name)."
             - narrate "<context.cause> returns the cause of the event. Can be: WALK, WORLD_CHANGE, JOIN, LEAVE, TELEPORT, VEHICLE"
-            
-            
+
+
+
 # | ███████████████████████████████████████████████████████████
 # % ██    Protecc Handler
 # | ██
@@ -244,5 +248,3 @@ Protecc_Handler:
             - flag <player> Protecc.RightMarker:<context.location>
         on player left clicks with ProteccStick:
             - flag <player> Protecc.LeftMarker:<context.location>
-
-
