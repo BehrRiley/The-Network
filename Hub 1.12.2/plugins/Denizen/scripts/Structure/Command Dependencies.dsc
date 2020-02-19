@@ -22,11 +22,10 @@ Admin_Permission_Denied:
   type: task
   debug: false
   script:
-    - if <player.flag[Behrry.Essentials.Rank]> > <[Rank]>
-      - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.yaml_key[adminpermission]>"
-      - define Message "<proc[Colorize].context[You don't have permission to do that.|red]>"
-      - narrate <proc[HoverMsg].context[<[Message]>|<[Hover]>]>
-      - stop
+    - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
+    - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6>Moderation"
+    - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
+    - stop
 
 Player_Verification:
   type: task
