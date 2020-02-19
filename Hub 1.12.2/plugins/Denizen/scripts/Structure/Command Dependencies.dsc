@@ -32,9 +32,9 @@ Player_Verification:
   type: task
   debug: false
   ErrorProcess:
-    - define Message "<proc[Colorize].context[Player is not online or does not exist.|red]>"
-    - define Hover "<&6>Y<&e>ou <&6>E<&e>ntered<&co><&nl><&c>/<context.command.to_lowercase> <context.raw_args>"
-    - narrate <proc[MsgHover].context[<[Message]>|<[Hover]>]>
+    - define Hover "<&6>Y<&e>ou <&6>E<&e>ntered<&co><&nl><&c>/<context.alias.to_lowercase> <context.raw_args>"
+    - define Text "<proc[Colorize].context[Player is not online or does not exist.|red]>"
+    - narrate <proc[MsgHover].context[<[Hover]>|<[Text]>]>
     - stop
   script:
     - if <server.match_player[<[User]>]||null> == null:
