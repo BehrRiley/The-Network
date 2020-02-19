@@ -31,6 +31,7 @@ teleport_Command:
             - define User <context.args.last>
             - inject Player_Verification
             - foreach <[PlayerList]> as:Player:
+                - flag <[Player]> behrry.essentials.teleport.back:<[player].location>
                 - teleport <[Player]> <[User].location>
                 - narrate targets:<[Player]> "<proc[Colorize].context[You were teleported to:|green]> <&r><[User].name.display>"
             - if <[PlayerList].size> > 1:
