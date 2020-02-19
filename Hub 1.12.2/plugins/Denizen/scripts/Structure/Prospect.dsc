@@ -68,7 +68,7 @@ Prospect_Command:
 # % ██  [ Handlers ] ██
 Prospect_Handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player clicks with Moderator_Prospector:
             - determine passively cancelled
