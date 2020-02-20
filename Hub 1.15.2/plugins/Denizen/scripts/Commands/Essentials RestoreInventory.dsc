@@ -44,6 +44,3 @@ RestoreInventory_Command:
                 - narrate targets:<[User]> "<proc[Colorize].context[Your inventory before death was restored.|green]>"
         - else:
             - narrate "<proc[Colorize].context[Inventory cache must be an index number.|red]>"
-
-
-                    
