@@ -3,25 +3,46 @@
     - [x] Complete / Consistent
     - [ ] Revisit
     - [Essentials]() | Main global commands
-        - [x] Back
+        - [x] Back      - [ ] test
+        - [x] CleanGround
+        - [x] ClearChat
+        - [x] ClearInventory
         - [x] Colors
-        - [ ] DeathBack
+        - [ ] ControlledFlight
+        - [x] DeathBack
         - [x] Discord
+        - [x] Fly
+        - [x] FlySpeed
+        - [x] GamemodeInventory
         - [ ] Give
-        - [ ] GMA
-        - [ ] GMC
-        - [ ] GMS
-        - [ ] GMSP
+        - [x] GMA
+        - [x] GMC
+        - [x] GMS
+        - [x] GMSP
+        - [ ] GMR
+        - [x] Hat
         - [ ] Head
+        - [x] Heal
+        - [x] Help
         - [x] Home
         - [ ] InventorySee
-        - [ ] IP
-        - [ ] Nickname
+        - [x] MaxHealth
+        - [x] IP
+        - [x] Nickname
+        - [x] Ping
         - [ ] Report
         - [ ] Restoreinventory
+        - [x] RunSpeed
+        - [x] Seen
         - [x] SetHome
+        - [x] Suicide
+        - [x] TabOffline
         - [ ] Teleport
-        - [ ] World
+        - [x] TPAccept
+        - [x] TPDecline
+        - [x] TPHere
+        - [ ] Weather
+        - [x] World
     - [BehrEdit]() | WorldEdit Features
     - [BehrBot]() | Discord Command Center | Data & Memory Storage
     - [Security]() | Grief Prevention, logging and management
