@@ -64,22 +64,23 @@ Nickname_Command:
         - if <[Nickname].contains_any[&k]>:
             - narrate "<proc[Colorize].context[Obfuscated names are blacklisted.|red]>"
             - stop
-        - define Blacklist "<list[Admin|a d m i n|owner|owna|administrator|moderator]>"
+        - define Blacklist "<list[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley]>"
         - if <[Nickname].parse_color.strip_color.contains_any[<[Blacklist]>]>:
             - narrate "<proc[Colorize].context[Illegal Name.|red]>"
             - stop
 
         # -██ [ resetting ?
-        - if <[Nickname]> == <[User].name> || <list[Clear|Reset|Remove|Delete].contains[<[Nickname]>]>:
+        - if <[Nickname]> == <[User].name> || <list[Clear|Reset|Remove|Delete|Default].contains[<[Nickname]>]>:
             - define Hover "<proc[Colorize].context[Click to change nickname.|green]><&nl> <&r><[User].name>"
             - define Text "<proc[Colorize].context[Nickname Reset to|yellow]> <&r><[User].name><&e>."
             - define Command "nick "
             - narrate targets:<[User]> <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+            - adjust <[User]> display_name:<[User].name>
             - stop
 
-        - define Hover "<proc[Colorize].context[Click to reset to:|green]><&nl> <&r><[User].name.display>"
+        - define Hover "<proc[Colorize].context[Click to reset to:|green]><&nl> <&r><[User].display_name>"
         - define Text "<proc[Colorize].context[Your nickname has been changed to:|green]> <&r><[Nickname].parse_color>"
-        - define Command "nick <[User].name.display.escaped.replace[&ss].with[&]>"
+        - define Command "nick <[User].display_name.escaped.replace[&ss].with[&]>"
         - narrate targets:<[User]> <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
         - if <[AdminRan].exists>:
             - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
