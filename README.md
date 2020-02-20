@@ -54,10 +54,26 @@
         - [ ] Prospect
         - [ ] Old/New Chest Viewing
     - [BehrEdit]() | WorldEdit Features
+        - [ ] QuickWand
+            - [ ] pos1
+            - [ ] pos2
+            - [ ] Filler Mode
+            - [ ] Monitor
+            - [ ] SelClear
+            - [ ] Remove Last Selection(MultiPoint Cuboid/Polygon Selector)
+            - [ ] Cuboid Mode
+            - [ ] Expanding Cuboid
+            - [ ] Irregular Polygon
+        - [ ] Undo/Redo
+        - [ ] Monitor
         - [ ] pos1
         - [ ] pos2
         - [ ] set
+        - [ ] stack
+        - [ ] repeatwand
         - [ ] replace
+        - [ ] move
+        - [ ] gravity
         - [ ] walls
         - [ ] outline
         - [ ] shell
