@@ -3,6 +3,7 @@
     - [x] Complete / Consistent
     - [ ] Revisit
     - [Essentials]() | Main global commands
+        - [ ] Armorstand
         - [x] Back
         - [x] CleanGround
         - [x] ClearChat
@@ -26,12 +27,18 @@
         - [x] Help
         - [x] Home
         - [ ] InventorySee
+        - [ ] Ignore
         - [x] MaxHealth
+        - [ ] Message
         - [x] Nickname
+        - [ ] Oxygen
         - [x] Ping
+        - [ ] Repair
+        - [ ] RepairAll
         - [ ] Report
         - [ ] Restoreinventory
         - [x] RunSpeed
+        - [ ] Ride
         - [x] Seen
         - [x] SetHome
         - [x] Suicide
@@ -40,11 +47,40 @@
         - [x] TPAccept
         - [x] TPDecline
         - [x] TPHere
+        - [ ] Unignore
         - [ ] Weather
         - [x] World
     - [Protecc]() | Protection & Prospecting Information
         - [ ] Prospect
+        - [ ] Old/New Chest Viewing
     - [BehrEdit]() | WorldEdit Features
+        - [ ] pos1
+        - [ ] pos2
+        - [ ] set
+        - [ ] replace
+        - [ ] walls
+        - [ ] outline
+        - [ ] shell
+        - [ ] regen
+        - [ ] hollow
+        - [ ] de-shell
+        - [ ] copy
+        - [ ] cut
+        - [ ] paste
+        - [ ] rotate
+        - [ ] flip
+        - [ ] schematic
+        - [ ] cyl
+        - [ ] hcyl
+        - [ ] sphere
+        - [ ] hsphere
+        - [ ] fill
+        - [ ] drain
+        - [ ] fixwater
+        - [ ] fixlava
+        - [ ] replacenear
+        - [ ] biome
+        - [ ] temperature
     - [BehrBot]() | Discord Command Center | Data & Memory Storage
     - [Moderation]() | Player Moderation & Management
         - [x] IP
