@@ -11,7 +11,7 @@ runSpeed_Command:
     usage: /runspeed #/Default
     adminusage: /runspeed (Player) #/Default
     aliases:
-        - fs
+        - walkspeed
     permission: behrry.essentials.runspeed
     tab complete:
         - if <player.groups.contains[Moderation]>:
