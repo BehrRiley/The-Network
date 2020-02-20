@@ -17,6 +17,12 @@ Controlledflight_Command:
         - else:
             - flag player behrry.essentials.controlledflight
             - narrate "<proc[Colorize].context[Controlled flight Enabled.|green]>"
+        
+            #- spawn armor_stand[gravity=false;visible=false] <player.location> save:Seat
+            #- define Entity <entry[Seat].spawned_entities.get[1]>
+            #- wait 1t
+            #- mount <player>|<[Entity]>
+            #- flag <player> Essentials.flightentity:<[Entity]>
     Deactivate:
         - if !<player.has_flag[behrry.essentials.controlledflight]>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
@@ -37,7 +43,18 @@ Controlledflight_Command:
             - case default:
                 - inject Command_Syntax Instantly
                 
-#Controlledflight_Handler:
+#Controlled_Flight_Handler:
 #    type: world
-#    debug: false
 #    events:
+#        on player steers entity:
+#            - if <context.dismount>:
+#                - remove <player.flag[Essentials.flightentity]>
+#                - flag <player> Essentials.flightentity:!
+#                - stop
+#            - if <context.sideways> > 0.5:
+#                - adjust 
+#
+#            - narrate <context.sideways>
+#            - narrate <context.forward>
+#            - narrate <context.jump>
+#            - narrate <context.dismount>
