@@ -3,7 +3,7 @@
     - [x] Complete / Consistent
     - [ ] Revisit
     - [Essentials]() | Main global commands
-        - [x] Back      - [ ] test
+        - [x] Back
         - [x] CleanGround
         - [x] ClearChat
         - [x] ClearInventory
@@ -27,7 +27,6 @@
         - [x] Home
         - [ ] InventorySee
         - [x] MaxHealth
-        - [x] IP
         - [x] Nickname
         - [x] Ping
         - [ ] Report
@@ -43,11 +42,19 @@
         - [x] TPHere
         - [ ] Weather
         - [x] World
+    - [Protecc]() | Protection & Prospecting Information
+        - [ ] Prospect
     - [BehrEdit]() | WorldEdit Features
     - [BehrBot]() | Discord Command Center | Data & Memory Storage
-    - [Security]() | Grief Prevention, logging and management
-        - [Player Management]() | Data Control & Management
-        - [Currency Management]() | Monies & Points
+    - [Moderation]() | Player Moderation & Management
+        - [x] IP
+        - [x] CommandSpy
+        - [ ] Mute
+        - [ ] TempMute
+        - [ ] Kick
+        - [ ] TempBan
+        - [ ] Ban
+        - [ ] SilentChest
 
 - [Hub 1.15.2](Hub%201.15.2/plugins/Denizen/scripts) | Main Compatible Hub
 - [Hub 1.12.2](Hub%201.12.2/plugins/Denizen/scripts) | Compatibility Hub
@@ -63,6 +70,47 @@
         - [Quests]() | Quest Development - Notes, Transcripts, Etc
         - [Dungeoneering]() | Procedurally Generating Dungeons
         - [Minigames]() | Minigame Development - Notes, Transcripts, Etc
+            # PvP / PvM
+            - [ ] Barbarian Assault
+            - [ ] Barrows
+            - [ ] Bounty Hunter
+            - [ ] Burgh De Rott Ramble
+            - [x] Castle Wars
+            - [ ] Champions' Challenge
+            - [ ] Chambers of Xeric
+            - [ ] Clan Wars
+            - [ ] Duel Arena
+            - [ ] Dungeoneering
+            - [ ] Mage Arena
+            - [ ] Nightmare Zone
+            - [ ] Pest Control
+            - [ ] Temple Trekking
+            - [ ] Theatre of Blood
+            - [ ] TzHaar Fight Cave
+            - [ ] TzHaar Fight Pit
+            - [ ] Last Man Standing
+            - [ ] Inferno (hah)
+            # Skilling
+            - [ ] Blast Furnace
+            - [ ] Brimhaven Agility Arena
+            - [ ] Fishing Trawler
+            - [ ] Gnome Ball
+            - [ ] Gnome Restaurant
+            - [ ] Impetuous Impulses
+            - [ ] Mage Training Arena
+            - [ ] Pyramid Plunder
+            - [ ] Ranging Guild
+            - [ ] Rogues' Den
+            - [ ] Sorceress's Garden
+            - [ ] Tithe Farm
+            - [ ] Trouble Brewing
+            - [ ] Volcanic Mine
+            # Miscellaneous
+            - [ ] Burthorpe Games Room
+            - [ ] Rat Pits
+            - [ ] Rogue Trader
+            - [ ] Tears of Guthix
+            - [ ] Treasure Trails
         - [Skills]() | Skill Development - Notes, Mechanics, Etc
     ------
     - [WorldPainter]() | Geographic Management & Design
