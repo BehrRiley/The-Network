@@ -14,6 +14,14 @@ MsgCmd:
     # - <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>]><[Text].unescaped><&end_click><&end_hover>
 
+MsgChat:
+    type: procedure
+    debug: false
+    definitions: Hover|Text|Command
+    script:
+    # - <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - determine <&hover[<[Hover].unescaped>]><&click[<[Command]>]><[Text].unescaped><&end_click><&end_hover>
+
 MsgHint:
     type: procedure
     debug: false
@@ -53,3 +61,4 @@ MsgHintIns:
     script:
     # - <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>|<[Insertion]>]>
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
+
