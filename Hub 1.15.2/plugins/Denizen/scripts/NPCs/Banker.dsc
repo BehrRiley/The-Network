@@ -241,8 +241,6 @@ Deposit_All:
         custom_model_data: 134
         flags: "li@HIDE_POTION_EFFECTS|HIDE_ENCHANTS|HIDE_ATTRIBUTES|HIDE_UNBREAKABLE|HIDE_DESTROYS|HIDE_PLACED_ON"
     display name: <&2>D<&a>eposit <&2>A<&a>ll
-
-
 Deposit_Equipement:
     type: item
     debug: false
