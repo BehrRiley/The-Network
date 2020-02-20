@@ -3,7 +3,7 @@ Player_Sitting:
     debug: false
     events:
         on player right clicks *stairs:
-            - if <player.has_flag[SitDelay]> || <player.has_flag[Essentials.Chair]> || <player.is_sneaking>:
+            - if <player.has_flag[SitDelay]> || <player.has_flag[Essentials.Chair]> || <player.is_sneaking> || <context.location.material.half> == top || <player.item_in_hand.material.name> != air:
                 - stop
             - flag player SitDelay duration:10t
 
