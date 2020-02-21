@@ -34,7 +34,7 @@ Help_Handler:
             - else:
                 - inject Command_Syntax Instantly
             
-            - define Commands <server.list_scripts.parse[name].filter[ends_with[_Command]]>
+            - define Commands <server.list_scripts.parse[name].filter[ends_with[_Command]].alphabetical>
 
             # Verify Console Ran
             - if <context.source_type> == server:
