@@ -15,27 +15,17 @@ Essentials:
             - bungeeexecute "send <bungee.server> MainHub"
         on stop command:
             - bungeeexecute "send <bungee.server> MainHub"
-        on player chats:
-            - determine passively cancelled
-            - if <player.has_flag[Interacting_NPC]>:
-                - stop
-            - define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
-            - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.display_name><&r>"
-            - define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
-            - define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
-            - define Message "<[NamePlate]>: <context.message.parse_color>"
-            #- discord id:GeneralBot Message channel:623742787615064082 "**[<player.groups.get[1]>]** <player.display_name.strip_color>: <context.message.strip_color>"
-            - flag server Behrry.Essentials.ChatHistory.Global:->:<[Message].escaped>
-            - announce <[Message]>
-            #- bungeerun <bungee.list_servers.exclude[<bungee.server>]> Relay_Chat_Task def:Global|<[Message].escaped>
         on player logs in:
             - wait 1s
             #- run Chat_Channel_Load def:Global
             - if <player.has_flag[behrry.essentials.display_name]>:
                 - adjust <player> display_name:<player.flag[behrry.essentials.display_name]>
-        on player joins:
-            - wait 1s
-            - determine "<player.display_name> <proc[Colorize].context[joined the server.|green]>"
+            - if <player.in_group[Silent]>:
+                - while !<player.groups.contains[Public]>:
+                    - execute as_server "upc addgroup <player.name> Public"
+                    - wait 5t
+        on player quits:
+            - flag player behrry.chat.lastreply:!
         on hanging breaks:
             - if <context.entitiy||> == <server.match_player[behr]||>:
                 - stop
@@ -64,9 +54,11 @@ Essentials:
                 - determine passively <player.world.spawn_location>
         on pl command:
             - determine passively fulfilled
-            - narrate "Plguins (5): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>, <&a>Depenizen<&f>"
+            - narrate "Plguins (4): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>"
         on resource pack status:
-            - narrate targets:<server.match_player[behr]> "<context.status>"
+            #- narrate targets:<server.match_player[behr]> "<context.status>"
+            - if <context.status> == declined:
+                - kick <player> "reason:Must accept resource pack. This does not affect textures."
         on player changes gamemode:
             - if <player.has_flag[gamemode.inventory.changebypass]>:
                 - flag player gamemode.inventory.changebypass:!
@@ -77,6 +69,119 @@ Essentials:
                 - inventory set d:<player.inventory> o:<player.flag[gamemode.inventory.<context.gamemode>].as_list>
             - else:
                 - flag player gamemode.inventory.<context.gamemode>:<player.inventory.list_contents>
+
+Chat_Handler:
+    type: world
+    debug: false
+    GroupManager:
+        - flag player behrry.chat.experience:+15
+        - if !<player.in_group[Patron]>:
+            - if <player.in_group[Silent]>:
+                - execute as_server "upc removeGroup <player.name> Silent"
+                - execute as_server "upc addGroup <player.name> Visitor"
+            - if <player.in_group[Visitor]>:
+                - if <player.flag[behrry.chat.experience]> > 1000:
+                    - execute as_server "upc removeGroup <player.name> Visitor"
+                    - execute as_server "upc addGroup <player.name> Patron"
+    NameplateFormat:
+        - define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
+        - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.display_name><&r>"
+        - define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
+        - define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - define DiscordNamePlate "**<player.display_name>**"
+    TEMPNameplateFormat:
+        - define Mods <list[Faience|_Aes|FoxChirpz|ExpertAbyss|Whitey1488]>
+        - define Behr <server.match_player[Behr_riley]||<server.match_offline_player[behr_riley]>>
+        - if <[Mods].contains[<player.name>]>:
+            - define NamePlate "☼<&sp><&r><player.display_name><&r>"
+            - define DiscordNamePlate "**<player.display_name>**"
+        - else if <player> == <[Behr]>:
+            - define NamePlate "<&a>☼<&sp><&r><player.display_name><&r>"
+            - define DiscordNamePlate "**<player.display_name>**"
+        - else:
+            - define Nameplate "<player.display_name><&r>"
+            - define DiscordNamePlate "**<player.display_name>**"
+    GlobalChatLog:
+        - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
+            - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
+        - flag server Behrry.Essentials.ChatHistory.Global:->:<[Message].escaped>
+        #- define Channel 123
+        #- discord id:GeneralBot message channel:<[Channel]>
+
+    events:
+        on player joins:
+            - if <player.has_flag[behrry.protecc.prospecting]>:
+                - flag player behrry.protecc.prospecting:!
+            #@ Print the chat history
+            - narrate <server.flag[Behrry.Essentials.ChatHistory.Global].parse[unescaped].separated_by[<&nl>]>
+
+            #@ Format the message
+            - if <bungee.server||null> == null:
+                - define Server "Bandit Craft."
+            - else:
+                - define Server "The Test Server."
+            - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[joined the network on:|yellow]> <&a><[Server]>"
+
+            #@ Log the chat
+            - define Log <[Message].escaped>
+            - inject Chat_Logger Instantly
+
+            #@ Discord relay to other servers
+            - if <bungee.server||null> == Hub2:
+                - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
+            - else:
+                - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
+
+            #@ Print to game chat
+            - determine <[Message]>
+            
+        on player quits:
+            #@Format the Message
+            - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[left the network.|yellow]>"
+
+            #@Log to global chat
+            - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
+                - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
+            - flag server Behrry.Essentials.ChatHistory.Global:->:<[Message].escaped>
+
+            #@Discord Relay to Other Servers
+            - if <bungee.server||null> == Hub2:
+                - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
+            - else:
+                - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
+            
+            #@ Join Message Main Server
+            - determine <[Message]>
+
+        on player chats:
+            - determine passively cancelled
+            #@ NPC Check
+            - if <player.has_flag[Interacting_NPC]>:
+                - stop
+
+            #@ Fixing your group
+            #------ uperms remove before fix ------#
+            - inject locally GroupManager Instantly
+
+            #@ in-game formatting
+            #------ uperms remove before fix ------#
+            - inject locally NameplateFormat Instantly
+            #- inject locally TEMPNameplateFormat Instantly
+
+            #@ ChatLog
+            - define Message "<[NamePlate]>: <context.message.parse_color>"
+            - define DiscordMessage "<[DiscordNamePlate]>: <context.message>"
+            - inject locally GlobalChatLog Instantly
+            
+            #@ Discord relay
+            - if <bungee.server||null> == Hub2:
+                - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
+            - else:
+                - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
+
+            #@ print to discord and in-game
+            - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
+            - announce <[Message].replace[:smile:].with[☺].replace[:sad:].with[☻].replace[:fist:].with[╓].replace[:thumbsup:].with[•].replace[:thumbsdown:].with[◘].replace[:wink:].with[♀].replace[:eyes].with[►].replace[:sunglasses:].with[↑].replace[:pufferfish:].with[▲]>
 
 Ranks:
     type: yaml data
