@@ -103,6 +103,7 @@ Chat_Logger:
 # | ██
 # % ██  [ Tab-completes Players Online ] ██
 # % ██  [ Usage ] - inject Online_Player_Tabcomplete Instantly
+# - ██  [ Todo: ]  make this universal arg-numbered, used in: fly, 
 Online_Player_Tabcomplete:
     type: task
     debug: false
@@ -142,24 +143,8 @@ OneArg_Command_Tabcomplete:
 
 # % ██  [ Usage ] - define Arg1 <list[option1|option2|option3]>
 # % ██  [       ] - define Arg2 <list[option1|option2|option3]>
-# % ██  [       ] - inject OneArg_Command_Tabcomplete Instantly
-TwoArg_Command_Tabcomplete:
-    type: task
-    debug: false
-    script:
-        - if <context.args.size||0> == 0:
-            - determine <[Arg1]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[Arg1].filter[starts_with[<context.args.get[1]>]]>
-        - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
-            - determine <[Arg2]>
-        - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[Arg2].filter[starts_with[<context.args.get[2]>]]>
-
-# % ██  [ Usage ] - define Arg1 <list[option1|option2|option3]>
-# % ██  [       ] - define Arg2 <list[option1|option2|option3]>
-# % ██  [       ] - define Arg# <list[option1|option2|option3]>
-# % ██  [       ] - inject OneArg_Command_Tabcomplete Instantly
+# % ██  [       ] - define Arg3 <list[option1|option2|option3]>
+# % ██  [       ] - inject MultiArg_Command_Tabcomplete Instantly
 MultiArg_Command_Tabcomplete:
     type: task
     debug: false
@@ -169,7 +154,7 @@ MultiArg_Command_Tabcomplete:
         - foreach <context.args> as:Arg:
             - if <[Loop_Index]> == <context.args.size>:
                 - if !<context.raw_args.ends_with[<&sp>]>:
-                    - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Arg<[Loop_Index]>]>]>]]>
+                    - determine <[Arg<[Loop_Index]>].filter[starts_with[<context.args.get[<[Loop_Index]>]>]]>
                 - else if <[Arg<[Loop_Index].add[1]>].exists>:
                     - determine <[Arg<[Loop_Index].add[1]>]>
                 - else:
@@ -184,7 +169,7 @@ MultiArg_Command_Tabcomplete:
 # % ██  [ Activates or Deactivates a toggle command ] ██
 # % ██  [ Usage ] - define Arg <context.args.get[1]>
 # % ██  [       ] - define ModeFlag "behrry.essentials.example"
-# % ██  [       ] - define ModeName "Drop Lock"
+# % ██  [       ] - define ModeName "Mode Name"
 # % ██  [       ] - inject Activation_Arg_Command Instantly
 
 Activation_Arg_Command:
@@ -195,18 +180,18 @@ Activation_Arg_Command:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
         - else:
             - flag player <[ModeFlag]>
-            - narrate "<proc[Colorize].context[<[ModeName]>  Enabled.|green]>"
+            - narrate "<proc[Colorize].context[<[ModeName]> Enabled.|green]>"
     Deactivate:
         - if !<player.has_flag[<[ModeFlag]>]>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
         - else:
             - flag player <[ModeFlag]>:!
-            - narrate "<proc[Colorize].context[<[ModeName]> Enabled.|green]>"
+            - narrate "<proc[Colorize].context[<[ModeName]> Disabled.|green]>"
     script:
-        - choose <[Arg]||null>:
-            - case "on":
+        - choose <[Arg]>:
+            - case on true activate:
                 - inject locally Activate Instantly
-            - case "off":
+            - case off false deactivate:
                 - inject locally Deactivate Instantly
             - case "null":
                 - if <player.has_flag[<[ModeFlag]>]>:
