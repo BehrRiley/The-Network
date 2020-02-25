@@ -7,8 +7,11 @@ Heal_Command:
     name: heal
     debug: false
     description: Heals a player
-    usage: /heal
+    usage: /heal (player)
     permission: behrry.essentials.heal
+    tab complete:
+        - if <player.groups.contains[Moderation]>:
+            - inject Online_Player_Tabcomplete Instantly
     script:
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
