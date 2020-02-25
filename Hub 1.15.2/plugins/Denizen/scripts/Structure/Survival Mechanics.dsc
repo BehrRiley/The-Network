@@ -19,11 +19,34 @@ Silk_Spawners:
     on player places spawner:
         - wait 1t
         - if <context.hand> == HAND:
-                - define Type <player.item_in_hand.nbt[key]>
+            - define Type <player.item_in_hand.nbt[key]>
         - else:
-                - define Type <player.item_in_offhand.nbt[key]>
+            - define Type <player.item_in_offhand.nbt[key]>
         - modifyblock <context.location> spawner
         - adjust <context.location> "spawner_type:<[Type]>"
+
+Bed_Fix:
+    type: world
+    debug: false
+    events:
+        on player enters bed:
+            - flag player behrry.essentials.inbed
+            - wait 1s
+            - while <player.has_flag[behrry.essentials.inbed]>:
+                - if <player.world.time.div[1000].round_up> < 13:
+                    - define timeh <player.world.time.div[1000].round_up.pad_left[2].with[0]>
+                - else:
+                    - define timeh <player.world.time.div[1000].round_up.sub[12].pad_left[2].with[0]>
+                - define timem <player.world.time.duration.time.second.pad_left[2].with[0]>
+
+                - time <player.world.time.add[5]>t
+                - actionbar "<proc[Colorize].context[time: <[timeh]>:<[timem]>|green]>"
+                - wait 1t
+        on player leaves bed:
+            - flag player behrry.essentials.inbed:!
+        on player quits:
+            - flag player behrry.essentials.inbed:!
+
 
 CreativeCommandChecker:
     type: world
