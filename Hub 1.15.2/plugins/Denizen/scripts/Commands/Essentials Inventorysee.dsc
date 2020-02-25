@@ -2,29 +2,20 @@
 # % ██    /invsee - see a player's current inventory
 # | ██
 # % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | 
+# $ ██  [ TO-DO   ] ██
 inventorysee_Command:
     type: command
     name: inventorysee
     debug: false
     description: Views another player's inventory
+    usage: /inventorysee <&lt>Player<&gt>
+    permission: behrry.essentials.inventorysee
     aliases:
       - invsee
       - inv
-    usage: /inventorysee <&lt>Player<&gt>
-    permission: behrry.essentials.inventorysee
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - if !<player.has_flag[behrry.essentials.tabofflinemode]>:
-                - if <context.args.size||0> == 0:
-                    - determine <server.list_online_players.parse[name].exclude[<player.name>]>
-                - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                    - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
-            - else:
-                - if <context.args.size||0> == 0:
-                    - determine <server.list_players.parse[name].exclude[<player.name>]>
-                - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                    - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+            - inject Online_Player_Tabcomplete Instantly
     script:
         - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
             - inject Command_syntax instantly
