@@ -15,11 +15,14 @@ gamemodeinventory_Command:
         - gminv
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - if !<player.has_Flag[behrry.essentials.tabofflinemode]>:
-                - if <context.args.size||0> == 0:
-                    - determine <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>]>
-                - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                    - determine <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>].filter[starts_with[<context.args.get[1]>]]>
+            - define Arg1 <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>]>
+            - inject OneArg_Command_Tabcomplete Instantly
+
+            #- if !<player.has_Flag[behrry.essentials.tabofflinemode]>:
+            #    - if <context.args.size||0> == 0:
+            #        - determine <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>]>
+            #    - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
+            #        - determine <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>].filter[starts_with[<context.args.get[1]>]]>
     script:
         - if <context.args.get[3]||null> != null || <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
