@@ -17,16 +17,7 @@ Nickname_Command:
         - nick
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - if !<player.has_flag[behrry.essentials.tabofflinemode]>:
-                - if <context.args.size||0> == 0:
-                    - determine <server.list_online_players.parse[name].exclude[<player.name>]>
-                - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                    - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
-            - else:
-                - if <context.args.size||0> == 0:
-                    - determine <server.list_players.parse[name].exclude[<player.name>]>
-                - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                    - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+            - inject Online_Player_Tabcomplete Instantly
     script:
         # -██ [ correct syntax?
         - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
