@@ -12,10 +12,7 @@ MaxHealth_Command:
         - maxhp
     permission: behrry.essentials.maxhealth
     tab complete:
-        - if <context.args.size||0> == 0:
-            - determine <server.list_players.parse[name].exclude[<player.name>]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+        - inject Online_Player_Tabcomplete Instantly
     script:
         - if <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
