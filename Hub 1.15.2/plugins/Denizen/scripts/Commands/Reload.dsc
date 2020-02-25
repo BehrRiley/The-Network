@@ -5,9 +5,6 @@ r:
     aliases:
         - /r
     script:
-        - if <context.server>:
-          - narrate "<proc[colorize].context[Nothing interesting happens.|yellow]>"
-          - stop
         - reload
 
 rh:
@@ -16,6 +13,6 @@ rh:
     events:
         on reload scripts:
             - if <context.had_error>:
-                - announce "<&c>Reload Error"
+                - narrate targets:<server.match_player[behr]> "<&c>Reload Error"
             - else:
-                - announce "<&a>Reloaded"
+                - narrate targets:<server.match_player[behr]> "<&a>Reloaded"
