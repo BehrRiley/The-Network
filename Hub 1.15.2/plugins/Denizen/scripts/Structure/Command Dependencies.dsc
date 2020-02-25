@@ -181,5 +181,40 @@ MultiArg_Command_Tabcomplete:
 # | ███████████████████████████████████████████████████████████
 # % ██    Command Dependencies | Unique Command Features
 # | ██
-# % ██  [ Tab-completes Players Online ] ██
-# % ██  [ Usage ] - inject Online_Player_Tabcomplete Instantly
+# % ██  [ Activates or Deactivates a toggle command ] ██
+# % ██  [ Usage ] - define Arg <context.args.get[1]>
+# % ██  [       ] - define ModeFlag "behrry.essentials.example"
+# % ██  [       ] - define ModeName "Drop Lock"
+# % ██  [       ] - inject Activation_Arg_Command Instantly
+
+Activation_Arg_Command:
+    type: task
+    debug: false
+    Activate:
+        - if <player.has_flag[<[ModeFlag]>]>:
+            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+        - else:
+            - flag player <[ModeFlag]>
+            - narrate "<proc[Colorize].context[<[ModeName]>  Enabled.|green]>"
+    Deactivate:
+        - if !<player.has_flag[<[ModeFlag]>]>:
+            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+        - else:
+            - flag player <[ModeFlag]>:!
+            - narrate "<proc[Colorize].context[<[ModeName]> Enabled.|green]>"
+    script:
+        - choose <[Arg]||null>:
+            - case "on":
+                - inject locally Activate Instantly
+            - case "off":
+                - inject locally Deactivate Instantly
+            - case "null":
+                - if <player.has_flag[<[ModeFlag]>]>:
+                    - inject locally Deactivate Instantly
+                - else:
+                    - inject locally Activate Instantly
+            - case default:
+                - inject Command_Syntax Instantly
+
+
+
