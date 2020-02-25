@@ -35,3 +35,4 @@ addperm_Command:
             - inject Command_Error Instantly
         - define Permission <context.args.get[2]>
         - execute as_player "upc addgrouppermission <[Group]> <[Permission]>"
+        - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> "<&b>Permission: <&a><[Permission]> <&e>added to: <&a><[Group]>"
