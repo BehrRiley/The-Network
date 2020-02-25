@@ -12,19 +12,16 @@ Message_Command:
     aliases:
         - message
     tab complete:
-        - if <context.args.size||0> == 0:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>].include[Everyone]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>].include[Everyone].filter[starts_with[<context.args.get[1]>]]>
+        - inject Online_Player_Tabcomplete Instantly
     script:
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
         - if <context.args.get[2]||null> != null:
             - define User <context.args.get[1]>
             - inject Player_Verification Instantly
-        #- if <[User]> == <player>:
-        #    - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        #    - stop
+        - if <[User]> == <player>:
+            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+            - stop
 
         - flag <[User]> behrry.chat.lastreply:<player>
         - define Message <context.raw_args.after[<context.args.get[1]><&sp>]><&r>
