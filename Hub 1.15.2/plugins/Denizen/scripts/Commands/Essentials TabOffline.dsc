@@ -2,7 +2,7 @@
 # % ██    /TabOffline
 # | ██
 # % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | 
+# $ ██  [ TO-DO   ] ██ 
 TabOffline_Command:
     type: command
     name: tabofflinemode
@@ -12,13 +12,15 @@ TabOffline_Command:
     permission: behrry.essentials.tabofflinemode
     aliases:
         - taboffline
-        - taboff
         - tomode
         - offlinetab
+    tab complete:
+        - if <player.groups.in_group[Moderation]>:
+            - inject Online_Player_Tabcomplete Instantly
     script:
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
-        - if <context.args.get[1]> == null:
+        - if <context.args.get[1]||null> == null:
             - if <player.has_flag[behrry.essentials.tabofflinemode]>:
                 - flag <player> behrry.essentials.tabofflinemode:!
             - else:
@@ -26,7 +28,7 @@ TabOffline_Command:
         - else:
             - define User <context.args.get[1]>
             - inject Player_Verification_Offline Instantly
-            - if <player.groups.contains[Moderation]>:
+            - if <player.groups.in_group[Moderation]>:
                 - if <player.has_flag[behrry.essentials.tabofflinemode]>:
                     - flag <[User]> behrry.essentials.tabofflinemode:!
                 - else:
