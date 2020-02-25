@@ -8,40 +8,19 @@ Controlledflight_Command:
     debug: false
     description: Enters a controlled flight mode for precision hovering
     usage: /controlledflight (on/off)
+    permission: behrry.essentials.controlledflight
     aliases:
         - cfly
-    permission: behrry.essentials.controlledflight
-    Activate:
-        - if <player.has_flag[behrry.essentials.controlledflight]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        - else:
-            - flag player behrry.essentials.controlledflight
-            - narrate "<proc[Colorize].context[Controlled flight Enabled.|green]>"
-        
-            #- spawn armor_stand[gravity=false;visible=false] <player.location> save:Seat
-            #- define Entity <entry[Seat].spawned_entities.get[1]>
-            #- wait 1t
-            #- mount <player>|<[Entity]>
-            #- flag <player> Essentials.flightentity:<[Entity]>
-    Deactivate:
-        - if !<player.has_flag[behrry.essentials.controlledflight]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        - else:
-            - flag player behrry.essentials.controlledflight:!
-            - narrate "<proc[Colorize].context[Controlled flight Enabled.|green]>"
+    tab complete:
+        - define Arg1 <list[on|off]>
+        - inject OneArg_Command_Tabcomplete Instantly
     script:
-        - choose <context.args.get[1]||null>:
-            - case "on":
-                - inject locally Activate Instantly
-            - case "off":
-                - inject locally Deactivate Instantly
-            - case "null":
-                - if <player.has_flag[behrry.essentials.controlledflight]>:
-                    - inject locally Deactivate Instantly
-                - else:
-                    - inject locally Activate Instantly
-            - case default:
-                - inject Command_Syntax Instantly
+        - if <context.args.get[2]||null> != null:
+            - inject Command_Syntax Instantly
+        - define Arg <context.args.get[1]||null>
+        - define ModeFlag "behrry.essentials.controlledflight"
+        - define ModeName "Controlled flight"
+        - inject Activation_Arg_Command Instantly
                 
 #Controlled_Flight_Handler:
 #    type: world
