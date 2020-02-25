@@ -1,0 +1,45 @@
+# | ███████████████████████████████████████████████████████████
+# % ██    /PlayerLocations - 
+# | ██
+# % ██  [ Command ] ██
+PlayerData_Command:
+    type: command
+    name: playerdata
+    debug: false
+    description: Manage the notable player data
+    usage: /PlayerData
+    permission: behrry.moderation.playerlocations
+    aliases:
+        - pdata
+    tab complete:
+        - if !<player.has_flag[behrry.essentials.tabofflinemode]>:
+            - if <context.args.size> == 0:
+                - determine <server.list_online_players.parse[name].exclude[<player.name>]>
+            - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
+                - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+        - else:
+            - if <context.args.size||0> == 0:
+                - determine <server.list_players.parse[name].exclude[<player.name>]>
+            - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
+                - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+    script:
+        #@ Check if arg1 is blank or if arg2 isn't blank
+        - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
+            - inject Command_Syntax Instantly
+        
+        #@ Check player arg
+        - define User <context.args.get[1]>
+        - inject Player_Verification_Offline Instantly
+        
+        #@ Define Notable locations
+        - define LocationList <list[behrry.essentials.back|behrry.essentials.display_name|behrry.essentials.]>
+        
+        #@ Define Modes
+        - define ModeList <list[behrry.essentials.droplock|behrry.essentials.|behrry.essentials.|]>
+        - foreach <[ModeList]> as:flag:
+            - if <player.has_flag[<[Flag]>]>:
+              - define ExistingModes:->:<[Flag]>
+        
+        #@ Define Settings
+        #- define SettingsList <list[behrry.settings.usebed]>
+        
