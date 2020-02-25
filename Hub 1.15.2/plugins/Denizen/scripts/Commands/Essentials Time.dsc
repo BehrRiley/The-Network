@@ -24,11 +24,14 @@ Time_Command:
             - define Int <context.args.get[1]>
             - if <[Int]> < 0:
                 - narrate "<proc[Colorize].context[Time cannot be negative.|red]>"
+                - stop
             - if <[Int]> >= 24000:
                 - narrate "<proc[Colorize].context[Time cannot exceed 23999.|red]>"
+                - stop
             - if <[Int].contains[.]>:
                 - narrate "<proc[Colorize].context[Time cannot contain decimals.|red]>"
-            - time <[Int]>
+                - stop
+            - time <[Int]>t
             - define Name <&e><[Int]>
         - else:
             - define Arg <context.args.get[1]>
@@ -37,33 +40,34 @@ Time_Command:
                     - time 0
                     - define Name "<&e>Start"
                 - case Day:
-                    - time 1000
+                    - time 1000t
                     - define Name "<&e>Day"
                 - case Noon:
-                    - time 6000
+                    - time 6000t
                     - define Name "<&e>Noon"
                 - case Sunset:
-                    - time 11615
+                    - time 11615t
                     - define Name "<&e>Sunset"
                 - case Bedtime:
-                    - time 12542
+                    - time 12542t
                     - define Name "<&e>Bedtime"
                 - case Dusk:
-                    - time 12786
+                    - time 12786t
                     - define Name "<&e>Dusk"
                 - case Night:
-                    - time 13000
+                    - time 13000t
                     - define Name "<&e>Night"
                 - case Midnight:
-                    - time 18000
+                    - time 18000t
                     - define Name "<&e>Midnight"
                 - case Sunrise:
-                    - time 22200
+                    - time 22200t
                     - define Name "<&e>Sunrise"
                 - case Dawn:
-                    - time 23216
+                    - time 23216t
                     - define Name "<&e>Dawn"
                 - case default:
                     - inject Command_Syntax Instantly
         - narrate "<proc[Colorize].context[Time set to:|green]> <[Name]>"
+        - time <[Time]>
             
