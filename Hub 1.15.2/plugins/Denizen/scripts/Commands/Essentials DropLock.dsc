@@ -1,5 +1,5 @@
 # | ███████████████████████████████████████████████████████████
-# % ██    /droplock - 
+# % ██    /droplock -
 # | ██
 # % ██  [ Command ] ██
 droplock_Command:
@@ -10,35 +10,15 @@ droplock_Command:
     permission: behrry.essentials.droplock
     usage: /droplock (on/off)
     tab complete:
-        - if <context.args.size||0> == 0:
-            - determine <list[on|off]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <list[on|off].filter[starts_with[<context.args.get[1]>]]>
-    Activate:
-        - if <player.has_flag[behrry.essentials.droplock]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        - else:
-            - flag player behrry.essentials.droplock
-            - narrate "<proc[Colorize].context[Drop Lock  Enabled.|green]>"
-    Deactivate:
-        - if !<player.has_flag[behrry.essentials.droplock]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        - else:
-            - flag player behrry.essentials.droplock:!
-            - narrate "<proc[Colorize].context[Drop Lock Enabled.|green]>"
+        - define Arg1 <list[on|off]>
+        - inject OneArg_Command_Tabcomplete Instantly
     script:
-        - choose <context.args.get[1]||null>:
-            - case "on":
-                - inject locally Activate Instantly
-            - case "off":
-                - inject locally Deactivate Instantly
-            - case "null":
-                - if <player.has_flag[behrry.essentials.droplock]>:
-                    - inject locally Deactivate Instantly
-                - else:
-                    - inject locally Activate Instantly
-            - case default:
-                - inject Command_Syntax Instantly
+        - if <context.args.get[2]||null> != null:
+            - inject Command_Syntax Instantly
+        - define Arg <context.args.get[1]||null>
+        - define ModeFlag "behrry.essentials.droplock"
+        - define ModeName "drop lock"
+        - inject Activation_Arg_Command Instantly
 
 Droplock_Handler:
     type: world
