@@ -17,7 +17,9 @@ teleport_Command:
                 - define reason "You cannot teleport to yourself."
                 - inject Command_Error Instantly
             - else:
+                - flag <Player> behrry.essentials.teleport.back:<player.location>
                 - teleport <player> <[User].location>
+                - narrate "<proc[Colorize].context[You were teleported to:|green]> <&r><[User].display_name>"
         - else:
             - foreach <context.raw_args.split[<&sp>].get[1].to[<context.args.size.sub[1]>]> as:User:
                 - inject Player_Verification
@@ -33,9 +35,9 @@ teleport_Command:
             - foreach <[PlayerList]> as:Player:
                 - flag <[Player]> behrry.essentials.teleport.back:<[player].location>
                 - teleport <[Player]> <[User].location>
-                - narrate targets:<[Player]> "<proc[Colorize].context[You were teleported to:|green]> <&r><[User].name.display>"
+                - narrate targets:<[Player]> "<proc[Colorize].context[You were teleported to:|green]> <&r><[User].display_name>"
             - if <[PlayerList].size> > 1:
                 - define WasWere were
             - else:
                 - define WasWere was
-            - narrate targets:<[User]> "<[PlayerList].parse[name.display].formatted> <&r><proc[Colorize].context[<[WasWere]> teleported to you.|green]>"
+            - narrate targets:<[User]> "<[PlayerList].parse[display_name].formatted> <&r><proc[Colorize].context[<[WasWere]> teleported to you.|green]>"
