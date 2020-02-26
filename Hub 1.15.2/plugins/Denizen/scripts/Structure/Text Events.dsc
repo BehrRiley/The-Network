@@ -62,3 +62,15 @@ MsgHintIns:
     # - <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>|<[Insertion]>]>
         - determine <&hover[<[Hover].unescaped>]><&click[/<[Command]>].type[suggest_command]><&insertion[<[Insert].unescaped>]><[Text].unescaped><&end_insertion><&end_click><&end_hover>
 
+Colorize_Green:
+    type: format
+    debug: false
+    format: <proc[Colorize].context[<text>|green]>
+Colorize_Yellow:
+    type: format
+    debug: false
+    format: <proc[Colorize].context[<text>|yellow]>
+Colorize_Red:
+    type: format
+    debug: false
+    format: <proc[Colorize].context[<text>|red]>
