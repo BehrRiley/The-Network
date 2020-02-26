@@ -1,6 +1,6 @@
 Protecc_Handler:
     type: world
-    debug: true
+    debug: false
     reset:
         - flag player protecc.position.1:!
         - flag player protecc.position.2:!
@@ -67,30 +67,48 @@ Protecc_Handler:
         #on player breaks block in:claims:
         #    - determine passively cancelled
         #    - narrate true
-#claimcommandtest:
-#    type: command
-#    name: claimcommandtest
-#    debug: true
-#    permission: protecc.claim
-#    script:
-#        - if <player.name> != behr_riley:
-#            - narrate "stahp, bad"
-#            - stop
-#
-#        #@ determine cuboid
-#        #- <cuboid[<player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2]>]>
-#        - define Pos1Flag <player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2].as_location>>
-#        - define Pos2Flag <player.flag[protecc.position.2].as_location||<[Pos1Flag]>>
-#        - define cuboid <cuboid[<[Pos1Flag]>|<[Pos2Flag]>]>
-#
-#        #- note <[Cuboid]> as:Claims
-#        - choose <context.args.get[1]>:
-#            - case add:
-#                - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
-#            - case test:
-#                - define Index <cuboid[Claims].get[<[Cuboid]>]>
-#                - narrate <cuboid[Claims].remove_member[<[Index]>]>
-#                - note <cuboid[Claims].remove_member[<[Index]>]> as:claims
+claimcommandtest:
+    type: command
+    name: claimcommandtest
+    debug: true
+    permission: protecc.claim
+    aliases:
+        - t
+    tab complete:
+        - define Arg1 <list[Add|Test|Narrate]>
+        - define Arg2 <list[Members_Size|List_Members]>
+        - inject MultiArg_Command_Tabcomplete Instantly
+    script:
+        - if <player.name> != behr_riley:
+            - narrate "stahp, bad"
+            - stop
+
+        #@ determine cuboid
+        #- <cuboid[<player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2]>]>
+        - define Pos1Flag <player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2].as_location>>
+        - define Pos2Flag <player.flag[protecc.position.2].as_location||<[Pos1Flag]>>
+        - define cuboid <cuboid[<[Pos1Flag]>|<[Pos2Flag]>]>
+
+        #- note <[Cuboid]> as:Claims
+        - choose <context.args.get[1]>:
+            - case add:
+                - if <cuboid[Claims].list_members.contains[<[Cuboid]>]>:
+                    - narrate "Already there"
+                - else:
+                    - narrate "putting it there"
+                    - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
+            - case remove:
+                - if !<cuboid[Claims].list_members.contains[<[Cuboid]>]>:
+                    - narrate "Not there"
+                - else:
+                    - narrate "removing it"
+                - note <cuboid[Claims].remove_member[<[Cuboid]>]> as:claims
+            - case narrate:
+                - choose <context.args.get[2]>:
+                    - case Members_Size:
+                        - narrate "<&a><&lt>cuboid[Claims].members_size<&gt><&b>: <&e><cuboid[Claims].members_size>"
+                    - case List_Members:
+                        - narrate "<&a><&lt>cuboid[Claims].List_Members<&gt><&b>: <&e><cuboid[Claims].List_Members>"
 
 
 Protecc_Position_Task:

@@ -161,12 +161,15 @@ Chat_Handler:
 
             #@ Fixing your group
             #------ uperms remove before fix ------#
-            - inject locally GroupManager Instantly
+            - if <bungee.server||null> == null:
+                - inject locally GroupManager Instantly
 
             #@ in-game formatting
             #------ uperms remove before fix ------#
-            - inject locally NameplateFormat Instantly
-            #- inject locally TEMPNameplateFormat Instantly
+            - if <bungee.server||null> == null:
+                - inject locally NameplateFormat Instantly
+            - else:
+                - inject locally TEMPNameplateFormat Instantly
 
             #@ ChatLog
             - define Message "<[NamePlate]>: <context.message.parse_color>"
