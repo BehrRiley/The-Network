@@ -6,6 +6,7 @@
 
 - Moderation
   - Administrator
+  - Moderator
   - Support
 
 - Producers
