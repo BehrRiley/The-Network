@@ -28,5 +28,5 @@ ClearInventory_Command:
 
         - if <[User]> != <player>:
             - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s Inventory Cleared.|green]>"
-        - narrate targets:<[User]> "<proc[Colorize].context[Inventory Cleared.|green]>"
+        - narrate targets:<[User]> format:Colorize_Green "Inventory Cleared."
         - inventory set d:<[User].inventory> o:<inventory[Blank_Inventory]>
