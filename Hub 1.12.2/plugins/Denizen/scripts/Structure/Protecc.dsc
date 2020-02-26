@@ -75,7 +75,7 @@ claimcommandtest:
     aliases:
         - t
     tab complete:
-        - define Arg1 <list[Add|Test|Narrate]>
+        - define Arg1 <list[Add|Remove|Narrate]>
         - define Arg2 <list[Members_Size|List_Members]>
         - inject MultiArg_Command_Tabcomplete Instantly
     script:
@@ -85,6 +85,7 @@ claimcommandtest:
 
         #@ determine cuboid
         #- <cuboid[<player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2]>]>
+        #-<player.flag[protecc.selection.cuboid]>
         - define Pos1Flag <player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2].as_location>>
         - define Pos2Flag <player.flag[protecc.position.2].as_location||<[Pos1Flag]>>
         - define cuboid <cuboid[<[Pos1Flag]>|<[Pos2Flag]>]>
@@ -93,16 +94,19 @@ claimcommandtest:
         - choose <context.args.get[1]>:
             - case add:
                 - if <cuboid[Claims].list_members.contains[<[Cuboid]>]>:
-                    - narrate "Already there"
+                    - narrate format:Colorize_Red "This claim exists already."
                 - else:
-                    - narrate "putting it there"
+                    - narrate format:Colorize_Green "putting it there"
+                    - flag player protecc.claims:->:<[Cuboid]>
                     - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
             - case remove:
                 - if !<cuboid[Claims].list_members.contains[<[Cuboid]>]>:
-                    - narrate "Not there"
+                    - narrate format:Colorize_Red "No claim found."
                 - else:
-                    - narrate "removing it"
-                - note <cuboid[Claims].remove_member[<[Cuboid]>]> as:claims
+                    - narrate format:Colorize_Green "Removing Claim: <proc[CuboidTextFormat].context[<[Cuboid]>]>"
+                    - flag player protecc.claims:,-:<[Cuboid]>
+                    - define Index <cuboid[Claims].list_members.find[<[Cuboid]>]>
+                    - note <cuboid[Claims].remove_member[<[Index]>]> as:claims
             - case narrate:
                 - choose <context.args.get[2]>:
                     - case Members_Size:
@@ -110,6 +114,23 @@ claimcommandtest:
                     - case List_Members:
                         - narrate "<&a><&lt>cuboid[Claims].List_Members<&gt><&b>: <&e><cuboid[Claims].List_Members>"
 
+CuboidTextFormat:
+    type: procedure
+    debug: true
+    definitions: Cuboid
+    script:
+        - define min <[Cuboid].min>
+        - define max <[Cuboid].max>
+
+        - define minx <&6>[<&e><&e>X<&6>:<&a><[min].x><&6>,<&sp>
+        - define miny <&e>Y<&6>:<&a><[min].y><&6>,<&sp>
+        - define minz <&e>Z<&6>:<&a><[min].z><&6>]
+
+        - define maxx <&6>[<&e><&e>X<&6>:<&a><[max].x><&6>,<&sp>
+        - define maxy <&e>Y<&6>:<&a><[max].y><&6>,<&sp>
+        - define maxz <&e>Z<&6>:<&a><[max].z><&6>]
+
+        - determine "<[minx]><[miny]><[minz]> <&b>- <[maxx]><[maxy]><[maxz]> <&b>| <&6>[<&e>Size<&6>: <&e><[Cuboid].blocks.size><&6>]"
 
 Protecc_Position_Task:
     type: task
