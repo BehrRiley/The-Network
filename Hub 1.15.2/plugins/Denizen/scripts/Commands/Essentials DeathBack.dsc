@@ -17,8 +17,8 @@ deathback_Command:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
         - if <player.has_flag[behrry.essentials.teleport.deathback]>:
-            - narrate "<proc[Colorize].context[Returning to death location.|green]>"
+            - narrate format:Colorize_Green "Returning to death location."
             - flag <player> behrry.essentials.teleport.back:<player.location>
             - teleport <player> <player.flag[behrry.essentials.teleport.deathback].as_location>
         - else:
-            - narrate "<proc[Colorize].context[No death location to return to.|red]>"
+            - narrate format:Colorize_Red "No death location to return to."
