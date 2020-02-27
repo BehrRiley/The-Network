@@ -38,6 +38,10 @@ MsgURL:
     # - <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[URL]>]>
         - determine <&hover[<[Hover].unescaped>]><&click[<[URL]>].type[OPEN_URL]><[Text].unescaped><&end_click><&end_hover>
 
+# % ██  [ Usage ] - define Hover "Text in hoverbox"
+# % ██  [       ] - define Text "Text in chat"
+# % ██  [       ] - define Insert "Text inserted into chat"
+# % ██  [       ] - narrate "<proc[MsgHoverIns].context[<[Hover]>|<[Text]>|<[Insert]>]>"
 MsgHoverIns:
     type: procedure
     debug: false
