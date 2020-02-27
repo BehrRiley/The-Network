@@ -57,7 +57,22 @@ Essentials:
             - narrate "Plguins (4): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>"
         on resource pack status:
             #- narrate targets:<server.match_player[behr]> "<context.status>"
+            - if <context.status> == accepted:
+                - flag player Resource_Accepted duration:40s
             - if <context.status> == declined:
+                - narrate "<&c>You must accept the resource pack. This does not affect textures - only moderation font specs."
+                - wait 1s
+                - narrate "<&c>Kicking in 25 seconds - please accept resource pack."
+                - title "title:<&4>Warning" "subtitle:<&c>Please accept resource pack."
+                - actionbar "<&4>This resource pack does not change game textures."
+                - wait 5s
+                - narrate "<&c>Tip: Edit Server > Server Resource Packs: ENABLED"
+                - wait 20s
+                - if !<server.has_flag[behrry.essentials.resourcecheckspam.<player>]>:
+                    - flag server behrry.essentials.resourcecheckspam.<player> duration:1m
+                    - announce format:Colorize_yellow "Player declined resource pack."
+                - if <player.has_flag[Resource_Accepted]>:
+                    - stop
                 - kick <player> "reason:Must accept resource pack. This does not affect textures."
         on player changes gamemode:
             - if <player.has_flag[gamemode.inventory.changebypass]>:
@@ -69,6 +84,14 @@ Essentials:
                 - inventory set d:<player.inventory> o:<player.flag[gamemode.inventory.<context.gamemode>].as_list>
             - else:
                 - flag player gamemode.inventory.<context.gamemode>:<player.inventory.list_contents>
+        #on player damages player:
+        #    - if <context.entity.gamemode||null> == creative:
+        #        - if !<context.entity.has_flag[smacked]>:
+        #            - define vector <context.entity.location.sub[<context.damager.location>].normalize.mul[0.5]>
+        #            - adjust <context.entity> velocity:<def[vector].x>,0.4,<def[vector].z>
+        #            - flag <context.entity> smacked duration:0.45s
+        #        - playeffect effect:EXPLOSION_NORMAL at:<context.entity.location.add[0,1,0]> visibility:50 quantity:10 offset:0.5
+        #        - playeffect effect:EXPLOSION_LARGE at:<context.entity.location.add[0,1,0]> visibility:50 quantity:1 offset:0.5
 
 Chat_Handler:
     type: world
@@ -159,6 +182,13 @@ Chat_Handler:
             - if <player.has_flag[Interacting_NPC]>:
                 - stop
 
+            #@ BChat Check
+            - if <player.has_flag[behrry.essentials.bchat]>:
+                - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
+                - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
+                - narrate targets:<[Targets]> "<[Prefix]> <&7><context.message.parse_color>"
+                - stop
+
             #@ Fixing your group
             #------ uperms remove before fix ------#
             - if <bungee.server||null> == null:
@@ -176,15 +206,15 @@ Chat_Handler:
             - define DiscordMessage "<[DiscordNamePlate]>: <context.message>"
             - inject locally GlobalChatLog Instantly
             
+            #@ print to discord and in-game
+            - announce <[Message].replace[:pufferfish:].with[▲]>
+            - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
+
             #@ Discord relay
             - if <bungee.server||null> == Hub2:
                 - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
             - else:
                 - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
-
-            #@ print to discord and in-game
-            - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
-            - announce <[Message].replace[:smile:].with[☺].replace[:sad:].with[☻].replace[:fist:].with[╓].replace[:thumbsup:].with[•].replace[:thumbsdown:].with[◘].replace[:wink:].with[♀].replace[:eyes].with[►].replace[:sunglasses:].with[↑].replace[:pufferfish:].with[▲]>
 
 Ranks:
     type: yaml data
