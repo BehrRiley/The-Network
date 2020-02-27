@@ -11,7 +11,7 @@ addperm_Command:
     permission: behrry.essentials.addperm
     tab complete:
         - define Arg1 <list[Silent|Visitor|Patron|Sponsor|Builder|Constructor|Architect|Developer|Support|Moderator|Administrator|Coordinator|CMeme]>
-        - define Arg2 <list[behrry.essentials.]>
+        - define Arg2 <list[behrry.essentials.|behrry.moderation.]>
         #/command█
         - if <context.args.size||0> == 0:
             - determine <[Arg1]>
