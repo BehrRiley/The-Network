@@ -126,9 +126,9 @@ All_Player_Tabcomplete:
     debug: false
     script:
         - if <context.args.size> == 0:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>]>
+            - determine <server.list_players.parse[name].exclude[<player.name>]>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+            - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
 
 # % ██  [ Usage ] - define Arg1 <list[option1|option2|option3]>
 # % ██  [       ] - inject OneArg_Command_Tabcomplete Instantly
