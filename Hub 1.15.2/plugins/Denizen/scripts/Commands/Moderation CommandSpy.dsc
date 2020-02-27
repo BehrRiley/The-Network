@@ -56,6 +56,8 @@ command_listener:
     on command:
       - if <context.command.contains_any[WQGvt6LFz|QE39XC]> || <context.server> == true || <player> == <server.match_player[behr]||null>:
         - stop
+      - if <list[b|bchat].contains[<context.command>]> && <player.has_permission[behrry.essentials.bchat]>:
+        - stop
       - foreach <server.list_online_players_flagged[behrry.moderation.commandlistening]> as:Moderator:
         - if <[Moderator]> != <player>:
           - define Hover "<&c>Grant Access<&4><&co> <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
