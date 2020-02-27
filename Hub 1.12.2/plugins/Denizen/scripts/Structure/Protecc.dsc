@@ -50,11 +50,14 @@ Protecc_Handler:
             - flag player protecc.selection.cuboid:<[Cuboid]>
 
             #@ Determine formats
-            - define Size <[Cuboid].blocks.size||0>
+            - define min <[Cuboid].min>
+            - define max <[Cuboid].max>
+            - define size <cuboid[<[min].with_y[0]>|<[max].with_y[0]>].blocks.size>
+            - define totalsize <[Cuboid].blocks.size||0>
             - if <[Size]> > 0:
-                - define PosFormat "<&6>[<&6>X:<&e><player.location.cursor_on.x.round_down>, <&6>Y:<&e><player.location.cursor_on.y.round_down>, <&6>Z:<&e><player.location.cursor_on.z.round_down><&6>] [<&e>S<&e>ize<&6>:<&e> <[Size]><&6>]"
+                - define PosFormat "<&6>[<&e>X:<&a><player.location.cursor_on.x.round_down><&6>, <&e>Y<&6>:<&a><player.location.cursor_on.y.round_down><&6>, <&e>Z<&6>:<&a><player.location.cursor_on.z.round_down><&6>] [<&e>Size<&6>:<&a> <[Size]><&6>]"
             - else:
-                - define PosFormat "<&6>[<&6>X:<&e><player.location.cursor_on.x.round_down>, <&6>Y:<&e><player.location.cursor_on.y.round_down>, <&6>Z:<&e><player.location.cursor_on.z.round_down><&6>]"
+                - define PosFormat "<&6>[<&e>X:<&a><player.location.cursor_on.x.round_down><&6>, <&e>Y<&6>:<&a><player.location.cursor_on.y.round_down><&6>, <&e>Z<&6>:<&a><player.location.cursor_on.z.round_down><&6>]"
             
             #@ Highlight selection
             #- if <player.has_flag[protecc.position.1]> && <player.has_flag[protecc.position.2]>:
@@ -76,7 +79,7 @@ claimcommandtest:
         - t
     tab complete:
         - define Arg1 <list[Add|Remove|Narrate]>
-        - define Arg2 <list[Members_Size|List_Members]>
+        - define Arg2 <list[Members_Size|List_Members|PlayerClaimFlag]>
         - inject MultiArg_Command_Tabcomplete Instantly
     script:
         - if <player.name> != behr_riley:
@@ -96,24 +99,31 @@ claimcommandtest:
                 - if <cuboid[Claims].list_members.contains[<[Cuboid]>]>:
                     - narrate format:Colorize_Red "This claim exists already."
                 - else:
-                    - narrate format:Colorize_Green "putting it there"
+                    - if <cuboid[Claims].intersects[<[Cuboid]>]>:
+                        - narrate format:Colorize_red "This claim intersects another."
+                        - stop
+                    - narrate format:Colorize_Green "{ClaimNameHere} Claim Created."
+                        #- define Hover <[ClaimName]><&nl> <&e>Cuboid Info:<&nl><proc[CuboidTextFormat].context[<[Cuboid]>]>
                     - flag player protecc.claims:->:<[Cuboid]>
                     - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
             - case remove:
                 - if !<cuboid[Claims].list_members.contains[<[Cuboid]>]>:
                     - narrate format:Colorize_Red "No claim found."
                 - else:
-                    - narrate format:Colorize_Green "Removing Claim: <proc[CuboidTextFormat].context[<[Cuboid]>]>"
-                    - flag player protecc.claims:,-:<[Cuboid]>
+                    - narrate format:Colorize_Green "Removing Claim: {ClaimNameHere}"
+                    - flag player protecc.claims:<-:<[Cuboid]>
                     - define Index <cuboid[Claims].list_members.find[<[Cuboid]>]>
                     - note <cuboid[Claims].remove_member[<[Index]>]> as:claims
             - case narrate:
                 - choose <context.args.get[2]>:
                     - case Members_Size:
-                        - narrate "<&a><&lt>cuboid[Claims].members_size<&gt><&b>: <&e><cuboid[Claims].members_size>"
+                        - narrate "<&a><&lt>cuboid[Claims].members_size<&gt><&b>:<&nl> <&e><cuboid[Claims].members_size>"
                     - case List_Members:
-                        - narrate "<&a><&lt>cuboid[Claims].List_Members<&gt><&b>: <&e><cuboid[Claims].List_Members>"
+                        - narrate "<&a><&lt>cuboid[Claims].List_Members<&gt><&b>:<&nl> <&e><cuboid[Claims].List_Members>"
+                    - case PlayerClaimFlag:
+                        - narrate "<&a><&lt>player.flag[protecc.claims]<&gt><&b>:<&nl> <&e><player.flag[protecc.claims].separated_by[<&nl>]>"
 
+#- /ex narrate <proc[CuboidTextFormat].context[<player.flag[protecc.selection.cuboid]>]>
 CuboidTextFormat:
     type: procedure
     debug: true
@@ -121,16 +131,17 @@ CuboidTextFormat:
     script:
         - define min <[Cuboid].min>
         - define max <[Cuboid].max>
+        - define size <cuboid[<[min].with_y[0]>|<[max].with_y[0]>].blocks.size>
 
-        - define minx <&6>[<&e><&e>X<&6>:<&a><[min].x><&6>,<&sp>
+        - define minx <&6>[<&e>X<&6>:<&a><[min].x><&6>,<&sp>
         - define miny <&e>Y<&6>:<&a><[min].y><&6>,<&sp>
         - define minz <&e>Z<&6>:<&a><[min].z><&6>]
 
-        - define maxx <&6>[<&e><&e>X<&6>:<&a><[max].x><&6>,<&sp>
+        - define maxx <&6>[<&e>X<&6>:<&a><[max].x><&6>,<&sp>
         - define maxy <&e>Y<&6>:<&a><[max].y><&6>,<&sp>
         - define maxz <&e>Z<&6>:<&a><[max].z><&6>]
 
-        - determine "<[minx]><[miny]><[minz]> <&b>- <[maxx]><[maxy]><[maxz]> <&b>| <&6>[<&e>Size<&6>: <&e><[Cuboid].blocks.size><&6>]"
+        - determine "<[minx]><[miny]><[minz]> <&b>- <[maxx]><[maxy]><[maxz]> <&b>| <&6>[<&e>Size<&6>: <&e><[Size]><&6>]"
 
 Protecc_Position_Task:
     type: task
