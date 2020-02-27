@@ -23,6 +23,11 @@ RTP_Command:
             - narrate "<proc[Colorize].context[This cannot be done in this world.|red]>"
             - stop
         
+        #@ Check for cooldown
+        - if <player.has_flag[behrry.essentials.rtpcooldown]>:
+            - narrate "<proc[Colorize].context[You must wait:|red]> <player.flag[behrry.essentials.rtpcooldown].expiration.formatted>> <proc[Colorize].context[to RTP again.|red]>"
+        
+        - flag player behrry.essentials.rtpcooldown duration:1m
         - cast levitation power:30 duration:1s
         - wait .8s
         #@ Define bad areas
