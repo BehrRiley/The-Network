@@ -179,7 +179,7 @@ Protecco_Wando:
         unbreakable: true
         flags: HIDE_ALL
     lore:
-        - <&a> Position 1<&co> Left Click
-        - <&a> Position 2<&co> Right Click
+        - <&a> Position 1: Left Click
+        - <&a> Position 2: Right Click
     enchantments:
         - BINDING_CURSE
