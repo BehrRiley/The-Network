@@ -180,6 +180,16 @@ Chat_Handler:
             - determine passively cancelled
             #@ NPC Check
             - if <player.has_flag[Interacting_NPC]>:
+                - define Targets "<server.list_online_players.filter[in_group[Moderation]]>"
+                - define Message "<&7>[<&8>Muted<&7> <&7><player.name>: <context.message.strip_color>"
+                - narrate targets:<[Targets]> <[Message]>
+                - stop
+            
+            #@ Ignore Check
+            #-
+
+            #@ Mute check
+            - if <player.has_flag[muted]>:
                 - stop
 
             #@ BChat Check
