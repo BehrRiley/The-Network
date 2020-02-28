@@ -17,11 +17,11 @@ Silk_Spawners:
       - define Type <context.location.spawner_type.after[@].to_titlecase>
       - determine "i@spawner[display_name=<[Type]> Spawner;nbt=li@key/<[Type]>]"
     on player places spawner:
-        - wait 1t
         - if <context.hand> == HAND:
             - define Type <player.item_in_hand.nbt[key]>
         - else:
             - define Type <player.item_in_offhand.nbt[key]>
+        - wait 1t
         - modifyblock <context.location> spawner
         - adjust <context.location> "spawner_type:<[Type]>"
 
