@@ -7,39 +7,25 @@ AddClaim_Command:
     name: addclaim
     debug: false
     description: Claims the selected or named claim.
-    usage: /addclaim
+    usage: /addclaim (Name)
     permission: protecc.claim.add
     script:
+        #@ Check for name
         - if <context.args.get[1]||null> != null:
-            - inject Command_Syntax Instantly
-        - choose <context.args.get[1]>:
-            - case add:
-                - if <cuboid[Claims].list_members.contains[<[Cuboid]>]>:
-                    - narrate format:Colorize_Red "This claim exists already."
-                - else:
-                    - if <cuboid[Claims].intersects[<[Cuboid]>]>:
-                        - narrate format:Colorize_red "This claim intersects another."
-                        - stop
-                    - narrate format:Colorize_Green "{ClaimNameHere} Claim Created."
-                        #- define Hover <[ClaimName]><&nl> <&e>Cuboid Info:<&nl><proc[CuboidTextFormat].context[<[Cuboid]>]>
-                    - flag player protecc.claims:->:<[Cuboid]>
-                    - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
-            - case remove:
-                - if !<cuboid[Claims].list_members.contains[<[Cuboid]>]>:
-                    - narrate format:Colorize_Red "No claim found."
-                - else:
-                    - narrate format:Colorize_Green "Removing Claim: {ClaimNameHere}"
-                    - flag player protecc.claims:<-:<[Cuboid]>
-                    - define Index <cuboid[Claims].list_members.find[<[Cuboid]>]>
-                    - note <cuboid[Claims].remove_member[<[Index]>]> as:claims
-            - case narrate:
-                - choose <context.args.get[2]>:
-                    - case Members_Size:
-                        - narrate "<&a><&lt>cuboid[Claims].members_size<&gt><&b>:<&nl> <&e><cuboid[Claims].members_size>"
-                    - case List_Members:
-                        - narrate "<&a><&lt>cuboid[Claims].List_Members<&gt><&b>:<&nl> <&e><cuboid[Claims].List_Members>"
-                    - case PlayerClaimFlag:
-                        - narrate "<&a><&lt>player.flag[protecc.claims]<&gt><&b>:<&nl> <&e><player.flag[protecc.claims].separated_by[<&nl>]>"
+            - if <player.has_flag[]> || <player.flag[settings.protecc.NamedClaimsPreference]||false>:
+        - flag player protecc.help
+
+
+        - if <cuboid[Claims].list_members.contains[<[Cuboid]>]>:
+            - narrate format:Colorize_Red "This claim exists already."
+        - else:
+            - if <cuboid[Claims].intersects[<[Cuboid]>]>:
+                - narrate format:Colorize_red "This claim intersects another."
+                - stop
+            - narrate format:Colorize_Green "{ClaimNameHere} Claim Created."
+                #- define Hover <[ClaimName]><&nl> <&e>Cuboid Info:<&nl><proc[CuboidTextFormat].context[<[Cuboid]>]>
+            - flag player protecc.claims:->:<[Cuboid]>
+            - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
 
 
 # | ███████████████████████████████████████████████████████████
@@ -56,6 +42,14 @@ RemoveClaim_Command:
     script:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
+            
+        - if !<cuboid[Claims].list_members.contains[<[Cuboid]>]>:
+            - narrate format:Colorize_Red "No claim found."
+        - else:
+            - narrate format:Colorize_Green "Removing Claim: {ClaimNameHere}"
+            - flag player protecc.claims:<-:<[Cuboid]>
+            - define Index <cuboid[Claims].list_members.find[<[Cuboid]>]>
+            - note <cuboid[Claims].remove_member[<[Index]>]> as:claims
 
 
 # | ███████████████████████████████████████████████████████████
@@ -116,8 +110,13 @@ ShowClaim_Command:
     debug: false
     description: Shows the boundaries of the specified claim, or the claim you're in.
     usage: /showclaim (ClaimName)
-    permission: protecc.claim.exp
-    
+    permission: protecc.claim.show
+    script:
+        - if <context.args.get[1]||null> == null:
+            - inject ClaimFind_Task Instantly
+        - narrate <[Claim]>
+
+
 # | ███████████████████████████████████████████████████████████
 # % ██    /
 # | ██
@@ -143,3 +142,65 @@ ListClaims_Command:
         - define DP "<element[].pad_left[6].with[x].replace[x].with[<&2>-<&a>-]>"
         - define PageDisplay "<&6>[<&e>1<&6>/<&e>1<&6>]"
         - define Footer "<&a>+ <[DP]> <proc[Colorize].context[Q Previous Z Next Y|Green]> <[DP]> +"
+
+    
+# | ███████████████████████████████████████████████████████████
+# % ██    /
+# | ██
+# % ██  [ Command ] ██
+ClaimSettings_Command:
+    type: command
+    name: claimsettings
+    debug: false
+    description: Shows you your claim
+    usage: /ClaimSettings
+    permission: protecc.settings
+    script:
+        - if <context.args.get[3]||null> != null:
+            - inject ClaimFind_Task Instantly
+        - if <context.args.get[1]||null> == null:
+            - define Arg Help
+        - else:
+            - define Arg <context.args.get[1]>
+        - choose <[Arg]>:
+            - case "Help":
+                - define List <list[Help|NamedClaims]>
+                - foreach <[List]> as:Command:
+                    - define Hover ""
+                    - Define Text ""
+                    - Define Command ""
+                    - narrate <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
+            - case "NamedClaims"
+                - define Arg <context.args.get[2]||null>
+                - define ModeFlag "settings.protecc.NamedClaimsPreference"
+                - define ModeName "Named claims are now"
+                - inject Activation_Arg_Command Instantly
+            - case "MaxHeight"
+                - define Arg <context.args.get[2]||null>
+                - define ModeFlag "settings.protecc.MaxHeight"
+                - define ModeName "Max height mode is now"
+                - inject Activation_Arg_Command Instantly
+
+ClaimHelp_Command:
+    type: command
+    name: claimhelp
+    debug: false
+    description: Shows you your claim
+    usage: /ClaimHelp
+    permission: protecc.help
+    script:
+        - foreach <server.list_commands.filter[ends_with[_Command]].filter[contains[Claim]]>
+
+ClaimFind_Task:
+    type: task
+    debug: true
+    script:
+        - if <player.location.is_within[Claims]>:
+            - foreach <cuboid[Claims].list_members> as:Cuboid:
+                - if <player.location.is_within[<[Cuboid]>]>:
+                    - define Claims:->:<[Cuboid]>
+        - else:
+            - narrate format:Colorize_Red "No claims found."
+            - stop
+        
+        - narrate <[Claim]>
