@@ -10,22 +10,67 @@ AddClaim_Command:
     usage: /addclaim (Name)
     permission: protecc.claim.add
     script:
+        #@ Check for flag
+        - if !<player.has_flag[protecc.selection.cuboid]>:
+            - narrate format:Colorize_Red "No cuboid found."
+            - stop
+        - define Cuboid <player.flag[protecc.selection.cuboid]>
+
         #@ Check for name
         - if <context.args.get[1]||null> != null:
-            - if <player.has_flag[]> || <player.flag[settings.protecc.NamedClaimsPreference]||false>:
-        - flag player protecc.help
-
-
+            - if <player.has_flag[settings.protecc.NamedClaimsPreference]>:
+                - narrate format:Colorize_Red "No name specified. Your current claim settings require a name."
+                - stop
+            - if !<player.has_flag[protecc.claim.VerifyNoName]>:
+                - flag player protecc.claim.VerifyNoName duration:2m
+                - narrate format:Colorize_Yellow "Retype to Verify: Are you sure you don't want a claim name?"
+                - stop
+            #- for after Home rewrite
+            #- define Homes <player.flag[behrry.essentials.homes].parse[after[/]]>
+            #- if <[Cuboid].contains_any[<[Homes]>]>:
+            #    - foreach <[Homes]> as:Home:
+            #        - if <[Home].is_within[<[Cuboid]>]>:
+            #            - if !<player.flag[protecc.claims].parse[before[/]].contains[<[Home]>]||true>:
+            #                - define ClaimName <[Home]>
+            #                - foreach stop
+            #        - else:
+            #            - if <[ClaimName]||null> == null && <[Loop_Index]> == <[Homes].size>:
+            #                - define ClaimCount <player.flag[protecc.claims].size||0>
+            #                - define ClaimName Home<[ClaimCount].add[1]>
+            #- else:
+            #    - define ClaimCount <player.flag[protecc.claims].size||0>
+            #    - define ClaimName Home<[ClaimCount].add[1]>
+            #->  vv and remove these next two for this vv  <-#->
+            - define ClaimCount <player.flag[protecc.claims].size||0>
+            - define ClaimName Home<[ClaimCount].add[1]>
+            #->  ^^                                    ^^  <-#->
+        #@ If arg1 isn't blank
+        - else:
+            - define ClaimName <context.args.get[1]>
+            #@ Check if alphanumerical
+            - if !<[ClaimName].matches[[a-zA-Z0-9-_\&]+]>:
+                - narrate format:Colorize_Red "Claim names should be alphanumerical"
+                - stop
+            #@ Check for length
+            - if <[Nickname].parse_color.strip_color.length> > 16:
+                - narrate format:Colorize_Red "Claim names should be less than 16 charaters"
+                - stop
+                
+        #@ Check for existing claim
         - if <cuboid[Claims].list_members.contains[<[Cuboid]>]>:
             - narrate format:Colorize_Red "This claim exists already."
-        - else:
-            - if <cuboid[Claims].intersects[<[Cuboid]>]>:
-                - narrate format:Colorize_red "This claim intersects another."
-                - stop
-            - narrate format:Colorize_Green "{ClaimNameHere} Claim Created."
-                #- define Hover <[ClaimName]><&nl> <&e>Cuboid Info:<&nl><proc[CuboidTextFormat].context[<[Cuboid]>]>
-            - flag player protecc.claims:->:<[Cuboid]>
-            - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
+
+        #@ Check for intersecting claims
+        - if <cuboid[Claims].intersects[<[Cuboid]>]>:
+            - narrate format:Colorize_red "This claim intersects another."
+            - stop
+
+        #@ Create the claim
+        - define Hover <[ClaimName]><&nl> <&e>Cuboid Info:<&nl><proc[CuboidTextFormat].context[<[Cuboid]>]>
+        - define Text "<proc[Colorize].context[Claim Created:|green]> <&e><[ClaimName]>"
+        - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
+        - flag player protecc.claims:->:<[Cuboid]>
+        - note <cuboid[Claims].add_member[<[Cuboid]>]> as:Claims
 
 
 # | ███████████████████████████████████████████████████████████
