@@ -16,7 +16,7 @@ RTP_Command:
             - inject Command_Syntax Instantly
 
         #@ Define integers
-        - define distance 5000
+        - define distance 4000
 
         #@ Check world
         - if <player.world.name> != Bees:
