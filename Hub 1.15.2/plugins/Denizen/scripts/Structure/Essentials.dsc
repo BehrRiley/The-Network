@@ -15,6 +15,8 @@ Essentials:
             - bungeeexecute "send <bungee.server> MainHub"
         on stop command:
             - bungeeexecute "send <bungee.server> MainHub"
+        #on player breaks block in:NetherSpawn:
+        #    - determine cancelled
         on player logs in:
             - wait 1s
             #- run Chat_Channel_Load def:Global
