@@ -13,7 +13,7 @@ tablist:
         - "<&7>Time<&co> <&6>[<&f><util.date.time.hour><&6><&co><&f><util.date.time.minute><&6><&co><&f><util.date.time.second><&6>]    <&7>Days Since Last Accident<&co> <&6>[<&f><[value].money.as_money.format_number||0><&6>]"
         - "<&a><&m><element[].pad_left[40].with[-]>"
     events:
-        on delta time secondly:
+        on delta time secondly every:5:
             - foreach <server.list_online_players>:
             #-temp remove after uperms fix
                 - if <bungee.server||null> == null:
