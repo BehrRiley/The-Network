@@ -203,7 +203,7 @@ Chat_Handler:
             - inject locally GlobalChatLog Instantly
             
             #@ print to discord and in-game
-            - Determine <[Message].replace[:pufferfish:].with[▲]>
+            - announce <[Message].replace[:pufferfish:].with[▲]>
             
 
             ##@ Discord relay - between external servers
