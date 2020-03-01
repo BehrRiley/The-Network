@@ -134,7 +134,7 @@
             - [ ] [Duel Arena](notes/mini-games/DuelArena.md) | Players duel each other, with the ability to set special rules.
             - [ ] Dungeoneering |  Players explore—and survive—the depths of Daemonheim by solving puzzles, unlocking doors, fighting monsters and bosses, and using every skill to solve puzzles and progress to deeper floors.
             - [ ] Mage Arena | Clan Wars allows members of two opposing Friends Chat to engage in player-versus-player combat against one another. 
-            - [ ] Nightmare Zone | Partake in "dreams" to fight bosses previously defeated in quests. 
+            - [ ] [Nightmare Zone](notes/mini-games/NightmareZone.md) | Partake in "dreams" to fight bosses previously defeated in quests. 
             - [ ] Pest Control | A team combat minigame which involves protecting a vulnerable Void Knight, while fending off against waves of incoming monsters and taking down four portals. 
             - [ ] Temple Trekking | A game where players have to guide refugees from Burgh de Rott to Paterdomus for rewards. 
             - [ ] Theatre of Blood | Players set up a team to fight through an arena filled with bosses in a predetermined order. Should they succeed this challenge, they shall be greatly rewarded. 
@@ -146,7 +146,7 @@
             - [ ] Blast Furnace | Players work together to keep the furnace running. The furnace halves the amount of coal needed to produce a bar when smelting. 
             - [ ] Brimhaven Agility Arena | A Medium level Agility course for players. Pillars dispense tickets which can be traded in for rewards. 
             - [ ] Fishing Trawler | Players work together to keep a boat afloat while keeping nets fixed in order to catch as many fish as possible. 
-            - [ ] Gnome Ball | A minigame where players try to pass and charge with a small ball towards a hoop to score a goal, while the defending gnomes attempt to tackle them. 
+            - [ ] [Gnome Ball](notes/mini-games/GnomeBall.md) | A minigame where players try to pass and charge with a small ball towards a hoop to score a goal, while the defending gnomes attempt to tackle them. 
             - [ ] Gnome Restaurant | Players deliver food to customers gnomes within a time limit, gaining unique food rewards. 
             - [ ] Impetuous Impulses | A minigame where implings are hunted and trapped in magical jars. Rewards vary from a chisel to pieces of dragon arrows. 
             - [ ] Mage Training Arena | A minigame composed of four separate "sub-minigames". The rewards are pizazz points, exchangeable for abilities such as the Bones to Peaches spell, or items such as runes or infinity robes. 
