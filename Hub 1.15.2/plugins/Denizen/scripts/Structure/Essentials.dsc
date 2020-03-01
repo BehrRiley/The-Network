@@ -7,14 +7,14 @@ Essentials:
     type: world
     debug: false
     events:
-        on system time minutely every:15:
-            - execute as_server "save-all"
-        on system time hourly every:12:
-            - adjust restart
-        on restart command:
-            - bungeeexecute "send <bungee.server> MainHub"
-        on stop command:
-            - bungeeexecute "send <bungee.server> MainHub"
+        #on system time minutely every:15:
+        #    - execute as_server "save-all"
+        #on system time hourly every:12:
+        #    - adjust restart
+        #on restart command:
+        #    - bungeeexecute "send <bungee.server> MainHub"
+        #on stop command:
+        #    - bungeeexecute "send <bungee.server> MainHub"
         #on player breaks block in:NetherSpawn:
         #    - determine cancelled
         on player logs in:
@@ -28,10 +28,7 @@ Essentials:
                     - wait 5t
         on player quits:
             - flag player behrry.chat.lastreply:!
-        on hanging breaks:
-            - if <context.entitiy||> == <server.match_player[behr]||>:
-                - stop
-            - else if <context.cause> == obstruction:
+        on hanging breaks because obstruction:
                 - determine cancelled
         on player right clicks Composter:
             - if <context.location.material.level> == 8 && <player.world.name> == Gielinor:
