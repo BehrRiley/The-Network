@@ -26,7 +26,9 @@ gmc_Command:
             - else:
                 - inject Admin_Permission_Denied Instantly
 
-        - if <[User].gamemode> == Creative:
+        - if <[User].world.name> != Creative:
+            - narrate targets:<player> format:Colorize_Red "Creative in this world is not allowed."
+        - else if <[User].gamemode> == Creative:
             - if <[User]> == <player>:
                 - narrate targets:<player> "<proc[Colorize].context[You are already in Creative Mode.|red]>"
             - else:
