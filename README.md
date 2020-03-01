@@ -127,11 +127,11 @@
             - [ ] Barrows
             - [ ] Bounty Hunter
             - [ ] Burgh De Rott Ramble
-            - [x] [Castle Wars](notes/mini-games/CastleWars.md)
+            - [x] [Castle Wars](notes/mini-games/CastleWars.md) A competitive game of Capture the Flag in which two teams try to bring the opponent's flag back to their base.
             - [ ] Champions' Challenge
             - [ ] Chambers of Xeric
             - [ ] Clan Wars
-            - [ ] Duel Arena
+            - [ ] [Duel Arena](notes/mini-games/DuelArena.md) Players duel each other, with the ability to set special rules.
             - [ ] Dungeoneering
             - [ ] Mage Arena
             - [ ] Nightmare Zone
