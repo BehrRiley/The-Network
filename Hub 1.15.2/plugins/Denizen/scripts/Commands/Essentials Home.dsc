@@ -35,7 +35,7 @@ Home_Command:
             #- define SoftMenu <list[<[SelectHomes]>|<[Delete]>|<[ReLocate]>|<[ChangeDirection]>|<[Guide]>|<[WhereIs]>]>
             #- note "in@generic[title=<[title]>;size=<[Size]>]" as:<player>HomeGUI
             #- inventory open d:HomeGUI
-            - inject Command_Syntax Instantly 
+            - inject Command_Syntax Instantly
         #@ Check for existing homes
         - if !<player.has_flag[behrry.essentials.homes.name]>:
             - narrate "<proc[Colorize].context[You have no homes.|red]>"
