@@ -1,65 +1,65 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██
-Prospect_Command:
-    type: command
-    name: Prospect
-    debug: false
-    description: Prospects actions at a location
-    usage: /prospect (on/off)
-    permission: behrry.protecc.prospect
-    Activate:
-        - if <player.has_flag[behrry.protecc.prospecting]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        - else:
-            - flag player behrry.protecc.prospecting
-            - flag player behrry.protecc.distance:2.5
-            - adjust <player> item_slot:1
-            - flag player behrry.protecc.itemsave:<player.inventory.slot[1]>
-            - take slot:1 quantity:<player.inventory.slot[1].quantity>
-            - give Moderator_Prospector slot:1
-            - narrate "<proc[Colorize].context[Prospecting Mode Enabled.|green]>"
-            - while <player.has_flag[behrry.protecc.prospecting]>:
-                - define NewFlagDistance <player.eye_location.add[<player.location.direction.vector.mul[<player.flag[behrry.protecc.distance]>]>].round>
-                - define FlagDistance <player.eye_location.points_between[<[NewFlagDistance]>].distance[1].size>
-                - define ObstructionDistance <player.eye_location.points_between[<player.location.cursor_on>].distance[1].size>
-                - if <[FlagDistance]> < <[ObstructionDistance]>:
-                    - define Loc <player.eye_location.add[<player.location.direction.vector.mul[<player.flag[behrry.protecc.distance]||2>]>].round>
-                - else:
-                    - define Loc <player.location.cursor_on>
-                - flag player behrry.protecc.selection:<[Loc]>
-                - run Prospector_Highlighter_Task def:<[Loc]>
-                - wait 5t
-    Deactivate:
-        - if !<player.has_flag[behrry.protecc.prospecting]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
-        - else:
-            - flag player behrry.protecc.prospecting:!
-            - narrate "<proc[Colorize].context[Prospecting Mode Disabled.|green]>"
-            - flag player behrry.protecc.prospecting:!
-            - flag player behrry.protecc.distance:!
-            - flag player behrry.protecc.selection:!
-
-            - take slot:1 quantity:<player.inventory.slot[1].quantity>
-            - if <player.flag[behrry.protecc.itemsave].as_item.material.name> != air:
-                - give <player.flag[behrry.protecc.itemsave].as_item>
-            - flag player behrry.protecc.itemsave:!
-
-    script:
-        - choose <context.args.get[1]||null>:
-            - case "on":
-                - inject locally Activate Instantly
-            - case "off":
-                - inject locally Deactivate Instantly
-            - case "null":
-                - if <player.has_flag[behrry.protecc.prospecting]>:
-                    - inject locally Deactivate Instantly
-                - else:
-                    - inject locally Activate Instantly
-            - case default:
-                - inject Command_Syntax Instantly
+## | ███████████████████████████████████████████████████████████
+## % ██    /
+## | ██
+## % ██  [ Command ] ██
+## $ ██  [ TO-DO   ] ██
+#Prospect_Command:
+#    type: command
+#    name: Prospect
+#    debug: false
+#    description: Prospects actions at a location
+#    usage: /prospect (on/off)
+#    permission: behrry.protecc.prospect
+#    Activate:
+#        - if <player.has_flag[behrry.protecc.prospecting]>:
+#            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+#        - else:
+#            - flag player behrry.protecc.prospecting
+#            - flag player behrry.protecc.distance:2.5
+#            - adjust <player> item_slot:1
+#            - flag player behrry.protecc.itemsave:<player.inventory.slot[1]>
+#            - take slot:1 quantity:<player.inventory.slot[1].quantity>
+#            - give Moderator_Prospector slot:1
+#            - narrate "<proc[Colorize].context[Prospecting Mode Enabled.|green]>"
+#            - while <player.has_flag[behrry.protecc.prospecting]>:
+#                - define NewFlagDistance <player.eye_location.add[<player.location.direction.vector.mul[<player.flag[behrry.protecc.distance]>]>].round>
+#                - define FlagDistance <player.eye_location.points_between[<[NewFlagDistance]>].distance[1].size>
+#                - define ObstructionDistance <player.eye_location.points_between[<player.location.cursor_on>].distance[1].size>
+#                - if <[FlagDistance]> < <[ObstructionDistance]>:
+#                    - define Loc <player.eye_location.add[<player.location.direction.vector.mul[<player.flag[behrry.protecc.distance]||2>]>].round>
+#                - else:
+#                    - define Loc <player.location.cursor_on>
+#                - flag player behrry.protecc.selection:<[Loc]>
+#                - run Prospector_Highlighter_Task def:<[Loc]>
+#                - wait 5t
+#    Deactivate:
+#        - if !<player.has_flag[behrry.protecc.prospecting]>:
+#            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+#        - else:
+#            - flag player behrry.protecc.prospecting:!
+#            - narrate "<proc[Colorize].context[Prospecting Mode Disabled.|green]>"
+#            - flag player behrry.protecc.prospecting:!
+#            - flag player behrry.protecc.distance:!
+#            - flag player behrry.protecc.selection:!
+#
+#            - take slot:1 quantity:<player.inventory.slot[1].quantity>
+#            - if <player.flag[behrry.protecc.itemsave].as_item.material.name> != air:
+#                - give <player.flag[behrry.protecc.itemsave].as_item>
+#            - flag player behrry.protecc.itemsave:!
+#
+#    script:
+#        - choose <context.args.get[1]||null>:
+#            - case "on":
+#                - inject locally Activate Instantly
+#            - case "off":
+#                - inject locally Deactivate Instantly
+#            - case "null":
+#                - if <player.has_flag[behrry.protecc.prospecting]>:
+#                    - inject locally Deactivate Instantly
+#                - else:
+#                    - inject locally Activate Instantly
+#            - case default:
+#                - inject Command_Syntax Instantly
 ## | ███████████████████████████████████████████████████████████
 ## % ██    /
 ## | ██
@@ -146,7 +146,7 @@ Prospect_Command:
 #
 #                    # - data | 1) Inventory Location | 2) Time | 3) Player | 4) Action | 5) Contents Before | 6) Contents After | 7) List of Removed | 8) List of Deposited | 9) Block Type
 #                    - define Data:|:<context.inventory.location>|<util.date.time.duration.replace[.].with[tacosauce]>|<player>|<[OpenData].escaped>|<[CloseData].escaped>|<[RemoveList].escaped>|<[DepositList].escaped>|<context.inventory.inventory_type>
-#                    
+#
 #                    - if <[RemoveList].Size> != 0 && <[DepositList].size> != 0:
 #                        - define Data "<[Data].insert[Exchanged].at[4]>"
 #                    - else if <[RemoveList].size> != 0:
