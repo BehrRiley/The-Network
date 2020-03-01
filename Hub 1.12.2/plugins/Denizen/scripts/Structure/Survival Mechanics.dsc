@@ -11,7 +11,7 @@ Survival_Mechanics:
 
 Silk_Spawners:
   type: world
-  debug: true
+  debug: false
   events:
     on player breaks spawner:
       - define Type <context.location.spawner_type.after[@].to_titlecase>
@@ -52,10 +52,10 @@ CreativeCommandChecker:
     type: world
     debug: false
     events:
-        on overlay|walls|outline|center|smooth|deform|hollow|regen|move|naturalize|line|curve|forest|flora|custompaste|schematic|schem|generate|generatebiome|hcyl|cyl|sphere|hsphere|pyramid|hpyramid|forestgen|pumpkins|toggleplace|fill|fillr|drain|fixwater|fixlava|removeabove|removebelow|replacenear|removenear|snow|thaw|butcher|remove command:
-            - if <player.gamemode> != Creative:
-                - narrate "<&c>This command is permitted only in Creative"
-                - determine fulfilled
+        #on overlay|walls|outline|center|smooth|deform|hollow|regen|move|naturalize|line|curve|forest|flora|custompaste|schematic|schem|generate|generatebiome|hcyl|cyl|sphere|hsphere|pyramid|hpyramid|forestgen|pumpkins|toggleplace|fill|fillr|drain|fixwater|fixlava|removeabove|removebelow|replacenear|removenear|snow|thaw|butcher|remove command:
+        #    - if <player.gamemode> != Creative:
+        #        - narrate "<&c>This command is permitted only in Creative"
+        #        - determine fulfilled
         on cut|set|replace|pos1|pos2|hpos1|hpos2|stack|flip|rotate|copy command:
             - if <player.gamemode> != Creative:
                 - if <player.gamemode> == Spectator:
