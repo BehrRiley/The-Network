@@ -24,3 +24,10 @@ World_Command:
             - adjust <player> gamemode:Survival
         - teleport <player> <world[<context.args.get[1]>].spawn_location>
         - narrate "<proc[Colorize].context[You were teleported to world:|green]> <context.args.get[1]>"
+
+world_handler:
+    type: world
+    debug: false
+    events:
+        on server prestart:
+            - createworld Creative
