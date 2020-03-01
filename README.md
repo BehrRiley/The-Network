@@ -147,7 +147,7 @@
             - [ ] Brimhaven Agility Arena | A Medium level Agility course for players. Pillars dispense tickets which can be traded in for rewards. 
             - [ ] Fishing Trawler | Players work together to keep a boat afloat while keeping nets fixed in order to catch as many fish as possible. 
             - [ ] [Gnome Ball](notes/mini-games/GnomeBall.md) | A minigame where players try to pass and charge with a small ball towards a hoop to score a goal, while the defending gnomes attempt to tackle them. 
-            - [ ] Gnome Restaurant | Players deliver food to customers gnomes within a time limit, gaining unique food rewards. 
+            - [ ] [Gnome Restaurant](notes/mini-games/GnomeRestaurant.md) | Players deliver food to customers gnomes within a time limit, gaining unique food rewards. 
             - [ ] Impetuous Impulses | A minigame where implings are hunted and trapped in magical jars. Rewards vary from a chisel to pieces of dragon arrows. 
             - [ ] Mage Training Arena | A minigame composed of four separate "sub-minigames". The rewards are pizazz points, exchangeable for abilities such as the Bones to Peaches spell, or items such as runes or infinity robes. 
             - [ ] Pyramid Plunder | Advance through 8 rooms, avoiding traps, and defending yourself from the pyramid's inhabitants in an attempt to loot treasure. 
