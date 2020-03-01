@@ -123,46 +123,46 @@
         - [Dungeoneering]() | Procedurally Generating Dungeons
         - [Minigames]() | Minigame Development - Notes, Transcripts, Etc
             ##### PvP / PvM
-            - [ ] Barbarian Assault
-            - [ ] Barrows
-            - [ ] Bounty Hunter
-            - [ ] Burgh De Rott Ramble
-            - [x] [Castle Wars](notes/mini-games/CastleWars.md) A competitive game of Capture the Flag in which two teams try to bring the opponent's flag back to their base.
-            - [ ] Champions' Challenge
-            - [ ] Chambers of Xeric
-            - [ ] Clan Wars
-            - [ ] [Duel Arena](notes/mini-games/DuelArena.md) Players duel each other, with the ability to set special rules.
-            - [ ] Dungeoneering
-            - [ ] Mage Arena
-            - [ ] Nightmare Zone
-            - [ ] Pest Control
-            - [ ] Temple Trekking
-            - [ ] Theatre of Blood
-            - [ ] TzHaar Fight Cave
-            - [ ] TzHaar Fight Pit
-            - [ ] Last Man Standing
-            - [ ] Inferno (hah)
+            - [ ] Barbarian Assault | A team of five fights waves of penance creatures and the penance queen. 
+            - [ ] Barrows | Fight the six Barrows Brothers to earn Barrows equipment. 
+            - [ ] Bounty Hunter | Fight other players assigned to you in the wilderness
+            - [ ] Burgh De Rott Ramble | A game where you guide potential Myreque recruits from Paterdomus to Burgh de Rott. 
+            - [x] [Castle Wars](notes/mini-games/CastleWars.md) |  A competitive game of Capture the Flag in which two teams try to bring the opponent's flag back to their base.
+            - [ ] Champions' Challenge | Fight creatures of 10 races to have a chance at being challenged by their champions. Defeating the human champion proclaims players as champion of champions. 
+            - [ ] Chambers of Xeric | The players set up a team to fight through a randomize dungeon who will be based upon the total level of the team. Defeating the Great Olm, at the end, will reward the victors accordingly to their individual score. 
+            - [ ] Clan Wars | Clan Wars allows members of two opposing Friends Chat to engage in player-versus-player combat against one another. 
+            - [ ] [Duel Arena](notes/mini-games/DuelArena.md) | Players duel each other, with the ability to set special rules.
+            - [ ] Dungeoneering |  Players explore—and survive—the depths of Daemonheim by solving puzzles, unlocking doors, fighting monsters and bosses, and using every skill to solve puzzles and progress to deeper floors.
+            - [ ] Mage Arena | Clan Wars allows members of two opposing Friends Chat to engage in player-versus-player combat against one another. 
+            - [ ] Nightmare Zone | Partake in "dreams" to fight bosses previously defeated in quests. 
+            - [ ] Pest Control | A team combat minigame which involves protecting a vulnerable Void Knight, while fending off against waves of incoming monsters and taking down four portals. 
+            - [ ] Temple Trekking | A game where players have to guide refugees from Burgh de Rott to Paterdomus for rewards. 
+            - [ ] Theatre of Blood | Players set up a team to fight through an arena filled with bosses in a predetermined order. Should they succeed this challenge, they shall be greatly rewarded. 
+            - [ ] TzHaar Fight Cave | Players fight alone against an army of TzHaar monsters. If they can defeat TzTok-Jad, they gain the sought-after fire cape. Tokkul is also awarded. 
+            - [ ] TzHaar Fight Pit | Players fight in a safe pit of combat in a free-for-all environment, last man standing gains a tokkul reward. 
+            - [ ] Last Man Standing | Players fight for survival on an island with nothing but resources found on the island. 
+            - [ ] Inferno | Players battle an onslaught of enemies, making their way to defeat TzKal-Zuk. 
             ##### Skilling
-            - [ ] Blast Furnace
-            - [ ] Brimhaven Agility Arena
-            - [ ] Fishing Trawler
-            - [ ] Gnome Ball
-            - [ ] Gnome Restaurant
-            - [ ] Impetuous Impulses
-            - [ ] Mage Training Arena
-            - [ ] Pyramid Plunder
-            - [ ] Ranging Guild
-            - [ ] Rogues' Den
-            - [ ] Sorceress's Garden
-            - [ ] Tithe Farm
-            - [ ] Trouble Brewing
-            - [ ] Volcanic Mine
+            - [ ] Blast Furnace | Players work together to keep the furnace running. The furnace halves the amount of coal needed to produce a bar when smelting. 
+            - [ ] Brimhaven Agility Arena | A Medium level Agility course for players. Pillars dispense tickets which can be traded in for rewards. 
+            - [ ] Fishing Trawler | Players work together to keep a boat afloat while keeping nets fixed in order to catch as many fish as possible. 
+            - [ ] Gnome Ball | A minigame where players try to pass and charge with a small ball towards a hoop to score a goal, while the defending gnomes attempt to tackle them. 
+            - [ ] Gnome Restaurant | Players deliver food to customers gnomes within a time limit, gaining unique food rewards. 
+            - [ ] Impetuous Impulses | A minigame where implings are hunted and trapped in magical jars. Rewards vary from a chisel to pieces of dragon arrows. 
+            - [ ] Mage Training Arena | A minigame composed of four separate "sub-minigames". The rewards are pizazz points, exchangeable for abilities such as the Bones to Peaches spell, or items such as runes or infinity robes. 
+            - [ ] Pyramid Plunder | Advance through 8 rooms, avoiding traps, and defending yourself from the pyramid's inhabitants in an attempt to loot treasure. 
+            - [ ] Ranging Guild | A way to train Ranged which can be profitable. Players may exchange tickets earned as rewards for items, such as rune arrows. 
+            - [ ] Rogues' Den | Players show their deft abilities as they navigate this tricky maze filled with traps and obstacles. Depending on success, players can earn fair amounts of Agility and Thieving experience, as well as rogue armour, displaying their experienced skills. 
+            - [ ] Sorceress's Garden | Players attempt to sneak around watchful elementals guarding their gardens to pick Sq'irk fruits or herbs. 
+            - [ ] Tithe Farm | The minigame revolves around intensively planting special seeds into farming patches, tending them until harvest, and depositing the produce into sacks in order to earn points. 
+            - [ ] Trouble Brewing | Two teams compete as each try to brew the most bottles of 'rum'. Experience in a variety of skills can be earned for performing the many tasks needed in the process of 'rum' production. 
+            - [ ] Volcanic Mine | Mining as many ore fragments as possible before the volcano eventually erupts. 
             ##### Miscellaneous
-            - [ ] Burthorpe Games Room
-            - [ ] Rat Pits
-            - [ ] Rogue Trader
-            - [ ] Tears of Guthix
-            - [ ] Treasure Trails
+            - [ ] Burthorpe Games Room | A room where players can compete in various board games. 
+            - [ ] Rat Pits | Players can train their cats to be a wily cat in these arenas of battle between cats and mice. 
+            - [ ] Rogue Trader | Players barter with Ali Morrisane. The rewards include less expensive runes, clothes, and blackjacks. 
+            - [ ] Tears of Guthix | Collect the tears of the god of balance in a sacred cave guarded by his faithful Guardian of Guthix, Juna. The tears improve a player's experience in their lowest skill. You can only do this minigame once a week. 
+            - [ ] Treasure Trails | Players follow cryptic clues on wild chases to obtain valuable rewards. Rewards include runes, god pages, trimmed armour, third-age equipment, and much more! 
         - [Skills]() | Skill Development - Notes, Mechanics, Etc
     ------
     - [WorldPainter]() | Geographic Management & Design
