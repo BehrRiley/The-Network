@@ -66,7 +66,7 @@ These are located in the north-east and south-west points of the river. Players 
 ### Collapsible rocks
 The collapsible rocks are located in the caves below the arena. Using a pickaxe or an explosive potion, players may collapse the walls and fill the cave passageway with rocks, so that players may not pass. To get past the collapsed rocks, players must use either two explosive potions or a pickaxe or both. If rocks are collapsed on top of a player, they will die immediately. This is an excellent trick if you are running through the tunnels with the flag, as it gets rid of many chasers and blocks the rest, but they could also kill you. The best trick to use is when it's clear, put a barricade on one side of you and put one under you. Therefore, the player doesn't see it under you, and when they go to attack you they actually attack the barricade, and then, you can use an explosive potion on the wall, killing them.
 
-Some useful tactics:
+#### Some useful tactics:
 A player bring a Dragon spear; another player has an explosive potion. The player with a dragon spear uses its special to push someone into the rockslide area. Another player then collapses the area.
 Placing a barricade beneath you negates any dragon spear effect on you from another player from the opposing team.
 If there is a barricade beneath you while a player tries to cross, he will be trapped in the rockslide area, which you can either immediately collapse or slowly mine.
@@ -94,13 +94,12 @@ Once you join a team, you have to wait in an underground cavern until the next g
 - Tickets should be track-able - god forbid we actually lose them if they exist someplace.
 
 ### Positions (NPC Logic)
-Attackers: Players who storm the enemy castle either to attack other players or try to capture the flag and bring it back to their own castle.
-Defenders: Players who defend the flag on the 3rd floor or 4th floor keeping the enemies from getting a point. Those with freeze spells make good defenders as they can freeze opponents trying to run upstairs. Barricaders may also fall into this category.
-Archers: Players that are located on the outer wall near the catapult that attack incoming enemies players. They may either be rangers or mages.
-Medics: Players who use potions to heal other players.
-Catapulters: Players who attack incoming enemies using the catapult.
-Door men: Players who keep on closing the door on incoming enemies stopping them from coming in and leaving.
-Barricades or Engineers: Players who set up barricades slowing enemy players down from taking the flag.
-Miners: Players who go down in the dungeon and clear the way for their team and setting up collapsible rocks on the enemies. They may also try to repeatedly collapse rocks on team mates.
-Flag holder: A player who grabs their own flag after an enemy player has dropped it outside their castle and then holds on to it. This player should have a high Defence level and be experienced in Combat.
-Freeloaders: Players who do absolutely nothing but stand around. The most popular spot for freeloading is the small room on the 4th floor where the trapdoor is at. If there are too many of them, it weakens a team.
+- Attackers: Players who storm the enemy castle either to attack other players or try to capture the flag and bring it back to their own castle.
+- Defenders: Players who defend the flag on the 3rd floor or 4th floor keeping the enemies from getting a point. Those with freeze spells make good defenders as they can freeze opponents trying to run upstairs. Barricaders may also fall into this category.
+- Archers: Players that are located on the outer wall near the catapult that attack incoming enemies players. They may either be rangers or mages.
+- Medics: Players who use potions to heal other players.
+- Catapulters: Players who attack incoming enemies using the catapult.
+- Door men: Players who keep on closing the door on incoming enemies stopping them from coming in and leaving.
+- Barricades or Engineers: Players who set up barricades slowing enemy players down from taking the flag.
+- Miners: Players who go down in the dungeon and clear the way for their team and setting up collapsible rocks on the enemies. They may also try to repeatedly collapse rocks on team mates.
+- Flag holder: A player who grabs their own flag after an enemy player has dropped it outside their castle and then holds on to it. This player should have a high Defence level and be experienced in Combat.
