@@ -111,18 +111,10 @@ Chat_Handler:
         - define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
         - define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - define DiscordNamePlate "**<player.display_name>**"
-    TEMPNameplateFormat:
-        - define Mods <list[Faience|_Aes|FoxChirpz|ExpertAbyss|Whitey1488]>
-        - define Behr <server.match_player[Behr_riley]||<server.match_offline_player[behr_riley]>>
-        - if <[Mods].contains[<player.name>]>:
-            - define NamePlate "☼<&sp><&r><player.display_name><&r>"
-            - define DiscordNamePlate "**<player.display_name>**"
-        - else if <player> == <[Behr]>:
-            - define NamePlate "<&a>☼<&sp><&r><player.display_name><&r>"
-            - define DiscordNamePlate "**<player.display_name>**"
-        - else:
-            - define Nameplate "<player.display_name><&r>"
-            - define DiscordNamePlate "**<player.display_name>**"
+
+    DiscordMessage:
+        - define DiscordMessage "<[DiscordNamePlate]>: <context.message>"
+        - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
     GlobalChatLog:
         - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
             - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
@@ -176,12 +168,8 @@ Chat_Handler:
             - determine <[Message]>
 
         on player chats:
-            - determine passively cancelled
             #@ NPC Check
             - if <player.has_flag[Interacting_NPC]>:
-                - define Targets "<server.list_online_players.filter[in_group[Moderation]]>"
-                - define Message "<&7>[<&8>Muted<&7> <&7><player.name>: <context.message.strip_color>"
-                - narrate targets:<[Targets]> <[Message]>
                 - stop
             
             #@ Ignore Check
@@ -189,41 +177,40 @@ Chat_Handler:
 
             #@ Mute check
             - if <player.has_flag[muted]>:
-                - stop
+                - define Targets "<server.list_online_players.filter[in_group[Moderation]]>"
+                - define Message "<&7>[<&8>Muted<&7> <&7><player.name>: <context.message.strip_color>"
+                - narrate targets:<[Targets]> <[Message]>
+                - determine cancelled
 
             #@ BChat Check
             - if <player.has_flag[behrry.essentials.bchat]>:
                 - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
                 - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
                 - narrate targets:<[Targets]> "<[Prefix]> <&7><context.message.parse_color>"
-                - stop
+                - determine cancelled
 
             #@ Fixing your group
-            #------ uperms remove before fix ------#
-            - if <bungee.server||null> == null:
-                - inject locally GroupManager Instantly
+            - run locally GroupManager Instantly
 
             #@ in-game formatting
-            #------ uperms remove before fix ------#
-            - if <bungee.server||null> == null:
-                - inject locally NameplateFormat Instantly
-            - else:
-                - inject locally TEMPNameplateFormat Instantly
+            - inject locally NameplateFormat Instantly
+            
+            #@ Discord message
+            - run locally DiscordMessage Instantly
 
             #@ ChatLog
             - define Message "<[NamePlate]>: <context.message.parse_color>"
-            - define DiscordMessage "<[DiscordNamePlate]>: <context.message>"
             - inject locally GlobalChatLog Instantly
             
             #@ print to discord and in-game
-            - announce <[Message].replace[:pufferfish:].with[▲]>
-            - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
+            - Determine <[Message].replace[:pufferfish:].with[▲]>
+            
 
-            #@ Discord relay
-            - if <bungee.server||null> == Hub2:
-                - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
-            - else:
-                - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
+            ##@ Discord relay - between external servers
+            #- if <bungee.server||null> == Hub2:
+            #    - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
+            #- else:
+            #    - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
 
 Ranks:
     type: yaml data
