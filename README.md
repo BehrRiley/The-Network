@@ -127,7 +127,7 @@
             - [ ] Barrows
             - [ ] Bounty Hunter
             - [ ] Burgh De Rott Ramble
-            - [x] Castle Wars
+            - [x] [Castle Wars](notes/mini-games/CastleWars.md)
             - [ ] Champions' Challenge
             - [ ] Chambers of Xeric
             - [ ] Clan Wars
