@@ -21,9 +21,10 @@ Kick_Command:
 
         - if <[User].in_group[Moderation]>:
             - if <[User]> == <player>:
-                - narrate Colorize_Red "You cannot kick yourself."
-            - else if <[User]> != <server.match_player[Behr]||false>:
-                - narrate Colorize_Red "This player cannot be kicked."
+                - narrate format:Colorize_Red "You cannot kick yourself."
+                - stop
+            - else if <[User]> == <server.match_player[Behr]||false>:
+                - narrate format:Colorize_Red "This player cannot be kicked."
                 - stop
 
         - if <context.args.get[2]||null> != null:
