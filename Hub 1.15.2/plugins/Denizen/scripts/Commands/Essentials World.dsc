@@ -31,3 +31,5 @@ world_handler:
     events:
         on server prestart:
             - createworld Creative
+            - createworld Hub
+        #    - createworld Runescape50px1
