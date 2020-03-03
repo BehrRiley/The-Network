@@ -35,7 +35,7 @@ RTP_Command:
         - repeat 100:
             - define x <util.random.int[-<[Distance]>].to[<[Distance]>]>
             - define z <util.random.int[-<[Distance]>].to[<[Distance]>]>
-            - ~chunkload <location[<[x]>,0,<[z]>,<player.world.name>].chunk>
+            - chunkload <location[<[x]>,0,<[z]>,<player.world.name>].chunk>
             - define Loc <location[<[x]>,0,<[z]>,<player.world.name>].highest>
             - if <[Loc].material.name.contains_any[<[Blacklist]>]>:
                 #- narrate "Bad RTP, retrying... <[Loc].material.name>"
