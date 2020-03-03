@@ -9,15 +9,15 @@ skin_url_handler:
     debug: false
     events:
         on npc command:
-            - if <c.args.get[1].to_lowercase||null> != skin:
+            - if <context.args.get[1].to_lowercase||null> != skin:
                 - stop
-            - if !<li@-u|--url.contains[<c.args.get[2].to_lowercase||null>]>:
+            - if !<li@-u|--url.contains[<context.args.get[2].to_lowercase||null>]>:
                 - stop
             - determine passively fulfilled
 
-            - define url <c.args.get[3]||null>
-            - define model <c.args.get[4].to_lowercase||empty>
-            - if <c.server>:
+            - define url <context.args.get[3]||null>
+            - define model <context.args.get[4].to_lowercase||empty>
+            - if <context.server>:
                 - define npc <server.selected_npc||null>
             - else:
                 - define npc <player.selected_npc||null>
