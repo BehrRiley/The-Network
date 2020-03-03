@@ -3,7 +3,7 @@
 ## Description
 It is similar to Capture the Flag, but with a RuneScape twist.
 
-### Travel
+### Travel & Location
 Castle Wars is found in the south-west corner of Kandarin and may be accessed via a number of ways:
 
 Literally walking there in the Gielinor World.
