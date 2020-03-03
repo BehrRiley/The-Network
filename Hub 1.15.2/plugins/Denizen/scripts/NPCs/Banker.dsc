@@ -31,9 +31,9 @@ Banker:
             - inject locally GenericGreeting Instantly
     GenericGreeting:
         - wait 2s
-# $ - define Options_List "<list[I'd like to access my bank account, please|I'd like to check my pin settings|i'd like to see my collection box|What is this place?]>"
+    # $ - define Options_List "<list[I'd like to access my bank account, please|I'd like to check my pin settings|i'd like to see my collection box|What is this place?]>"
         - define Options_List "<list[I'd like to access my bank account, please|What is this place?]>"
-# $ - define Trigger_List "<list[access|pin|collection|place]>"
+    # $ - define Trigger_List "<list[access|pin|collection|place]>"
         - define Trigger_List <list[access|place]>
         - if <script[<script.name>_Interact].step[<player>]> != Normal:
             - zap Banker_Interact Normal
@@ -262,3 +262,64 @@ Equipment_Slot:
         custom_model_data: 136
         flags: "li@HIDE_POTION_EFFECTS|HIDE_ENCHANTS|HIDE_ATTRIBUTES|HIDE_UNBREAKABLE|HIDE_DESTROYS|HIDE_PLACED_ON"
     display name: <&2>E<&a>quipment <&2>M<&a>enu
+
+
+
+# | ███████████████████████████████████████████████████████████
+# % ██    /npc assignment --set Grand Exchange ClerkNPC
+# | ██
+# % ██  [ Assignment Script ] ██
+# $ ██  [ To-Do ] | Pin Settings | Grand Exchange            ██
+Grand_Exchange_Clerk:
+    type: assignment
+    debug: false
+    actions:
+        on assignment:
+            - trigger name:click state:true
+            - trigger name:proximity state:true radius:4
+            - trigger name:chat state:true
+            - if <server.has_flag[npc.skin.<script.name>]>:
+                - adjust <npc> skin_blob:<server.flag[npc.skin.<script.name>]>
+            - else:
+                - narrate "<proc[Colorize].context[No NPC skin saved for:|red]> <&6>'<&e><script.name><&6>'"
+        on exit proximity:
+            - if <player.flag[interacting_npc]||> == <script.name>:
+                - flag player interacting_npc:!
+                - if <script[<script.name>_Interact].step[<player>]> != Normal:
+                        - zap "Grand Exchange Clerk_Interact" Normal
+        on click:
+            - if <player.flag[interacting_npc]||> != <script.name>:
+                - flag player interacting_npc:<script.name>
+            - narrate format:npc "Welcome to the Grand Exchange. Would you like to trade now, or exchange item sets?
+            - inject locally GenericGreeting Instantly
+    GenericGreeting:
+        - wait 2s
+        #|How do I use the Grand Exchange?
+        #|I'd like to set up trade offers please.
+        #|Can you help me with item sets?
+        #|I'd like Exchange collection reminders on login, please.
+        #|I'm fine, thanks.
+        - define Options_List "<list[How do I use the Grand Exchange?|I'd like to set up trade offers please.|Can you help me with item sets?|I'd like Exchange collection reminders on login, please.|I'm fine, thanks.]>"
+        - define Trigger_List <list[How|Trade|Sets|Reminder|Bye]>
+        - if <script[<script.name>_Interact].step[<player>]> != Normal:
+            - zap "Grand Exchange Clerk_Interact" Normal
+        - inject Trigger_Option_builder Instantly
+    interact scripts:
+        - Grand_Exchange_Clerk_Interact
+
+# | ██  [ Grand Exchange Clerk Interact Script ] ██
+Grand_Exchange_Clerk_Interact:
+    type: interact
+    debug: false
+    speed: 0
+    steps:
+        Normal*:
+            chat trigger:
+                Bank:
+                    trigger: hi
+                    hide trigger message: true
+                    script:
+                    - narrate format:npc "hi"
+                    - wait 2s
+                    - define Options_List "<list[And what do you do?|didn't you used to be called the Bank of Varrock?]>"
+                    - define Trigger_List "<list[what|Varrock]>"
