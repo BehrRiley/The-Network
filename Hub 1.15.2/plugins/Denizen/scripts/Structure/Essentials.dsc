@@ -9,11 +9,7 @@ Essentials:
     events:
         #on system time minutely every:15:
         #    - execute as_server "save-all"
-        #on system time hourly every:12:
-        #    - adjust restart
         #on restart command:
-        #    - bungeeexecute "send <bungee.server> MainHub"
-        #on stop command:
         #    - bungeeexecute "send <bungee.server> MainHub"
         #on player breaks block in:NetherSpawn:
         #    - determine cancelled
@@ -130,7 +126,7 @@ Chat_Handler:
             - narrate <server.flag[Behrry.Essentials.ChatHistory.Global].parse[unescaped].separated_by[<&nl>]>
 
             #@ Format the message
-            - if <bungee.server||null> == null:
+            - if <bungee.server||BanditCraft> == BanditCraft:
                 - define Server "Bandit Craft."
             - else:
                 - define Server "The Test Server."
@@ -141,7 +137,7 @@ Chat_Handler:
             - inject Chat_Logger Instantly
 
             #@ Discord relay to other servers
-            - if <bungee.server||null> == Hub2:
+            - if <bungee.server||BanditCraft> == TestServer:
                 - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
             - else:
                 - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
@@ -159,7 +155,7 @@ Chat_Handler:
             - flag server Behrry.Essentials.ChatHistory.Global:->:<[Message].escaped>
 
             #@Discord Relay to Other Servers
-            - if <bungee.server||null> == Hub2:
+            - if <bungee.server||BanditCraft> == TestServer:
                 - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
             - else:
                 - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
@@ -168,6 +164,7 @@ Chat_Handler:
             - determine <[Message]>
 
         on player chats:
+            - determine passively cancelled
             #@ NPC Check
             - if <player.has_flag[Interacting_NPC]>:
                 - stop
@@ -194,16 +191,25 @@ Chat_Handler:
 
             #@ in-game formatting
             - inject locally NameplateFormat Instantly
-            
-            #@ Discord message
-            - run locally DiscordMessage Instantly
 
             #@ ChatLog
-            - define Message "<[NamePlate]>: <context.message.parse_color>"
+            - define Message "<[NamePlate]>: <context.message.parse_color.replace[:pufferfish:].with[▲]>"
             - inject locally GlobalChatLog Instantly
             
-            #@ print to discord and in-game
-            - announce <[Message].replace[:pufferfish:].with[▲]>
+            #@ Print to Server
+            - announce <[Message]>
+            
+            #@ Print to Other Servers
+            - if <bungee.list_servers.size||1> > 1:
+                - foreach <bungee.list_servers.exclude[<bungee.server>]> as:Server:
+                    - bungee <[Server]>:
+                        - announce <[Message]>
+            #@ Discord message
+            #- inject locally DiscordMessage Instantly
+            - if <bungee.list_servers.contains[TestServer]> && <bungee.server> != TestServer:
+                - bungeerun TestServer Discord_Chat_Task def:<[DiscordNamePlate]>|<context.message.escaped>
+            - else:
+                - inject locally DiscordMessage Instantly
             
 
             ##@ Discord relay - between external servers
