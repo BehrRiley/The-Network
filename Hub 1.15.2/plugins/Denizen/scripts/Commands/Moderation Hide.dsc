@@ -30,3 +30,12 @@ Hide_Command:
             - playsound <player.location> sound:ENTITY_BLAZE_AMBIENT
             - playeffect effect:EXPLOSION_NORMAL at:<player.location.add[0,1,0]> visibility:50 quantity:10 offset:0.5
             - playeffect effect:EXPLOSION_LARGE at:<player.location.add[0,1,0]> visibility:50 quantity:1 offset:0.5
+
+Hide_Handler:
+    type: world
+    debug: false
+    events:
+        on player damages entity:
+            - if <player.has_flag[behrry.moderation.hide]>:
+                - determine passively cancelled
+                - narrate format:Colorize_Red "You cannot attack while hidden."
