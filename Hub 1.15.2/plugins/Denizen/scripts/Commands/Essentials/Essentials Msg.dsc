@@ -29,18 +29,13 @@ Message_Command:
         - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>]<&9> <&chr[00bb]> <&9><[Message]>"
 Reply_Command:
     type: command
-    name: msg
+    name: r
     debug: true
     description: Replies to the last player who messaged you.
     usage: /r <&lt>Message<&gt>
     permission: behrry.essentials.reply
     aliases:
-        - r
-    tab complete:
-        - if <context.args.size||0> == 0:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>].include[Everyone]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>].include[Everyone].filter[starts_with[<context.args.get[1]>]]>
+        - reply
     script:
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
