@@ -15,8 +15,11 @@ gmc_Command:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
+        #@ Verify args
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
+            
+        #@ Check for self or named player
         - if <context.args.get[1]||null> == null:
             - define User <player>
         - else:
@@ -25,19 +28,23 @@ gmc_Command:
                 - inject Player_Verification Instantly
             - else:
                 - inject Admin_Permission_Denied Instantly
-
-        - if <[User].world.name> != Creative:
-            - narrate targets:<player> format:Colorize_Red "Creative in this world is not allowed."
-        - else if <[User].gamemode> == Creative:
+        
+        #@ Check if blacklisted
+        - define Blacklist <list[Bees|Bees_The_Nether|Bees_The_End]>
+        - if <[Blacklist].contains[<[User].world.name>]>:
+            - narrate format:Colorize_Red "Creative in this world is not allowed."
+            - stop
+            
+        #@ Check if player is already in creative
+        - if <[User].gamemode> == Creative:
             - if <[User]> == <player>:
-                - narrate targets:<player> "<proc[Colorize].context[You are already in Creative Mode.|red]>"
+                - narrate "<proc[Colorize].context[You are already in Creative Mode.|red]>"
             - else:
-                - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already in Creative Mode.|red]>"
+                - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already in Creative Mode.|red]>"
         - else:
             - if <[User]> != <player>:
                 - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context['s Gamemode changed to:|red]> <&e>Creative"
-            - else:
-                - narrate targets:<[User]> "<proc[Colorize].context[Gamemode changed to:|green]> <&e>Creative"
+            - narrate targets:<[User]> "<proc[Colorize].context[Gamemode changed to:|green]> <&e>Creative"
             - adjust <[User]> gamemode:Creative
 
 ## | ███████████████████████████████████████████████████████████
