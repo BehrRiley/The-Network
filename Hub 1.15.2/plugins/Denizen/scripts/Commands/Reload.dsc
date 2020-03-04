@@ -1,7 +1,8 @@
-r:
+reloadscripts:
     type: command
-    name: r
+    name: reloadscripts
     debug: false
+    permission: behrry.development.reloadscripts
     aliases:
         - /r
     script:
