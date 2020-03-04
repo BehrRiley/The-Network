@@ -53,3 +53,17 @@ Colorize:
         ## - Forward and Backward Slash
         #- define Text <[Text].replace[/].with[<[1]>/<[2]>].replace[<&bs>].with[<[1]><&bs><[2]>]>
         - Determine <[Text]>
+
+
+Colorize_Green:
+    type: format
+    debug: false
+    format: <proc[Colorize].context[<text>|green]>
+Colorize_Yellow:
+    type: format
+    debug: false
+    format: <proc[Colorize].context[<text>|yellow]>
+Colorize_Red:
+    type: format
+    debug: false
+    format: <proc[Colorize].context[<text>|red]>
