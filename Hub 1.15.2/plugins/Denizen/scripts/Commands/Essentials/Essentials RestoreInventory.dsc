@@ -9,8 +9,8 @@ RestoreInventory_Command:
         - invr
         - invrestore
         - inventoryrestore
-    usage: /restoreinv <&lt>PlayerName<&gt>(1-10/Backup)
-    permission: behrry.essentials.inventoryrestore
+    usage: /restoreinv <&lt>PlayerName<&gt> (1-10/Backup)
+    permission: behrry.essentials.restoreinventory
     tab complete:
         - inject Online_Player_Tabcomplete Instantly
     script:
@@ -23,7 +23,7 @@ RestoreInventory_Command:
         - define YamlSize <yaml[<[User]>].read[<[Key]>].size||0>
         - define UID <yaml[<[User]>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
         - if <[YamlSize]> == 0 && <context.args.get[2]||null> != backup:
-                - narrate "<[User].name.display><&r> <proc[Colorize].context[does not have a cached death inventory.|red]>"
+                - narrate "<[User].display_name><&r> <proc[Colorize].context[does not have a cached death inventory.|red]>"
         - else:
             - define Arg2 <context.args.get[2]||1>
             - if <[Arg2]> == Backup:
@@ -32,7 +32,7 @@ RestoreInventory_Command:
                     - narrate targets:<[User]> "<proc[Colorize].context[Your inventory was restored to a backup.|green]>"
                 - else:
                     - narrate "<proc[Colorize].context[Player does not have a backup inventory.|red]>"
-            - else if <[Arg2]> matches number:
+            - else if <[Arg2].is_integer>:
                 - if <[Arg2]> > <[YamlSize]>:
                     - narrate "<&4>I<&2>nventory<&4>: <&6>[<&e><proc[Colorize].context[does not exist.|red]>"
                 - else:
@@ -42,7 +42,7 @@ RestoreInventory_Command:
                     - yaml id:<[User]> set <[Key]>:<-:<[Cache]>
                     - yaml id:<[User]> savefile:data/pData/<player.uuid>.yml
                     - if <[User]> != <player>:
-                        - narrate targets:<player> "<&e>Player<&6><&co> <&f><[User].name.display><&r> <&e>Inventory<&6><&co><&f>[<context.args.get[2]||1>]<&f> Restored."
+                        - narrate targets:<player> "<&e>Player<&6><&co> <&f><[User].display_name><&r> <&e>Inventory<&6><&co><&f>[<context.args.get[2]||1>]<&f> Restored."
                     - narrate targets:<[User]> "<proc[Colorize].context[Your inventory before death was restored.|green]>"
             - else:
                 - narrate "<proc[Colorize].context[Inventory cache must be an index number.|red]>"
