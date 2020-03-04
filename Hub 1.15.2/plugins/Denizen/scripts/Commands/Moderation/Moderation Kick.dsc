@@ -26,6 +26,9 @@ Kick_Command:
             - else if <[User]> == <server.match_player[Behr]||false>:
                 - narrate format:Colorize_Red "This player cannot be kicked."
                 - stop
+            - else if !<player.in_group[Administrator]>:
+                - narrate format:Colorize_Red "Not strong enough permission."
+                - stop
 
         - if <context.args.get[2]||null> != null:
             - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
