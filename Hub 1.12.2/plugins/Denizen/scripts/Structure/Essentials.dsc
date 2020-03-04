@@ -5,14 +5,21 @@
 # $ ██    [ To-Do ]                     ██
 Essentials:
     type: world
-    debug: false
+    debug: true
     events:
-        #on system time minutely every:15:
-        #    - execute as_server "save-all"
+        on system time hourly:
+            - execute as_server "acball 100"
         #on restart command:
         #    - bungeeexecute "send <bungee.server> MainHub"
         #on player breaks block in:NetherSpawn:
         #    - determine cancelled
+        on player clicks block in:golden_shovel:
+            #- if <context.location> == <location[29,64,197,Bees]>:
+            - if <player.inventory.list_contents.parse[material.name].contains[golden_shovel]>:
+                - stop
+            - else:
+                - give i@golden_shovel
+                - execute as_op "claimbook <player.name>"
         on player logs in:
             - wait 1s
             #- run Chat_Channel_Load def:Global
