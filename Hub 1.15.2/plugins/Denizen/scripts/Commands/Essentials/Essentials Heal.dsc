@@ -13,11 +13,16 @@ Heal_Command:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
+        #@ Verify args
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
-        - if <context.args.get[1]||null> == null:
-            - heal <player>
+        
+        #@ Check if self or player named
+        - if <context.args.get[1]||null> == null::
+            - define User <player>
         - else:
             - define User <context.args.get[1]>
             - inject Player_Verification
-            - heal <[User]>
+            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was healed.|green]>"
+        - heal <[User]>
+        - narrate targets:<[User]> format:Colorize_Green "You were healed."
