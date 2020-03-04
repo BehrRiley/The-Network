@@ -153,6 +153,10 @@ Chat_Handler:
             - determine <[Message]>
             
         on player quits:
+            #@ Cancel if player was kicked
+            - if <player.has_flag[behrry.moderation.kicked]>:
+                - determine NONE
+                
             #@Format the Message
             - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[left the network.|yellow]>"
 
