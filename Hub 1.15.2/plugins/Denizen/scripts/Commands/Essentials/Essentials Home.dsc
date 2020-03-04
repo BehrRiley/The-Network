@@ -2,17 +2,18 @@
 # % ██    /home name takes you to your home.
 # | ██
 # % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script | tab complete GUI for homes on blank | transform flags into notable to make homes unique
+# $ ██  [ TO-DO   ] ██ | furnish script | tab complete GUI for homes on blank | Add admin controls to use other homes
 Home_Command:
     type: command
     name: home
     debug: false
     description: Teleports you to a home.
+    admindescription: Teleports you to a home, or another player's home.
     permission: behrry.essentials.home
     aliases:
       - h
-      - homes
     usage: /home <&lt>HomeName<&gt> (Remove)
+    adminusage: /home <&lt>player<&gt> <&lt>HomeName<&gt> (Remove)
     tab complete:
         - if <context.args.size||0> == 0:
           - determine <player.flag[behrry.essentials.homes.name]||>
