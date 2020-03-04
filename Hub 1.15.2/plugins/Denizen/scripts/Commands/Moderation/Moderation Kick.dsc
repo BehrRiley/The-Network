@@ -1,8 +1,7 @@
 # | ███████████████████████████████████████████████████████████
-# % ██    /kick - returns you to where you teleported from
+# % ██    /kick - Kicks a named player.
 # | ██
 # % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script, create out of combat bypass | cooldown | Bypass monsters near
 Kick_Command:
     type: command
     name: kick
@@ -33,6 +32,7 @@ Kick_Command:
         - if <context.args.get[2]||null> != null:
             - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
             - announce "<proc[User_Display_Simple].context[<[User]>]> <&e>was kicked for: <&a><[Reason]>"
+            - flag <[User]> behrry.moderation.kicked duration:1s
             - kick <[User]> reason:<[Reason]>
         - else:
             - announce "<[User]> was kicked."
