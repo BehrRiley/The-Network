@@ -31,8 +31,6 @@ Essentials:
                     - wait 5t
         on player quits:
             - flag player behrry.chat.lastreply:!
-        on hanging breaks because obstruction:
-                - determine cancelled
         on player right clicks Composter:
             - if <context.location.material.level> == 8 && <player.world.name> == Gielinor:
                 - determine cancelled
@@ -109,10 +107,11 @@ Chat_Handler:
                     - execute as_server "upc removeGroup <player.name> Visitor"
                     - execute as_server "upc addGroup <player.name> Patron"
     NameplateFormat:
-        - define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
+        #- define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
         - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.display_name><&r>"
-        - define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
-        - define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+        #- define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
+        #- define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
+        - define NamePlate <[Text]>
         - define DiscordNamePlate "**<player.display_name>**"
 
     DiscordMessage:
@@ -153,6 +152,10 @@ Chat_Handler:
             - determine <[Message]>
             
         on player quits:
+            #@ Cancel if player was kicked
+            - if <player.has_flag[behrry.moderation.kicked]>:
+                - determine NONE
+                
             #@Format the Message
             - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[left the network.|yellow]>"
 
@@ -184,14 +187,14 @@ Chat_Handler:
                 - define Targets "<server.list_online_players.filter[in_group[Moderation]]>"
                 - define Message "<&7>[<&8>Muted<&7> <&7><player.name>: <context.message.strip_color>"
                 - narrate targets:<[Targets]> <[Message]>
-                - determine cancelled
+                - stop
 
             #@ BChat Check
             - if <player.has_flag[behrry.essentials.bchat]>:
                 - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
                 - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
                 - narrate targets:<[Targets]> "<[Prefix]> <&7><context.message.parse_color>"
-                - determine cancelled
+                - stop
 
             #@ Fixing your group
             - run locally GroupManager Instantly
