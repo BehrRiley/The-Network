@@ -5,11 +5,14 @@ damage_handler:
         on player damages entity:
             #@ Determine damage amount
             - define Damage <context.final_damage>
-            - flag player behrry.skill.exp.cd:+:<context.final_damage> duration:1s
+            
+            #@ Determine cooldown, cap experience
             - if <player.flag[Behrry.skill.exp.cd]||0> > 50:
+                - flag player behrry.skill.exp.cd:+:<context.final_damage> duration:10t
                 - stop
             
-            - if <player.location.find.entities.within[5].size> > 25:
+            #@ Determine if grinder
+            - if <player.location.find.entities.within[4].size> > 30:
                 - stop
 
             #@ Determine damage style
