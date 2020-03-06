@@ -68,15 +68,12 @@ Experience_Handler:
     type: world
     debug: false
     events:
-        on system secondly:
-            - foreach <server.list_players_flagged[Behrry.skill.exp.cd]> as:Player:
-                - flag <[Player]> behrry.skill.exp.cd:-:25 duration:15t
         on player joins:
             - if !<player.has_flag[Behrry.skill.Hitpoints.level]>:
                 - flag player behrry.skill.Hitpoints.Exp:1154
                 - flag player behrry.skill.Hitpoints.Level:10
 
-clearer:
+clearerQWAT:
     type: task
     script:
         #- foreach <list[attack|strength|defense|ranged]> as:Skill:
