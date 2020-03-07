@@ -5,7 +5,7 @@
 TPDecline_Command:
     type: command
     name: tpdecline
-    debug: true
+    debug: false
     description: Declines a teleport request sent to you.
     usage: /tpdecline (<&lt>Player<&gt>)
     permission: behrry.essentials.tpdecline
