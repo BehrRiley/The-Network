@@ -7,8 +7,6 @@ Essentials:
     type: world
     debug: false
     events:
-        on system time minutely every:15:
-            - execute as_server save-all
         on system time hourly:
             - execute as_server "acball 100"
         #on restart command:
@@ -20,16 +18,6 @@ Essentials:
             - else:
                 - give i@golden_shovel
                 - execute as_op "claimbook <player.name>"
-        on player logs in:
-            - wait 1s
-            - if <player.has_flag[behrry.essentials.display_name]>:
-                - adjust <player> display_name:<player.flag[behrry.essentials.display_name]>
-            - if <player.in_group[Silent]>:
-                - while !<player.groups.contains[Public]>:
-                    - execute as_server "upc addgroup <player.name> Public"
-                    - wait 5t
-        on player quits:
-            - flag player behrry.chat.lastreply:!
         on hanging breaks because obstruction:
                 - determine cancelled
         on player right clicks Composter:
