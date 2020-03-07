@@ -27,10 +27,11 @@ Message_Command:
         - define Message <context.raw_args.after[<context.args.get[1]><&sp>]><&r>
         - narrate targets:<player>  "<&7>[<&8><[User].name><&7>]<&9> <&chr[00ab]> <&9><[Message]>"
         - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>]<&9> <&chr[00bb]> <&9><[Message]>"
+
 Reply_Command:
     type: command
     name: r
-    debug: true
+    debug: false
     description: Replies to the last player who messaged you.
     usage: /r <&lt>Message<&gt>
     permission: behrry.essentials.reply
@@ -43,6 +44,9 @@ Reply_Command:
             - if <player.has_flag[behrry.chat.lastreply]>:
                 - define User <player.flag[behrry.chat.lastreply]>
                 - inject Player_Verification Instantly
+            - else:
+                - narrate format:Colorize_Red "Nobody to respond to."
+                - stop
         - define Message <context.raw_args>
         - narrate targets:<player>  "<&7>[<&8><[User].name><&7>] <&1><&chr[00ab]> <&9><[Message]>"
         - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>] <&1><&chr[00bb]> <&9><[Message]>"
