@@ -1,7 +1,7 @@
 debug_Command:
     type: command
     name: debug
-    debug: true
+    debug: false
     description: Debugs the command you type.
     usage: /debug (run)/<&lt>commandname<&gt> (Args)
     permission: behrry.essentials.debug
