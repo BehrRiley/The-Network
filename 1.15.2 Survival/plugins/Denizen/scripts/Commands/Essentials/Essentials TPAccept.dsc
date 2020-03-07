@@ -5,7 +5,7 @@
 TPAccept_Command:
     type: command
     name: tpaccept
-    debug: true
+    debug: false
     description: Accepts a teleport request sent to you.
     usage: /tpaccept (<&lt>Player<&gt>)
     permission: behrry.essentials.tpaccept
