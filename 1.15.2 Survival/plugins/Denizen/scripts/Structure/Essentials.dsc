@@ -115,9 +115,9 @@ Chat_Handler:
         - define NamePlate <[Text]>
         - define DiscordNamePlate "**<player.display_name>**"
 
-    DiscordMessage:
-        - define DiscordMessage "<[DiscordNamePlate]>: <context.message>"
-        - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
+    #!DiscordMessage:
+    #!   - define DiscordMessage "<[DiscordNamePlate]>: <context.message>"
+    #!   - discord id:GeneralBot message channel:593523276190580736 "<[DiscordMessage].parse_color.strip_color.replace[`].with['].replace[▲].with[<&lt>:pufferfish:681640271028551712<&gt>].replace[:pufferfish:].with[<&lt>:pufferfish:681640271028551712<&gt>]>"
     GlobalChatLog:
         - if <server.flag[Behrry.Essentials.ChatHistory.Global].size||0> > 24:
             - flag server Behrry.Essentials.ChatHistory.Global:<-:<server.flag[Behrry.Essentials.ChatHistory.Global].first>
@@ -143,11 +143,11 @@ Chat_Handler:
             - define Log <[Message].escaped>
             - inject Chat_Logger Instantly
 
-            #@ Discord relay to other servers
-            - if <bungee.server||BanditCraft> == TestServer:
-                - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
-            - else:
-                - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
+            ##@ Discord relay to other servers
+            #- if <bungee.server||BanditCraft> == TestServer:
+            #    - discord id:BehrBot message channel:681573237687058458 "►◄<[Message].escaped>"
+            #- else:
+            #    - discord id:BehrBot message channel:681573237687058458 "◄►<[Message].escaped>"
 
             #@ Print to game chat
             - determine <[Message]>
@@ -218,10 +218,10 @@ Chat_Handler:
                         - announce <[Message]>
             #@ Discord message
             #- inject locally DiscordMessage Instantly
-            - if <bungee.list_servers.contains[TestServer]> && <bungee.server> != TestServer:
-                - bungeerun TestServer Discord_Chat_Task def:<[DiscordNamePlate]>|<context.message.escaped>
-            - else:
-                - inject locally DiscordMessage Instantly
+            #- if <bungee.list_servers.contains[TestServer]> && <bungee.server> != TestServer:
+            #    - bungeerun TestServer Discord_Chat_Task def:<[DiscordNamePlate]>|<context.message.escaped>
+            #- else:
+            #    - inject locally DiscordMessage Instantly
             
 
             ##@ Discord relay - between external servers
