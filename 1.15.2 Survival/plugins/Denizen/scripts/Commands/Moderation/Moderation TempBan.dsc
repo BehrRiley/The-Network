@@ -6,7 +6,7 @@
 Tempban_Command:
     type: command
     name: tempban
-    debug: true
+    debug: false
     description: tempbans a player.
     usage: /tempban <&lt>Player<&gt> <&lt>Duration<&gt> (reason)
     permission: behrry.moderation.tempban
