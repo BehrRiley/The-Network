@@ -1,5 +1,7 @@
 # :taco: Table of Contents - Scripts :taco:
 ## FileTree
+- [Controls](.control) | Server Management Scripts
+- [Backups](.backups) | Server Backup directory
 - [Servers and Worlds](Servers) | Server Directory
     - [1.15.2 Production](1.15.2%20Production) | Primary production server
         - [x] BanditCraft
