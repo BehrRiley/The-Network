@@ -5,10 +5,12 @@ damage_handler:
         on player damages entity:
             #@ Determine damage amount
             - define Damage <context.final_damage>
-            - flag player behrry.skill.exp.cd:+:<context.final_damage> duration:1s
-            - if <player.flag[Behrry.skill.exp.cd]||0> > 50:
+            - if <player.flag[Behrry.skill.exp.cd]||0> < 75:
+                - flag player behrry.skill.exp.cd:+:<context.final_damage> duration:1s
+            - else:
                 - stop
             
+            #@ Determine Spawner or Exploit
             - if <player.location.find.entities.within[5].size> > 25:
                 - stop
 
