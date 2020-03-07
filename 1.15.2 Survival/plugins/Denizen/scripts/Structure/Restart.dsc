@@ -24,4 +24,7 @@ Server_Restart_Task:
             - flag server behrry.essentials.restartcountdown:<[flag].sub[0.5s]>
             - bossbar update Restart players:<server.list_online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Time]>" color:red progress:<[Flag].in_seconds.div[300]>
             - wait 10t
+        - execute as_server save-all
+        - wait 5s
         - bossbar remove Restart
+        - adjust server restart
