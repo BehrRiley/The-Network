@@ -1,4 +1,5 @@
 :begin
+@echo off
 
 REM --xcopy--
 REM xcopy "from" "to/backup"
@@ -28,7 +29,13 @@ move /Y “..\.backups\1.15.2 Production\24_backup” “..\.backups\1.15.2 Prod
 move /Y “..\.backups\1.15.2 Production\12_backup” “..\.backups\1.15.2 Production\24h_backup”
 xcopy /W /E /H /R /Y “..\Servers\1.15.2 Production\” “..\.backups\1.15.2 Production\12h_backup”
 
-
+for /F "tokens=2" %%i in ('date /t') do set mydate=%%i
+set mytime=%time%
+echo --------------------------------------------------
+echo ----- Completion: %mydate%    %mytime% ------
+echo --------------------------------------------------
+echo --------------------------------------------------
+echo ----- Loop Complete ------------------------------
+echo --------------------------------------------------
 timeout 43200
-echo Timeout - Confirmation - Copying 
 goto begin
