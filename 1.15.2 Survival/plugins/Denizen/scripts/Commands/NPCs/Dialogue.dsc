@@ -2,7 +2,7 @@
 Dialogue_Command:
     type: command
     name: dialogue
-    debug: true
+    debug: false
     description: Selects a dialogue option
     usage: /dialogue <&lt>#<&gt>
     permission: behrry.interaction.dialogue
