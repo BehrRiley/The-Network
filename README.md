@@ -13,22 +13,28 @@
         - 48 hour save
     - [ ] 1.12.2 Construction
     - [ ] 0.0.0 Discord
+    - [ ] Scripts
+        - 12 hour save
+        - 24 hour save
+        - 48 hour save
+        - 72 hour save
+        - 96 hour save
 - [Servers and Worlds](Servers) | Server Directory
-    - [1.15.2 Production](1.15.2%20Production) | Primary production server
+    - [1.15.2 Production](Servers\1.15.2%20Production) | Primary production server
         - [x] BanditCraft
         - [ ] Creative / Plot
     - [0.0.0 Data](0.0.0%20Data) | Data Hub - Discord, Cache, Network data
         - [ ] Hub
-    - [1.15.2 Construction](1.15.2%20Construction) | Gielinor & Project Construction for Producers
+    - [1.15.2 Construction](Servers\1.15.2%20Construction) | Gielinor & Project Construction for Producers
         - [ ] Creative / Plot
         - [ ] Gielinor
         - [ ] Minigames
-    - [1.12.2](1.12.2%20Construction) | 1.12.2 Based Compatibility Construction for Producers
+    - [1.12.2](Servers\1.12.2%20Construction) | 1.12.2 Based Compatibility Construction for Producers
         - [ ] Creative / Plot
         - [ ] Gielinor
         
 ## Scripts
-- [Scripts](../scripts/) | Shared Structured Scripts
+- [Scripts](.scripts\) | Shared Structured Scripts
     - [x] Complete / Consistent
     - [ ] Revisit
     - [Essentials]() | Main global commands
