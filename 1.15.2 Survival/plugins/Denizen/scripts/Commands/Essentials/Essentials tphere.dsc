@@ -5,7 +5,7 @@
 TPHere_Command:
     type: command
     name: tphere
-    debug: true
+    debug: false
     description: Requests a player to teleport to you.
     usage: /tphere <&lt>Player<&gt> (Cancel)
     permission: behrry.essentials.tphere
