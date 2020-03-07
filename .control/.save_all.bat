@@ -12,11 +12,11 @@ REM Note:
 REM /B Copies the Symbolic Link itself versus the target of the link.
 
 REM --dir--
-REM 1.15.2 Production Servers    |  ..\Servers\1.15.2 Production
-REM 1.15.2 Construction Servers  |  ..\Servers\1.15.2 Construction
-REM 1.15.2 Construction Servers  |  ..\Servers\1.12.2 Construction
-REM Data Servers                 |  ..\Servers\0.0.0 Data
-REM Backups                      |  ..\.backups\*time
+REM 1.15.2 Production Servers    -  ..\Servers\1.15.2 Production
+REM 1.15.2 Construction Servers  -  ..\Servers\1.15.2 Construction
+REM 1.15.2 Construction Servers  -  ..\Servers\1.12.2 Construction
+REM Data Servers                 -  ..\Servers\0.0.0 Data
+REM Backups                      -  ..\.backups\*time
 
 REM - 1.15.2 Production Servers
 rd /s /q "..\.backups\1.15.2 Production\96h"
@@ -37,5 +37,5 @@ echo --------------------------------------------------
 echo --------------------------------------------------
 echo ----- Loop Complete ------------------------------
 echo --------------------------------------------------
-timeout 43200
+timeout 43200 /nobreak
 goto begin
