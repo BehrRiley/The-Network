@@ -6,7 +6,7 @@
 Ban_Command:
     type: command
     name: ban
-    debug: true
+    debug: false
     description: bans a player.
     usage: /ban <&lt>Player<&gt> (reason)
     permission: behrry.moderation.ban
