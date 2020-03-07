@@ -1,4 +1,20 @@
 # :taco: Table of Contents - Scripts :taco:
+## FileTree
+- [Servers and Worlds](Servers) | Server Directory
+    - [1.15.2 Production](1.15.2%20Production) | Primary production server
+        - [x] BanditCraft
+        - [ ] Creative / Plot
+    - [0.00.0 Discord](0.00.0%20Discord) | Discord Hub - Cache, Network data
+        - [ ] Hub
+    - [1.15.2 Construction](1.15.2%20Construction) | Gielinor & Project Construction for Producers
+        - [ ] Creative / Plot
+        - [ ] Gielinor
+        - [ ] Minigames
+    - [1.12.2](1.12.2%20Construction) | 1.12.2 Based Compatibility Construction for Producers
+        - [ ] Creative / Plot
+        - [ ] Gielinor
+        
+## Scripts
 - [Scripts](../scripts/) | Shared Structured Scripts
     - [x] Complete / Consistent
     - [ ] Revisit
@@ -108,8 +124,6 @@
         - [ ] Ban
         - [ ] SilentChest
 
-- [Hub 1.15.2](Hub%201.15.2/plugins/Denizen/scripts) | Main Compatible Hub
-- [Hub 1.12.2](Hub%201.12.2/plugins/Denizen/scripts) | Compatibility Hub
 - To-Do:
     - [Web Host]() | Web Host Server
     - [Discord]() | Discord Relay Server
