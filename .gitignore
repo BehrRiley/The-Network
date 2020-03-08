@@ -11,18 +11,18 @@ Archive Scripts/*
 Gateway/*
 !*Gateway/**.jar
 
-# 1.15.2 Survival
-1.15.2 Survival/*
-!*1.15.2 Survival/**.jar
-!1.15.2 Survival/plugins
-1.15.2 Survival/plugins/*
+# Servers/1.15.2 Production
+Servers/1.15.2 Production/*
+!*Servers/1.15.2 Production/**.jar
+!Servers/1.15.2 Production/plugins
+Servers/1.15.2 Production/plugins/*
 # plugin jars
-#!1.15.2 Survival/plugins/**.jar
-!1.15.2 Survival/plugins/denizen
-1.15.2 Survival/plugins/denizen/notables.yml
-1.15.2 Survival/plugins/denizen/saves.yml
-!1.15.2 Survival/plugins/denizen/
-1.15.2 Survival/plugins/denizen/data
+#!Servers/1.15.2 Production/plugins/**.jar
+!Servers/1.15.2 Production/plugins/denizen
+Servers/1.15.2 Production/plugins/denizen/notables.yml
+Servers/1.15.2 Production/plugins/denizen/saves.yml
+!Servers/1.15.2 Production/plugins/denizen/
+Servers/1.15.2 Production/plugins/denizen/data
 
 # Hub 1.12.2
 Hub 1.12.2/*

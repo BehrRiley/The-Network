@@ -1,5 +1,5 @@
 :begin
-cd "..\1.15.2 Survival"
+cd "..\Servers\1.15.2 Production"
 
 java -Xms1G -Xmx1G -jar paper-126.jar -nogui
 
