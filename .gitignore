@@ -2,9 +2,11 @@
 bin-debug/*
 bin-release/*
 
+
 # Restricted Folders
 Archive Data/*
 Archive Scripts/*
+
 
 # Server Restricted Folders
 # Gateway
@@ -12,11 +14,35 @@ Gateway/*
 !*Gateway/**.jar
 
 
+# File-types
+*.old
+
+
+# Executables
+.exe
+
+
+
 # Servers/1.15.2 Gateway
 Servers/1.15.2 Gateway/*
 !*Servers/1.15.2 Gateway/**.jar
 !Servers/1.15.2 Gateway/plugins
 Servers/1.15.2 Gateway/plugins/*
+
+
+# Servers/0.0.0 Data
+Servers/0.0.0 Data/*
+!*Servers/0.0.0 Data/**.jar
+!Servers/0.0.0 Data/plugins
+Servers/0.0.0 Data/plugins/*
+# plugin jars
+#!Servers/0.0.0 Data/plugins/**.jar
+!Servers/0.0.0 Data/plugins/denizen
+Servers/0.0.0 Data/plugins/denizen/notables.yml
+Servers/0.0.0 Data/plugins/denizen/saves.yml
+!Servers/0.0.0 Data/plugins/denizen/
+Servers/0.0.0 Data/plugins/denizen/data
+
 
 # Servers/1.15.2 Production
 Servers/1.15.2 Production/*
@@ -31,16 +57,33 @@ Servers/1.15.2 Production/plugins/denizen/saves.yml
 !Servers/1.15.2 Production/plugins/denizen/
 Servers/1.15.2 Production/plugins/denizen/data
 
+
+# Servers/1.15.2 Construction
+Servers/1.15.2 Construction/*
+!*Servers/1.15.2 Construction/**.jar
+!Servers/1.15.2 Construction/plugins
+Servers/1.15.2 Construction/plugins/*
 # plugin jars
-#!Hub 1.12.2/plugins/**.jar
-!Hub 1.12.2/plugins/denizen
-!Hub 1.12.2/plugins/denizen/
-Hub 1.12.2/plugins/denizen/data
+#!Servers/1.15.2 Construction/plugins/**.jar
+!Servers/1.15.2 Construction/plugins/denizen
+Servers/1.15.2 Construction/plugins/denizen/notables.yml
+Servers/1.15.2 Construction/plugins/denizen/saves.yml
+!Servers/1.15.2 Construction/plugins/denizen/
+Servers/1.15.2 Construction/plugins/denizen/data
 
-# File-types
-*.old
 
-# Executables
-.exe
+# Servers/1.12.2 Construction
+Servers/1.12.2 Construction/*
+!*Servers/1.12.2 Construction/**.jar
+!Servers/1.12.2 Construction/plugins
+Servers/1.12.2 Construction/plugins/*
+# plugin jars
+#!Servers/1.12.2 Construction/plugins/**.jar
+!Servers/1.12.2 Construction/plugins/denizen
+Servers/1.12.2 Construction/plugins/denizen/notables.yml
+Servers/1.12.2 Construction/plugins/denizen/saves.yml
+!Servers/1.12.2 Construction/plugins/denizen/
+Servers/1.12.2 Construction/plugins/denizen/data
+
 
 
