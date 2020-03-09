@@ -19,6 +19,6 @@ Player_Sitting:
             - flag <player> Essentials.Chair:<[Chair]> duration:10s
         on player steers entity:
             - if <context.dismount>:
-                - remove <player.flag[Essentials.Chair]>
+                - remove <player.flag[Essentials.Chair].as_entity>
                 - flag <player> Essentials.Chair:!
                 - teleport <player> <player.location.add[0,1,0]>
