@@ -18,7 +18,7 @@ droplock_Command:
         - define Arg <context.args.get[1]||null>
         - define ModeFlag "behrry.essentials.droplock"
         - define ModeName "drop lock"
-        - inject Activation_Arg_Command Instantly
+        - inject Activation_Arg Instantly
 
 #Droplock_Handler:
 #    type: world
