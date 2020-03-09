@@ -22,6 +22,9 @@ Colorize:
             - case "Yellow":
                 - define 1 <&6>
                 - define 2 <&e>
+            - case "Gray":
+                - define 1 <&8>
+                - define 2 <&7>
 
         # - First-Letter-Case
         - define Text li@
