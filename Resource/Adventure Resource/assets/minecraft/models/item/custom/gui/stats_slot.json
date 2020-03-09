@@ -1,0 +1,72 @@
+{
+	"__usecomment": "For use with Behr's OSRS Project; Content in this project is licensed under CC BY-NC-SA 3.0",
+	"__trademarks": "RuneScape and RuneScape Old School are the trademarks of Jagex Limited and are used with the permission of Jagex",
+	"__comment": "Designed by Bear with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "item/custom/gui/stats_slot",
+		"texture": "item/custom/gui/stats_slot"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box1",
+			"from": [ 0.4211, 8, 1.6842 ],
+			"to": [ 15.57899, 9, 14.31578 ],
+			"faces": {
+				"down": { "uv": [ 0.4210526, 14.31579, 15.57895, 1.684211 ], "texture": "#particle" },
+				"up": { "uv": [ 0.4210526, 1.684211, 15.57895, 14.31579 ], "texture": "#particle" },
+				"north": { "uv": [ 15.57895, 1.684211, 0.4210529, 2.105264 ], "texture": "#particle" },
+				"south": { "uv": [ 0.4210526, 13.89474, 15.57895, 14.31579 ], "texture": "#particle" },
+				"west": { "uv": [ 0.4210526, 1.684211, 0.8421053, 14.31579 ], "texture": "#particle", "rotation": 270 },
+				"east": { "uv": [ 15.57895, 14.31579, 15.15789, 1.684211 ], "texture": "#particle", "rotation": 270 }
+			}
+		},
+		{
+			"__comment": "Box2",
+			"from": [ 1.2632, 8, 1.2632 ],
+			"to": [ 14.73688, 9, 14.73688 ],
+			"faces": {
+				"down": { "uv": [ 1.263158, 14.73684, 14.73684, 1.263158 ], "texture": "#particle" },
+				"up": { "uv": [ 1.263158, 1.263158, 14.73684, 14.73684 ], "texture": "#particle" },
+				"north": { "uv": [ 14.73684, 1.263158, 1.263158, 1.684211 ], "texture": "#particle" },
+				"south": { "uv": [ 1.263158, 14.31579, 14.73684, 14.73684 ], "texture": "#particle" },
+				"west": { "uv": [ 1.263158, 1.263158, 1.684211, 14.73684 ], "texture": "#particle", "rotation": 270 },
+				"east": { "uv": [ 14.73684, 14.73684, 14.31579, 1.263158 ], "texture": "#particle", "rotation": 270 }
+			}
+		},
+		{
+			"__comment": "Box3",
+			"from": [ 1.6842, 8, 0.4211 ],
+			"to": [ 14.31578, 9, 15.57899 ],
+			"faces": {
+				"down": { "uv": [ 1.684211, 15.57895, 14.31579, 0.4210529 ], "texture": "#particle" },
+				"up": { "uv": [ 1.684211, 0.4210529, 14.31579, 15.57895 ], "texture": "#particle" },
+				"north": { "uv": [ 14.31579, 0.4210529, 1.684211, 0.8421059 ], "texture": "#particle" },
+				"south": { "uv": [ 1.684211, 15.1579, 14.31579, 15.57895 ], "texture": "#particle" },
+				"west": { "uv": [ 1.684211, 0.4210529, 2.105263, 15.57895 ], "texture": "#particle", "rotation": 270 },
+				"east": { "uv": [ 14.31579, 15.57895, 13.89474, 0.4210529 ], "texture": "#particle", "rotation": 270 }
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"scale":  [ 0, 0, 0 ]
+		},
+		"thirdperson_lefthand": {
+			"scale":  [ 0, 0, 0 ]
+		},
+		"firstperson_righthand": {
+			"scale":  [ 0, 0, 0 ]
+		},
+		"firstperson_lefthand": {
+			"scale":  [ 0, 0, 0 ]
+		},
+		"gui": {
+			"rotation":  [ 90, 0, 0 ],
+			"scale":  [ 1.4, 1, 1.4 ]
+		},
+		"fixed": {
+			"rotation":  [ 90, 0, 0 ],
+			"scale":  [ 1.4, 1, 1.4 ]
+		}
+	}
+}

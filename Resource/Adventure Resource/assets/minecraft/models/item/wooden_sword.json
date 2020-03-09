@@ -1,0 +1,34 @@
+{
+	"__usecomment": "For use with Behr's OSRS Project; Content in this project is licensed under CC BY-NC-SA 3.0",
+	"__trademarks": "RuneScape and RuneScape Old School are the trademarks of Jagex Limited and are used with the permission of Jagex",
+	"__comment": "also, wood is max dur 60",
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "item/wooden_sword"
+  },
+  "overrides": [
+    { "predicate": { "custom_model_data": 1}, "model": "item/custom/magic_hat" },
+    { "predicate": { "custom_model_data": 2}, "model": "item/custom/handheld/bandos_godsword" },
+    { "predicate": { "custom_model_data": 3}, "model": "item/custom/handheld/zamorak_godsword" },
+
+    { "predicate": { "custom_model_data": 20}, "model": "item/custom/handheld/bronze_axe" },
+    { "predicate": { "custom_model_data": 21}, "model": "item/custom/handheld/iron_axe" },
+    { "predicate": { "custom_model_data": 22}, "model": "item/custom/handheld/steel_axe" },
+    { "predicate": { "custom_model_data": 23}, "model": "item/custom/handheld/black_axe" },
+    { "predicate": { "custom_model_data": 24}, "model": "item/custom/handheld/mithril_axe" },
+    { "predicate": { "custom_model_data": 25}, "model": "item/custom/handheld/adamant_axe" },
+    { "predicate": { "custom_model_data": 26}, "model": "item/custom/handheld/rune_axe" },
+    { "predicate": { "custom_model_data": 27}, "model": "item/custom/handheld/dragon_axe" },
+
+    { "predicate": { "custom_model_data": 30}, "model": "item/custom/handheld/bronze_dagger" },
+
+    { "predicate": { "custom_model_data": 40}, "model": "item/custom/handheld/bronze_pickaxe" },
+    { "predicate": { "custom_model_data": 41}, "model": "item/custom/handheld/iron_pickaxe" },
+    { "predicate": { "custom_model_data": 42}, "model": "item/custom/handheld/steel_pickaxe" },
+    { "predicate": { "custom_model_data": 43}, "model": "item/custom/handheld/black_pickaxe" },
+    { "predicate": { "custom_model_data": 44}, "model": "item/custom/handheld/mithril_pickaxe" },
+    { "predicate": { "custom_model_data": 45}, "model": "item/custom/handheld/adamant_pickaxe" },
+    { "predicate": { "custom_model_data": 46}, "model": "item/custom/handheld/rune_pickaxe" },
+    { "predicate": { "custom_model_data": 47}, "model": "item/custom/handheld/dragon_pickaxe" }
+  ]
+}

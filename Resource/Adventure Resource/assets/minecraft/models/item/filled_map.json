@@ -1,0 +1,12 @@
+{
+	"__usecomment": "For use with Behr's OSRS Project; Content in this project is licensed under CC BY-NC-SA 3.0",
+	"__trademarks": "RuneScape and RuneScape Old School are the trademarks of Jagex Limited and are used with the permission of Jagex",
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "item/filled_map",
+        "layer1": "item/filled_map_markings"
+    },
+    "overrides": [
+        { "predicate": { "custom_model_data": 1}, "model": "item/custom/runes/air_rune" }
+    ]
+}
