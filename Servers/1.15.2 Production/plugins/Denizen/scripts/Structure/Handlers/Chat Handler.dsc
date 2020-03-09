@@ -39,6 +39,21 @@ Chat_Handler:
             #@ Ignore Check
             #-
 
+            #@ Command Check
+            - if <player.has_flag[behrry.essentials.homerename]>:
+                - define OldHome <player.flag[behrry.essentials.homerename]>
+                - flag player behrry.essentials.homerename:!
+                #@ Check args
+                - define Name <context.message>
+                - if <[Name]> == Cancel:
+                    - narrate format:Colorize_Yellow "Home rename cancelled."
+                    - stop
+                - if <[Name].split.size> > 1:
+                    - narrate format:Colorize_Red "Names cannot have spaces."
+                    - stop
+                - execute as_player "renamehome <[OldHome]> <[Name]>"
+                - stop
+
             #@ Mute check
             - if <player.has_flag[muted]>:
                 - define Targets "<server.list_online_players.filter[in_group[Moderation]]>"
