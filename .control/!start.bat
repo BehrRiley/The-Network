@@ -1,8 +1,19 @@
-:begin
-cd "..\Servers\1.15.2 Production"
+@echo off
 
-java -Xms1G -Xmx1G -jar paper-126.jar -nogui
+echo Opening Gateway Server
+timeout 3 /nobreak
+start cmd /k call !start_1152gateway.bat
 
-timeout 3
-echo resuming server...
-goto begin
+REM echo Starting Database Server
+REM timeout 3 /nobreak
+REM start cmd /k call !start_datahost.bat
+
+echo Starting Main Server
+timeout 3 /nobreak
+start cmd /k call !start_1152production.bat
+
+
+echo Initiating Backup System
+timeout 3 /nobreak
+call .save_all.bat
+pause
