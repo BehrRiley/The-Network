@@ -27,3 +27,45 @@ debug_Command:
                 #@ /command arg1+
                 - execute as_op "<context.args.get[1]> <context.raw_args.after[<context.args.get[1]><&sp>]>"
             - execute as_op "denizen submit"
+
+Queue_Kill:
+    type: command
+    name: queue
+    permission: behrry
+    script:
+        - define queue <queue.list.exclude[<queue>].get[1]>
+        - queue <[queue]> stop
+
+
+test:
+    type: task
+    debug: false
+    script:
+        - define Loc <player.location.sub[0,3,0]>
+        - define Distance 500
+        - define Frequency 1
+        - repeat <[Distance]>:
+            - define mod <[Value]>
+            - if <[mod].is_even>:
+                - repeat <[mod]>:
+                    - define Loc <[Loc].sub[0,0,16]>
+                    - chunkload <[Loc].chunk> duration:1s
+                    - wait <[Frequency]>t
+                - repeat <[mod]>:
+                    - define Loc <[Loc].add[16,0,0]>
+                    - chunkload <[Loc].chunk> duration:1s
+                    - wait <[Frequency]>t
+            - else:
+                - repeat <[mod]>:
+                    - define Loc <[Loc].add[0,0,16]>
+                    - chunkload <[Loc].chunk> duration:1s
+                    - wait <[Frequency]>t
+                - repeat <[mod]>:
+                    - define Loc <[Loc].sub[16,0,0]>
+                    - chunkload <[Loc].chunk> duration:1s
+                    - wait <[Frequency]>t
+            - announce to_console "<&e>Completion<&6>:<&a> <[mod].div[<[Distance]>].round_to[5].mul[100]>%"
+        - announce to_console "<&a>Chunkloading Complete<&2>."
+        
+
+
