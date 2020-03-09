@@ -172,7 +172,7 @@ MultiArg_Command_Tabcomplete:
 # % ██  [       ] - define ModeName "Mode Name"
 # % ██  [       ] - inject Activation_Arg_Command Instantly
 
-Activation_Arg_Command:
+Activation_Arg:
     type: task
     debug: false
     Activate:
