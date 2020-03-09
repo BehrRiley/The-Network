@@ -99,6 +99,7 @@ Discordc_Command:
     name: discordc
     usage: /discordc restart
     permission: behrry.essentials.discordc
+    description: Controls the discordbots.
     aliases:
         - dc
     script:
