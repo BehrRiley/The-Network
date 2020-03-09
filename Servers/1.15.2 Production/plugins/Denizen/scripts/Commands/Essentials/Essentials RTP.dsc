@@ -19,7 +19,7 @@ RTP_Command:
         - define distance 4000
 
         #@ Check world
-        - if <player.world.name> != Bees:
+        - if <player.world.name> != World:
             - narrate "<proc[Colorize].context[This cannot be done in this world.|red]>"
             - stop
         
@@ -36,7 +36,7 @@ RTP_Command:
         - repeat 100:
             - define x <util.random.int[-<[Distance]>].to[<[Distance]>]>
             - define z <util.random.int[-<[Distance]>].to[<[Distance]>]>
-            - chunkload <location[<[x]>,0,<[z]>,<player.world.name>].chunk>
+            - chunkload <location[<[x]>,0,<[z]>,<player.world.name>].chunk> duration:20s
             - define Loc <location[<[x]>,0,<[z]>,<player.world.name>].highest>
             - if <[Loc].material.name.contains_any[<[Blacklist]>]>:
                 #- narrate "Bad RTP, retrying... <[Loc].material.name>"
