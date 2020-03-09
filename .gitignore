@@ -11,6 +11,13 @@ Archive Scripts/*
 Gateway/*
 !*Gateway/**.jar
 
+
+# Servers/1.15.2 Gateway
+Servers/1.15.2 Gateway/*
+!*Servers/1.15.2 Gateway/**.jar
+!Servers/1.15.2 Gateway/plugins
+Servers/1.15.2 Gateway/plugins/*
+
 # Servers/1.15.2 Production
 Servers/1.15.2 Production/*
 !*Servers/1.15.2 Production/**.jar
@@ -24,11 +31,6 @@ Servers/1.15.2 Production/plugins/denizen/saves.yml
 !Servers/1.15.2 Production/plugins/denizen/
 Servers/1.15.2 Production/plugins/denizen/data
 
-# Hub 1.12.2
-Hub 1.12.2/*
-!*Hub 1.12.2/**.jar
-!Hub 1.12.2/plugins
-Hub 1.12.2/plugins/*
 # plugin jars
 #!Hub 1.12.2/plugins/**.jar
 !Hub 1.12.2/plugins/denizen
@@ -40,6 +42,5 @@ Hub 1.12.2/plugins/denizen/data
 
 # Executables
 .exe
-Hub 1.12.2/plugins/Denizen/scripts/Structure/PluginFix.dsc
 
 
