@@ -1,4 +1,4 @@
-# :taco: Table of Contents - Scripts :taco:
+# :taco: Table of Contents :taco:
 ## FileTree
 - [Controls](.control) | Server Management Scripts
 - [Backups](.backups) | Server Backup directory - 12 hour save intervals
