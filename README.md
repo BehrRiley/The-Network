@@ -1,18 +1,16 @@
 # :taco: Table of Contents - Scripts :taco:
 ## FileTree
 - [Controls](.control) | Server Management Scripts
-- [Backups](.backups) | Server Backup directory
+- [Backups](.backups) | Server Backup directory - 12 hour save intervals
     - [ ] 1.15.2 Production
-        - 12 hour save
-        - 24 hour save
-        - 48 hour save
-        - 72 hour save
-        - 96 hour save
     - [ ] 1.15.2 Construction
     - [ ] 1.12.2 Construction
     - [ ] 0.0.0 Discord
     - [ ] Scripts
 - [Servers and Worlds](Servers) | Server Directory
+    - [1.15.2 Gateway](Servers\1.15.2%20Gateway) | Gateway proxy server
+        - [ ] waterfall
+        - [ ] bungeecord
     - [1.15.2 Production](Servers\1.15.2%20Production) | Primary production server
         - [x] BanditCraft
         - [ ] Creative / Plot
@@ -25,6 +23,12 @@
     - [1.12.2](Servers\1.12.2%20Construction) | 1.12.2 Based Compatibility Construction for Producers
         - [ ] Creative / Plot
         - [ ] Gielinor
+- [Resource](Resource) | Resource Pack & data
+    - [ ] Server Resource | Primary ASCII/unicode restriction
+    - [ ] Adventure Resource | Custom items & model data
+    - [ ] Minecraft Template | Default resource pack for templating
+- [Scripts](Scripts) | Resource Pack & data
+- [Notes](Notes) | To-Dos, Notes & misc
         
 ## Scripts
 - [Scripts](.scripts\) | Shared Structured Scripts
