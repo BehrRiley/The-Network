@@ -10,10 +10,10 @@ The games in the Burthorpe Games Room are quite common brain-teasing puzzle game
 Games:
 | Game | Description |
 | ---- | ----------- |
-| Draughts / Checkers | Like real checkers, the object of the game is to 'jump' over all of your opponent's pieces. |
+| Draughts/Checkers | Like real checkers, the object of the game is to 'jump' over all of your opponent's pieces. |
 | Connect-Four | Each player must click a column, which will drop their rune to the bottom-most empty space in that column. A player wins when they connects four of his runes diagonally or in a straight line. |
 | Reversi | The goal is to have more of your runes on the board than your opponent. You can take your opponents pieces by trapping them between your own. |
 | Dots and Boxes | Each player fills in white line segments. If a player closes a box (their line completes a 1x1 square), that player's rune appears in the box. The player then gets another turn to place another segment. The game ends when all boxes are filled, and the player with the most filled-in squares is the winner. |
-| BlackJack | Try to acquire cards with a face value as close as possible to 21 without going over. |
+| Black-ack | Try to acquire cards with a face value as close as possible to 21 without going over. |
 | Uno | Players take turns matching a card in their hand with the current card shown on top of the deck either by color or number. Special action cards deliver game-changing moments as they help you defeat your opponents. |
 
