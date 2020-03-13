@@ -73,6 +73,8 @@ Essentials:
                 - inventory set d:<player.inventory> o:<player.flag[gamemode.inventory.<context.gamemode>].as_list>
             - else:
                 - flag player gamemode.inventory.<context.gamemode>:<player.inventory.list_contents>
+        on player changes sign:
+            - determine <context.new.parse[parse_color]>
         #on player damages player:
         #    - if <context.entity.gamemode||null> == creative:
         #        - if !<context.entity.has_flag[smacked]>:
