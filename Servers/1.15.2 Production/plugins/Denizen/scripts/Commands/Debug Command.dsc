@@ -42,8 +42,8 @@ test:
     debug: false
     script:
         - define Loc <player.location.sub[0,3,0]>
-        - define Distance 500
-        - define Frequency 1
+        - define Distance 100
+        - define Frequency 4
         - repeat <[Distance]>:
             - define mod <[Value]>
             - if <[mod].is_even>:
@@ -65,7 +65,7 @@ test:
                     - chunkload <[Loc].chunk> duration:1s
                     - wait <[Frequency]>t
             - announce to_console "<&e>Completion<&6>:<&a> <[mod].div[<[Distance]>].round_to[5].mul[100]>%"
+            #- announce to_console "<&e>Completion<&6>:<&a> <element[<[Mod]>].div[<[Distance].mul[<[Distance].sub[1].mul[2].div[2].add[1]>]>]>%"
         - announce to_console "<&a>Chunkloading Complete<&2>."
-        
 
 
