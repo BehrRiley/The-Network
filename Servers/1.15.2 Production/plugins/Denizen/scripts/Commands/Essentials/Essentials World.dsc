@@ -32,3 +32,4 @@ world_handler:
         on server prestart:
             - createworld Hub
             - createworld Runescape50px1
+            - createworld Creative
