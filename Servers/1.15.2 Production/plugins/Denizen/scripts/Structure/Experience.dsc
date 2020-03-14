@@ -14,7 +14,25 @@ xp_calc:
     script:
         - define pow_term <[lvl].div[7]>
         - define mul_term <element[300].mul[<element[2].power[<[pow_term]>]>]>
-        - determine <[lvl].add[<[mul_term]>].div[4].round_down>
+        - determine <[lvl].add[<[mul_term]>].round_down.div[4].round_down>
+        #- define Line <element[0.5].mul[<[Lvl].power[2]>].sub[<[Lvl].mul[0.5]>].add[<element[2].power[<element[1].div[7]>].mul[300].mul[<element[2].power[<[lvl].div[7]>].sub[1].div[<element[2].power[<element[1].div[7]>].sub[1]>]>]>].round_down.div[4].round>
+
+
+
+#testcalc:
+#    type: task
+#    debug: false
+#    script:
+#        - define Correct <list[83|91|102|112|124|138|151|168|185|204|226|249|274|304|335|369|408]>
+#        - repeat 17:
+#            - define NewXP <proc[xp_calc2].context[<[value]>]>
+#            - if <[Correct].get[<[value]>]> == <[NewXP]>:
+#                - define xp "<&2>[<&a><&chr[2714]><&2>]<&a> <[NewXP]>"
+#            - else:
+#                - define xp "<&4>[<&c><&chr[2716]><&4>]<&c> <[NewXP]>"
+#            - narrate "<&e>Level<&6>:<&a> <[Value]> <&b> <&e>Exp<&6>: <[xp]> <&b><[Correct].get[<[value]>]>"
+
+
 
 # % ███ [ Grants the provided amount of xp to a player                            ] ███
 add_xp:
@@ -28,6 +46,8 @@ add_xp:
             - flag player behrry.skill.<[skill]>.ExpReq:0
         - if !<player.has_flag[behrry.skill.<[skill]>.Level]>:
             - flag player behrry.skill.<[skill]>.Level:1
+        
+        - flag player behrry.skill.<[skill]>.Exp:+:<[xp]>
         - while <[xp]> > 0:
             - define xp_req <proc[xp_calc].context[<player.flag[behrry.skill.<[skill]>.Level]>]>
             - define to_add <[xp_req].sub[<player.flag[behrry.skill.<[skill]>.ExpReq]>]>
@@ -35,9 +55,9 @@ add_xp:
             - if <[xp]> >= 0:
                 - flag player behrry.skill.<[skill]>.Level:++
                 - flag player behrry.skill.<[skill]>.ExpReq:0
+                - toast "<&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><player.flag[behrry.skill.<[skill]>.Level]>." icon:emerald frame:challenge
                 - narrate "Congratulations, you've just advanced a <&6><[skill]><&r> level. <&nl>Your <&6><[skill]><&r> level is now <&6><player.flag[behrry.skill.<[skill]>.Level]><&f>."
             - else:
-                - flag player behrry.skill.<[skill]>.Exp:+:<[xp].add[<[to_add]>]>
                 - flag player behrry.skill.<[skill]>.ExpReq:+:<[xp].add[<[to_add]>]>
 
 # % ███ [ Grants the provided amount of xp to an unstrung player                  ] ███
@@ -59,6 +79,7 @@ add_xp_nostring:
             - if <[xp]> >= 0:
                 - flag <[player]> behrry.skill.<[skill]>.Level:++
                 - flag <[player]> behrry.skill.<[skill]>.ExpReq:0
+                - toast targets:<[Player]> <&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><[player].flag[behrry.skill.<[skill]>.Level]>." icon:bow frame:challenge
                 - narrate "targets:<[Player]> Congratulations, you've just advanced a <&6><[skill]><&r> level! <&nl>Your <&6><[skill]><&r> level is now <&6><[player].flag[behrry.skill.<[skill]>.Level]><&f>."
             - else:
                 - flag <[player]> behrry.skill.<[skill]>.Exp:+:<[xp].add[<[to_add]>]>
@@ -68,9 +89,6 @@ Experience_Handler:
     type: world
     debug: false
     events:
-        on system secondly:
-            - foreach <server.list_players_flagged[Behrry.skill.exp.cd]> as:Player:
-                - flag <[Player]> behrry.skill.exp.cd:-:25 duration:15t
         on player joins:
             - if !<player.has_flag[Behrry.skill.Hitpoints.level]>:
                 - flag player behrry.skill.Hitpoints.Exp:1154
