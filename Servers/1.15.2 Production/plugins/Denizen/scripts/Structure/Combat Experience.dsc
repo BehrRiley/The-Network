@@ -5,6 +5,10 @@ damage_handler:
         on player damages entity:
             #@ Determine damage amount
             - define Damage <context.final_damage>
+            
+            #@ Determine if damage is impossible
+            - if <[Damage]> > 80:
+                - stop
             - if <player.flag[Behrry.skill.exp.cd]||0> < 75:
                 - flag player behrry.skill.exp.cd:+:<context.final_damage> duration:1s
             - else:
