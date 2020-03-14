@@ -16,7 +16,7 @@ RTP_Command:
             - inject Command_Syntax Instantly
 
         #@ Define integers
-        - define distance 4000
+        - define distance 6000
 
         #@ Check world
         - if <player.world.name> != World:
