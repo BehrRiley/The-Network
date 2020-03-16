@@ -28,10 +28,12 @@ debug_Command:
                 - execute as_op "<context.args.get[1]> <context.raw_args.after[<context.args.get[1]><&sp>]>"
             - execute as_op "denizen submit"
 
-Queue_Kill:
+Queue_Kill_command:
     type: command
     name: queue
-    permission: behrry
+    description: Debugs the command you type.
+    usage: /queue
+    permission: behrry.essentials.queuekill
     script:
         - define queue <queue.list.exclude[<queue>].get[1]>
         - queue <[queue]> stop
