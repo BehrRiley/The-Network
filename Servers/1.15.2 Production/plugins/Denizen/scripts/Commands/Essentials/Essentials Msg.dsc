@@ -23,10 +23,10 @@ Message_Command:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
 
-        - flag <[User]> behrry.chat.lastreply:<player>
-        - define Message <context.raw_args.after[<context.args.get[1]><&sp>]><&r>
-        - narrate targets:<player>  "<&7>[<&8><[User].name><&7>]<&9> <&chr[00ab]> <&9><[Message]>"
-        - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>]<&9> <&chr[00bb]> <&9><[Message]>"
+        - flag <[User]> behrry.chat.lastreply:<player.name>
+        - define Message <context.raw_args.after[<context.args.get[1]><&sp>].parse_color><&r>
+        - narrate targets:<player>  "<&7>[<&8><[User].name><&7>]<&1> <&chr[00ab]> <&9><[Message]>"
+        - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>]<&1> <&chr[00bb]> <&9><[Message]>"
 
 Reply_Command:
     type: command
@@ -47,6 +47,6 @@ Reply_Command:
             - else:
                 - narrate format:Colorize_Red "Nobody to respond to."
                 - stop
-        - define Message <context.raw_args>
+        - define Message <context.raw_args.parse_color>
         - narrate targets:<player>  "<&7>[<&8><[User].name><&7>] <&1><&chr[00ab]> <&9><[Message]>"
         - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>] <&1><&chr[00bb]> <&9><[Message]>"
