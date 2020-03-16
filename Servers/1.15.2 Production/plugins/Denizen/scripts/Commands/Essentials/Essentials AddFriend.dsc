@@ -4,10 +4,10 @@
 # % ██  [ Command ] ██
 Friend_Command:
     type: command
-    name: addfriend
+    name: friend
     debug: false
     description: Adds or removes a player to or from your friends list.
-    usage: /addfriend <&lt>Player<&gt> (Remove)
+    usage: /friend <&lt>Player<&gt> (Remove)
     permission: behrry.essentials.friend
     script:
         #@ Check for args
