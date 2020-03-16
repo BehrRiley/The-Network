@@ -17,7 +17,7 @@ Hide_Command:
         - define Arg <context.args.get[1]||null>
         - define ModeFlag "behrry.moderation.hide"
         - define ModeName "Invisibility mode"
-        - inject Activation_Arg_Command Instantly
+        - inject Activation_Arg Instantly
 
         - if <player.has_flag[behrry.moderation.hide]>:
             - adjust <player> hide_from_players
