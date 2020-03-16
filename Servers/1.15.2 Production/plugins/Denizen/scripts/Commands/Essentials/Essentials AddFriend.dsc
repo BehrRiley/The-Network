@@ -24,7 +24,7 @@ Friend_Command:
                 - inject Command_Syntax Instantly
 
             #@ Check if player is on the friends list
-            - if !<player.flag[behrry.essentials.friends].contains[<[User]||false>:
+            - if !<player.flag[behrry.essentials.friends].contains[<[User]>||false>:
                 - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is not in your friends list.|red]>"
                 - stop
             
@@ -35,7 +35,7 @@ Friend_Command:
         #@ Run process to add friend
         - else:
             #@ Check if player is already a friend
-            - if <player.flag[behrry.essentials.friends].contains[<[User]||false>:
+            - if <player.flag[behrry.essentials.friends].contains[<[User]>||false>:
                 - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already your friend.|red]>"
                 - stop
         
