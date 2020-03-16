@@ -28,7 +28,7 @@ TPHere_Command:
             - inject Player_Verification Instantly
 
         - if <[User]> == <player>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+            - narrate format:colorize_yellow "Nothing interesting happens."
             - stop
 
         - if <context.args.get[2]||null> != null:
@@ -50,7 +50,7 @@ TPHere_Command:
 
         - if <[User].has_flag[behrry.essentials.teleport.request]>:
             - if <[User].flag[behrry.essentials.teleport.request].parse[before[/]].contains[<player>]>:
-                - narrate "<proc[Colorize].context[Teleport request still pending.|red]>"
+                - narrate format:Colorize_Red "Teleport request still pending."
                 - stop
 
         - define HoverA "<proc[Colorize].context[Teleport To:|Green]><&nl><proc[User_Display_Simple].context[<player>]>"
