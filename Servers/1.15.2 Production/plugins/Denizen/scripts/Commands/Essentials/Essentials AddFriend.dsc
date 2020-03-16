@@ -28,7 +28,7 @@ Friend_Command:
                 - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is not in your friends list.|red]>"
                 - stop
             
-            #@ Remove friend
+            #@ Remove player
             - flag player behrry.essentials.friends:<-:<[User]>
             - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was removed from your friends list.|green]>"
         
