@@ -61,15 +61,15 @@ Attack_Style:
 
 
 
-Highscores_Command:
+Hiscores_Command:
     type: command
-    name: highscores
+    name: hiscores
     debug: false
-    description: Checks the highscores
-    usage: /highscores <&lt>Skill/Total<&gt>
-    permission: behrry.combat.highscores
+    description: Checks the hiscores
+    usage: /hiscores <&lt>Skill/Total<&gt>
+    permission: behrry.combat.hiscores
     tab complete:
-        - define arg1 <list[Attack|Strength|Defense|Hitpoints|Ranged]>
+        - define arg1 <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - inject OneArg_Command_Tabcomplete Instantly
     script:
         #@ Verify args
@@ -77,7 +77,7 @@ Highscores_Command:
             - inject Command_Syntax Instantly
 
         #@ Verify Skill
-        - define Skills <list[Attack|Strength|Defense|Ranged|Hitpoints]>
+        - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - define Skill <context.args.get[1].to_titlecase>
         - if !<[Skills].contains[<[Skill]>]>:
             - inject Command_Syntax Instantly
@@ -85,7 +85,7 @@ Highscores_Command:
         - define Players <server.list_players_flagged[behrry.skill.<[Skill]>.Level]>
         - define PlayersOrdered <[Players].sort_by_number[flag[behrry.skill.<[Skill]>.Level]].reverse>
         - define PlayerGet <[PlayersOrdered].get[1].to[8]>
-        - narrate "<&2>+<&a>-------<&6>[<&e> HighScores <&6>] <&b>| <&6>[<&e> <[Skill]> <&6>]<&a>-------<&2>+"
+        - narrate "<&2>+<&a>-------<&6>[<&e> hiscores <&6>] <&b>| <&6>[<&e> <[Skill]> <&6>]<&a>-------<&2>+"
         - foreach <[PlayerGet]> as:Player:
             - narrate "<proc[User_Display_Simple].context[<[Player]>]> <&b>| <&e> Level<&6>: <&a><[Player].flag[behrry.skill.<[Skill]>.Level]> <&b>| <&e> Exp<&6>: <&a><[Player].flag[behrry.skill.<[Skill]>.Exp].round>"
 
@@ -102,7 +102,7 @@ level_Command:
     usage: /level (Skill)
     permission: behrry.combat.level
     tab complete:
-        - define arg1 <list[Attack|Strength|Defense|Hitpoints|Ranged]>
+        - define arg1 <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - inject OneArg_Command_Tabcomplete Instantly
     script:
         #@ Verify args
@@ -110,7 +110,7 @@ level_Command:
             - inject Command_Syntax Instantly
 
         #@ Verify Skill
-        - define Skills <list[Attack|Strength|Defense|Ranged|Hitpoints]>
+        - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
         - define Skill <context.args.get[1].to_titlecase>
         - if !<[Skills].contains[<[Skill]>]>:
             - inject Command_Syntax Instantly
