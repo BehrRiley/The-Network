@@ -31,6 +31,8 @@ TPDecline_Command:
                     - narrate "<proc[Colorize].context[No teleport request found.|red]>"
                     - stop
 
+            - if <player.flag[behrry.essentials.teleport.requesttype].map_get[<[User]>]||false> == teleportto:
+                - flag <player> behrry.essentials.teleport.requesttype:<-:<[User]>/teleportto
             - flag <player> behrry.essentials.teleport.request:<-:<[User]>/<[Loc]>
 
             - narrate targets:<player> "<proc[Colorize].context[Teleport request declined.|green]>"
