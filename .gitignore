@@ -86,4 +86,8 @@ Servers/1.12.2 Construction/plugins/denizen/saves.yml
 Servers/1.12.2 Construction/plugins/denizen/data
 
 
+# Resource template
+Resource/Template/*
+
+
 
