@@ -35,9 +35,6 @@ Chat_Handler:
             #@ NPC Check
             - if <player.has_flag[Interacting_NPC]>:
                 - stop
-            
-            #@ Ignore Check
-            #-
 
             #@ Command Check
             - if <player.has_flag[behrry.essentials.homerename]>:
@@ -79,8 +76,9 @@ Chat_Handler:
             - inject locally GlobalChatLog Instantly
             
             #@ Print to Server
-   
             - announce <[Message]>
+            
+            #@ Check for ignorelists
             
             #@ Print to Other Servers
             - if <bungee.list_servers.size||1> > 1:
