@@ -67,11 +67,13 @@ add_xp_nostring:
     definitions: xp|skill|player
     script:
         - if !<[player].has_flag[behrry.skill.<[skill]>.Exp]>:
-            - flag <[player]> behrry.skill.<[skill]>.Exp:0
+            - flag <[player]> behrry.skill.<[skill]>.Exp:<[xp]>
         - if !<[player].has_flag[behrry.skill.<[skill]>.ExpReq]>:
             - flag <[player]> behrry.skill.<[skill]>.ExpReq:0
         - if !<[player].has_flag[behrry.skill.<[skill]>.Level]>:
             - flag <[player]> behrry.skill.<[skill]>.Level:1
+            
+        - flag player behrry.skill.<[skill]>.Exp:+:<[xp]>
         - while <[xp]> > 0:
             - define xp_req <proc[xp_calc].context[<[player].flag[behrry.skill.<[skill]>.Level]>]>
             - define to_add <[xp_req].sub[<[player].flag[behrry.skill.<[skill]>.ExpReq]>]>
@@ -79,10 +81,9 @@ add_xp_nostring:
             - if <[xp]> >= 0:
                 - flag <[player]> behrry.skill.<[skill]>.Level:++
                 - flag <[player]> behrry.skill.<[skill]>.ExpReq:0
-                - toast targets:<[Player]> <&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><[player].flag[behrry.skill.<[skill]>.Level]>." icon:bow frame:challenge
-                - narrate "targets:<[Player]> Congratulations, you've just advanced a <&6><[skill]><&r> level! <&nl>Your <&6><[skill]><&r> level is now <&6><[player].flag[behrry.skill.<[skill]>.Level]><&f>."
+                - toast targets:<[Player]> "<&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><[player].flag[behrry.skill.<[skill]>.Level]>." icon:bow frame:challenge
+                - narrate targets:<[Player]> "Congratulations, you've just advanced a <&6><[skill]><&r> level! <&nl>Your <&6><[skill]><&r> level is now <&6><[player].flag[behrry.skill.<[skill]>.Level]><&f>."
             - else:
-                - flag <[player]> behrry.skill.<[skill]>.Exp:+:<[xp].add[<[to_add]>]>
                 - flag <[player]> behrry.skill.<[skill]>.ExpReq:+:<[xp].add[<[to_add]>]>
 
 Experience_Handler:
@@ -97,12 +98,7 @@ Experience_Handler:
 clearer:
     type: task
     script:
-        #- foreach <list[attack|strength|defense|ranged]> as:Skill:
-        - foreach <server.list_players> as:Player:
-            #- flag <[Player]> behrry.skill.<[Skill]>.Exp:0
-            #- flag <[Player]> behrry.skill.<[Skill]>.Level:1
-            #- flag <[Player]> behrry.skill.<[Skill]>.ExpReq:0
-            - if <[Player].flag[behrry.skill.Hitpoints.Level]||0> < 10:
-                - flag <[Player]> behrry.skill.Hitpoints.Exp:1154
-                - flag <[player]> behrry.skill.Hitpoints.Level:10
-                - flag <[Player]> behrry.skill.Hitpoints.ExpReq:0
+        - define Player <server.match_player[Fox]>
+        - flag <[Player]> behrry.skill.Mining.Exp:0
+        - flag <[player]> behrry.skill.Mining.Level:0
+        - flag <[Player]> behrry.skill.Mining.ExpReq:0
