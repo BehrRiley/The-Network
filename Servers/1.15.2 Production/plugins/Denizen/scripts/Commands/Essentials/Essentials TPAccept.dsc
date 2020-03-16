@@ -30,11 +30,18 @@ TPAccept_Command:
                 - else:
                     - narrate "<proc[Colorize].context[No teleport request found.|red]>"
                     - stop
-
-            - flag <player> behrry.essentials.teleport.request:<-:<[User]>/<[Loc]>
-            - flag <player> behrry.essentials.teleport.back:<player.location>
-
+            
             - narrate targets:<[User]>|<player> "<proc[Colorize].context[Teleport request accepted.|green]>"
-            - teleport <player> <[Loc]>
+            - if <player.has_flag[behrry.essentials.teleport.requesttype]>:
+                - if <player.flag[behrry.essentials.teleport.requesttype].map_get[<[User]>]||false> == teleportto:
+                    - flag <player> behrry.essentials.teleport.requesttype:<-:<[User]>/teleportto
+                    - flag <player> behrry.essentials.teleport.request:<-:<[User]>/<[Loc]>
+                    - flag <[User]> behrry.essentials.teleport.back:<[User].location>
+                    - teleport <[User]> <player.location.add[0.01,0,0.01]>
+            - else:
+                - flag <player> behrry.essentials.teleport.request:<-:<[User]>/<[Loc]>
+                - flag <player> behrry.essentials.teleport.back:<player.location>
+                - teleport <player> <[Loc].add[0.01,0,0.01]>
+
         - else:
             - narrate "<proc[Colorize].context[No teleport request found.|red]>"
