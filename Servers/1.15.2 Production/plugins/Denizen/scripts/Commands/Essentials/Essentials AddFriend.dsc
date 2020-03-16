@@ -1,34 +1,49 @@
 # | ███████████████████████████████████████████████████████████
-# % ██    /addfriend - Adds a player to your friends list.
+# % ██    /friend - Adds or removes a player to or from your friends list.
 # | ██
 # % ██  [ Command ] ██
-AddFriend_Command:
+Friend_Command:
     type: command
     name: addfriend
     debug: false
-    description: Adds a player to your friends list.
-    usage: /addfriend <&lt>Player<&gt>
-    permission: behrry.essentials.addfriend
+    description: Adds or removes a player to or from your friends list.
+    usage: /addfriend <&lt>Player<&gt> (Remove)
+    permission: behrry.essentials.friend
     script:
         #@ Check for args
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
         
         #@ Check for player
         - define User <context.args.get[1]>
         - inject Player_Verification_Offline
         
-        #@ Check if player is already a friend
-        - if <player.has_flag[behrry.essentials.friends]>:
-          - if <player.flag[behrry.essentials.friends].contains[<[User]>:
-            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already your friend.|red]>"
-            - stop
+        #@ Check for removal arg
+        - if <context.args.get[2]||null> != null:
+            - if <context.args.get[2]> != remove:
+                - inject Command_Syntax Instantly
+
+            #@ Check if player is on the friends list
+            - if !<player.flag[behrry.essentials.friends].contains[<[User]||false>:
+                - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is not in your friends list.|red]>"
+                - stop
+            
+            #@ Remove friend
+            - flag player behrry.essentials.friends:<-:<[User]>
+            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was removed from your friends list.|green]>"
         
-        #@ Check if player is on ignore list
-        - if <player.has_flag[behrry.essentials.ignorelist]>:
-          - if <player.flag[behrry.essentials.ignorelist].contains[<[User]>]>:
-            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is on your ignore list.|red]>"
-            - stop
+        #@ Run process to add friend
+        - else:
+            #@ Check if player is already a friend
+            - if <player.flag[behrry.essentials.friends].contains[<[User]||false>:
+                - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already your friend.|red]>"
+                - stop
         
-        #@ Add player to friends list
-        - flag player behrry.essentials.friends:->:<[User]>
+            #@ Check if player is on ignore list
+            - if <player.flag[behrry.essentials.ignorelist].contains[<[User]>]||false>:
+                - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is on your ignore list.|red]>"
+                - stop
+        
+            #@ Add player to friends list
+            - flag player behrry.essentials.friends:->:<[User]>
+            - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was added to your friends list.|green]>"
