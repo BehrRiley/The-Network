@@ -69,4 +69,7 @@ Farming_Handler:
         on player places wither_rose:
             - define XP 5
             - inject Locally ExpGet Instantly
+        on player breaks pumpkin|watermellon:
+            - define XP 5
+            - inject Locally ExpGet Instantly
         #on player clicks sugarcane|bamboo:
