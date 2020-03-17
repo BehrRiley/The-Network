@@ -36,4 +36,7 @@ Construction_Handler:
         on player places diamond_block|emerald_block|gold_block|iron_block|anvil:
             - define XP 15
             - inject Locally ExpGet Instantly
+        on player places conduit|beacon:
+            - define XP 100
+            - inject Locally ExpGet Instantly
             
