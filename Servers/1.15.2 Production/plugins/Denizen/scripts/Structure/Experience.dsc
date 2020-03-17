@@ -55,7 +55,10 @@ add_xp:
             - if <[xp]> >= 0:
                 - flag player behrry.skill.<[skill]>.Level:++
                 - flag player behrry.skill.<[skill]>.ExpReq:0
-                - toast "<&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><player.flag[behrry.skill.<[skill]>.Level]>." icon:emerald frame:challenge
+                - if <player.flag[behrry.skill.<[skill]>.level].mod[10]> == 0:
+                    - toast "<&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><player.flag[behrry.skill.<[skill]>.Level]>." icon:emerald frame:challenge
+                - else:
+                    - toast "<&e>Congratulations! Your <&6><[Skill]><&e> level is now <&6><player.flag[behrry.skill.<[skill]>.Level]>." icon:emerald frame:task
                 - narrate "Congratulations, you've just advanced a <&6><[skill]><&r> level. <&nl>Your <&6><[skill]><&r> level is now <&6><player.flag[behrry.skill.<[skill]>.Level]><&f>."
             - else:
                 - flag player behrry.skill.<[skill]>.ExpReq:+:<[xp].add[<[to_add]>]>
