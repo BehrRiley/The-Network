@@ -63,4 +63,10 @@ Farming_Handler:
                 - stop
 
             - inject Locally ExpGet Instantly
+        on player places dandelion|poppy|blue_orchid|allium|azure_bluet|tulips|oxeye_daisy|cornflower|lil*|sunflower|rose_bush|peony:
+            - define XP 2
+            - inject Locally ExpGet Instantly
+        on player places wither_rose:
+            - define XP 5
+            - inject Locally ExpGet Instantly
         #on player clicks sugarcane|bamboo:
