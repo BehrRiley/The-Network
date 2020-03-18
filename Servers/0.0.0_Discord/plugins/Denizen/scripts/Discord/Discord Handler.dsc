@@ -4,6 +4,6 @@ Discord_Handler:
   Description: Executes commands as the specified server.
   events:
     on discord message received:
-      - ~run Execute_Command
-      - ~run Online_Command
-      - ~run Help_Command
+      - ~run Execute_DCommand
+      - ~run Online_DCommand
+      - ~run Help_DCommand
