@@ -1,4 +1,4 @@
-Online_Command:
+Online_DCommand:
   type: task
   usage: /Online (Server)
   description: Shows you the players online in a specific server, or all servers.
