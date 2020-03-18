@@ -1,6 +1,7 @@
 Execute_DCommand:
   type: task
-  usage: /ex <&lt>Command<&gt> <&lt>Server<&gt> (Args)(|<&lt>Command<&gt> (Args))*
+  usage: /ex <&lt>Commands<&gt>
+  syntax: /ex <&lt>Command<&gt> <&lt>Server<&gt> (Args)(|<&lt>Command<&gt> (Args))*
   description: Executes a command on a specified server.
   RolePermission:
     - Developer
