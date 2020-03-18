@@ -1,6 +1,7 @@
 Online_DCommand:
   type: task
   usage: /Online (Server)
+  syntax: /Online (Server)
   description: Shows you the players online in a specific server, or all servers.
   RolePermission:
     - Everyone
