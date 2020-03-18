@@ -1,5 +1,10 @@
 Execute_DCommand:
   type: task
+  usage: /ex <&lt>Command<&gt> <&lt>Server<&gt> (Args)(|<&lt>Command<&gt> (Args))*
+  description: Executes a command on a specified server.
+  RolePermission:
+    - Developer
+    - Coordinator
   script:
     #@ Verify Role
     - if !<context.author.roles[481711026962694146].parse[name].contains_any[Coordinator|Developer]||false>
