@@ -24,7 +24,7 @@ bchat_Command:
                 - define Arg <context.args.get[1]||null>
                 - define ModeFlag "behrry.essentials.bchat"
                 - define ModeName "▲chat"
-                - inject Activation_Arg_Command Instantly
+                - inject Activation_Arg Instantly
             - else:
                 - inject locally Chat Instantly
         - else if <context.args.get[2]||null> != null:
