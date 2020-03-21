@@ -16,9 +16,9 @@ Player_Sitting:
             - define Chair <entry[Seat].spawned_entities.get[1]>
             - wait 1t
             - mount <player>|<[Chair]>
-            - flag <player> Essentials.Chair:<[Chair]> duration:10s
-        on player steers entity:
+            - flag <player> Essentials.Chair:<[Chair]>
+        on player steers armor_stand:
             - if <context.dismount>:
-                - remove <player.flag[Essentials.Chair].as_entity>
+                - remove <player.flag[Essentials.Chair].as_entity||>
                 - flag <player> Essentials.Chair:!
                 - teleport <player> <player.location.add[0,1,0]>
