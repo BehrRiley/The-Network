@@ -105,3 +105,4 @@ clearer:
         - flag <[Player]> behrry.skill.Mining.Exp:0
         - flag <[player]> behrry.skill.Mining.Level:0
         - flag <[Player]> behrry.skill.Mining.ExpReq:0
+
