@@ -14,9 +14,9 @@ Message_Command:
     tab complete:
         - inject Online_Player_Tabcomplete Instantly
     script:
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.size||0> < 2:
             - inject Command_Syntax Instantly
-        - if <context.args.get[2]||null> != null:
+
             - define User <context.args.get[1]>
             - inject Player_Verification Instantly
         - if <[User]> == <player>:
