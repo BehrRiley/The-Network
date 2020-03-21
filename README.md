@@ -9,8 +9,8 @@
             alt="License"></a>
         <!--- PayPal           --->
     <a href="https://www.paypal.com/paypalme2/BearRiley">
-        <img src="https://img.shields.io/badge/Donate-PayPal-green.svg"
-            alt="Donate"></a>
+        <img src="https://img.shields.io/badge/Donate-PayPal-green.svg&logo=PayPal">
+    </a>
         <!--- Discord Activity  --->
     <a href="https://discord.gg/4beFHHv">
         <img src="https://img.shields.io/discord/481711026962694146?logo=discord"
