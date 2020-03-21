@@ -25,7 +25,7 @@ Teleport_Command:
                 - define reason "You cannot teleport to yourself."
                 - inject Command_Error Instantly
             #@ Check if Moderator, bypass
-            - if <player.in_group[Moderation]>:
+            - if <player.in_group[Moderation]> && <[User].name> != Behr_Riley:
                 - flag <Player> behrry.essentials.teleport.back:<player.location>
                 - teleport <player> <[User].location>
                 - narrate "<proc[Colorize].context[You were teleported to:|green]> <&r><[User].display_name>"
