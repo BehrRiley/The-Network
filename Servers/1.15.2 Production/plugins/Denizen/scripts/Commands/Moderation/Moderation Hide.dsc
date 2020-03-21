@@ -4,38 +4,60 @@
 # % ██  [ Command ] ██
 # $ ██  [ TO-DO   ] ██ | furnish script, create out of combat bypass | cooldown | Bypass monsters near
 Hide_Command:
-    type: command
-    name: hide
-    debug: false
-    description: Hides you from players.
-    usage: /hide (on/off)
-    permission: behrry.moderation.hide
-    script:
-        #@ Check for args
-        - if <context.args.get[1]||null> != null:
-            - inject Command_Syntax Instantly
-        - define Arg <context.args.get[1]||null>
-        - define ModeFlag "behrry.moderation.hide"
-        - define ModeName "Invisibility mode"
-        - inject Activation_Arg Instantly
+  type: command
+  name: hide
+  debug: false
+  description: Hides you from players.
+  usage: /hide (on/off)
+  permission: behrry.moderation.hide
+  script:
+    #@ Check for args
+    - if <context.args.get[1]||null> != null:
+      - inject Command_Syntax Instantly
+    
+    #@ Define definitions
+    - define Arg <context.args.get[1]||null>
+    - define ModeFlag "behrry.moderation.hide"
+    - define ModeName "Invisibility mode"
+    - inject Activation_Arg Instantly
+    - define Moderators <server.list_online_players.filter[in_grou[Moderation]]>
+    - if <player.has_flag[behrry.moderation.hide]>:
 
-        - if <player.has_flag[behrry.moderation.hide]>:
-            - adjust <player> hide_from_players
-            - while <player.is_online> && <player.has_flag[behrry.moderation.hide]>:
-                - actionbar "<&7>You are hidden from players."
-                - wait 5s
-        - else:
-            - adjust <player> show_to_players
-        - repeat 3:
-            - playsound <player.location> sound:ENTITY_BLAZE_AMBIENT
-            - playeffect effect:EXPLOSION_NORMAL at:<player.location.add[0,1,0]> visibility:50 quantity:10 offset:0.5
-            - playeffect effect:EXPLOSION_LARGE at:<player.location.add[0,1,0]> visibility:50 quantity:1 offset:0.5
+      - adjust <player> hide_from_players
+      - while <player.is_online> && <player.has_flag[behrry.moderation.hide]>:
+        - actionbar "<&7>You are hidden from players."
+        - wait 5s
+        - while next
+      - flag server behrry.moderation.hide:<-:<player>
+    - else:
+      - adjust <player> show_to_players
+    - repeat 3:
+      - playsound <player.location> sound:ENTITY_BLAZE_AMBIENT
+      - playeffect effect:EXPLOSION_NORMAL at:<player.location.add[0,1,0]> visibility:50 quantity:10 offset:0.5
+      - playeffect effect:EXPLOSION_LARGE at:<player.location.add[0,1,0]> visibility:50 quantity:1 offset:0.5
 
 Hide_Handler:
-    type: world
-    debug: false
-    events:
-        on player damages entity:
-            - if <player.has_flag[behrry.moderation.hide]>:
-                - determine passively cancelled
-                - narrate format:Colorize_Red "You cannot attack while hidden."
+  type: world
+  debug: false
+  events:
+    on player damages entity:
+      - if <player.has_flag[behrry.moderation.hide]>:
+        - determine passively cancelled
+        - narrate format:Colorize_Red "You cannot attack while hidden."
+    on player logs in:
+      - if <server.has_flag[behrry.moderation.hidelist]>:
+        - if <server.flag[behrry.moderation.hidelist].size> > 1:
+
+
+Invisible:
+  type: task
+  definitions: User|Team|Toggle|ID
+  script:
+   #@ Unescape Definitions
+    - define Team <[Team].unescaped>
+    - if <[Toggle]> == on:
+      - cast <[User]> invisibility power:1 duration:9999
+      - team name:<[ID]> add:<[Team].include[<[User]>]>
+    - else:
+      - cast <[User]> invisibility remove
+      - team name:<[ID]> remove:<[Team].include[<[User]>]>
