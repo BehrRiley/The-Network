@@ -2,10 +2,14 @@ Restart_Handler:
     type: world
     debug: false
     events:
-        #on restart command:
+        on restart command:
         #    #- Send players to backup/lobby server
-        #    - determine passively fulfilled
-        #    - run Restart_Command Instantly
+            - determine passively fulfilled
+            - if <context.args.get[1]||null> == null || <context.args.get[4]||null> != null:
+                - inject Command_Syntax Instantly
+            - if !<list[Instant|Queue|Skip|Set].contains[<context.args.get[2]||null>]>:
+                - inject Command_Syntax Instantly
+            - run Restart_Command Instantly
         on stop command:
             - if <bungee.server> != TestServer:
                 - bungeeexecute "send <bungee.server> TestServer"
@@ -16,11 +20,11 @@ Restart_Handler:
                     - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> format:Colorize_yellow "Server restart queue skipped."
                     - stop
                 - announce "<&6>{<&e>▲<&6>}-<&e>Server will restart in five minutes.<&6>-{<&e>▲<&6>}"
-                - inject Server_Restart_Task def:<duration[300]>|20
+                - run Server_Restart_Task def:<duration[300]>|20
 
 Server_Restart_Task:
     type: task
-    debug: true
+    debug: false
     definitions: time|speed
     Restart:
         - execute as_server save-all
@@ -73,11 +77,10 @@ Restart_Command:
     name: restart
     debug: false
     description: Restarts the server
-    usage: /restart <&lt>Instant/Queue/Skip/Set<&gt>
-    permission: behrry.essentials.restart
+    usage: /restart <&lt>Instant/Queue/Skip/Set<&gt> (Time (Speed))
+    permission: behrry.moderation.restart
     tab complete:
         - define Arg1 <list[Instant|Queue|Skip|Set]>
-        #- define Arg2 <list[Queue/m|Queue/s]>
         - inject OneArg_Command_Tabcomplete Instantly
     script:
         #@ Check for args
