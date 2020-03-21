@@ -30,18 +30,18 @@ Servers/1.15.2 Gateway/*
 Servers/1.15.2 Gateway/plugins/*
 
 
-# Servers/0.0.0 Data
-Servers/0.0.0 Data/*
-!*Servers/0.0.0 Data/**.jar
-!Servers/0.0.0 Data/plugins
-Servers/0.0.0 Data/plugins/*
+# Servers/0.0.0 Discord
+Servers/0.0.0 Discord/*
+!*Servers/0.0.0 Discord/**.jar
+!Servers/0.0.0 Discord/plugins
+Servers/0.0.0 Discord/plugins/*
 # plugin jars
-#!Servers/0.0.0 Data/plugins/**.jar
-!Servers/0.0.0 Data/plugins/denizen
-Servers/0.0.0 Data/plugins/denizen/notables.yml
-Servers/0.0.0 Data/plugins/denizen/saves.yml
-!Servers/0.0.0 Data/plugins/denizen/
-Servers/0.0.0 Data/plugins/denizen/data
+#!Servers/0.0.0 Discord/plugins/**.jar
+!Servers/0.0.0 Discord/plugins/denizen
+Servers/0.0.0 Discord/plugins/denizen/notables.yml
+Servers/0.0.0 Discord/plugins/denizen/saves.yml
+!Servers/0.0.0 Discord/plugins/denizen/
+Servers/0.0.0 Discord/plugins/denizen/data
 
 
 # Servers/1.15.2 Production
