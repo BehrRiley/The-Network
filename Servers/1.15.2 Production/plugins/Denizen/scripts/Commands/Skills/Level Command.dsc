@@ -12,6 +12,12 @@ Level_Command:
         #@ Verify args
         - if <context.args.size||0> > 1:
             - inject Command_Syntax Instantly
+        
+        #@ Check if blank
+        - if <context.args.get[1]||null> == null:
+            - narrate format:Colorize_Green "Available Skills:"
+            - narrate format:Colorize_Yellow "Attack, Strength, Defense, Hitpoints, Ranged, Mining, Woodcutting, Farming, Construction"
+            - stop
 
         #@ Verify Skill
         - define Skills <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
