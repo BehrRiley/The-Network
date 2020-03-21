@@ -108,16 +108,17 @@ Online_Player_Tabcomplete:
     type: task
     debug: false
     script:
+        - define HiddenModerators <server.list_online_players.filter[has_flag[behrry.moderation.hide]]>
         - if !<player.has_flag[behrry.essentials.tabofflinemode]>:
             - if <context.args.size> == 0:
-                - determine <server.list_online_players.parse[name].exclude[<player.name>]>
+                - determine <server.list_online_players.exclude[<[HiddenModerators]>|<player>].parse[name]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+                - determine <server.list_online_players.exclude[<[HiddenModerators]>|<player>].parse[name].filter[starts_with[<context.args.get[1]>]]>
         - else:
             - if <context.args.size||0> == 0:
-                - determine <server.list_players.parse[name].exclude[<player.name>]>
+                - determine <server.list_players.exclude[<[HiddenModerators]>|<player>].parse[name]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-                - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+                - determine <server.list_players.exclude[<[HiddenModerators]>|<player>].parse[name].filter[starts_with[<context.args.get[1]>]]>
 
 
 # % ██  [ Usage ] - inject All_Player_Tabcomplete Instantly
