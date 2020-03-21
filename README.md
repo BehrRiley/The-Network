@@ -1,3 +1,33 @@
+<p>
+    <h1 align="center">The Network</h1>
+    <h2 align="center">Partial Access Directory</h2>
+</p>
+<p align="center">
+        <!--- License          --->
+    <a href="https://github.com/BehrRiley/The-Network">
+        <img src="https://img.shields.io/github/license/BehrRiley/The-Network.svg"
+            alt="License"></a>
+        <!--- PayPal           --->
+    <a href="https://www.paypal.com/paypalme2/BearRiley">
+        <img src="https://img.shields.io/badge/Donate-PayPal-green.svg"
+            alt="Donate"></a>
+        <!--- Discord Activity  --->
+    <a href="https://discord.gg/4beFHHv">
+        <img src="https://img.shields.io/discord/481711026962694146?logo=discord"
+            alt="chat on Discord"></a>
+        <!--- Dynmap Status    --->
+    <a href="http://76.119.243.194:8123/index.html">
+        <img src="https://img.shields.io/website?down_color=lightgrey&down_message=Offline&label=Dynmap&up_message=Online&url=http%3A%2F%2F76.119.243.194%3A8123%2Findex.html"></a>
+        <!--- Feature Requests --->
+    <a href="https://github.com/BehrRiley/The-Network/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22">
+        <img src="https://img.shields.io/github/issues/BehrRiley/The-Network/Feature Request?label=Feature%20Requests"></a>
+        <!--- Languages        --->
+        <img src="https://img.shields.io/github/languages/count/BehrRiley/The-Network">
+        <!--- Pulse            --->
+    <a href="https://github.com/BehrRiley/The-Network/pulse">
+        <img src="https://img.shields.io/github/commit-activity/m/BehrRiley/The-Network"></a>
+</p>
+
 # :taco: Table of Contents :taco:
 ## FileTree
 - [Controls](.control) | Server Management Scripts
