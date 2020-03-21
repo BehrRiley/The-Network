@@ -53,6 +53,7 @@ MobInv_Handler:
             - define Whitelist <list[Wheat_Seeds|Beetroot_Seeds|Bread|Carrot|Potato|Beetroot|Wheat]>
             - if !<[Whitelist].contains[<context.item.material.name||null>]>:
                 - determine passively cancelled
+        #- on player closes *SheepInventory*|*VillagerInventory*:
         on player closes inventory:
             #@ Check if inventory belongs to a Sheep
             - if !<context.inventory.replace[<player.uuid>].starts_with[in@SheepInventory]||false>:
