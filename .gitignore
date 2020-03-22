@@ -1,6 +1,5 @@
 # Build and Release Folders
-bin-debug/*
-bin-release/*
+Web/bin-debug/*
 
 
 # Restricted Folders
@@ -20,7 +19,6 @@ Gateway/*
 
 # Executables
 .exe
-
 
 
 # Servers/1.15.2 Gateway
