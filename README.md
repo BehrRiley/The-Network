@@ -27,10 +27,11 @@
 <p align=center>
     <!--- Bug Tracker ---->
     <a href=https://github.com/BehrRiley/The-Network/labels/Bork>
-        <img src=https://img.shields.io/github/issues/BehrRiley/The-Network/Bork?logo=symantec&label=Bugs>
+        <img src=https://img.shields.io/github/issues-raw/BehrRiley/The-Network/Bork?logo=symantec&label=Bugs>
+    </a>
     <!--- Feature Requests ---->
     <a href=https://github.com/BehrRiley/The-Network/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22>
-        <img src=https://img.shields.io/github/issues/BehrRiley/The-Network/FeatureRequest?logo=google-keep&label=Feature%20Requests>
+        <img src=https://img.shields.io/github/issues-raw/BehrRiley/The-Network/Feature%20Request?logo=google-keep&label=Feature%20Requests>
     </a>
     <!--- Commit Activity ---->
     <a href=https://github.com/BehrRiley/The-Network/pulse>
