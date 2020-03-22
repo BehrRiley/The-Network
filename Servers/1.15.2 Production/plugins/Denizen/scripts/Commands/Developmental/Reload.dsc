@@ -15,6 +15,6 @@ rh:
         on reload scripts:
             - if <server.match_player[behr]||null> != null:
                 - if <context.had_error>:
-                    - narrate targets:<server.match_player[behr]> "<&c>Reload Error"
+                    - narrate targets:<server.match_player[behr_riley]> "<&c>Reload Error"
                 - else:
-                    - narrate targets:<server.match_player[behr]> "<&a>Reloaded"
+                    - narrate targets:<server.match_player[behr_riley]> "<&a>Reloaded"
