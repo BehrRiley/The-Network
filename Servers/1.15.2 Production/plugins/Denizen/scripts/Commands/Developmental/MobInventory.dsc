@@ -42,7 +42,7 @@ MobInv:
 
 MobInv_Handler:
     type: world
-    debug: false
+    debug: true
     events:
         on player right clicks villager|Sheep:
             - if <player.is_sneaking>:
@@ -53,15 +53,7 @@ MobInv_Handler:
             - define Whitelist <list[Wheat_Seeds|Beetroot_Seeds|Bread|Carrot|Potato|Beetroot|Wheat]>
             - if !<[Whitelist].contains[<context.item.material.name||null>]>:
                 - determine passively cancelled
-        #- on player closes *SheepInventory*|*VillagerInventory*:
-        on player closes inventory:
-            #@ Check if inventory belongs to a Sheep
-            - if !<context.inventory.replace[<player.uuid>].starts_with[in@SheepInventory]||false>:
-                - stop
-            #@ Check if inventory belongs to a Villager
-            - if !<context.inventory.replace[<player.uuid>].starts_with[in@VillagerInventory]||false>:
-                - stop
-
+        on player closes *SheepInventory*|*VillagerInventory*:
             - define Inventory <context.inventory>
             - inventory clear d:<entity[<context.inventory.after[_]>]>
             - inventory set d:<entity[<context.inventory.after[_]>]> o:<[Inventory].list_contents>
