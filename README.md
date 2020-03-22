@@ -23,9 +23,14 @@
     <a href=>
         <img src=https://img.shields.io/website?logo=openstreetmap&down_color=lightgrey&down_message=Offline&label=Dynmap&up_message=Online&url=http%3A%2F%2F76.119.243.194%3A8123%2Findex.html>
     </a>
+</p>
+<p align=center>
+    <!--- Bug Tracker ---->
+    <a href=https://github.com/BehrRiley/The-Network/labels/Bork>
+        <img src=https://img.shields.io/github/issues/BehrRiley/The-Network/Bork?logo=symantec&label=Bugs>
     <!--- Feature Requests ---->
     <a href=https://github.com/BehrRiley/The-Network/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22>
-        <img src=https://img.shields.io/github/issues/BehrRiley/The-Network/Feature&20Request?label=Feature%20Requests>
+        <img src=https://img.shields.io/github/issues/BehrRiley/The-Network/FeatureRequest?logo=google-keep&label=Feature%20Requests>
     </a>
     <!--- Commit Activity ---->
     <a href=https://github.com/BehrRiley/The-Network/pulse>
