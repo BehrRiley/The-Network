@@ -1,3 +1,3 @@
-cd "..\Servers\1.12.2 Construction"
+cd "..\..\.jars\Buildtools"
 
-java -jar BuildTools.jar --rev 1.12.2
+java -jar "Buildtools.jar" --rev 1.12.2
