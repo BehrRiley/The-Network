@@ -1,6 +1,6 @@
 Online_DCommand:
   type: task
-  debug: true
+  debug: false
   usage: /Online
   syntax: /Online (Server)
   description: Shows you the players online in a specific server, or all servers.
