@@ -16,17 +16,19 @@ REM Data Servers                 -  ..\Servers\0.0.0 Data
 REM Backups                      -  ..\.backups\##h\
 
 REM ------------- 1.15.2 Production --------------------------------------------------------
-rd /s /q "..\.backups\120h\1.15.2 Production Backup"
-move /Y “..\.backups\108h\1.15.2 Production Backup” “..\.backups\120h\”
-move /Y “..\.backups\96h\1.15.2 Production Backup” “..\.backups\108h\”
-move /Y “..\.backups\84h\1.15.2 Production Backup” “..\.backups\96h\”
-move /Y “..\.backups\72h\1.15.2 Production Backup” “..\.backups\84h\”
-move /Y “..\.backups\60h\1.15.2 Production Backup” “..\.backups\72h\”
-move /Y “..\.backups\48h\1.15.2 Production Backup” “..\.backups\60h\”
-move /Y “..\.backups\36h\1.15.2 Production Backup” “..\.backups\48h\”
-move /Y “..\.backups\24h\1.15.2 Production Backup” “..\.backups\36h\”
-move /Y “..\.backups\12h\” “..\.backups\24h\”
-xcopy /E /H /R /Y “..\Servers\1.15.2 Production” “..\.backups\12h\1.15.2 Production Backup\”
+Set Version=1.15.2
+set Server=Production
+rd /s /q "..\.backups\120h\%Version% %Server% Backup"
+move /Y "..\.backups\108h\%Version% %Server% Backup" "..\.backups\120h\"
+move /Y "..\.backups\96h\%Version% %Server% Backup" "..\.backups\108h\"
+move /Y "..\.backups\84h\%Version% %Server% Backup" "..\.backups\96h\"
+move /Y "..\.backups\72h\%Version% %Server% Backup" "..\.backups\84h\"
+move /Y "..\.backups\60h\%Version% %Server% Backup" "..\.backups\72h\"
+move /Y "..\.backups\48h\%Version% %Server% Backup" "..\.backups\60h\"
+move /Y "..\.backups\36h\%Version% %Server% Backup" "..\.backups\48h\"
+move /Y "..\.backups\24h\%Version% %Server% Backup" "..\.backups\36h\"
+move /Y "..\.backups\12h\" "..\.backups\24h\"
+xcopy /E /H /R /Y "..\Servers\%Version% %Server%" "..\.backups\12h\%Version% %Server% Backup\"
 
 REM ------------- Other Placeholder --------------------------------------------------------
 
