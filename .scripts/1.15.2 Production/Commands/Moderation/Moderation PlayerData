@@ -1,0 +1,50 @@
+# | ███████████████████████████████████████████████████████████
+# % ██    /PlayerLocations - 
+# | ██
+# % ██  [ Command ] ██
+PlayerData_Command:
+    type: command
+    name: playerdata
+    debug: false
+    description: Manage the notable player data
+    usage: /PlayerData <&lt>Player<&gt>
+    permission: behrry.moderation.playerlocations
+    aliases:
+        - pdata
+    tab complete:
+        - inject All_Player_Tabcomplete Instantly
+    script:
+        #@ Check if arg1 is blank or if arg2 isn't blank
+        - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
+            - inject Command_Syntax Instantly
+        
+        #@ Check player arg
+        - define User <context.args.get[1]>
+        - inject Player_Verification_Offline Instantly
+        
+        #@ Locations
+        #@ Define Notable locations
+        - define LocationList <list[behrry.essentials.teleport.back|behrry.essentials.teleport.deathback]>
+        
+        #@ Homes
+        #- To-do: replace home mechs
+        #- [-] behrry.essentials.homes.name
+        #- [-] behrry.essentials.homes.location
+        #- [+] behrry.essentials.homes
+        #- [+] - define Homes <[User].flag[behrry.essentials.homes].parse[before[/]]>
+        
+        #@ Inventories
+        #@ Gamemode Inventories
+        - foreach <list[Survival|Creative|Spectator|Adventure]> as:Gamemode:
+            - define Gamemodeinventories:->:gamemode.inventory.<[Gamemode]>
+        
+        #@ Settings & Modes
+        #@ Define Modes
+        - define ModeList <list[behrry.essentials.droplock|behrry.essentials.bchat]>
+        - foreach <[ModeList]> as:flag:
+            - if <player.has_flag[<[Flag]>]>:
+              - define ExistingModes:->:<[Flag]>
+        
+        #@ Define Settings
+        - define SettingsList <list[settings.essentials.bedspawn]>
+       
