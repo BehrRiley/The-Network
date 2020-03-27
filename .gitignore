@@ -9,20 +9,21 @@ Archive Scripts/*
 
 # File-types
 *.old
+*.archive
 
 
 # Executables
 .exe
 
-# ██ [ Server Directories     ] ██
-# ██ | 1.15.2 Gateway         | ██
+# ██ [ Server Directories      ] ██
+# ██ | 1.15.2 Gateway          | ██
 Servers/1.15.2 Gateway/*
 !*Servers/1.15.2 Gateway/**.jar
 !Servers/1.15.2 Gateway/plugins
 Servers/1.15.2 Gateway/plugins/*
 
 
-# ██ | 0.0.0 Discord          | ██
+# ██ | 0.0.0 Discord           | ██
 Servers/0.0.0 Discord/*
 !*Servers/0.0.0 Discord/**.jar
 !Servers/0.0.0 Discord/plugins
@@ -36,7 +37,7 @@ Servers/0.0.0 Discord/plugins/denizen/saves.yml
 Servers/0.0.0 Discord/plugins/denizen/data
 
 
-# ██ | 1.15.2 Production      | ██
+# ██ | 1.15.2 Production       | ██
 Servers/1.15.2 Production/*
 !*Servers/1.15.2 Production/**.jar
 !Servers/1.15.2 Production/plugins
@@ -50,7 +51,7 @@ Servers/1.15.2 Production/plugins/denizen/saves.yml
 Servers/1.15.2 Production/plugins/denizen/data
 
 
-# ██ | 1.15.2 Construction    | ██
+# ██ | 1.15.2 Construction     | ██
 Servers/1.15.2 Construction/*
 !*Servers/1.15.2 Construction/**.jar
 !Servers/1.15.2 Construction/plugins
@@ -64,7 +65,7 @@ Servers/1.15.2 Construction/plugins/denizen/saves.yml
 Servers/1.15.2 Construction/plugins/denizen/data
 
 
-# ██ | 1.12.2 Construction    | ██
+# ██ | 1.12.2 Construction     | ██
 Servers/1.12.2 Construction/*
 !*Servers/1.12.2 Construction/**.jar
 !Servers/1.12.2 Construction/plugins
@@ -78,8 +79,9 @@ Servers/1.12.2 Construction/plugins/denizen/saves.yml
 Servers/1.12.2 Construction/plugins/denizen/data
 
 
-# ██ | 1.15.2 Test            | ██
+# ██ | Template & Test Servers | ██
 Servers/1.15.2 Test*
+Servers/Templates/*
 
 
 # Resource template
