@@ -4,7 +4,7 @@ Donate_Command:
     debug: false
     description: Gives you the donate link.
     usage: /donate
-    permission: behrry.essentials.donate
+    permission: Behrry.Essentials.Donate
     script:
         #@ Check Args
         - if <context.args.get[1]||null> != null:
