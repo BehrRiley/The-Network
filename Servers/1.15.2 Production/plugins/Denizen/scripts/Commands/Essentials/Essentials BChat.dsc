@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /bchat -
-# | ██
-# % ██  [ Command ] ██
 bchat_Command:
     type: command
     name: bchat
@@ -19,6 +15,7 @@ bchat_Command:
         - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
         - narrate targets:<[Targets]> "<[Prefix]> <&7><context.raw_args.parse_color>"
     script:
+    # @ ██ [  Check Args ] ██
         - if <list[On|off].contains[<context.args.get[1]>]> || <context.args.get[1]||null> == null:
             - if <context.args.get[2]||null> == null:
                 - define Arg <context.args.get[1]||null>
