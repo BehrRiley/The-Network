@@ -8,7 +8,7 @@ Fly_Command:
     debug: false
     description: Grants Flight
     usage: /fly (player) (on/off)
-    permission: behrry.essentials.fly
+    permission: Behrry.Essentials.Fly
     tab complete:
         - inject Online_Player_Tabcomplete Instantly
     script:
