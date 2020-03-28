@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /msg - Message a player
-# | ██
-# % ██  [ Command ] ██
 Message_Command:
     type: command
     name: msg
@@ -38,9 +34,12 @@ Reply_Command:
     aliases:
         - reply
     script:
-        - if <context.args.get[1]||null> == null:
+    # @ ██ [  Check for Empty Arg ] ██
+        - if <context.args.is_empty>:
             - inject Command_Syntax Instantly
+    # @ ██ [  Check if Arg is null still somehow ] ██
         - if <context.args.get[1]||null> != null:
+        # @ ██ [  Check if player has a return recip. ] ██
             - if <player.has_flag[behrry.chat.lastreply]>:
                 - define User <player.flag[behrry.chat.lastreply]>
                 - inject Player_Verification Instantly
