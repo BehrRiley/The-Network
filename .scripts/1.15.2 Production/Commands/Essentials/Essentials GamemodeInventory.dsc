@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /gamemodeinventory - Loads the inventory to the respective gamemode
-# | ██
-# % ██  [ Command ] ██
 gamemodeinventory_Command:
     type: command
     name: gamemodeinventory
