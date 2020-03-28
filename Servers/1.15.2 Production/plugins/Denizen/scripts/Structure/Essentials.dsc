@@ -29,13 +29,13 @@ Essentials:
         on player dies:
             - flag player behrry.essentials.teleport.deathback:<player.location>
             - define key Behrry.Essentials.Cached_Inventories
-            - define YamlSize <yaml[<player>].read[<[Key]>].size||0>
-            - define UID <yaml[<player>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
+            - define YamlSize <yaml[<player.uuid>].read[<[Key]>].size||0>
+            - define UID <yaml[<player.uuid>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
             - if <[YamlSize]> > 9:
-                - foreach <yaml[<player]>].read[<[Key]>].get[1].to[<[YamlSize].sub[9]>]>:
-                    - yaml id:<player> set <[Key]>:<-:<[Value]>
-            - yaml id:<player> set <[Key]>:->:<[UID].add[1]>Lasagna<player.inventory.list_contents>
-            - yaml id:<player> savefile:data/pData/<player.uuid>.yml
+                - foreach <yaml[<player.uuid>].read[<[Key]>].get[1].to[<[YamlSize].sub[9]>]>:
+                    - yaml id:<player.uuid> set <[Key]>:<-:<[Value]>
+            - yaml id:<player.uuid> set <[Key]>:->:<[UID].add[1]>Lasagna<player.inventory.list_contents>
+            - yaml id:<player.uuid> savefile:data/pData/<player.uuid>.yml
         on player respawns:
             - if <player.flag[settings.essentials.bedspawn]||false> == true:
                 - determine passively <player.bed_spawn>
