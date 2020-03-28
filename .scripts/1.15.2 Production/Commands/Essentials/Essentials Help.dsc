@@ -4,7 +4,7 @@ Help_Command:
     debug: false
     description: Prints commands and command info.
     usage: /help (#)
-    permission: behrry.essentials.help
+    permission: Behrry.Essentials.Help
     tab complete:
         - determine ""
     script:
@@ -15,10 +15,10 @@ Help_Handler:
     debug: false
     description: Prints commands and command info.
     usage: /help (#)
-    permission: behrry.essentials.help
+    permission: Behrry.Essentials.Help
     events:
         on help command:
-            # Verify command syntax
+        # @ ██ [  Verify command syntax ] ██
             - determine passively fulfilled
             - if <context.args.get[2]||null> != null:
                 - inject Command_Syntax Instantly
@@ -31,7 +31,7 @@ Help_Handler:
             
             - define Commands <server.list_scripts.parse[name].filter[ends_with[_Command]].alphabetical>
 
-            # Verify Console Ran
+        # @ ██ [  Verify Console Ran ] ██
             - if <context.source_type> == server:
                 - foreach <[Commands]> as:command:
                     - define Syntax "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed||>|Yellow]>"
@@ -39,23 +39,23 @@ Help_Handler:
                     - announce to_console "<[Syntax]> <[Description]>"
                 - stop
 
-            # Verify Permissions | Build list
+        # @ ██ [  Verify Permissions | Build list ] ██
             - foreach <[Commands]> as:command:
                 - if !<player.has_permission[<script[<[Command]>].yaml_key[permission]||null>]>:
                     - foreach next
                 - else:
                     - define CommandList:->:<[Command]>
                 
-            # Setup Notes
-            # + -------- /Help | Commands | Info -------- +"
-            # /command <args> (args) | Does this thing here
-            # /command <args> (args) | Does this thing here
-            # + -------- [ ] Previous | Next [ ] -------- +"
+        # @ ██ [  Setup Notes ] ██
+        # @ ██ [  + -------- /Help | Commands | Info -------- +" ] ██
+        # @ ██ [  /command <args> (args) | Does this thing here ] ██
+        # @ ██ [  /command <args> (args) | Does this thing here ] ██
+        # @ ██ [  + -------- [ ] Previous | Next [ ] -------- +" ] ██
 
-            # Format Body
-            # /command <args> (args) | Does this thing here
+        # @ ██ [  Format Body ] ██
+        # @ ██ [  /command <args> (args) | Does this thing here ] ██
             
-            # Distribute Pages
+        # @ ██ [  Distribute Pages ] ██
             - define Lines 8
             - define PageCount <[CommandList].size.div[<[Lines]>].round_up>
             - if <[HelpPage]> > <[PageCount]>:
@@ -65,14 +65,14 @@ Help_Handler:
             - define Math2 "<element[<[Lines]>].mul[<[HelpPage].sub[1]>].add[<[Lines]>]>"
             - define CommandPage "<[CommandList].get[<[Math1]>].to[<[Math2]>]>"
 
-            # Format Header
-            # + -------- /Help | Commands | Info -------- +"
+        # @ ██ [  Format Header ] ██
+        # @ ██ [  + -------- /Help | Commands | Info -------- +" ] ██
             - define DP "<element[].pad_left[6].with[x].replace[x].with[<&2>-<&a>-]>"
             - define PageDisplay "<&6>[<&e><[HelpPage]><&6>/<&e><[PageCount]><&6>]"
             - define Header "<&a>+ <[DP]> <proc[Colorize].context[/Help ~ Commands ~ Info|Green]> <[DP]> +"
             
-            # Format Footer
-            # + -------- [ ] Previous | Next [ ] -------- +"
+        # @ ██ [  Format Footer ] ██
+        # @ ██ [  + -------- [ ] Previous | Next [ ] -------- +" ] ██
             - define Footer "<&a>+ <[DP]> <proc[Colorize].context[Q Previous Z Next Y|Green]> <[DP]> +"
             - if <[HelpPage]> == 1:
                 - define Previous "<&7>[<&8><&chr[25c0]><&7>]"
@@ -106,10 +106,9 @@ Help_Handler:
                 - inject Command_Error Instantly
             - define Footer <[Footer].replace[Q].with[<[Previous]>].replace[Y].with[<[Next]>].replace[Z].with[<[PageDisplay]>]>
             
-            # Print
+        # @ ██ [ Print ] ██
             - narrate <[Header]>
             - foreach <[CommandPage]> as:Command:
-                # <script[<[Command]>].yaml_key[#####]>]>
                 - define Hover "<proc[Colorize].context[Click to Insert:|green]><&nl><proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed>|Yellow]>"
                 - define Text "<proc[Colorize].context[<script[<[Command]>].yaml_key[Usage].parsed>|Yellow]> <&b>&pipe <&3><script[<[Command]>].yaml_key[description]>"
                 - define Command "<script[<[Command]>].yaml_key[name]> "
