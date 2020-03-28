@@ -6,8 +6,11 @@ Report_Command:
     usage: /report <&lt>message<&gt>
     permission: behrry.essentials.report
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
+
+    # @ ██ [  Send Report ] ██
         - define Message <script[ReportForm].yaml_key[form].separated_by[<&nl>]>
         - discord id:GeneralBot message channel:623750914775187466 "<[Message].parsed.unescaped||error>"
 
