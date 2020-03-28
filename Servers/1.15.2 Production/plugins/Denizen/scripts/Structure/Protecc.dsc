@@ -15,12 +15,12 @@
 ##        on player clicks with Protecco_Wando:
 ##            - determine passively cancelled
 ##
-##            #@ Open gui menu
+##        # @ ██ [  Open gui menu ] ██
 ##            #- if <player.is_sneaking> && <context.click_type.contains_any[right]>:
 ##            #  - inventory open d:in@BwandMenu
 ##            #  - stop
 ##
-##            #@ Clear selection
+##        # @ ██ [  Clear selection ] ██
 ##            - if <player.is_sneaking> && <context.click_type.contains_any[left]>:
 ##                - if <player.has_flag[protecc.clearwarning]>:
 ##                    - inject locally Reset Instantly
@@ -29,27 +29,27 @@
 ##                    - narrate "<proc[Colorize].context[shift+left-click again to clear positions.|yellow]>"
 ##                - stop
 ##
-##            #@ Determine block location
+##        # @ ██ [  Determine block location ] ██
 ##            - define loc <context.location||<player.location.cursor_on>>
 ##            
-##            #@ Determine left/right
+##        # @ ██ [  Determine left/right ] ██
 ##            - if <context.click_type.contains_any[left]>:
 ##                - define Pos 1
 ##            - else if <context.click_type.contains_any[right]>:
 ##                - define Pos 2
 ##
-##            #@ Check worlds
+##        # @ ██ [  Check worlds ] ██
 ##            - if <player.flag[protecc.position.1].as_location.world.name||<player.world.name>> != <player.world.name> || <player.flag[protecc.position.2].as_location.world.name||<player.world.name>> != <player.world.name>:
 ##                - inject locally Reset Instantly
 ##
-##            #@ Determine flags
+##        # @ ██ [  Determine flags ] ██
 ##            - flag player protecc.position.<[Pos]>:<[Loc]>
 ##            - define Pos1Flag <player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2].as_location>>
 ##            - define Pos2Flag <player.flag[protecc.position.2].as_location||<[Pos1Flag]>>
 ##            - define cuboid <cuboid[<[Pos1Flag]>|<[Pos2Flag]>]>
 ##            - flag player protecc.selection.cuboid:<[Cuboid]>
 ##
-##            #@ Determine formats
+##        # @ ██ [  Determine formats ] ██
 ##            - define min <[Cuboid].min>
 ##            - define max <[Cuboid].max>
 ##            - define size <cuboid[<[min].with_y[0]>|<[max].with_y[0]>].blocks.size>
@@ -59,7 +59,7 @@
 ##            - else:
 ##                - define PosFormat "<&6>[<&e>X:<&a><player.location.cursor_on.x.round_down><&6>, <&e>Y<&6>:<&a><player.location.cursor_on.y.round_down><&6>, <&e>Z<&6>:<&a><player.location.cursor_on.z.round_down><&6>]"
 ##            
-##            #@ Highlight selection
+##        # @ ██ [  Highlight selection ] ██
 ##            #- if <player.has_flag[protecc.position.1]> && <player.has_flag[protecc.position.2]>:
 ##                #- if <[size]> < 1000000:
 ##                    #- playeffect effect:flame at:<[cuboid].shell.parse[add[0.5,0.5,0.5]]> offset:0
@@ -86,7 +86,7 @@
 ##            - narrate "stahp, bad"
 ##            - stop
 ##
-##        #@ determine cuboid
+##    # @ ██ [  determine cuboid ] ██
 ##        #- <cuboid[<player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2]>]>
 ##        #-<player.flag[protecc.selection.cuboid]>
 ##        - define Pos1Flag <player.flag[protecc.position.1].as_location||<player.flag[protecc.position.2].as_location>>
