@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /rules
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██
 Rules_Command:
     type: command
     name: rules
@@ -11,11 +6,11 @@ Rules_Command:
     usage: /rules
     permission: behrry.essentials.rules
     script:
-        #@ Check for args
-        - if <context.args.get[1]||null> != null:
+    # @ ██ [  Check for args ] ██
+        - if <context.args.get[1]||null> != null:S
             - inject Command_Syntax Instantly
         
-        #@ print
+    # @ ██ [  print ] ██
         - narrate "<&e>1<&6>.<&r> <&a>Use common sense."
 
 
