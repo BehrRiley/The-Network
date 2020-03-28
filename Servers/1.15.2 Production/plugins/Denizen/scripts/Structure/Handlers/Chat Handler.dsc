@@ -35,7 +35,7 @@ Chat_Handler:
             - define Message <context.message.parse_color>
             
             #@ Mute Check, Formatting & Print
-            - if <player.flag[muted]||false>:
+            - if <player.flag[behrry.moderation.muted]||false>:
                 - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
                 - narrate format:Muted_Chat_Format targets:<[Moderation]> <[Message].strip_color>
                 - stop
@@ -89,62 +89,57 @@ Chat_Handler:
                     - announce <[NewMessage]>
             - if <bungee.list_servers.contains[Discord]||false>:
                 - bungeerun Discord Discord_Message def:593523276190580736|<[DiscordMessage]>
-    old:
-        on player chats:
-            - determine passively cancelled
+            - if <player.has_flag[behrry.essentials.display_name]>:
+                - announce to_console format:Console_Chatter_displayname_Format "<[Message]>"
+            - else:
+                - announce to_console format:Console_Chatter_Format "<[Message]>"
 
-            #@ Command Check
-            - if <player.has_flag[behrry.essentials.homerename]>:
-                - define OldHome <player.flag[behrry.essentials.homerename]>
-                - flag player behrry.essentials.homerename:!
-                #@ Check args
-                - define Name <context.message>
-                - if <[Name]> == Cancel:
-                    - narrate format:Colorize_Yellow "Home rename cancelled."
-                    - stop
-                - if <[Name].split.size> > 1:
-                    - narrate format:Colorize_Red "Names cannot have spaces."
-                    - stop
-                - execute as_player "renamehome <[OldHome]> <[Name]>"
+Discord_Relay:
+    type: task
+    debug: false
+    definitions: Message
+# $ definitions: Message|UserLink
+    script:
+    # $ ██ [ To-Do:                                                      ] ██
+    # - ██ | Add UserLinks as secondary definition for ignoring players  | ██
+    # - ██ | Dependent File:                                             | ██
+    # - ██ | .scripts/0.0.0 Discord/Discord/Handlers/Discord Handler.dsc | ██
+        # @ ██ [ Define Userlink ] ██
+        # % How should UserLink look?
+        # % Guessing with key/value mapping - playertag/discordtag
+        #^- define User <[UserLink].before[/]>
+        #^- foreach <server.list_online_players> as:Player:
+        #^    - if <[player].has_flag[behrry.essentials.ignorelist]>:
+        #^        - if <player.flag[behrry.essentials.ignorelist].contains[<[User]>]>:
+        #^            - define Blacklist:->:<[User]>
+
+            # @ ██ [ Check if player is Muted ] ██
+            - if <[User].has_flag[behrry.moderation.muted]>:
+                - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
+                - narrate format:Muted_Chat_Format targets:<[Moderation].include[<[User]>]> "<[Message].unescaped.strip_color>"
                 - stop
 
-            #@ Mute check
-            - if <player.has_flag[muted]>:
-                - define Targets "<server.list_online_players.filter[in_group[Moderation]]>"
-                - define Message "<&7>[<&8>Muted<&7> <&7><player.name>: <context.message.strip_color>"
-                - narrate targets:<[Targets]> <[Message]>
-                - determine cancelled
-
-            #@ BChat Check
-            - if <player.has_flag[behrry.essentials.bchat]>:
-                - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
-                - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
-                - narrate targets:<[Targets]> "<[Prefix]> <&7><context.message.parse_color>"
-                - determine cancelled
-
-            #@ Fixing your group
-            - run locally GroupManager Instantly
-
-            #@ in-game formatting
-            - inject locally NameplateFormat Instantly
-
-            #@ ChatLog
-            - define Message "<[NamePlate]>: <context.message.parse_color.replace[:pufferfish:].with[▲]>"
-            - inject locally GlobalChatLog Instantly
-            
-            #@ Print to Server
-            - announce <[Message]>
-            
-            #@ Print to Other Servers
-            - if <bungee.list_servers.size||1> > 1:
-                - foreach <bungee.list_servers.exclude[<bungee.server>]> as:Server:
-                    - bungee <[Server]>:
-                        - announce <[Message]>
+            # @ ██ [ Print to Chat ] ██
+            - narrate targets:<server.list_online_players.exclude[<[BlackList]>]> "<[Message].unescaped>"
+            - announce "<[Message].unescaped>"
+    
 
 Muted_Chat_Format:
     type: format
-    format: "<&7>[<&8>Muted<&7> <&7><player.name><&8>:<&7> <text>"
+    debug: false
+    format: "<&7>[<&c>Muted<&7>] <player.name><&8>:<&7> <text>"
+Console_Chatter_displayname_Format:
+    type: format
+    debug: false
+    format: "<&3>[<&7>Chatter<&3>] <&r><player.flag[behrry.essentials.display_name]> <&8>(<&7><player.name><&8>)<&b>:<&r> <text>"
+Console_Chatter_Format:
+    type: format
+    debug: false
+    format: "<&3>[<&7>Chatter<&3>] <&7><player.name><&b>:<&r><&f> <text>"
 
+
+    # $ ██ [ To-Do:                   ] ██
+    # - ██ | These should be flagged  | ██
 Ranks:
     type: yaml data
     Moderation:
@@ -172,3 +167,5 @@ Ranks:
             Muted: <&4>[<&c>Muted<&4>]<&sp><&r>
         HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Private Message|yellow]>"
         CmdNP: "msg <player.name> "
+
+
