@@ -6,7 +6,7 @@ Give_Command:
     admindescription: gives yourself or another player an item.
     usage: /give <&lt>Item<&gt> (#) (-s)
     adminusage: /give <&lt>Item<&gt> (#) (-s)
-    permission: behrry.essentials.give
+    permission: Behrry.Essentials.Give
     tab complete:
         - if <context.args.size||0> == 0:
           - determine <server.list_online_players.parse[name]>
