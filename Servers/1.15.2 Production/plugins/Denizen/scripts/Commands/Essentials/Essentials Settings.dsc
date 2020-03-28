@@ -11,5 +11,16 @@ settings_Command:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
 
-    # @ ██ [  Define settings ] ██
-        - define Settings <list[settings.essentials.bedspawn]>
+    # @ ██ [  Define Settings ] ██
+        - define Essentials <list[bedspawn]>
+        - define ChatLogs <list[FirstJoined|Joined|Switched|Quit|Players]>
+        - define Settings <list[]>
+
+        - foreach <list[<[Essentials]>]> as:Flag:
+            - if !<player.has_flag[Behrry.Essentials.<[Flag]>]>:
+                - flag player Behrry.Essentials.<[Flag]>
+            - define EssentialsFlags:->:Behrry.Essentials.<[Flag]>
+        - foreach <list[<[ChatLogs]>]> as:Flag:
+            - define ChatLogFlags:->:Behrry.Settings.ChatHistory.<[Flag]>
+        - foreach <list[<[Settings]>]> as:Flag:
+            - define ChatLogFlags:->:Behrry.Essentials.<[Flag]>
