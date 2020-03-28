@@ -6,7 +6,7 @@ Trade_Command:
     usage: /trade (<&lt>Player<&gt> <&lt>Accept/Decline<&gt>)
     permission: behrry.essentials.trade
     script:
-        #@ Check args
+    # @ ██ [  Check args ] ██
         - if <context.args.get[1]||null> == null:
             - if !<player.target.is_player||false>:
                 - narrate format:colorize_red "Target is not a player."
@@ -42,7 +42,7 @@ Trade_Handler:
                 - run Trade_Command path:script
 
         on player clicks in *PlayerTradeInventory*:
-        #@ Define Definitions
+    # @ ██ [  Define Definitions ] ██
             - define Target <player[<context.inventory.notable_name.after[_]>]>
             - define TargetInv <player[<[Target]>].open_inventory>
             - define LeftInv <script.yaml_key[LeftInvSlots].as_list>
@@ -51,22 +51,22 @@ Trade_Handler:
             - define i2 <context.cursor_item>
             - define NewSlot <context.slot.add[5]>
         
-        #@ Check if clicking in other player's trade window
+    # @ ██ [  Check if clicking in other player's trade window ] ██
             - if <[RightInv].contains[<context.raw_slot>]>:
                 - determine cancelled
 
-        #@ Adjust Items within the player's trade window
+    # @ ██ [  Adjust Items within the player's trade window ] ██
             - if <script.yaml_key[LeftinvSlots].as_list.contains[<context.raw_slot>]>:
                 #- item1 in inv
                 #- item2 in hand
-        #@ Check if the player accepted already
+    # @ ██ [  Check if the player accepted already ] ██
                 - if <player.has_flag[behrry.essentials.trade.acceptedphase1]>:
                     - inject Locally AcceptIntercept
                 - if <player.has_flag[behrry.essentials.trade.acceptedwaiting1]>:
                     - determine cancelled
-        #@ Determine Click Actions
+    # @ ██ [  Determine Click Actions ] ██
                 - choose <context.action>:
-        #@ Pickup Actions
+    # @ ██ [  Pickup Actions ] ██
                     - case "pickup_one":
                         - define Item <[i1].with[quantity=1]>
                         #- inventory set d:<[TargetInv]> o:<[Item]> slot:<[NewSlot]>
@@ -79,7 +79,7 @@ Trade_Handler:
                     - case "pickup_all":
                         - inventory set d:<[TargetInv]> o:air slot:<[NewSlot]>
 
-        #@ Place Actions
+    # @ ██ [  Place Actions ] ██
                     - case "place_one":
                         - if <[i1].material.name> == <[i2].material.name>:
                             - define Item <[i2].with[quantity=<[i1].quantity.add[1]>]>
@@ -96,11 +96,11 @@ Trade_Handler:
                         - define Item <[i2]>
                         - inventory set d:<[TargetInv]> o:<[Item]> slot:<[NewSlot]>
                     
-        #@ Shift Key
+    # @ ██ [  Shift Key ] ██
                     - case "MOVE_TO_OTHER_INVENTORY":
                         - inventory set d:<[TargetInv]> o:air slot:<[NewSlot]>
 
-        #@ Misc Options
+    # @ ██ [  Misc Options ] ██
                     - case "SWAP_WITH_CURSOR":
                         - adjust <player> item_on_cursor: <[i1]>
                         - inventory set d:<[TargetInv]> o:<[i2]> slot:<[NewSlot]>
@@ -121,7 +121,7 @@ Trade_Handler:
                     #- case "UNKNOWN":
                     - case default:
                         - determine cancelled
-        #@ Moving items from the player inventory
+    # @ ██ [  Moving items from the player inventory ] ██
             - else:
                 - Choose <context.action>:
                     - case "MOVE_TO_OTHER_INVENTORY":
@@ -135,14 +135,14 @@ Trade_Handler:
                             - determine cancelled
 
             - inject InvDebugPrint instantly
-            #@ Return to this to re-implement shift-clicking
+        # @ ██ [  Return to this to re-implement shift-clicking ] ██
             #- else if <context.click.contains[shift]>:
             #    - determine cancelled
         on player drops item:
             - if <player.has_flag[behrry.essentials.trade.cursorprotect]>:
                 - determine passively cancelled
         on player drags in *PlayerTradeInventory*:
-        #@ Define Definitions
+    # @ ██ [  Define Definitions ] ██
             - define Target <player[<context.inventory.notable_name.after[_]>]>
             - define TargetInv <player[<[Target]>].open_inventory>
             - define LeftInv <script.yaml_key[LeftInvSlots].as_list>
@@ -150,25 +150,25 @@ Trade_Handler:
             - define i1 <context.item>
             - define NewSlots <context.slots.parse[add[5]]>
 
-        #@ Check if other player has accepted already
+    # @ ██ [  Check if other player has accepted already ] ██
             - if <player.has_flag[behrry.essentials.trade.acceptedphase1]>:
                 - inject Locally AcceptIntercept
-        #@ Check if player has accepted already
+    # @ ██ [  Check if player has accepted already ] ██
             - if <player.has_flag[behrry.essentials.trade.acceptedwaiting1]>:
                 - Determine cancelled
 
-        #@ Check if player clicked in the other player's trade window
+    # @ ██ [  Check if player clicked in the other player's trade window ] ██
             - if <[RightInv].contains_any[<context.raw_slots>]>:
                 - determine cancelled
             
-        #@ Check if player clicked in their trade window
+    # @ ██ [  Check if player clicked in their trade window ] ██
             - if <[LeftInv].contains_any[<context.raw_slots>]>:
-                #@ Dragging single quantity items
+            # @ ██ [  Dragging single quantity items ] ██
                 - if <context.slots.size> == 1:
                     - inventory set d:<[TargetInv]> o:<[i1]> slot:<[NewSlots].get[1]>
                 
                 #- Check if left or right click
-                #@ Dragging even quantity items -:LEFT:-
+            # @ ██ [  Dragging even quantity items -:LEFT:- ] ██
                 - if <[i1].quantity.mod[2]> == <[NewSlots].size.mod[2]>:
                     - foreach <[NewSlots]> as:NewSlot:
                         - inventory set d:<[TargetInv]> o:<[i1].with[quantity=<[i1].quantity.div[<[NewSlots].size>]>]> slot:<[NewSlot]>
@@ -178,23 +178,23 @@ Trade_Handler:
             - inject InvDebugPrint2 instantly
 
         on player closes *PlayerTradeInventory*:
-        #@ Define other player
+    # @ ██ [  Define other player ] ██
             - define target <player[<context.inventory.notable_name.after[_]>]>
 
-        #@ Prevent item dropping while on cursor
+    # @ ██ [  Prevent item dropping while on cursor ] ██
             - if <player.item_on_cursor.material.name> != air:
                 - flag player behrry.essentials.trade.cursorprotect duration:1t
-        #@ Remove flags
+    # @ ██ [  Remove flags ] ██
             - define Flags <list[acceptedphase1|acceptedwaiting1]>:
             - foreach <list[<Player>|<[Target]>]> as:Player:
                 - foreach <[Flags]> as:Flag:
                     - if <player.has_flag[behrry.essentials.trade.<[Flag]>]>:
                         - flag <[Player]> behrry.essentials.trade.<[Flag]>:!
-        #@ Check for duplicate
+    # @ ██ [  Check for duplicate ] ██
             - if <player.has_flag[behrry.essentials.trade.dedup]>:
                 - stop
 
-        #@ Define definitions
+    # @ ██ [  Define definitions ] ██
             - define target <player[<context.inventory.notable_name.after[_]>]>
             - define LeftInvSlots <script.yaml_key[LeftInvSlots].as_list>
             - define RightInvSlots <script.yaml_key[RightInvSlots].as_list>
@@ -205,7 +205,7 @@ Trade_Handler:
             - define PlayerLoot <inventory[<[Inventory1]>].slot[<[LeftInvSlots]>]>
             - define TargetLoot <inventory[<[Inventory2]>].slot[<[LeftInvSlots]>]>
 
-        #@ Adjust items
+    # @ ██ [  Adjust items ] ██
             - foreach <[PlayerLoot]> as:Loot:
                 - if !<[Loot].script.name.contains[BLANK]||false> && <[Loot].material.name> != Air:
                     - give <[Loot]>
@@ -219,7 +219,7 @@ Trade_Handler:
             - narrate format:Colorize_Red "Cancelled the trade."
             - narrate targets:<[Target]> format:Colorize_Red "<[Target].name> cancelled the trade."
         on player clicks Accept_Button in *PlayerTradeInventory*:
-        #@ Define definitions
+    # @ ██ [  Define definitions ] ██
             - determine passively cancelled
             - define target <player[<context.inventory.notable_name.after[_]>]>
             - define LeftInvSlots <script.yaml_key[LeftInvSlots].as_list>
@@ -232,7 +232,7 @@ Trade_Handler:
             - define BlankSlots <script.yaml_key[BlankSlots].as_list.exclude[5|32]>
             - flag player behrry.essentials.trade.acceptedwaiting1
 
-        #@ Fun Flare while waiting
+    # @ ██ [  Fun Flare while waiting ] ██
             - if <player.has_flag[behrry.essentials.trade.acceptedwaiting1]>:
                 - foreach <[BlankSlots]> as:Slot:
                     - define RandomColor <list[red|orange|yellow|lime|light_blue|purple].random>
@@ -247,16 +247,16 @@ Trade_Handler:
                     - inventory set d:<[Inventory2]> o:<item[Confirm_Blank1]> slot:<[Slot]>
                     - inventory update
             - else:
-        #@ Check if the other player already accepted
+    # @ ██ [  Check if the other player already accepted ] ██
                 - if <[Target].has_flag[behrry.essentials.trade.acceptedwaiting1]>:
                     - inject Locally AcceptTrade Instantly
                     - stop
-        #@ Add Flags and Define Definitions
+    # @ ██ [  Add Flags and Define Definitions ] ██
                 - flag player behrry.essentials.trade.acceptedwaiting1
                 - flag player behrry.essentials.trade.acceptedphase1
                 - flag <[Target]> behrry.essentials.trade.acceptedphase1
                 
-        #@ Flare locking the banner green
+    # @ ██ [  Flare locking the banner green ] ██
             - foreach <[BlankSlots]> as:Slot:
                 - inventory set d:<[Inventory1]> o:<item[Confirm_Blank1]> slot:<[Slot]>
                 - inventory set d:<[Inventory2]> o:<item[Confirm_Blank1]> slot:<[Slot]>
@@ -267,11 +267,11 @@ Trade_Handler:
                 - if <[Item].material.name> == air:
                     - inventory set d:<[Inventory1]> o:<item[Confirm_Blank0]> slot:<[LeftInvSlots].get[<[Loop_Index]>]>
                     
-        #@ Lock the accepting player's inventory
+    # @ ██ [  Lock the accepting player's inventory ] ██
             - foreach <context.inventory.slot[<[LeftInvSlots]>]> as:Item:
                 - if <[Item].material.name> == air:
                     - inventory set d:<inventory[<[Inventory1]>]> o:<item[Confirm_Blank0]> slot:<[LeftInvSlots].get[<[Loop_Index]>]>
-        #@ Show the other player the locked inventory
+    # @ ██ [  Show the other player the locked inventory ] ██
             - foreach <inventory[<[Inventory2]>].slot[<[RightInvSlots]>]> as:Item:
                 - if <[Item].material.name> == air:
                     - inventory set d:<inventory[<[Inventory2]>]> o:<item[Confirm_Blank0]> slot:<[RightInvSlots].get[<[Loop_Index]>]>
@@ -284,7 +284,7 @@ Trade_Handler:
 
 
     AcceptIntercept:
-    #@ Flag & Define Definitions
+# @ ██ [  Flag & Define Definitions ] ██
         - flag <[Target]> behrry.essentials.trade.acceptedwaiting1:!
         - flag <player> behrry.essentials.trade.acceptedphase1:!
         - flag <[Target]> behrry.essentials.trade.acceptedphase1:!
@@ -294,7 +294,7 @@ Trade_Handler:
         - define LeftInvSlots <script.yaml_key[LeftInvSlots].as_list>
         - define RightInvSlots <script.yaml_key[RightInvSlots].as_list>
         
-    #@ Run the banner flare green
+# @ ██ [  Run the banner flare green ] ██
         - foreach <[BlankSlots]> as:Slot:
             - inventory set d:<[Inventory1]> o:<item[Confirm_Blank0]> slot:<[Slot]>
             - inventory set d:<[Inventory2]> o:<item[Confirm_Blank0]> slot:<[Slot]>
@@ -306,7 +306,7 @@ Trade_Handler:
             - inventory set d:<[Inventory2]> o:<item[Blank]> slot:<[Slot]>
             - inventory update
 
-    #@ Remove the lock from the other player
+# @ ██ [  Remove the lock from the other player ] ██
         - foreach <inventory[<[Inventory1]>].slot[<[RightInvSlots]>].reverse> as:Item:
             - if <[Item].script.name.contains[BLANK]||false>:
                 - inventory set d:<inventory[<[Inventory1]>]> o:air slot:<[RightInvSlots].reverse.get[<[Loop_Index]>]>
