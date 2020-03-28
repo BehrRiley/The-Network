@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /ignore - Adds or removes a player to or from your ignore list.
-# | ██
-# % ██  [ Command ] ██
 Ignore_Command:
     type: command
     name: ignore
