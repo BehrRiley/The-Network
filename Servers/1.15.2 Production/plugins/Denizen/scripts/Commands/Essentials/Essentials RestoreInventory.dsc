@@ -20,8 +20,8 @@ RestoreInventory_Command:
         - inject Player_Verification Instantly
 
         - define key Behrry.Essentials.Cached_Inventories
-        - define YamlSize <yaml[<[User]>].read[<[Key]>].size||0>
-        - define UID <yaml[<[User]>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
+        - define YamlSize <yaml[<[User].uuid>].read[<[Key]>].size||0>
+        - define UID <yaml[<[User].uuid>].read[<[Key]>].get[<[YamlSize]>].before[Lasagna]||0>
         - if <[YamlSize]> == 0 && <context.args.get[2]||null> != backup:
                 - narrate "<[User].display_name><&r> <proc[Colorize].context[does not have a cached death inventory.|red]>"
         - else:
@@ -36,11 +36,12 @@ RestoreInventory_Command:
                 - if <[Arg2]> > <[YamlSize]>:
                     - narrate "<&4>I<&2>nventory<&4>: <&6>[<&e><proc[Colorize].context[does not exist.|red]>"
                 - else:
-                    - define Cache <yaml[<[User]>].read[<[Key]>].last>
+                    - define Cache <yaml[<[User].uuid>].read[<[Key]>].last>
                     - flag <[User]> Behrry.Essentials.inventory.backup:<[User].inventory.list_contents>
+                    - inventory clear d:<[User].inventory>
                     - inventory set d:<[User].inventory> o:<[Cache].after[Lasagna]>
-                    - yaml id:<[User]> set <[Key]>:<-:<[Cache]>
-                    - yaml id:<[User]> savefile:data/pData/<player.uuid>.yml
+                    #- yaml id:<[User]> set <[Key]>:<-:<[Cache]>
+                    - yaml id:<[User].uuid> savefile:data/pData/<player.uuid>.yml
                     - if <[User]> != <player>:
                         - narrate targets:<player> "<&e>Player<&6><&co> <&f><[User].display_name><&r> <&e>Inventory<&6><&co><&f>[<context.args.get[2]||1>]<&f> Restored."
                     - narrate targets:<[User]> "<proc[Colorize].context[Your inventory before death was restored.|green]>"
