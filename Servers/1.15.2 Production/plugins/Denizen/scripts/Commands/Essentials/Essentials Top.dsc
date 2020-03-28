@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /top - takes you to the top!
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script, create out of combat bypass | cooldown | Bypass monsters near
 Top_Command:
     type: command
     name: top
@@ -11,10 +6,10 @@ Top_Command:
     usage: /top
     permission: behrry.essentials.top
     script:
-        #@ Check for args
+    # @ ██ [  Check for args ] ██
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
-        #@ check if they're already at the top
+    # @ ██ [  check if they're already at the top ] ██
         - if <player.location.y> > <player.location.highest>:
             - narrate "<proc[Colorize].context[Nothing Interesting Happens.|yellow]>"
             - stop
