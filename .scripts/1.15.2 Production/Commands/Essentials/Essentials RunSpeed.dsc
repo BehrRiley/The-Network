@@ -26,8 +26,11 @@ runSpeed_Command:
                 - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
                     - determine <server.list_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
+        
+    # @ ██ [  Check if specifying another User ] ██
         - if <context.args.get[2]||null> != null:
             - if <player.groups.contains[Moderation]>:
                 - define User <context.args.get[1]>
@@ -36,10 +39,13 @@ runSpeed_Command:
             - else:
                 - inject Command_Syntax Instantly
         - else:
+        # @ ██ [  Set Player as Default ] ██
             - define User <player>
             - define Speed <context.args.get[1]>
 
+    # @ ██ [  Check Speed Arg ] ██
         - if !<[Speed].is_integer>:
+        # @ ██ [  Check if speed is a valid speed Style ] ██
             - if <list[Lightspeed|ludicrous|Plad].contains[<[Speed]>]>:
                 - if <[Speed]> == Default:
                     - define Speed 2
@@ -47,6 +53,7 @@ runSpeed_Command:
                     - define Reason "Run speeds are numbers."
                     - inject Command_Error Instantly
             - else:
+            # @ ██ [  Determine Speed by Name ] ██
                 - choose <[Speed]>:
                     - case Lightspeed:
                         - adjust <[User]> walk_speed:0.5
@@ -58,10 +65,12 @@ runSpeed_Command:
                         - adjust <[User]> walk_speed:1.0
                         - narrate targets:<[User]> "<&c>G<&a>o<&c>i<&a>n<&c>g <&c>P<&a>l<&c>a<&a>d<&c>.<&a>.<&c>."
                 - stop
+    # @ ██ [  Speed Values ] ██
         - if <[Speed]> < 0 || <[Speed]> > 10:
             - define Reason "Run speeds range up to 10."
             - inject Command_Error Instantly
     
+    # @ ██ [  Adjust Player ] ██
         - adjust <[User]> walk_speed:<[Speed].div[10]>
         - if <[Speed]> == 10:
             - narrate targets:<[User]> "<&c>G<&a>o<&c>i<&a>n<&c>g <&c>P<&a>l<&c>a<&a>d<&c>.<&a>.<&c>."
