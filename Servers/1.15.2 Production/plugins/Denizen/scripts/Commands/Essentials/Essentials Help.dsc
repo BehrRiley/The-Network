@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /help Command for information on commands
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██
 Help_Command:
     type: command
     name: help
