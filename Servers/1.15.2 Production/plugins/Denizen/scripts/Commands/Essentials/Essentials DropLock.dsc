@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /droplock -
-# | ██
-# % ██  [ Command ] ██
 droplock_Command:
     type: command
     name: droplock
@@ -28,18 +24,18 @@ droplock_Command:
 #            - if <player.has_flag[behrry.essentials.droplock]>:
 #                - flag player behrry.essentials.droplock:!
 #        on player picks up item:
-#            #@ Check if player is in droplock mode
+#        # @ ██ [  Check if player is in droplock mode ] ██
 #            - if <player.has_flag[behrry.essentials.droplock]>:
-#                #@ Check for unique pickup
+#            # @ ██ [  Check for unique pickup ] ██
 #                - if <player.has_flag[behrry.essentials.pickup]>:
-#                    #@ If the item is in the unique pickup list, allow pickup
+#                # @ ██ [  If the item is in the unique pickup list, allow pickup ] ██
 #                    - if <player.flag[behrry.essentials.pickup]> == <context.item>:
 #                        - stop
 #                - else:
 #                    - determine cancelled
 #        on player right clicks block:
-#            #@ Check if player is in droplock mode
+#        # @ ██ [  Check if player is in droplock mode ] ██
 #            - if <player.has_flag[behrry.essentials.droplock]>:
-#                #@ Search for dropped items 0.5 blocks around the click location
+#            # @ ██ [  Search for dropped items 0.5 blocks around the click location ] ██
 #                - define DroppedItems <player.location.precise_cursor_on.find.entities[DROPPED_ITEM].within[0.5].exclude[<player>]>
 #                - flag player behrry.essentials.pickup:->:<[DroppedItems]> duration:1t
