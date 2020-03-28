@@ -42,6 +42,7 @@ Online_DCommand:
         - else:
           - define Player<[Loop_Index]> "<entry[Name].result>"
 
+    # @ ██ [ Format Lines ] ██
       - define line:!
       - repeat <[Players].size>:
         - if <[Value].is_odd>:
