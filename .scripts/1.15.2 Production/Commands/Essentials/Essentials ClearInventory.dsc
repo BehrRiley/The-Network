@@ -4,7 +4,7 @@ ClearInventory_Command:
     debug: false
     description: Clears yours, or another player's inventory
     usage: /clearinventory
-    permission: behrry.essentials.clearinventory
+    permission: Behrry.Essentials.ClearInventory
     aliases:
         - clearinv
         - invclear
