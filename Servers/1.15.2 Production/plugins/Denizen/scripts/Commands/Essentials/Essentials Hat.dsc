@@ -4,7 +4,7 @@ Hat_Command:
     debug: true
     description: Places a held item as a hat
     usage: /hat
-    permission: behrry.essentials.hat
+    permission: Behrry.Essentials.Hat
     script:
     # @ ██ [  Check Args ] ██
         - if <context.args.get[1]||null> != null:
