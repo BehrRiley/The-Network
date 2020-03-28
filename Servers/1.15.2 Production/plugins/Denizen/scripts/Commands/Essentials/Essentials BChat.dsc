@@ -19,7 +19,7 @@ bchat_Command:
         - if <list[On|off].contains[<context.args.get[1]>]> || <context.args.get[1]||null> == null:
             - if <context.args.get[2]||null> == null:
                 - define Arg <context.args.get[1]||null>
-                - define ModeFlag "behrry.essentials.bchat"
+                - define ModeFlag "Behrry.Essentials.BChat"
                 - define ModeName "▲chat"
                 - inject Activation_Arg Instantly
             - else:
@@ -29,11 +29,3 @@ bchat_Command:
         - else:
             - inject locally Chat Instantly
 
-#BChat_Handler:
-#    type: world
-#    events:
-#        on player chats:
-#            - if <player.has_flag[behrry.essentials.bchat]>:
-#                - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
-#                - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
-#                - narrate targets:<[Targets]> "<[Prefix]> <context.message.parse_color>"
