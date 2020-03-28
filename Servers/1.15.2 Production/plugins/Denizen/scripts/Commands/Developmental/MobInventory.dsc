@@ -25,7 +25,7 @@ MobInv:
             - else:
                 - define Wool <item[<player.target.color>_wool]>
             - define Inventory <player.uuid>SheepInventory_<[Mob].uuid>
-            - note as:<[Inventory]> in@generic[size=9;contents=<item[Blank]>|<item[Blank]>|<item[Blank]>|<item[Blank]>|<[Wool]>|<item[Blank]>|<item[Blank]>|<item[Blank]>|<item[Blank]>]
+            - note as:<[Inventory]> <inventory[generic[size=9;contents=<item[Blank]>|<item[Blank]>|<item[Blank]>|<item[Blank]>|<[Wool]>|<item[Blank]>|<item[Blank]>|<item[Blank]>|<item[Blank]>]]>
             - inventory open d:<[Inventory]>
             - stop
 
@@ -42,7 +42,7 @@ MobInv:
 
 MobInv_Handler:
     type: world
-    debug: true
+    debug: false
     events:
         on player right clicks villager|Sheep:
             - if <player.is_sneaking>:
@@ -55,8 +55,8 @@ MobInv_Handler:
                 - determine passively cancelled
         on player closes *SheepInventory*|*VillagerInventory*:
             - define Inventory <context.inventory>
-            - inventory clear d:<entity[<context.inventory.after[_]>]>
-            - inventory set d:<entity[<context.inventory.after[_]>]> o:<[Inventory].list_contents>
+            - inventory clear d:<[Inventory]>
+            - inventory set d:<[Inventory]> o:<[Inventory].list_contents>
             - note as:<[Inventory]> remove
 
 #MobInventory_Handler:
