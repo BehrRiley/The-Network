@@ -4,7 +4,7 @@ Colors_Command:
     debug: false
     description: Lists the colors in a click-menu
     usage: /colors
-    permission: behrry.essentials.colors
+    permission: Behrry.Essentials.Colors
     script:
     # @ ██ [ Verify args ] ██
         - if <context.args.get[1]||null> != null:
