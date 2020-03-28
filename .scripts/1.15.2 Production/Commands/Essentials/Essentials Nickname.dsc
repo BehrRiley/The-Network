@@ -19,10 +19,10 @@ Nickname_Command:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
-        # -██ [ correct syntax?
+    # @ ██ [  correct syntax? ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
-        # -██ [ one or two args?
+    # @ ██ [  one or two args? ] ██
         - if <context.args.get[2]||null> == null:
             - define User <player>
             - define Nickname <context.args.get[1]>
@@ -38,19 +38,19 @@ Nickname_Command:
                     - stop
             - define Nickname <context.args.get[2]>
                     
-        # -██ [ same nickname ?
+    # @ ██ [  same nickname ? ] ██
         - if <[Nickname].parse_color> == <[User].flag[behrry.essentials.display_name]||>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
-        # -██ [ alphanumerical ?
+    # @ ██ [  alphanumerical ? ] ██
         - if !<[Nickname].matches[[a-zA-Z0-9-_\&]+]>:
             - narrate "<proc[Colorize].context[Nicknames should be alphanumerical.|red]>"
             - stop
-        # -██ [ too long ?
+    # @ ██ [  too long ? ] ██
         - if <[Nickname].parse_color.strip_color.length> > 16:
             - narrate "<proc[Colorize].context[Nicknames should be less than 16 charaters.|red]>"
             - stop
-        # -██ [ blacklisted ?
+    # @ ██ [  blacklisted ? ] ██
         - if <[Nickname].contains_any[&k]>:
             - narrate "<proc[Colorize].context[Obfuscated names are blacklisted.|red]>"
             - stop
@@ -59,7 +59,7 @@ Nickname_Command:
             - narrate "<proc[Colorize].context[Illegal Name.|red]>"
             - stop
 
-        # -██ [ resetting ?
+    # @ ██ [  resetting ? ] ██
         - if <[Nickname]> == <[User].name> || <list[Clear|Reset|Remove|Delete|Default].contains[<[Nickname]>]>:
             - define Hover "<proc[Colorize].context[Click to change nickname.|green]><&nl> <&r><[User].name>"
             - define Text "<proc[Colorize].context[Nickname Reset to|yellow]> <&r><[User].name><&e>."
