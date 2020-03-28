@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /ping - shows your ping
-# | ██
-# % ██  [ Command ] ██
 Ping_Command:
     type: command
     name: ping
@@ -13,8 +9,11 @@ Ping_Command:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
+        
+    # @ ██ [  Check if specifying another User ] ██
         - if <context.args.get[1]||null> == null:
             - narrate "<proc[Colorize].context[Current Ping:|green]> <&e><Player.ping>"
         - else:
