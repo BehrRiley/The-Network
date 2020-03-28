@@ -19,6 +19,7 @@ VChat_Command:
         - define DiscordMessage "**<player.name.display_name.strip_color>**: <[Message].strip_color.escaped>"
         - bungeerun Discord Discord_Message def:519612225854504962|<[DiscordMessage]>
     script:
+    # @ ██ [  Check Args ] ██
         - if <list[On|off].contains[<context.args.get[1]>]> || <context.args.get[1]||null> == null:
             - if <context.args.get[2]||null> == null:
                 - define Arg <context.args.get[1]||null>
