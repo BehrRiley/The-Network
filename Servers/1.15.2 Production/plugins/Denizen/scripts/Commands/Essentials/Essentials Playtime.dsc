@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /playtime - Shows you a player's current playtime.
-# | ██
-# % ██  [ Command ] ██
 Playtime_Command:
     type: command
     name: playtime
@@ -15,13 +11,18 @@ Playtime_Command:
         - if <player.groups.contains[Moderation]>:
             - inject All_Player_Tabcomplete Instantly
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.size> > 1:
             - inject Command_Syntax Instantly
+        
+    # @ ██ [  Check if specifying another player ] ██
         - if <context.args.get[1]||null> == null:
             - define User <player>
         - else:
             - define User <context.args.get[1]>
             - inject Player_Verification_Offline Instantly
+        
+    # @ ██ [  Check if player is online ] ██
         - if <[User].is_online>:
             - define PDays "<&e><[User].statistic[PLAY_ONE_MINUTE].div[1728000].round_down><&f>"
             - define PHours "<&e><[User].statistic[PLAY_ONE_MINUTE].div[72000].round_down.mod[24]><&f>"
@@ -33,7 +34,7 @@ Playtime_Command:
             - define PMinutes <[User].flag[behrry.essentials.lastPMinutes]>
             - define FirstDays <[User].flag[behrry.essentials.lastFirstDays]>
 
-
+    # @ ██ [  Send Message ] ██
         - Define Text "<proc[User_Display_Simple].context[<[User]>]> <&2>P<&a>laytime<&2>: <[PDays]> <&2>d<&a>ays<&2>, <[PHours]> <&2>h<&a>ours<&2>, <[PMinutes]> <&2>m<&a>inute<&2>s <&b><&pipe> <&2>F<&a>irst <&2>L<&a>ogin: <[FirstDays]> <&2>d<&a>ays <&2>a<&a>go<&2>."
         - narrate <[Text]>
 
