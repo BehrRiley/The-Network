@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /home name takes you to your home.
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script | tab complete GUI for homes on blank | Add admin controls to use other homes
 RenameHome_Command:
     type: command
     name: renamehome
@@ -18,31 +13,31 @@ RenameHome_Command:
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <player.flag[behrry.essentials.homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
     script:
-        #@ Verify args
+    # @ ██ [  Verify args ] ██
         - if <context.args.get[3]||null> != null:
             - inject Command_Syntax Instantly
 
-        #@ Open GUI without args
+    # @ ██ [  Open GUI without args ] ██
         - if <context.args.get[1]||null> == null:
             - run Home_GUI Instantly def:Rename
             - stop
 
-        #@ Check for existing homes
+    # @ ██ [  Check for existing homes ] ██
         - if !<player.has_flag[behrry.essentials.homes]>:
             - narrate "<proc[Colorize].context[You have no homes.|red]>"
             - stop
 
-        #@ Check first home
+    # @ ██ [  Check first home ] ██
         - define Name <context.args.get[1]>
         - if !<player.flag[behrry.essentials.homes].parse[before[/]].contains[<[Name]>]||null>:
             - narrate "<proc[Colorize].context[Home does not exist.|red]>"
             - stop
 
-        #@ Check for new name
+    # @ ██ [  Check for new name ] ██
         - if <context.args.get[2]||null> != null:
             - define NewName <context.args.get[2]>
 
-            #@ Check new home name
+        # @ ██ [  Check new home name ] ██
             - if <[Name]> == <[NewName]>:
                 - narrate format:Colorize_Yellow "Nothing interesting happens."
                 - stop
@@ -56,14 +51,14 @@ RenameHome_Command:
                 - narrate format:Colorize_Red "Invalid home name."
                 - stop
         
-            #@ Rename old to new
+        # @ ██ [  Rename old to new ] ██
             - define Location <player.flag[behrry.essentials.homes].map_get[<[Name]>].as_location>
             - flag player behrry.essentials.homes:<-:<[Name]>/<[Location]>
             - flag player behrry.essentials.homes:->:<[NewName]>/<[Location]>
             - narrate "<&2>H<&a>ome <proc[Colorize].context[[<[Name]>]|yellow]> <&2>R<&a>enamed<&2> <&2>t<&a>o<&2>: <proc[Colorize].context[[<[NewName]>]|yellow]>"
             - stop
 
-        #@ Start chat listener
+    # @ ██ [  Start chat listener ] ██
         - flag player behrry.essentials.homerename:<[Name]>
         - narrate format:Colorize_green "Type a new Home Name."
         - while <player.is_online> && <player.has_flag[behrry.essentials.homerename]>:
