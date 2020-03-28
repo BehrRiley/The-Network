@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /TabOffline
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ 
 TabOffline_Command:
     type: command
     name: tabofflinemode
@@ -18,8 +13,11 @@ TabOffline_Command:
         - if <player.groups.in_group[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
+        
+    # @ ██ [  Check if specifying a player ] ██
         - if <context.args.get[1]||null> == null:
             - if <player.has_flag[behrry.essentials.tabofflinemode]>:
                 - flag <player> behrry.essentials.tabofflinemode:!
