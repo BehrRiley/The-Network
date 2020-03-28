@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /SetHome for home controls
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script | tab complete GUI for homes on blank, check for enemies near? GOOD IDEA FOR SETTINGS | Suggest good names based on location
 SetHome_Command:
     type: command
     name: sethome
@@ -17,15 +12,15 @@ SetHome_Command:
             - if <context.raw_args.contains_any[<player.flag[behrry.essentials.homes].parse[before[/]]>]>:
                 - determine "<proc[Colorize].context[This Home Exists Already!|red]>"
     script:
-        #@ Verify args
+    # @ ██ [  Verify args ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
 
-        #@ Define name/loc
+    # @ ██ [  Define name/loc ] ██
         - define Name <context.args.get[1]||null>
         - define Location <player.location.simple.as_location.add[0.5,0,0.5].with_yaw[<player.location.yaw>].with_pitch[<player.location.pitch>]>
 
-        #@ Check args
+    # @ ██ [  Check args ] ██
         - if !<[Name].matches[[a-zA-Z0-9-_]+]>:
             - narrate format:Colorize_Red "Home names should only be alphanumerical."
             - stop
@@ -36,6 +31,6 @@ SetHome_Command:
             - narrate format:Colorize_Red "Invalid home name."
             - stop
         
-        #@ Set Home
+    # @ ██ [  Set Home ] ██
         - flag <player> behrry.essentials.homes:->:<[Name]>/<[Location]>
         - narrate "<proc[Colorize].context[New home set:|green]> <&6>[<&e><[Name]><&6>]"
