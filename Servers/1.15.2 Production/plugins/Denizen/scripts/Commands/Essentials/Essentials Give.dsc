@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    //give Command for giving items
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | offline capabilities
 Give_Command:
     type: command
     name: give
