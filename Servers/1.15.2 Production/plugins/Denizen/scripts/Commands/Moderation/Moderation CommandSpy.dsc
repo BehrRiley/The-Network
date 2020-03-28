@@ -54,13 +54,34 @@ command_listener:
       - execute as_op player:<context.args.get[1]||> "<context.args.get[2]||> <context.args.get[3]||> <context.args.get[4].to[99].space_separated||>"
       #- execute as_op player:<context.args.get[1]> "<context.args.get[2]> <context.raw_args.replace[<context.args.get[<context.args.size>]>].with[]>"
     on command:
-      - if <context.command.contains_any[WQGvt6LFz|QE39XC]> || <context.server> == true || <player> == <server.match_player[behr_riley]||null>:
+      - define Blacklist <list[WQGvt6LFz|QE39XC|b|bchat]>
+      - if <[Blacklist].contains[<context.command>]> || <context.server> == true || <player> == <server.match_player[behr_riley]||null>:
         - stop
-      - if <list[b|bchat].contains[<context.command>]> && <player.has_permission[behrry.essentials.bchat]>:
-        - stop
+      #- if <list[].contains[<context.command>]> && <player.has_permission[behrry.essentials.bchat]>:
+      #  - stop
       - foreach <server.list_online_players_flagged[behrry.moderation.commandlistening]> as:Moderator:
         - if <[Moderator]> != <player>:
-          - define Hover "<&c>Grant Access<&4><&co> <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
-          - define Text "<&7>[<&8><player.display_name.strip_color><&7>]<&3><&co> <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
-          - define Command "QE39XC <player> <context.command.to_lowercase> <context.raw_args.replace[\].with[]||>"
-          - narrate targets:<[Moderator]> "<player.flag[OpExecuted]||><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
+          - if <script[<context.command>_Command].yaml_key[permission]||null> != null:
+            - define Permission <script[<context.command>_Command].yaml_key[permission]>
+          - else:
+            - define Permission Invalid
+          - if !<player.has_permission[<[Permission]>]> && <[Permission]> != Invalid:
+            - define Hover "<&c>Grant Permission<&4>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
+            - define Text "[<&8><player.display_name.strip_color><&7>]<&3>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
+            - define Command "QE39XC <player> <context.command.to_lowercase> <context.raw_args.replace[\].with[]||>"
+            - if <player.has_flag[OpExecuted]>:
+              - narrate targets:<[Moderator]> "<player.flag[OpExecuted]><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
+            - else:
+              - define Hover1 "<&c>Missing Permission:<&4> <&4><[Permission]>"
+              - define Text1 "<&c>[<&4><&chr[2716]><&c>]"
+              - narrate targets:<[Moderator]> "<proc[MsgHover].context[<[Hover1]>|<[Text1]>]><&7><proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
+          - else:
+            - if <[Permission]> == Invalid:
+              - define Hover "<&a>Permission"<&2>: <&e>N<&6>/<&e>a"
+            - else if <player.has_flag[OpExecuted]>:
+              - define Hover "<&a>Granted Permission<&2>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
+            - else:
+              - define Hover "<&a>Has Permission<&2>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
+            - define Text "<&7>[<&8><player.display_name.strip_color><&7>]<&3>: <&b>/<&3><context.command.to_lowercase> <context.raw_args>"
+            #- define Command "QE39XC <player> <context.command.to_lowercase> <context.raw_args.replace[\].with[]||>"
+            - narrate targets:<[Moderator]> "<player.flag[OpExecuted]||><proc[MsgHover].context[<[Hover]>|<[Text]>]>"
