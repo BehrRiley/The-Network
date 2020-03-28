@@ -19,11 +19,11 @@ deathback_Command:
             - inject Command_Syntax Instantly
 
     # @ ██ [  Check if player has death-back ] ██
-        - if !<player.has_flag[behrry.essentials.teleport.deathback]>:
+        - if !<player.has_flag[Behrry.Essentials.Teleport.DeathBack]>:
             - narrate format:Colorize_Red "No death location to return to."
             - stop
         
     # @ ██ [  Teleport Player ] ██
         - narrate format:Colorize_Green "Returning to death location."
         - flag <player> behrry.essentials.teleport.back:<player.location>
-        - teleport <player> <player.flag[behrry.essentials.teleport.deathback].as_location>
+        - teleport <player> <player.flag[Behrry.Essentials.Teleport.DeathBack].as_location>
