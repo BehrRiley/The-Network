@@ -16,7 +16,7 @@ Chat_Relay:
     # % ██ | Emoji:          <:Emoji_Name:1234567> |
     # % ██ | Animated Emoji: <a:Emoji_Name:123456> |
         - foreach <[RawMessage].unescaped.split> as:String:
-            # @ ██ [ Check for Ping ] ██
+        # @ ██ [ Check for Ping ] ██
             - define RawUserID <[String].after[@!].before[<&gt>]>
             - define Mentions <[Mentions].unescaped.as_list>
             - if <[Mentions].parse[id].contains[<[RawUserID]>]>:
@@ -25,14 +25,14 @@ Chat_Relay:
                 - define Strings:|:<element[<&3>@<&b><[User]><&r>].escaped>
                 - foreach next
         
-            # @ ██ [ Check for Emoji] ██
+        # @ ██ [ Check for Emoji] ██
             - else if <[String].starts_with[<&lt>]> && <[String].ends_with[<&gt>]>:
                 - define Tag <[String].after_last[:].before[<&gt>]>
                 - if <[Tag].is_integer> && <[Tag].length> > 10:
                     - define Strings:|:<&chr[25B2]>
                     - foreach next
             
-            # @ ██ [ Check for URL ] ██
+        # @ ██ [ Check for URL ] ██
             - else if <[String].contains[.]>:
                 - foreach <list[https://|http://|www.]> as:protocal:
                     - if <[String].starts_with[<[Protocal]>]>:
@@ -45,7 +45,7 @@ Chat_Relay:
                         - define Strings:|:<proc[MsgURL].context[<[Hover]>|<[Text]>|<[URL]>].escaped>
                         - foreach stop
                         
-            # @ ██ [ Text is normal ] ██
+        # @ ██ [ Text is normal ] ██
             - else:
                 - define Strings:|:<[String].escaped>
         
@@ -55,8 +55,10 @@ Chat_Relay:
         - define Message <[Strings].space_separated.unescaped.parse_color||>
         - define Chat "<[UserFormatted]><&3>: <&r><[Message]>"
 
-    # $ ██ [ To-Do: ] ██
-    # $ ██ | Add UserLinks as secondary definition for ignoring players
+    # $ ██ [ To-Do:                                                         ] ██
+    # - ██ | Add UserLinks as secondary definition for ignoring players     | ██
+    # - ██ | Linked File:                                                   | ██
+    # - ██ | .scripts/1.15.2 Production/Structure/Handlers/Chat Handler.dsc | ██
 
     # @ ██ [ Message Servers ] ██
         - foreach <bungee.list_servers.exclude[<bungee.server>]> as:Server:
