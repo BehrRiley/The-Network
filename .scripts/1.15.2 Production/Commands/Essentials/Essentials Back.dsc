@@ -4,7 +4,7 @@ back_Command:
     debug: false
     description: Returns you back to your last location.
     usage: /back
-    permission: behrry.essentials.back
+    permission: Behrry.Essentials.Back
     script:
     # @ ██ [  Check for args ] ██
         - if <context.args.get[1]||null> != null:
