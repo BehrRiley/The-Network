@@ -6,19 +6,13 @@ gamemodeinventory_Command:
     admindescription: Adjusts another player's or your inventory to the gamemode inventory specified.
     usage: /gamemodeinventory <&lt>Gamemode<&gt>
     adminusage: /gamemodeinventory (Player) <&lt>Gamemode<&gt>
-    permission: behrry.essentials.gamemodeinventory
+    permission: Behrry.Essentials.GamemodeInventory
     aliases:
         - gminv
     tab complete:
         - if <player.groups.contains[Moderation]>:
             - define Arg1 <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>]>
             - inject OneArg_Command_Tabcomplete Instantly
-
-            #- if !<player.has_Flag[behrry.essentials.tabofflinemode]>:
-            #    - if <context.args.size||0> == 0:
-            #        - determine <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>]>
-            #    - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            #        - determine <list[Adventure|Creative|Survival|Spectator].exclude[<player.gamemode>].filter[starts_with[<context.args.get[1]>]]>
     script:
         - if <context.args.get[3]||null> != null || <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
@@ -46,6 +40,6 @@ gamemodeinventory_Command:
                 - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
 
-        - flag player gamemode.inventory.changebypass
+        - flag player Gamemode.Inventory.Changebypass
         - inventory clear
-        - inventory set d:<player.inventory> o:<player.flag[gamemode.inventory.<[Gamemode]>].as_list>
+        - inventory set d:<player.inventory> o:<player.flag[Gamemode.Inventory.<[Gamemode]>].as_list>
