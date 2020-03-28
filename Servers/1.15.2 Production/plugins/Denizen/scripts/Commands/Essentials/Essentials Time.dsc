@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /Time - For setting the time
-# | ██
-# % ██  [ Command ] ██
 Time_Command:
     type: command
     name: time
@@ -18,10 +14,14 @@ Time_Command:
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <[Time].filter[starts_with[<context.args.get[1]>]]>
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
+
+    # @ ██ [  Check if Arg is a number ] ██
         - if <context.args.get[1].is_integer>:
             - define Int <context.args.get[1]>
+        # @ ██ [  Check if number is a valid number for usage ] ██
             - if <[Int]> < 0:
                 - narrate "<proc[Colorize].context[Time cannot be negative.|red]>"
                 - stop
@@ -33,6 +33,7 @@ Time_Command:
                 - stop
             - time <[Int]>t
             - define Name <&e><[Int]>
+    # @ ██ [  Match time with time of day by name ] ██
         - else:
             - define Arg <context.args.get[1]>
             - choose <[Arg]>:
@@ -68,6 +69,7 @@ Time_Command:
                     - define Name "<&e>Dawn"
                 - case default:
                     - inject Command_Syntax Instantly
+    # @ ██ [  Set Time ] ██
         - narrate "<proc[Colorize].context[Time set to:|green]> <[Name]>"
         - time <[Time]>
             
