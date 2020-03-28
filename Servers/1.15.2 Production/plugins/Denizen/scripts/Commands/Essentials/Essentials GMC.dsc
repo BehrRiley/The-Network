@@ -43,7 +43,7 @@ gmc_Command:
                 - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already in Creative Mode.|red]>"
         - else:
             - if <[User]> != <player>:
-                - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context['s Gamemode changed to:|red]> <&e>Creative"
+                - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s Gamemode changed to:|red]> <&e>Creative"
             - narrate targets:<[User]> "<proc[Colorize].context[Gamemode changed to:|green]> <&e>Creative"
             - adjust <[User]> gamemode:Creative
 
