@@ -4,7 +4,7 @@ Message_Command:
     debug: false
     description: Messages a player
     usage: /msg <&lt>Player<&gt> <&lt>Message<&gt>
-    permission: behrry.essentials.msg
+    permission: Behrry.Essentials.Msg
     aliases:
         - message
     tab complete:
@@ -19,7 +19,7 @@ Message_Command:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
 
-        - flag <[User]> behrry.chat.lastreply:<player.name>
+        - flag <[User]> Behrry.Chat.LastReply:<player.name>
         - define Message <context.raw_args.after[<context.args.get[1]><&sp>].parse_color><&r>
         - narrate targets:<player>  "<&7>[<&8><[User].name><&7>]<&1> <&chr[00ab]> <&9><[Message]>"
         - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>]<&1> <&chr[00bb]> <&9><[Message]>"
@@ -30,7 +30,7 @@ Reply_Command:
     debug: false
     description: Replies to the last player who messaged you.
     usage: /r <&lt>Message<&gt>
-    permission: behrry.essentials.reply
+    permission: Behrry.Essentials.Reply
     aliases:
         - reply
     script:
@@ -40,8 +40,8 @@ Reply_Command:
     # @ ██ [  Check if Arg is null still somehow ] ██
         - if <context.args.get[1]||null> != null:
         # @ ██ [  Check if player has a return recip. ] ██
-            - if <player.has_flag[behrry.chat.lastreply]>:
-                - define User <player.flag[behrry.chat.lastreply]>
+            - if <player.has_flag[Behrry.Chat.LastReply]>:
+                - define User <player.flag[Behrry.Chat.LastReply]>
                 - inject Player_Verification Instantly
             - else:
                 - narrate format:Colorize_Red "Nobody to respond to."
