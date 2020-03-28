@@ -6,7 +6,7 @@ MaxHealth_Command:
     usage: /maxhealth <&lt>Player<&gt> <&lt>#<&gt>
     aliases:
         - maxhp
-    permission: behrry.essentials.maxhealth
+    permission: Behrry.Essentials.MaxHealth
     tab complete:
         - inject Online_Player_Tabcomplete Instantly
     script:
