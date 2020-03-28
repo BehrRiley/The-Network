@@ -23,18 +23,11 @@ silentchest_Command:
       - flag player behrry.moderation.silentchest:!
       - narrate "<proc[Colorize].context[Silent Chest Mode Enabled.|green]>"
   script:
-    - choose <context.args.get[1]||null>:
-      - case "on":
-        - inject locally Activate Instantly
-      - case "off":
-        - inject locally Deactivate Instantly
-      - case "null":
-        - if <player.has_flag[behrry.moderation.silentchest]>:
-          - inject locally Deactivate Instantly
-        - else:
-          - inject locally Activate Instantly
-      - case default:
-        - inject Command_Syntax Instantly
+    - define Arg <context.args.get[1]||null>
+    - define ModeFlag behrry.moderation.silentchest
+    - define ModeName "Silent Chest"
+    - inject Activation_Arg_Command Instantly
+
 
 silentchest_listener:
   type: world
@@ -43,4 +36,4 @@ silentchest_listener:
     on player right clicks chest|*shulker*|trapped_chest:
         - if <player.has_flag[behrry.moderation.silentchest]>:
             - determine passively cancelled
-            - inventory open <player.location.cursor_on>
+            - inventory open <player.location.cursor_on.inventory>
