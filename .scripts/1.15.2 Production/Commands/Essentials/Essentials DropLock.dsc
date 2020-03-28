@@ -12,7 +12,7 @@ droplock_Command:
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
         - define Arg <context.args.get[1]||null>
-        - define ModeFlag "behrry.essentials.droplock"
+        - define ModeFlag "Behrry.Essentials.DropLock"
         - define ModeName "drop lock"
         - inject Activation_Arg Instantly
 
@@ -21,21 +21,21 @@ droplock_Command:
 #    debug: false
 #    events:
 #        on player quits:
-#            - if <player.has_flag[behrry.essentials.droplock]>:
+#            - if <player.has_flag[Behrry.Essentials.droplock]>:
 #                - flag player behrry.essentials.droplock:!
 #        on player picks up item:
 #        # @ ██ [  Check if player is in droplock mode ] ██
-#            - if <player.has_flag[behrry.essentials.droplock]>:
+#            - if <player.has_flag[Behrry.Essentials.droplock]>:
 #            # @ ██ [  Check for unique pickup ] ██
-#                - if <player.has_flag[behrry.essentials.pickup]>:
+#                - if <player.has_flag[Behrry.Essentials.Pickup]>:
 #                # @ ██ [  If the item is in the unique pickup list, allow pickup ] ██
-#                    - if <player.flag[behrry.essentials.pickup]> == <context.item>:
+#                    - if <player.flag[Behrry.Essentials.Pickup]> == <context.item>:
 #                        - stop
 #                - else:
 #                    - determine cancelled
 #        on player right clicks block:
 #        # @ ██ [  Check if player is in droplock mode ] ██
-#            - if <player.has_flag[behrry.essentials.droplock]>:
+#            - if <player.has_flag[Behrry.Essentials.droplock]>:
 #            # @ ██ [  Search for dropped items 0.5 blocks around the click location ] ██
 #                - define DroppedItems <player.location.precise_cursor_on.find.entities[DROPPED_ITEM].within[0.5].exclude[<player>]>
-#                - flag player behrry.essentials.pickup:->:<[DroppedItems]> duration:1t
+#                - flag player Behrry.Essentials.Pickup:->:<[DroppedItems]> duration:1t
