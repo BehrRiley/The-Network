@@ -4,7 +4,7 @@ Dynmap_Command:
     debug: false
     description: Gives you the dynmap link.
     usage: /dynmap
-    permission: behrry.essentials.dynmap
+    permission: Behrry.Essentials.Dynmap
     script:
         - if <context.args.get[1]||null> != null:
             - if <player.name> != Behr_Riley:
