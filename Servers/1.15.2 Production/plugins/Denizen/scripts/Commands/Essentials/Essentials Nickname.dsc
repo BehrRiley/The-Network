@@ -30,12 +30,11 @@ Nickname_Command:
             - if <player.groups.contains[Moderation]>:
                 - define User <context.args.get[1]>
                 - inject Player_Verification_Offline Instantly
-                - define AdminRan True
             - else:
                 - if <context.args.get[1]> == <player.name>:
                     - define User <player>
                 - else:
-                    - narrate "<proc[Colorize].context[You don't have permission to do that.|red]>"
+                    - narrate format:Colorize_Red "You don't have permission to do that."
                     - stop
             - define Nickname <context.args.get[2]>
                     
@@ -67,13 +66,14 @@ Nickname_Command:
             - define Command "nick "
             - narrate targets:<[User]> <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
             - adjust <[User]> display_name:<[User].name>
+            - flag <[User]> behrry.essentials.display_name:!
             - stop
 
         - define Hover "<proc[Colorize].context[Click to reset to:|green]><&nl> <&r><[User].display_name>"
         - define Text "<proc[Colorize].context[Your nickname has been changed to:|green]> <&r><[Nickname].parse_color>"
         - define Command "nick <[User].display_name.escaped.replace[&ss].with[&]>"
         - narrate targets:<[User]> <proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>
-        - if <[AdminRan].exists>:
-            - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
+        - if <[User]> != <player>:
+            - narrate "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
         - adjust <[User]> display_name:<[Nickname].parse_color>
         - flag <[User]> behrry.essentials.display_name:<[Nickname].parse_color>
