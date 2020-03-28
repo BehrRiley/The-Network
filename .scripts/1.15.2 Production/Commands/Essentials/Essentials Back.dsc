@@ -14,7 +14,7 @@ back_Command:
         - if <player.has_flag[Behrry.Essentials.Teleport.Back]>:
             - define BackLoc <player.flag[Behrry.Essentials.Teleport.Back].as_location>
             - narrate format:Colorize_Green "Returning to last location"
-            - flag <player> behrry.essentials.teleport.back:<player.location>
+            - flag <player> Behrry.Essentials.Teleport.Back:<player.location>
             - teleport <player> <[BackLoc]>
         - else:
             - narrate format:Colorize_Red "No back location to return to"
