@@ -11,9 +11,9 @@ Home_Command:
     adminusage: /home <&lt>player<&gt> <&lt>HomeName<&gt> (Remove)
     tab complete:
         - if <context.args.size||0> == 0:
-          - determine <player.flag[behrry.essentials.homes].parse[before[/]]||>
+          - determine <player.flag[Behrry.Essentials.Homes].parse[before[/]]||>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <player.flag[behrry.essentials.homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
+            - determine <player.flag[Behrry.Essentials.Homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
         - else if <context.args.size> == 1 && <context.raw_args.ends_with[<&sp>]>:
             - determine "remove"
         - else if <context.args.size> == 2 && !<context.raw_args.ends_with[<&sp>]>:
@@ -24,7 +24,7 @@ Home_Command:
             - inject Command_Syntax Instantly
 
     # @ ██ [  Check for existing homes ] ██
-        - if !<player.has_flag[behrry.essentials.homes]>:
+        - if !<player.has_flag[Behrry.Essentials.Homes]>:
             - narrate "<proc[Colorize].context[You have no homes.|red]>"
             - stop
 
@@ -71,12 +71,12 @@ Home_Command:
                 - define Relocate true
 
     # @ ██ [  check if the home exists ] ██
-        - if !<player.flag[behrry.essentials.homes].parse[before[/]].contains[<[Name]>]>:
+        - if !<player.flag[Behrry.Essentials.Homes].parse[before[/]].contains[<[Name]>]>:
             - narrate "<proc[Colorize].context[That home does not exist.|red]>"
             - stop
 
     # @ ██ [  Define the home location ] ██
-        - define Location <player.flag[behrry.essentials.homes].map_get[<[Name]>].as_location>
+        - define Location <player.flag[Behrry.Essentials.Homes].map_get[<[Name]>].as_location>
         
     # @ ██ [  Run removal if removing ] ██
         - if <[Remove]>:
@@ -86,9 +86,9 @@ Home_Command:
         
     # @ ██ [  Run relocate if relocating ] ██
         - if <[Relocate]>:
-            - flag player behrry.essentials.homes:<-:<[Name]>/<[Location]>
+            - flag player Behrry.Essentials.Homes:<-:<[Name]>/<[Location]>
             - define NewLocation <player.location.simple.as_location.add[0.5,0,0.5].with_yaw[<player.location.yaw>].with_pitch[<player.location.pitch>]>
-            - flag <player> behrry.essentials.homes:->:<[Name]>/<[NewLocation]>
+            - flag <player> Behrry.Essentials.Homes:->:<[Name]>/<[NewLocation]>
             - narrate "<&2>H<&a>ome <proc[Colorize].context[[<[Name]>]|yellow]> <&2>R<&a>elocated<&2>."
             - stop
         
@@ -106,7 +106,7 @@ Home_GUI:
     script:
     # @ ██ [  Create GUI properties ] ██
         - define Title "My Homes"
-        - define HomeCount <player.flag[behrry.essentials.homes].size>
+        - define HomeCount <player.flag[Behrry.Essentials.Homes].size>
         - if <[HomeCount].div[9].round_up.add[1]> > 2:
             - define size 36
             - define Title "<[Title]> (1-27)"
@@ -127,7 +127,7 @@ Home_GUI:
                 - define ActionLore "<&4>C<&c>lick <&4>t<&c>o <&4>D<&c>elete"
 
     # @ ██ [  Create Homelist ] ██
-        - define Homes <player.flag[behrry.essentials.homes]>
+        - define Homes <player.flag[Behrry.Essentials.Homes]>
         #- define HomeList:->:<item[Blank]>
         - foreach <[Homes]> as:Home:
             - define Name <[Home].before[/]>
@@ -200,12 +200,12 @@ HomeGUI_Handler:
                         - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
 
                     - case "Delete":
-                        - if !<player.has_flag[behrry.essentials.homewarning]>:
-                            - flag player behrry.essentials.homewarning duration:1m
+                        - if !<player.has_flag[Behrry.Essentials.homewarning]>:
+                            - flag player Behrry.Essentials.Homewarning duration:1m
                             - narrate format:Colorize_Red "Are you sure you want to delete?"
                             - stop
                         - else:
-                            - flag player behrry.essentials.homewarning:!
+                            - flag player Behrry.Essentials.Homewarning:!
                             - execute as_player "home <context.item.nbt[name]> remove"
                             - run Home_GUI Instantly def:Teleport
 
@@ -220,7 +220,7 @@ HomeGUI_Handler:
                     - case "menuDelete":
                         - run Home_GUI Instantly def:Delete
                     - case "menuAddHome":
-                        - execute as_player "sethome Home<player.flag[behrry.essentials.homes].size.add[1]||>"
+                        - execute as_player "sethome Home<player.flag[Behrry.Essentials.Homes].size.add[1]||>"
                         - run Home_GUI Instantly def:Teleport
 
         on player drags in inventory:
