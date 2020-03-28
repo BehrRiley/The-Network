@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /settings - Adjusts settings
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | GUI
 settings_Command:
     type: command
     name: settings
@@ -11,10 +6,10 @@ settings_Command:
     usage: /settings (Setting (On/Off))
     permission: behrry.essentials.settings
     script:
-        #@ Check for args
+    # @ ██ [  Check for args ] ██
         #- to-do: GUI
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
 
-        #@ Define settings
+    # @ ██ [  Define settings ] ██
         - define Settings <list[settings.essentials.bedspawn]>
