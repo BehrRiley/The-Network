@@ -10,27 +10,27 @@ Teleport_Command:
         - tp
         - tpa
     script:
-        #@ Check args
+    # @ ██ [  Check args ] ██
         - if <context.args.get[1]||null> == null:
             - inject Command_Syntax Instantly
 
-        #@ Check player arg
+    # @ ██ [  Check player arg ] ██
         - define User <context.args.get[1]>
         - inject Player_Verification Instantly
 
-        #@ Check for multi-player teleporting
+    # @ ██ [  Check for multi-player teleporting ] ██
         - if <context.args.get[2]||null> == null:
-            #@ Check if trying to teleport to self
+        # @ ██ [  Check if trying to teleport to self ] ██
             - if <[User]> == <player>:
                 - define reason "You cannot teleport to yourself."
                 - inject Command_Error Instantly
-            #@ Check if Moderator, bypass
+        # @ ██ [  Check if Moderator, bypass ] ██
             - if <player.in_group[Moderation]> && <[User].name> != Behr_Riley:
                 - flag <Player> behrry.essentials.teleport.back:<player.location>
                 - teleport <player> <[User].location>
                 - narrate "<proc[Colorize].context[You were teleported to:|green]> <&r><[User].display_name>"
             - else:
-            #@ Check if player is still requested
+        # @ ██ [  Check if player is still requested ] ██
                 - if <[User].flag[behrry.essentials.teleport.request].parse[before[/]].contains[<Player>]||false>:
                     - narrate format:Colorize_Red "Teleport request still pending."
                     - stop
@@ -56,7 +56,7 @@ Teleport_Command:
                 - narrate targets:<[User]> "<&b>| <[Accept]> <&b>| <[Decline]> <&b>| <proc[User_Display_Simple].context[<player>]> <proc[Colorize].context[is requesting to teleport to you.|green]>"
                 - narrate targets:<player> "<&b>| <[Cancel]> <&b>| <proc[Colorize].context[Teleport request sent to:|green]> <proc[User_Display_Simple].context[<[User]>]><&2>."
         - else:
-            #@ Check if canceling
+        # @ ██ [  Check if canceling ] ██
             - if <context.args.get[2]||null> == Cancel:
                 - if <[User].has_flag[behrry.essentials.teleport.request]>:
                     - if <[User].flag[behrry.essentials.teleport.request].parse[before[/]].contains[<player>]>:
@@ -76,13 +76,11 @@ Teleport_Command:
                         - narrate Format:Colorize_Red "Teleport request still pending."
                         - stop
 
-
-#######################################################################################################
-            #@ Check if a moderator
+        # @ ██ [  Check if a moderator ] ██
             - if !<player.in_group[Moderation]>:
                 - inject Admin_Permission_Denied Instantly
 
-            #@ Teleport multiple people to last player
+        # @ ██ [  Teleport multiple people to last player ] ██
             - foreach <context.raw_args.split[<&sp>].get[1].to[<context.args.size.sub[1]>]> as:User:
                 - inject Player_Verification
                 - if <[PlayerList].contains[<[User]>]||false>:
