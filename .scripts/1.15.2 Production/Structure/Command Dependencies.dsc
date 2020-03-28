@@ -87,8 +87,8 @@ User_Display_Simple:
             - determine "<proc[Colorize].context[<[User].name>|yellow]>"
 
 # @ ██  [ Logging chat for global chat ] ██
-# @ ██  [ Usage ]  - define Log <LoggedText.escaped>
-# @ ██  [ Usage ]  - inject ChatLog Instantly
+# @ ██  [ Usage ]  - define Log SettingsKey/<[Message]>
+# @ ██  [       ]  - inject ChatLog Instantly
 Chat_Logger:
     type: task
     debug: false
@@ -103,7 +103,6 @@ Chat_Logger:
 # @ ██  [ Tab-completes Players Online ] ██
 # @ ██  [ Usage ] - define iArg #
 # @ ██  [       ] - inject Online_Player_Tabcomplete Instantly
-# - ██  [ Todo: ]  make this universal arg-numbered, used in: fly, 
 Online_Player_Tabcomplete:
     type: task
     debug: false
