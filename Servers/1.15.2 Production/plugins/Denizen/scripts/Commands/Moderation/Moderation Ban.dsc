@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /ban - returns you to where you teleported from
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script, create out of combat bypass | cooldown | Bypass monsters near
 Ban_Command:
     type: command
     name: ban
@@ -13,14 +8,14 @@ Ban_Command:
     tab complete:
         - inject All_Player_Tabcomplete Instantly
     script:
-        #@ Verify args
+    # @ ██ [  Verify args ] ██
         - if <context.args.get[2]||null> == null:
             - inject Command_Syntax Instantly
-        #@ Verify player
+    # @ ██ [  Verify player ] ██
         - define User <context.args.get[1]>
         - inject Player_Verification_Offline Instantly
 
-        #@ Check if player is a moderator
+    # @ ██ [  Check if player is a moderator ] ██
         - if <[User].in_group[Moderation]>:
             - if <[User]> == <player>:
                 - narrate Colorize_Red "You cannot ban yourself."
@@ -29,7 +24,7 @@ Ban_Command:
                 - narrate Colorize_Red "This player cannot be banned."
                 - stop
 
-        #@ Check if reason is specified
+    # @ ██ [  Check if reason is specified ] ██
         - if <context.args.get[2]||null> != null:
             - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
             - announce "<proc[User_Display_Simple].context[<[User]>]> <&e>was banned for: <&a><[Reason]>"
