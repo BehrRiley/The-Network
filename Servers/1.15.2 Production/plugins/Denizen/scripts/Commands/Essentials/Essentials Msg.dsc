@@ -17,8 +17,8 @@ Message_Command:
         - if <context.args.size||0> < 2:
             - inject Command_Syntax Instantly
 
-            - define User <context.args.get[1]>
-            - inject Player_Verification Instantly
+        - define User <context.args.get[1]>
+        - inject Player_Verification Instantly
         - if <[User]> == <player>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
             - stop
