@@ -3,7 +3,7 @@ bchat_Command:
     name: bchat
     debug: false
     description: Enables or disables bchat
-    permission: behrry.essentials.bchat
+    permission: Behrry.Essentials.BChat
     usage: /bchat ((on/off)/(Message))/<&lt>Message<&gt>
     tab complete:
         - define Arg1 <list[on|off]>
@@ -11,7 +11,7 @@ bchat_Command:
     aliases:
         - b
     chat:
-        - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
+        - define Targets <server.list_online_players.filter[has_permission[Behrry.Essentials.BChat]]>
         - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
         - narrate targets:<[Targets]> "<[Prefix]> <&7><context.raw_args.parse_color>"
     script:
