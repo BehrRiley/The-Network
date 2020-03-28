@@ -4,7 +4,7 @@ inventorysee_Command:
     debug: false
     description: Views another player's inventory
     usage: /inventorysee <&lt>Player<&gt>
-    permission: behrry.essentials.inventorysee
+    permission: Behrry.Essentials.InventorySee
     aliases:
       - invsee
       - inv
