@@ -4,7 +4,7 @@ Home_Command:
     debug: false
     description: Teleports you to a home.
     admindescription: Teleports you to a home, or another player's home.
-    permission: behrry.essentials.home
+    permission: Behrry.Essentials.Home
     aliases:
       - h
     usage: /home <&lt>HomeName<&gt> (Remove/Relocate)
@@ -80,7 +80,7 @@ Home_Command:
         
     # @ ██ [  Run removal if removing ] ██
         - if <[Remove]>:
-            - flag player behrry.essentials.homes:<-:<[Name]>/<[Location]>
+            - flag player Behrry.Essentials.Homes:<-:<[Name]>/<[Location]>
             - narrate "<&2>H<&a>ome <proc[Colorize].context[[<[Name]>]|yellow]> <&2>R<&a>emoved<&2>."
             - stop
         
@@ -93,7 +93,7 @@ Home_Command:
             - stop
         
     # @ ██ [  Teleport to Home ] ██
-        - flag <player> behrry.essentials.teleport.back:<player.location>
+        - flag <player> Behrry.Essentials.Teleport.Back:<player.location>
         - if !<[Location].chunk.is_loaded>:
             - chunkload <[Location].chunk> duration:20s
         - teleport <player> <[Location]>
@@ -200,12 +200,12 @@ HomeGUI_Handler:
                         - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
 
                     - case "Delete":
-                        - if !<player.has_flag[Behrry.Essentials.homewarning]>:
+                        - if !<player.has_flag[Behrry.Essentials.HomeWarning]>:
                             - flag player Behrry.Essentials.Homewarning duration:1m
                             - narrate format:Colorize_Red "Are you sure you want to delete?"
                             - stop
                         - else:
-                            - flag player Behrry.Essentials.Homewarning:!
+                            - flag player Behrry.Essentials.HomeWarning:!
                             - execute as_player "home <context.item.nbt[name]> remove"
                             - run Home_GUI Instantly def:Teleport
 
