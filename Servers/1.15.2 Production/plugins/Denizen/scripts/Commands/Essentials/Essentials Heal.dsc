@@ -4,7 +4,7 @@ Heal_Command:
     debug: false
     description: Heals a player
     usage: /heal (player)
-    permission: behrry.essentials.heal
+    permission: Behrry.Essentials.Heal
     tab complete:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
