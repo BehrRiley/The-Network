@@ -14,11 +14,16 @@ deathback_Command:
     aliases:
         - dback
     script:
+    # @ ██ [  Check Args ] ██
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
-        - if <player.has_flag[behrry.essentials.teleport.deathback]>:
-            - narrate format:Colorize_Green "Returning to death location."
-            - flag <player> behrry.essentials.teleport.back:<player.location>
-            - teleport <player> <player.flag[behrry.essentials.teleport.deathback].as_location>
-        - else:
+
+    # @ ██ [  Check if player has death-back ] ██
+        - if !<player.has_flag[behrry.essentials.teleport.deathback]>:
             - narrate format:Colorize_Red "No death location to return to."
+            - stop
+        
+    # @ ██ [  Teleport Player ] ██
+        - narrate format:Colorize_Green "Returning to death location."
+        - flag <player> behrry.essentials.teleport.back:<player.location>
+        - teleport <player> <player.flag[behrry.essentials.teleport.deathback].as_location>
