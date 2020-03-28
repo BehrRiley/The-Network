@@ -3,7 +3,7 @@ Head_Command:
     name: head
     description: Gives you a player's head.
     usage: /head <&lt>Name<&gt> (UUID)
-    permission: behrry.essentials.head
+    permission: Behrry.Essentials.Head
     script:
     # @ ██ [  Check Args ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
