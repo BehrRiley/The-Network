@@ -9,7 +9,7 @@ deathback_Command:
     name: deathback
     debug: false
     description: Returns you back your death location.
-    permission: behrry.essentials.dback
+    permission: Behrry.Essentials.DBack
     usage: /deathback
     aliases:
         - dback
