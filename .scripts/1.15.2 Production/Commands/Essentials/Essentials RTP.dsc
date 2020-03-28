@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /rtp - takes you to the rtp!
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script, create out of combat bypass | cooldown | Bypass monsters near
 RTP_Command:
     type: command
     name: rtp
@@ -11,19 +6,19 @@ RTP_Command:
     usage: /rtp
     permission: behrry.essentials.rtp
     script:
-        #@ Check for args
+    # @ ██ [  Check for args ] ██
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
 
-        #@ Define integers
+    # @ ██ [  Define integers ] ██
         - define distance 6000
 
-        #@ Check world
+    # @ ██ [  Check world ] ██
         - if <player.world.name> != World:
             - narrate "<proc[Colorize].context[This cannot be done in this world.|red]>"
             - stop
         
-        #@ Check for cooldown
+    # @ ██ [  Check for cooldown ] ██
         - if <player.has_flag[behrry.essentials.rtpcooldown]>:
             - narrate "<proc[Colorize].context[You must wait:|red]> <player.flag[behrry.essentials.rtpcooldown].expiration.formatted>> <proc[Colorize].context[to RTP again.|red]>"
             - stop
@@ -31,7 +26,7 @@ RTP_Command:
         - flag player behrry.essentials.rtpcooldown duration:1m
         - cast levitation power:30 duration:1s
         - wait .8s
-        #@ Define bad areas
+    # @ ██ [  Define bad areas ] ██
         - define Blacklist <list[Lava|Water|Leaves|ice]>
         - repeat 100:
             - define x <util.random.int[-<[Distance]>].to[<[Distance]>]>
