@@ -33,14 +33,14 @@ Chat_Handler:
             - run locally GroupManager Instantly
 
         # @ ██ [  BChat Check, Formatting & Print ] ██
-            - if <player.has_flag[behrry.essentials.bchat]>:
+            - if <player.has_flag[Behrry.Essentials.BChat]>:
                 - define Targets <server.list_online_players.filter[has_permission[behrry.essentials.bchat]]>
                 - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
                 - narrate targets:<[Targets]> "<[Prefix]> <&7><[Message].parse_color>"
                 - stop
 
         # @ ██ [  VoiceChat Check, Formatting & Print ] ██
-            - if <player.has_flag[behrry.essentials.voicechat]>:
+            - if <player.has_flag[Behrry.Essentials.VoiceChat]>:
                 - define Targets <server.list_online_players_flagged[behrry.essentials.voicechat]>
                 - define Prefix "<&b>[┤<proc[Colorize].context[VoiceChat]|Blue]><player.display_name||<player.name>><&3>:<&r>"
                 - narrate targets:<[Targets]> "<[Prefix]> <[Message].parse_color><&r>"
@@ -60,7 +60,7 @@ Chat_Handler:
         # @ ██ [  Run individual player checks ] ██
             - foreach <server.list_online_players> as:Player:
             # @ ██ [  Check if player is ignoring chatter ] ██
-                - if <[Player].flag[behrry.essentials.ignorelist].contains[<player>]||false>:
+                - if <[Player].flag[Behrry.Essentials.IgnoreList].contains[<player>]||false>:
                     - define Blacklist:->:<[Player]>
 
         # @ ██ [  Log chat ] ██
@@ -75,7 +75,7 @@ Chat_Handler:
                     - announce <[NewMessage]>
             - if <bungee.list_servers.contains[Discord]||false>:
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
-            - if <player.has_flag[behrry.essentials.display_name]>:
+            - if <player.has_flag[Behrry.Essentials.Display_Name]>:
                 - announce to_console format:Console_Chatter_displayname_Format "<[Message]>"
             - else:
                 - announce to_console format:Console_Chatter_Format "<[Message]>"
@@ -95,22 +95,22 @@ Discord_Relay:
         # % Guessing with key/value mapping - playertag/discordtag
         #^- define User <[UserLink].before[/]>
         #^- foreach <server.list_online_players> as:Player:
-        #^    - if <[player].has_flag[behrry.essentials.ignorelist]>:
-        #^        - if <player.flag[behrry.essentials.ignorelist].contains[<[User]>]>:
+        #^    - if <[player].has_flag[Behrry.Essentials.IgnoreList]>:
+        #^        - if <player.flag[Behrry.Essentials.IgnoreList].contains[<[User]>]>:
         #^            - define Blacklist:->:<[User]>
 
         # @ ██ [ Check if player is Muted ] ██
-            - if <[User].has_flag[behrry.moderation.muted]>:
-                - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
-                - narrate format:Muted_Chat_Format targets:<[Moderation].include[<[User]>]> "<[Message].unescaped.strip_color>"
-                - stop
+        # ^    - if <[User].has_flag[behrry.moderation.muted]>:
+        # ^        - define Moderation <server.list_online_players.filter[in_group[Moderation]]>
+        # ^        - narrate format:Muted_Chat_Format targets:<[Moderation].include[<[User]>]> "<[Message].unescaped.strip_color>"
+        # ^        - stop
         # @ ██ [ Log the Chat ] ██
             - define Log Discord/<[Message].unescaped>
             - inject Chat_Logger Instantly
 
         # @ ██ [ Print to Chat ] ██
             - narrate targets:<server.list_online_players.exclude[<[BlackList]>]> "<[Message].unescaped>"
-            - announce "<[Message].unescaped>"
+            #- announce "<[Message].unescaped>"
     
 
 Muted_Chat_Format:
@@ -120,7 +120,7 @@ Muted_Chat_Format:
 Console_Chatter_displayname_Format:
     type: format
     debug: false
-    format: "<&3>[<&7>Chatter<&3>] <&r><player.flag[behrry.essentials.display_name]> <&8>(<&7><player.name><&8>)<&b>:<&r> <text>"
+    format: "<&3>[<&7>Chatter<&3>] <&r><player.flag[Behrry.Essentials.Display_Name]> <&8>(<&7><player.name><&8>)<&b>:<&r> <text>"
 Console_Chatter_Format:
     type: format
     debug: false
