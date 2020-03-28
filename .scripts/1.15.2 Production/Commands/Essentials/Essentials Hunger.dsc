@@ -4,7 +4,7 @@ Hunger_Command:
     debug: false
     description: Hungers or satiates a player's hunger.
     usage: /hunger (player) <&lt>#<&gt>
-    permission: behrry.essentials.hunger
+    permission: Behrry.Essentials.Hunger
     tab complete:
         - inject Online_Player_Tabcomplete Instantly
     script:
