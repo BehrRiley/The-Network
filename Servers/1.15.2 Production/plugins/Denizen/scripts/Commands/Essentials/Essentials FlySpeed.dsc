@@ -8,7 +8,7 @@ FlySpeed_Command:
     adminusage: /flyspeed (Player) #/Default
     aliases:
         - fs
-    permission: behrry.essentials.flyspeed
+    permission: Behrry.Essentials.Flyspeed
     tab complete:
         - if <player.groups.contains[Moderation]>:
             - define Arg2 <list[Lightspeed|ludicrous|Plad]>
