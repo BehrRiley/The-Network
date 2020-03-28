@@ -4,7 +4,7 @@ groundclean_Command:
     debug: false
     description: Cleans the ground of dropped items.
     usage: /groundclean
-    permission: behrry.essentials.groundclean
+    permission: Behrry.Essentials.GroundClean
     aliases:
         - cleanground
     script:
