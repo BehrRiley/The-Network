@@ -54,7 +54,7 @@ Chat_Handler:
             - define Hover "<proc[Colorize].context[Real Name:|green]><&nl><player.name><&nl><proc[Colorize].context[Click to Message|green]>"
             - define Text "<[Prefix]><&b>:<&r> <[Message]>"
             - define Command "message <player.name> "
-            - define NewMessage "<proc[MsgCmd].context[<[Hover]>|<[Text]>|<[Command]>]>"
+            - define NewMessage "<proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>"
             - define DiscordMessage "**<player.display_name.strip_color>**: <[Message].strip_color>"
                 
         # @ ██ [  Run individual player checks ] ██
