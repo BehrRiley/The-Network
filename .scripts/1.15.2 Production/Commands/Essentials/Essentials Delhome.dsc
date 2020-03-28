@@ -16,14 +16,15 @@ DelHome_Command:
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
             - determine <player.flag[behrry.essentials.homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
     script:
-        #@ Verify args
+    # @ ██ [  Verify args ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
 
-        #@ Check for existing homes
+    # @ ██ [  Check for existing homes ] ██
         - if !<player.has_flag[behrry.essentials.homes]>:
             - narrate "<proc[Colorize].context[You have no homes.|red]>"
             - stop
-
+    
+    # @ ██ [  Re-Route Command ] ██
         - define Home <context.args.get[1]>
         - execute as_player "home <[Home]> remove"
