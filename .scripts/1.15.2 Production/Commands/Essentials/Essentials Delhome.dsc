@@ -8,7 +8,7 @@ DelHome_Command:
     name: delhome
     debug: false
     description: Deletes a specified name.
-    permission: behrry.essentials.delhome
+    permission: Behrry.Essentials.Delhome
     usage: /delhome <&lt>HomeName<&gt>
     tab complete:
         - if <context.args.size||0> == 0:
