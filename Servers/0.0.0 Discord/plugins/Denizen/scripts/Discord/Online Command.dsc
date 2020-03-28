@@ -15,6 +15,7 @@ Online_DCommand:
       - stop
 
     # @ ██ [ Verify Message ] ██
+    - announce to_console "<[RawMessage]>"
     - if <[RawMessage]> == "null":
       - stop
 
