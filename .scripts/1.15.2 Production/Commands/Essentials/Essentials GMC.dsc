@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /gmc - gamemode Creative command
-# | ██
-# % ██  [ Command ] ██
 gmc_Command:
     type: command
     name: gmc
@@ -15,11 +11,11 @@ gmc_Command:
         - if <player.groups.contains[Moderation]>:
             - inject Online_Player_Tabcomplete Instantly
     script:
-        #@ Verify args
+    # @ ██ [  Verify args ] ██
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
             
-        #@ Check for self or named player
+    # @ ██ [  Check for self or named player ] ██
         - if <context.args.get[1]||null> == null:
             - define User <player>
         - else:
@@ -29,13 +25,13 @@ gmc_Command:
             - else:
                 - inject Admin_Permission_Denied Instantly
         
-        #@ Check if blacklisted
+    # @ ██ [  Check if blacklisted ] ██
         - define Blacklist <list[Bees|Bees_The_Nether|Bees_The_End]>
         - if <[Blacklist].contains[<[User].world.name>]>:
             - narrate format:Colorize_Red "Creative in this world is not allowed."
             - stop
             
-        #@ Check if player is already in creative
+    # @ ██ [  Check if player is already in creative ] ██
         - if <[User].gamemode> == Creative:
             - if <[User]> == <player>:
                 - narrate "<proc[Colorize].context[You are already in Creative Mode.|red]>"
