@@ -5,10 +5,7 @@
 #__**WinSCP | FTP Access**__
 #<https://winscp.net/eng/download.php>
 #**```yml
-#host: banditcraft.pro
-#port: 21 (FTP Default)
-#Username: adsync
-#Password: TVhG%MXXrUZe$Zn5HHF$H3B7SjWRg%
+
 #```**
 #__**Plugin/File Repositories**__
 #<https://papermc.io/downloads>
