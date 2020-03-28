@@ -36,12 +36,12 @@ Mute_Command:
         - define User <context.args.get[1]>
         - inject Player_Verification_Offline Instantly
         - if <context.args.get[2]||null> == null:
-            - if <player.has_flag[muted]>:
+            - if <player.has_flag[behrry.moderation.muted]>:
                 - narrate "<proc[Colorize].context[Player is already muted.|Red]>"
             - else:
-                - flag <[User]> muted
+                - flag <[User]> behrry.moderation.muted
                 - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[was muted.|Red]>"
         - else if <context.args.get[2]> == remove:
-            - flag <[User]> muted:!
+            - flag <[User]> behrry.moderation.muted:!
         - else:
             - inject Command_Syntax Instantly
