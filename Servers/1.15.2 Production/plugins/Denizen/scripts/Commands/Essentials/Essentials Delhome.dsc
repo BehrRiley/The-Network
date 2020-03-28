@@ -12,16 +12,16 @@ DelHome_Command:
     usage: /delhome <&lt>HomeName<&gt>
     tab complete:
         - if <context.args.size||0> == 0:
-          - determine <player.flag[behrry.essentials.homes].parse[before[/]]||>
+          - determine <player.flag[Behrry.Essentials.Homes].parse[before[/]]||>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <player.flag[behrry.essentials.homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
+            - determine <player.flag[Behrry.Essentials.Homes].parse[before[/]].filter[starts_with[<context.args.get[1]>]]||>
     script:
     # @ ██ [  Verify args ] ██
         - if <context.args.get[1]||null> == null || <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
 
     # @ ██ [  Check for existing homes ] ██
-        - if !<player.has_flag[behrry.essentials.homes]>:
+        - if !<player.has_flag[Behrry.Essentials.Homes]>:
             - narrate "<proc[Colorize].context[You have no homes.|red]>"
             - stop
     
