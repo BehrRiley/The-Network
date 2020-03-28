@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /weather - Controls the weather
-# | ██
-# % ██  [ Command ] ██
 Weather_Command:
     type: command
     name: weather
