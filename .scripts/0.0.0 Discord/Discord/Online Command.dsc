@@ -14,6 +14,10 @@ Online_DCommand:
     - if !<[Whitelist].parse[before[/]].contains[<[Channel]>]>:
       - stop
 
+    # @ ██ [ Verify Message ] ██
+    - if <[RawMessage]> == "null":
+      - stop
+
     # @ ██ [ Verify Syntax ] ██
     - define Message <[RawMessage].unescaped>
     - if !<[Message].starts_with[/online]>:
