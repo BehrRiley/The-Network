@@ -1,7 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /flyspeed - Changes the speed you fly at.
-# | ██
-# % ██  [ Command ] ██
 FlySpeed_Command:
     type: command
     name: flyspeed
