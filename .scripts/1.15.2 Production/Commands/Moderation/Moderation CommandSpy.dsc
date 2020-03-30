@@ -54,7 +54,7 @@ command_listener:
       - execute as_op player:<context.args.get[1]||> "<context.args.get[2]||> <context.args.get[3]||> <context.args.get[4].to[99].space_separated||>"
       #- execute as_op player:<context.args.get[1]> "<context.args.get[2]> <context.raw_args.replace[<context.args.get[<context.args.size>]>].with[]>"
     on command:
-      - define Blacklist <list[WQGvt6LFz|QE39XC|b|bchat]>
+      - define Blacklist <list[WQGvt6LFz|QE39XC|b|bchat|dialogue]>
       - if <[Blacklist].contains[<context.command>]> || <context.server> == true || <player> == <server.match_player[behr_riley]||null>:
         - stop
       #- if <list[].contains[<context.command>]> && <player.has_permission[behrry.essentials.bchat]>:
