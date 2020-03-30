@@ -5,6 +5,9 @@ Login_Handler:
         on bungee player joins network:
         # % <context.name> returns the connecting player's name.
         # % <context.uuid> returns the connection player's UUID.
+            - wait 1s
+            - if <player.has_flag[justjoined]>:
+                - stop
         # @ ██ [Format the Message ] ██
             - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[joined the network.|yellow]>"
             - define DiscordMessage ":heavy_plus_sign: **<player.flag[behrry.essentials.display_name].strip_color||<player.name>>** has joined the network."
@@ -42,6 +45,7 @@ Login_Handler:
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
 
         on player logs in for the first time:
+            - flag player justjoined duration:10s
         # @ ██ [ Format the message ] ██
             - define Message "▲ <&6><player.name> <&d>joined the network for the first time! <&r>▲"
             - define e <&lt>a:sheep:693346095249752066<&gt>
