@@ -11,7 +11,7 @@ skin_url_handler:
         on npc command:
             - if <context.args.get[1].to_lowercase||null> != skin:
                 - stop
-            - if !<li@-u|--url.contains[<context.args.get[2].to_lowercase||null>]>:
+            - if !<list[-u|--url].contains[<context.args.get[2].to_lowercase||null>]>:
                 - stop
             - determine passively fulfilled
 
