@@ -75,6 +75,8 @@ Essentials:
                 - flag player gamemode.inventory.<context.gamemode>:<player.inventory.list_contents>
         on player changes sign:
             - determine <context.new.parse[parse_color]>
+        on entity spawns because:natural in:1152Spawn:
+            - determine cancelled
         #on player damages player:
         #    - if <context.entity.gamemode||null> == creative:
         #        - if !<context.entity.has_flag[smacked]>:
