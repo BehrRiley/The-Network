@@ -1,7 +1,7 @@
 murdermobs_Command:
     type: command
     name: murdermobs
-    debug: true
+    debug: false
     description: Murders the mobs around all players.
     usage: /murdermobs (Radius) (Mobs)
     permission: behrry.essentials.murdermobs
