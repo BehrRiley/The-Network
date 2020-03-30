@@ -20,6 +20,8 @@ Discord_Handler:
         - stop
       - if <[Author]> == <[Bot]>:
         - stop
+      - if <[Author].id.contains[234395307759108106]>:
+        - stop
       - if <[DM]>:
         #^ - ~run Report_DCommand def:<[DM]>|<[Group]>|<[Message]>|<[Author]>
         #^ - ~run Execute_DCommand def:<[DM]>|<[Group]>|<[Message]>|<[Author]>
