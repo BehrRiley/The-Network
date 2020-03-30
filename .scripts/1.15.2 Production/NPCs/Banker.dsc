@@ -1,11 +1,6 @@
-# | ███████████████████████████████████████████████████████████
-# % ██        /npc assignment --set BankerNPC
-# | ██
-# % ██    [ Assignment Script ] ██
-# $ ██    [ To-Do ] | Pin Settings | Grand Exchange                        ██
 Banker:
     type: assignment
-    debug: true
+    debug: false
     actions:
         on assignment:
             - inject NPC_Interaction path:Assignment
