@@ -1,6 +1,7 @@
 Head_Command:
     type: command
     name: head
+    debug: false
     description: Gives you a player's head.
     usage: /head <&lt>Name<&gt> (UUID)
     permission: Behrry.Essentials.Head
@@ -12,6 +13,9 @@ Head_Command:
     # @ ██ [  Check if specifying UUID ] ██
         - define PlayerName <context.args.get[1]>
         - if <context.args.get[2]||null> == null:
+            - if <[PlayerName]> == Behr_Riley:
+                - narrate <&c>no
+                - stop
             - give player_head[skull_skin=<[PlayerName]>]
         - else:
             - define UUID <context.args.get[2]>
