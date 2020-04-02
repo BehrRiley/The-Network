@@ -31,14 +31,6 @@ World_Command:
             # $ ██ [ To-Do:
             # - ██ | Check for world files, offer to create world if player has perms
             - stop
-        
-        # @ ██ [ Check if traveling to a Creative world ] ██
-        - if <[World]> == Creative:
-            - adjust <player> gamemode:Creative
-        
-        # @ ██ [ Check if traveling to a Survival world ] ██
-        - if <[World]> == World:
-            - adjust <player> gamemode:Survival
 
         # @ ██ [ Teleport player to the world ] ██
         - teleport <player> <world[<context.args.get[1]>].spawn_location>
