@@ -129,6 +129,7 @@ Console_Chatter_Format:
 
     # $ ██ [ To-Do:                   ] ██
     # - ██ | These should be flagged  | ██
+    
 Ranks:
     type: yaml data
     Moderation:
