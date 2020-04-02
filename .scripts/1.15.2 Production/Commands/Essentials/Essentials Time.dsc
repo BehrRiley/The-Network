@@ -33,6 +33,7 @@ Time_Command:
                 - stop
             - time <[Int]>t
             - define Name <&e><[Int]>
+            - narrate "<proc[Colorize].context[Time set to:|green]> <&e><[Int]>"
     # @ ██ [  Match time with time of day by name ] ██
         - else:
             - define Arg <context.args.get[1]>
@@ -67,9 +68,7 @@ Time_Command:
                 - case Dawn:
                     - time 23216t
                     - define Name "<&e>Dawn"
-                - case default:
+                - default:
                     - inject Command_Syntax Instantly
-    # @ ██ [  Set Time ] ██
-        - narrate "<proc[Colorize].context[Time set to:|green]> <[Name]>"
-        - time <[Time]>
+            - narrate "<proc[Colorize].context[Time set to:|green]> <[Name]>"
             
