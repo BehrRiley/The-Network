@@ -9,8 +9,8 @@ tablist:
     footer:
         - "<&a><&m><element[].pad_left[40].with[-]>"
         #     <&7>Server<&3>:<&r> <&6>[<&f><bungee.server><&6>]
-        - "<&7>World<&3>:<&r> <&6>[<&f><[Player].world.name><&6>]<&f>                             <&7>Coins<&3>:<&r> <&6>[<&f><[Player].money.as_money.format_number||0><&6>]"
-        - "<&7>Time<&3>:<&r> <&6>[<&f><util.date.time.hour><&6><&3>:<&r><&f><util.date.time.minute><&6><&3>:<&r><&f><util.date.time.second><&6>]    <&7>Days Since Last Accident<&3>:<&r> <&6>[<&f><[Player].money.as_money.format_number||0><&6>]"
+        - "<&7>World<&3>:<&r> <&6>[<&f><[Player].world.name.to_titlecase><&6>]<&f>                  <&7>Coins<&3>:<&r> <&6>[<&f><[Player].flag[Behrry.Economy.Coins]||0><&6>]"
+        - "<&7>Server<&3>: <&6>[<&f><bungee.server><&6>]                 <&7>Time<&3>:<&r> <&6>[<&f><util.date.time.hour><&6><&3>:<&r><&f><util.date.time.minute><&6><&3>:<&r><&f><util.date.time.second><&6>]"
         - "<&a><&m><element[].pad_left[40].with[-]>"
     moderatorheader:
         - "<&a><&m><element[].pad_left[40].with[-]>"
