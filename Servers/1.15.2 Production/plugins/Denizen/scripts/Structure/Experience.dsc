@@ -1,12 +1,12 @@
 # - ███ [  When a player is directly connected to event:                          ] ███
-# | ███ [    - run add_xp def:<#>|<skill> instantly                               ] ███
-# | ███ [   ex:run add_xp def:100|farming instantly                               ] ███
+# ^ ███ [    - run add_xp def:<#>|<skill> instantly                               ] ███
+# ^ ███ [   ex:run add_xp def:100|farming instantly                               ] ███
 # - ███ [                                                                         ] ███
 # - ███ [  When a player is NOT directly connected to the event:                  ] ███
-# | ███ [    - run add_xp_nostring def:<#>|<skill>|<player> instantly             ] ███
-# | ███ [   ex:run add_xp_nostring def:100|farming|<player[Behr_Riley]> instantly ] ███
+# ^ ███ [    - run add_xp_nostring def:<#>|<skill>|<player> instantly             ] ███
+# ^ ███ [   ex:run add_xp_nostring def:100|farming|<player[Behr_Riley]> instantly ] ███
 
-# % ███ [ returns xp needed for next level                                        ] ███
+# @ ███ [ returns xp needed for next level                                        ] ███
 xp_calc:
     type: procedure
     debug: false
@@ -19,18 +19,18 @@ xp_calc:
 
 
 
-#testcalc:
-#    type: task
-#    debug: false
-#    script:
-#        - define Correct <list[83|91|102|112|124|138|151|168|185|204|226|249|274|304|335|369|408]>
-#        - repeat 17:
-#            - define NewXP <proc[xp_calc2].context[<[value]>]>
-#            - if <[Correct].get[<[value]>]> == <[NewXP]>:
-#                - define xp "<&2>[<&a><&chr[2714]><&2>]<&a> <[NewXP]>"
-#            - else:
-#                - define xp "<&4>[<&c><&chr[2716]><&4>]<&c> <[NewXP]>"
-#            - narrate "<&e>Level<&6>:<&a> <[Value]> <&b> <&e>Exp<&6>: <[xp]> <&b><[Correct].get[<[value]>]>"
+#@testcalc:
+#@    type: task
+#@    debug: false
+#@    script:
+#^        - define Correct <list[83|91|102|112|124|138|151|168|185|204|226|249|274|304|335|369|408]>
+#^        - repeat 17:
+#^            - define NewXP <proc[xp_calc2].context[<[value]>]>
+#^            - if <[Correct].get[<[value]>]> == <[NewXP]>:
+#^                - define xp "<&2>[<&a><&chr[2714]><&2>]<&a> <[NewXP]>"
+#^            - else:
+#^                - define xp "<&4>[<&c><&chr[2716]><&4>]<&c> <[NewXP]>"
+#^            - narrate "<&e>Level<&6>:<&a> <[Value]> <&b> <&e>Exp<&6>: <[xp]> <&b><[Correct].get[<[value]>]>"
 
 
 
@@ -47,6 +47,7 @@ add_xp:
         - if !<player.has_flag[behrry.skill.<[skill]>.Level]>:
             - flag player behrry.skill.<[skill]>.Level:1
         
+        - flag player Behrry.Economy.Coins:+:<[xp].round_up>
         - flag player behrry.skill.<[skill]>.Exp:+:<[xp]>
         - while <[xp]> > 0:
             - define xp_req <proc[xp_calc].context[<player.flag[behrry.skill.<[skill]>.Level]>]>
