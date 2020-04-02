@@ -4,6 +4,9 @@ Restart_Handler:
     events:
         on restart command:
             - determine passively fulfilled
+        on server start:
+            - ~bungeetag Discord <server.list_online_players.parse[name]> as:Player:
+                - bungeeexecute send <[Player]> BanditCraft
         on stop command:
             - if <bungee.server> != TestServer:
                 - bungeeexecute "send <bungee.server> TestServer"
@@ -22,6 +25,8 @@ Server_Restart_Task:
     definitions: time|speed
     Restart:
         - bossbar remove Restart
+        - foreach <server.list_online_players.parse[name]> as:Player:
+            - bungeeexecute Send <[Player]> Discord
         - adjust server restart
     script:
         - define Time <[Time].as_duration>
