@@ -91,7 +91,12 @@ Home_Command:
             - flag <player> Behrry.Essentials.Homes:->:<[Name]>/<[NewLocation]>
             - narrate "<&2>H<&a>ome <proc[Colorize].context[[<[Name]>]|yellow]> <&2>R<&a>elocated<&2>."
             - stop
-        
+
+    # @ ██ [ Check if home world exists ] ██
+        - if !<server.list_worlds.contains[<[Location].world>]>:
+            - narrate format:Colorize_Red "World is not loaded."
+            - stop
+
     # @ ██ [  Teleport to Home ] ██
         - flag <player> Behrry.Essentials.Teleport.Back:<player.location>
         - if !<[Location].chunk.is_loaded>:
