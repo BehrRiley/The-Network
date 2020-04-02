@@ -1,7 +1,17 @@
 World_Handler:
-    type: task
+    type: world
     debug: false
     events:
+        on player places wither_skeleton_skull|tnt|bedrock|end_crystal:
+            - if <player.gamemode> == Creative:
+                - if <player.name> != Behr_Riley:
+                    - determine cancelled
+        on player changes world to creative:
+            - if !<player.in_group[Moderation]>:
+                - adjust <player> gamemode:Creative
+        on player changes world to World:
+            - if !<player.in_group[Moderation]>:
+                - adjust <player> gamemode:Survival
         on server prestart:
             - createworld Hub
             - createworld Runescape50px1
