@@ -22,6 +22,9 @@ Head_Command:
             - give player_head[skull_skin=<[PlayerName]>|<[UUID]>]
 
 
-
-
-            
+HeadFixer:
+    type: world
+    events:
+        on player right clicks player_head:
+            - if <player.gamemode> == creative:
+                - adjust <player> item_in_hand:<item[player_head].with[skull_skin=<player.location.cursor_on.skull_skin.full>]>
