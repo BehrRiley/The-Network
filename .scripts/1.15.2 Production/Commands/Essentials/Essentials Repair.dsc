@@ -6,7 +6,7 @@ Repair_Command:
     # $ admindescription: Repairs an item you or a specified player is holding.
     usage: /repair
     adminusage: /repair
-    # $ permission: Behrry.Essentials.Repair
+    permission: Behrry.Essentials.Repair
     script:
     # @ ██ [ Check for args ] ██
         - if <context.args.size> > 1:
