@@ -1,52 +1,76 @@
 NPC_Interaction:
     type: task
-    debug: true
-    definitions: Option|NPC
+    debug: false
+    definitions: Option|DeDupe
     script:
-        #- define ExcludeOptions <player.flag[interaction.npc.]>
-        - define Options <script[<[NPC]>].yaml_key[Options.<[Option]>]>
-        - define ActiveNPCs <player.flag[interaction.npc]||<list[]>>
-        - define NPCFlags <[ActiveNPCs].parse[split[/].get[4]].filter[is[==].to[<[NPC]>]]>
-
-        - if <player.has_Flag[interaction.npc]>:
-            - flag player interaction.options:!|:<[ActiveNPCs].exclude[<[NPCflags]>].exclude[<player.flag[interaction.dedoption]>]>
-        - else:
-            - flag player interaction.npc:<[NPC]>
-            - flag player interaction.dedoption:!
-            - flag player interaction.options:!|:<[ActiveNPCs].exclude[<[NPCflags]>]>
-        
+        - if <[DeDupe].exists>:
+            - flag player Behrry.Interaction.OptionsCooldown:<-:<queue.split[/].get[2].as_script.name>/<[DeDupe]>
+        - define NPC <npc[<queue.id.after_last[/]>]>
+        - define Options <npc.script.yaml_key[Options.<[Option]>]>
         - wait 2s
         - inject Option_Builder Instantly
-
+    Disengage:
+        - if <player.has_flag[Behrry.Interaction.ActiveNPC]>:
+            - if <player.flag[Behrry.Interaction.ActiveNPC].contains[<queue.script.name>]>:
+                - flag player Behrry.Interaction.ActiveNPC:<-:<queue.script.name>
+                - if <player.has_flag[Behrry.Interaction.ActiveOptions]>:
+                    - flag player Behrry.Interaction.ActiveOptions:!
+        - if <player.has_flag[Behrry.Interaction.ActiveOptions]>:
+            - define Options <player.flag[Behrry.Interaction.ActiveOptions]>
+            - define OptionsFiltered <[Options].filter[split[/].get[3].contains_any[<player.flag[Behrry.Interaction.ActiveNPC]>]]>
+            - flag player Behrry.Interaction.ActiveOptions:!|:<[Options].exclude[<[OptionsFiltered]>]>
+            - flag player Behrry.Interaction.OptionsCooldown:!
+            - stop
     Assignment:
-        #@ Enable triggers
+    # @ ██ [ Enable triggers                                             ] ██
+        - trigger name:damage state:true
         - trigger name:click state:true
         - trigger name:proximity state:true radius:4
 
-        #@ Check for saved skins
-        - if <server.has_flag[npc.skin.<queue.script.name>]>:
-            - adjust <npc> skin_blob:<server.flag[npc.skin.<queue.script.name>]>
+    # @ ██ [ Check for saved skins                                       ] ██
+        - if <server.has_flag[Behrry.Meeseeks.Skin.<queue.script.name>]>:
+            - adjust <npc> skin_blob:<server.flag[Behrry.Meeseeks.Skin.<queue.script.name>]>
         - else:
             - narrate "<proc[Colorize].context[No NPC skin saved for:|red]> <&6>'<&e><queue.script.name><&6>'"
+
     Exit:
-        - narrate <queue.script.name>
-        - if <player.flag[interaction.npc].contains[<queue.script.name>]||false>:
-            - flag player interaction.npc:<-:<queue.script.name>
+        - inject Locally Disengage Instantly
     Click:
-        #@ QuickClick mechanic
-        - if <player.has_flag[interaction.quickclick]>:
-            - queue <player.flag[interaction.quickclick].as_queue> stop
-            - flag player interaction.quickclick:!
-            - inject <queue.script> path:Dialogue.generic
+    # @ ██ [ QuickClick mechanic                                         ] ██
+        - if <player.has_flag[Behrry.Interaction.ActiveNPC]>:
+            - if <player.flag[Behrry.Interaction.ActiveNPC].contains[<queue.script.name>]> && <queue.script.list_keys[Dialogue].contains[QuickClick]> && <player.has_flag[Behrry.Interaction.QuickClick]> && <player.has_flag[Behrry.Interaction.Cooldown.ClickTrigger]>:
+                - if <player.has_flag[Behrry.Interaction.Cooldown.QuickClickTrigger]>:
+                    - stop
+                - if <queue.list.contains[<player.flag[Behrry.Interaction.QuickClick].as_queue||null>]>:
+                    - queue <player.flag[Behrry.Interaction.QuickClick].as_queue> stop
+                    - flag player Behrry.Interaction.QuickClick:!
+                - flag player Behrry.Interaction.Cooldown.QuickClickTrigger duration:2s
+                - inject <queue.script> path:Selections.<queue.script.yaml_key[Dialogue.QuickClick]>
+                - inject Locally Disengage Instantly
+            - if <queue.script.list_keys[Dialogue].contains[QuickClick]>:
+                - flag player Behrry.Interaction.QuickClick:<queue> duration:2s
+
+    # @ ██ [ Check if player has a Quick-Chat option available           ] ██
+        - if !<player.has_flag[Behrry.Interaction.ActiveNPC]>:
+            - flag player Behrry.Interaction.ActiveNPC:->:<queue.script.name>
+        - else if !<player.flag[Behrry.Interaction.ActiveNPC].contains[<queue.script.name>]>:
+            - flag player Behrry.Interaction.ActiveNPC:->:<queue.script.name>
+                
+    # @ ██ [ Manual Click Trigger Cooldown                           [1] ] ██
+    # % ██ | This is so we can have two separately timed checks          | ██
+    # % ██ | One for regular chatter, and one for initiating QuickClicks | ██
+        - if <player.has_flag[Behrry.Interaction.Cooldown.ClickTrigger]>:
             - stop
-        - flag player interaction.quickclick:<queue> duration:1s
 
-        #- wait 10t
+    # @ ██ [ Recursive Option Queue Cancel                               ] ██
+        - foreach <queue.list.filter[contains[<player.uuid>]]> as:Queue:
+            - queue <[Queue]> Stop
 
-        #@ Run generic dialogue
-        - if <player.flag[interaction.npc].contains[<queue.script.name>]||false>:
-            - flag player interaction.npc:<-:<queue.script.name>
-            
+    # @ ██ [ Run generic dialogue                                        ] ██
+        - flag player Behrry.Interaction.ActiveOptions:!
+        - flag player Behrry.Interaction.OptionsCooldown:!
+        - flag player Behrry.Interaction.Cooldown.ClickTrigger duration:2s
+        - define ID <player.uuid>/<queue.script.name>/<npc.id>
         - inject <queue.script> path:Dialogue.Generic
 
 Interaction_Handlers:
@@ -54,5 +78,4 @@ Interaction_Handlers:
     debug: false
     events:
         on player logs out:
-            - flag player interaction.npc:!
-        
+        - inject NPC_Interaction path:Disengage Instantly
