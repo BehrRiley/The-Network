@@ -8,6 +8,8 @@ Login_Handler:
             - wait 1s
             - if <player.has_flag[justjoined]>:
                 - stop
+            - if <player.is_banned>:
+                - stop
         # @ ██ [Format the Message ] ██
             - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[joined the network.|yellow]>"
             - define DiscordMessage ":heavy_plus_sign: **<player.flag[behrry.essentials.display_name].strip_color||<player.name>>** has joined the network."
@@ -17,6 +19,8 @@ Login_Handler:
         on bungee player leaves network:
         # % <context.name> returns the leaving player's name.
         # % <context.uuid> returns the leaving player's UUID.
+            - if <player.is_banned>:
+                - stop
         # @ ██ [Format the Message ] ██
             - define User <player[<context.uuid>]>
             - define Message "<[User].flag[behrry.essentials.display_name]||<[User].name>> <proc[Colorize].context[left the network.|yellow]>"
@@ -46,6 +50,7 @@ Login_Handler:
 
         on player logs in for the first time:
             - flag player justjoined duration:10s
+            
         # @ ██ [ Format the message ] ██
             - define Message "▲ <&6><player.name> <&d>joined the network for the first time! <&r>▲"
             - define e <&lt>a:sheep:693346095249752066<&gt>
