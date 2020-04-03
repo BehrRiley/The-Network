@@ -5,42 +5,43 @@ Dialogue_Command:
     debug: false
     description: Selects a dialogue option
     usage: /dialogue <&lt>#<&gt>
-    permission: behrry.interaction.dialogue
+    permission: Behrry.Interaction.Dialogue
+    aliases:
+        - o
+    #^  - d
     script:
-        #@ Check for args or if Check for open dialogue
-        - if <context.args.get[1]||null> == null || !<player.has_flag[interaction.options]>:
-            - inject Command_Syntax Instantly
+    # @ ██ [ Check if Option Selection is active ] ██
+        - if !<player.has_flag[Behrry.Interaction.ActiveOptions]>:
+            - stop
 
-        #@ Check if uniquely ran
-        - if <context.args.get[1].length> == 36 && <context.args.size> == 4:
-            - define Arg <context.args.get[1]>
-            - define Sel <context.args.get[2]>
-            - define NPC <context.args.get[3]>
-            - define Ind <context.args.get[4]>
+    # @ ██ [ Check if Player ran command directly ] ██
+        - else if <context.args.size> != 1:
+            - if <context.args.get[2].length> != 36 || <context.args.size> != 5:
+                - inject Command_Syntax Instantly
+        - define OptionChoice <context.args.get[1]>
 
-            #@ Check for valid UUID
-            - if !<player.flag[interaction.options].parse[split[/].get[3]].contains[<[Arg]>]>:
-                - stop
+    # @ ██ [ Define Definitions ] ██
+        - define Options <player.flag[Behrry.Interaction.ActiveOptions]>
+        - define OptionsFiltered <[Options].filter[split[/].get[3].contains_any[<player.flag[Behrry.Interaction.ActiveNPC]>]]>
+        
+        - if !<[OptionsFiltered].parse[before[/]].contains[<[OptionChoice]>]>:
+            - stop
+        - define SelectedOption <[OptionsFiltered].map_get[<[OptionChoice]>].split[/]>
+        
+        - define ASS <[SelectedOption].get[2]>
+        - define SEL <[SelectedOption].get[3]>
+        - define NPC <[SelectedOption].get[4]>
 
-            #@ Check if interacting with NPC
-            - if !<script[<[NPC]>].list_keys[Selections].contains[<[Sel]>]||true>:
-                - stop
+        - flag player Behrry.Interaction.OptionsCooldown:|:<[ASS]>/<[SEL]> duration:30s
+        - flag player Behrry.Interaction.ActiveOptions:!|:<[Options].exclude[<[OptionsFiltered]>]>
 
-            #@ Check if NPC has selection
-            - if !<player.flag[interaction.npc].contains[<[NPC]>]||true>:
-                - stop
+        - define ID <player.uuid>/<[NPC].script.name>/<[NPC].id>
+        - inject <[ASS].as_script> path:Selections.<[SEL]> npc:<[NPC]>
 
-            #@ Run selection, adjust flags
-            - define Flag <player.flag[interaction.options].get[<[Ind]>]>
-            - flag player interaction.options:!
-            - flag player interaction.dedoption:|:<[Sel]>
-            
-            - inject <[NPC]> path:Selections.<[Sel]>
-        - else:
-        #@  Check if valid option
-            - define Arg <context.args.get[1]>
-            - define Options <player.flag[interaction.options]>
-            - if !<[Options].is_integer> || <[Options].contains[.]> || <[Options].size> < <[Arg]> || 0 > <[Arg]>:
-                - narrate format:Colorize_Red "Must be an option between 1-<[Options].size>."
-                - stop
-            - narrate success
+#@DisguiseFix:
+#@    type: world
+#@    events:
+#@        on d command bukkit_priority:lowest:
+#^            - determine passively cancelled
+#^            - define Alias d
+#^            - inject Dialogue_Command Instantly
