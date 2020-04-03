@@ -19,7 +19,7 @@ Chat_Handler:
         - define NamePlate <[Text]>
         - define DiscordNamePlate "**<player.display_name>**"
     events:
-        on player chats:
+        on player chats bukkit_priority:lowest:
             - determine passively cancelled
             - define Message <context.message.parse_color>
             
