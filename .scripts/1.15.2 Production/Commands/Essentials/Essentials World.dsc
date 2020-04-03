@@ -33,5 +33,6 @@ World_Command:
             - stop
 
         # @ ██ [ Teleport player to the world ] ██
+        - flag <Player> behrry.essentials.teleport.back:<player.location>
         - teleport <player> <world[<context.args.get[1]>].spawn_location>
         - narrate "<proc[Colorize].context[You were teleported to world:|green]> <context.args.get[1]>"
