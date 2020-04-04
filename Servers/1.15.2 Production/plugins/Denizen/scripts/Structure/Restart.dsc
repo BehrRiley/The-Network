@@ -4,12 +4,15 @@ Restart_Handler:
     events:
         on restart command:
             - determine passively fulfilled
+            - inject Restart_Command
         on server start:
-            - ~bungeetag Discord <server.list_online_players.parse[name]> as:Player:
-                - bungeeexecute send <[Player]> BanditCraft
-        on stop command:
-            - if <bungee.server> != TestServer:
-                - bungeeexecute "send <bungee.server> TestServer"
+            - wait 5s
+            - repeat 5:
+                - if <bungee.server||null> == BanditCraft:
+                    - bungeeexecute "send Discord BanditCraft"
+                    - stop
+                - else:
+                    - wait 2s
         on system time minutely every:5:
             - if <util.date.time.hour.mod[12]> == 1 && <util.date.time.minute> == 55:
                 - if <server.has_flag[behrry.essentials.restartskip]>:
@@ -19,14 +22,15 @@ Restart_Handler:
                 - announce "<&6>{<&e>▲<&6>}-<&e>Server will restart in five minutes.<&6>-{<&e>▲<&6>}"
                 - run Server_Restart_Task def:<duration[300]>|20
 
+
 Server_Restart_Task:
     type: task
     debug: false
     definitions: time|speed
     Restart:
         - bossbar remove Restart
-        - foreach <server.list_online_players.parse[name]> as:Player:
-            - bungeeexecute Send <[Player]> Discord
+        - bungeeexecute "Send all Discord"
+        - wait 3s
         - adjust server restart
     script:
         - define Time <[Time].as_duration>
@@ -53,7 +57,7 @@ Server_Restart_Task:
 
             - bossbar update Restart players:<server.list_online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Clock]>" color:red progress:<[Timer]>
  
-        - inject Locally Restart Instantly
+        - inject Locally Restart
 
 quicktest:
     type: task
