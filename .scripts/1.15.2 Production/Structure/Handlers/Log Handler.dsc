@@ -23,6 +23,9 @@ Login_Handler:
                 - stop
         # @ ██ [Format the Message ] ██
             - define User <player[<context.uuid>]>
+            - if <[User]||null> == null:
+                - announce to_console "<&c>Player Leaves Network returned NULL for name."
+                - stop
             - define Message "<[User].flag[behrry.essentials.display_name]||<[User].name>> <proc[Colorize].context[left the network.|yellow]>"
             - define DiscordMessage ":heavy_multiplication_x: **<[User].flag[behrry.essentials.display_name].strip_color||<[User].name>>** has left the network."
             - bungeerun <bungee.list_servers.exclude[Discord]> ChatEvent_Message def:<context.uuid>|<[Message].escaped>|PlayerQuit
@@ -31,10 +34,14 @@ Login_Handler:
         on bungee player switches to serer:
         # @ ██ [ Flag Next Server ] ██
             - define User <player[<context.uuid>]>
+            - if <[User]||null> == null:
+                - announce to_console "<&c>Player Leaves Network returned NULL for name."
+                - stop
             - define DiscordMessage ":curly_loop: **<[User].flag[behrry.essentials.display_name].strip_color||<[User].name||>>** switched to `<context.server>`"
             - Bungee <context.server>:
                 - flag <player[<context.uuid>]> Behrry.Essentials.ServerSwitching:<bungee.server> duration:5s
             - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage].escaped>
+            
         on bungee server connects:
         # @ ██ [ Message Discord ] ██
             - if <bungee.list_servers.contains[Discord]||false>:
@@ -80,6 +87,12 @@ Login_Handler:
                             - playsound <[Player]> pitch:1.2 sound:ENTITY_PLAYER_LEVELUP
             - if <bungee.list_servers.contains[Discord]||false>:
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
+        on player logs in:
+            - if !<server.list_files[data/pData].contains[<player.uuid>]>:
+                - yaml id:<player.uuid> create
+                - yaml id:<player.uuid> savefile:data/pData/<player.uuid>.yml
+            - else:
+                - yaml id:<player.uuid> load:data/pData/<player.uuid>.yml
         on player joins:
             - determine passively NONE
         # @ ██ [ Adjust Flags ] ██
@@ -123,7 +136,7 @@ Login_Handler:
             - define Message "<[Name]> <proc[Colorize].context[joined the network on:|yellow]> <&a><[Server]><&6>."
         on player quits:
         # @ ██ [ Remove Flags ] ██
-            - define BlacklistFlags <list[behrry.chat.lastreply]>
+            - define BlacklistFlags <list[behrry.chat.lastreply|behrry.essentials.inbed|Behrry.Essentials.Sitting]>
             - foreach <[BlacklistFlags]> as:Flag:
                 - flag player <[Flag]>:!
             
@@ -146,31 +159,9 @@ Login_Handler:
             - case default:
                 - define Server "A Test Server"
 
-    Old:
-        on player quits:
-        # @ ██ [Format the Message ] ██
-        # $   - define Message "<player.flag[behrry.essentials.display_name]||<player.name>> <proc[Colorize].context[left the network.|yellow]>"
-        # $   - define DiscordMessage "**<player.display_name.strip_color>**: <[Message].strip_color>"
-
-        # @ ██ [Log to global chat ] ██
-        # $   - define Log Quit/<[Message]>
-        # $   - inject Chat_Logger Instantly
-            
-        # @ ██ [ Print to Other Servers ] ██
-        # $   - if <bungee.list_servers.size||1> > 1:
-        # $       - foreach <bungee.list_servers.exclude[<bungee.server>]> as:Server:
-        # $           - bungee <[Server]>:
-        # $               - announce <[Message]>
-        # $   - if <bungee.list_servers.contains[Discord]||false>:
-        # $       - bungeerun Discord Discord_Message def:593523276190580736|<[DiscordMessage]>
-
-        # @ ██ [ Join Message Main Server ] ██
-            - determine <[Message]>
-
-
 ChatEvent_Message:
     type: task
-    debug: true
+    debug: false
     definitions: PlayerUUID|RawMessage|EventType
     script:
     # @ ██ [ Check for Setting ] ██
