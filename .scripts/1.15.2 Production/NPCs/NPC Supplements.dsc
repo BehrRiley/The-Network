@@ -3,18 +3,53 @@ NPC_Interaction:
     debug: false
     definitions: Option|DeDupe
     script:
+    # @ ██ [ Give the player a period of time to cancel out option with QuickClick ] ██
+        - wait 2s
+    # @ ██ [ Check if forcibly removing an option, or set of options, from the cooldown ] ██
         - if <[DeDupe].exists>:
-            - flag player Behrry.Interaction.OptionsCooldown:<-:<queue.split[/].get[2].as_script.name>/<[DeDupe]>
+            - foreach <[Dedupe].unescaped.as_list> as:Selection:
+                - flag player Behrry.Interaction.OptionsCooldown:<-:<queue.split[/].get[2].as_script.name>/<[Selection]>
+        
+    # @ ██ [ Define Definitions ] ██
         - define NPC <npc[<queue.id.after_last[/]>]>
         - define Options <npc.script.yaml_key[Options.<[Option]>]>
-        - wait 2s
-        - inject Option_Builder Instantly
+
+    # @ ██ [ Construct Options Chat ] ██
+        - foreach <[Options]> as:Option:
+        # @ ██ [ Check if player has options on cooldown                 ] ██
+            - if <player.has_flag[Behrry.Interaction.OptionsCooldown]>:
+            # @ ██ [ Check if options on cooldown are:                   ] ██
+            # % ██ [ This queue's relevant NPC                           ] ██
+            # % ██ [ Any of the listed options                           ] ██
+                - if <player.flag[Behrry.Interaction.OptionsCooldown].parse[before[/]].contains[<queue.split[/].get[2].as_script.name>]> && <player.flag[Behrry.Interaction.OptionsCooldown].parse[after[/]].contains[<[Option].split[/].limit[2].get[1]>]>:
+                    - foreach next
+
+        # @ ██ [ Define Hover and Text Messages                          ] ██
+            - define Hover0 "<&6>[<&e>Insert<&6>]<&3> Select Dialogue with chat"
+            - define Message0 "<&3>[<&b><[Loop_Index]><&3>]"
+            - define Command0 "d <[Loop_Index]>"
+            - define Hover1 "<&6>[<&e>Select<&6>]<&a> <[Option].split[/].limit[2].get[2]>"
+            - define Message1 "<&6>[<&e>Click<&6>]<&a> <[Option].split[/].limit[2].get[2]>"
+
+        # @ ██ [ Build Commands and Flags                                ] ██
+            - define UUID <util.random.uuid>
+        # % ██ [ / Loop_Index / UUID / Script Name / Selection / NPC     ] ██
+            - define Command1 "dialogue <[Loop_Index]> <[UUID]> <queue.split[/].get[2]> <[Option].split[/].limit[2].get[1]> <[NPC]>"
+            - flag Behrry.Interaction.ActiveOptions:|:<[Loop_Index]>/<[UUID]>/<queue.split[/].get[2]>/<[Option].split[/].limit[2].get[1]>/<[NPC]> duration:10s
+
+        # @ ██ [ Print Messages                                          ] ██
+            - narrate <proc[MsgHint].context[<[Hover0]>|<[Message0]>|<[Command0]>]><proc[MsgCmd].context[<[Hover1]>|<[Message1]>|<[Command1]>]>
     Disengage:
+    # @ ██ [ Check if player is talking to NPCs                          ] ██
         - if <player.has_flag[Behrry.Interaction.ActiveNPC]>:
+        # @ ██ [ Check if player is talking with This NPC                ] ██
             - if <player.flag[Behrry.Interaction.ActiveNPC].contains[<queue.script.name>]>:
                 - flag player Behrry.Interaction.ActiveNPC:<-:<queue.script.name>
+            # @ ██ [ Check if player has Active Options with this NPC    ] ██
                 - if <player.has_flag[Behrry.Interaction.ActiveOptions]>:
                     - flag player Behrry.Interaction.ActiveOptions:!
+
+    # @ ██ [ Remove Options from this NPC if disengaging                 ] ██
         - if <player.has_flag[Behrry.Interaction.ActiveOptions]>:
             - define Options <player.flag[Behrry.Interaction.ActiveOptions]>
             - define OptionsFiltered <[Options].filter[split[/].get[3].contains_any[<player.flag[Behrry.Interaction.ActiveNPC]>]]>
