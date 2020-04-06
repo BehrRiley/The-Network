@@ -10,20 +10,24 @@ Survival_Mechanics:
                     - modifyblock <[Loc]> <context.item.material> naturally
 
 Silk_Spawners:
-  type: world
-  debug: false
-  events:
-    on player breaks spawner:
-      - define Type <context.location.spawner_type.after[@].to_titlecase>
-      - determine "i@spawner[display_name=<[Type]> Spawner;nbt=li@key/<[Type]>]"
-    on player places spawner:
-        - if <context.hand> == HAND:
-            - define Type <player.item_in_hand.nbt[key]>
-        - else:
-            - define Type <player.item_in_offhand.nbt[key]>
-        - wait 1t
-        - modifyblock <context.location> spawner
-        - adjust <context.location> "spawner_type:<[Type]>"
+    type: world
+    debug: false
+    events:
+        on player breaks spawner with *pickaxe:
+            - if !<player.item_in_hand.enchantments.contains[silk_touch]>:
+                - stop
+            - define Type <context.location.spawner_type.entity_type.to_titlecase>
+            - determine <context.material.item.with[display_name=<[Type]><&sp>Spawner;nbt=key/<[Type]>]>
+        on player places spawner:
+            - if !<player.item_in_hand.has_nbt[key]>:
+                - stop
+            - if <context.hand> == HAND:
+                - define Type <player.item_in_hand.nbt[key]>
+            - else:
+                - define Type <player.item_in_offhand.nbt[key]>
+            - wait 1t
+            - modifyblock <context.location> spawner
+            - adjust <context.location> spawner_type:<[Type]>
 
 Bed_Fix:
     type: world
