@@ -38,6 +38,10 @@ gmc_Command:
             - else:
                 - narrate "<proc[User_Display_Simple].context[<[User]>]> <proc[Colorize].context[is already in Creative Mode.|red]>"
         - else:
+            - if <player.has_flag[Behrry.Moderation.CreativeBan]>:
+                - narrate format:Colorize_Red "You are currently Creative-Banned."
+                - stop
+
             - if <[User]> != <player>:
                 - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s Gamemode changed to:|red]> <&e>Creative"
             - narrate targets:<[User]> "<proc[Colorize].context[Gamemode changed to:|green]> <&e>Creative"

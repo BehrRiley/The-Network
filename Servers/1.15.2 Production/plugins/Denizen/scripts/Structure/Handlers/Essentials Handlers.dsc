@@ -64,6 +64,9 @@ Essentials:
                     - stop
                 - kick <player> "reason:Must accept resource pack. This does not affect textures."
         on player changes gamemode:
+            - if <context.gamemode> == Creative && <player.has_flag[Behrry.Moderation.CreativeBan]>:
+                - narrate format:Colorize_Red "You are currently Creative-Banned."
+                - determine cancelled
             - if <player.has_flag[gamemode.inventory.changebypass]>:
                 - flag player gamemode.inventory.changebypass:!
             - else:
