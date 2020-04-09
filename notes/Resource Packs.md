@@ -10,11 +10,10 @@ Most of the data managed within Resource Packs utilize JSON syntax. JSON is a su
 In JSON, Values must be a `string`, a `number`, an `object`, an `array`, a `boolean` or `null`.
 
 For your resource packs, the file type for JSON files is `.json`.<br>
-For web related content if you use pieces of your resource pack for `Webizen`[^1], the MIME type for JSON text is "`application/json`".<br>
 We'll discuss how data should be formatted in each file in their respective category below.
 
 #### Denizen
-Denizen Syntax and Usage should be referrenced from the Meta or the guide, both can be found here[^2]:<br>
+Denizen Syntax and Usage should be referrenced from the Meta or the guide, both can be found here[^1]:<br>
 | https://one.denizenscript.com/denizen/lngs/<br>
 | https://guide.denizenscript.com/
 
@@ -51,7 +50,7 @@ This is the indicator to Minecraft what version this pack is.<br>
 Note: In pack format 3 and higher (`1.11` and higher) all of the file names in the resource pack must strictly be lowercase)
 
 ### Pack key: "`description`"
-This can be blank, or you can optimally fill this with something fancy. Unicode characters must be written pre-escaped, like this: `\uCODE`; two examples being: `\u2588` for `█`, and `\u00A7` for `§`, the section sign symbol which parses valid color tags[^3] you use to parse colors in minecraft chat. If you want red text, your text would look something like `\u00A74Dark Red!`.<br>
+This can be blank, or you can optimally fill this with something fancy. Unicode characters must be written pre-escaped, like this: `\uCODE`; two examples being: `\u2588` for `█`, and `\u00A7` for `§`, the section sign symbol which parses valid color tags[^2] you use to parse colors in minecraft chat. If you want red text, your text would look something like `\u00A74Dark Red!`.<br>
 Note: Color before formatting; Formatting codes persist after a color code, Not vise-versa!
 
 you can find a special characters in your Character Map if you're on a Windows operating system. `Start` > `Windows Accessories`. You can also google search for unicode characters.
@@ -180,7 +179,7 @@ The above example extends the item `wooden_sword` to have an additional item mod
 ```
 
 ### File: "`custom_item.json`"
-Your custom item's model data file is something you may or may not adjust yourself. There's plenty of options for modeling software available, two of which I personally recommend are Cubik Pro and BlockBench[^4]. Note that they must be able to export the model to a `.json` file format. Cubik Pro specifically saves the model, and the respective image file, into it's correct locations and formats the model file correctly. When you place your custom item's model data into the location you direct it to in the above example, the top of your model file should look something like this:<br>
+Your custom item's model data file is something you may or may not adjust yourself. There's plenty of options for modeling software available, two of which I personally recommend are Cubik Pro and BlockBench[^3]. Note that they must be able to export the model to a `.json` file format. Cubik Pro specifically saves the model, and the respective image file, into it's correct locations and formats the model file correctly. When you place your custom item's model data into the location you direct it to in the above example, the top of your model file should look something like this:<br>
 ```json
 {
 	"textures": {
@@ -196,13 +195,13 @@ This is where your image files are saved. These files should be in the relative 
 
 ___
 ### Inside the SOUNDS folder: `.minecraft\resourcepacks\MyResourcePack\assets\minecraft\sounds\`
-The sound format Minecraft uses is `.ogg`. Free converting tools can be found online[^5]. For organization's sake, if you're adding new sounds, I recommend placing them in a folder named `Custom`. Minecraft's default resource organizes it's sounds by category[^6]. You can find Minecraft's default resource sound index here: `\.minecraft\assets\indexes\1.15.json`; where `1.15` is the version we're using in this guide.<br>
+The sound format Minecraft uses is `.ogg`. Free converting tools can be found online[^4]. For organization's sake, if you're adding new sounds, I recommend placing them in a folder named `Custom`. Minecraft's default resource organizes it's sounds by category[^5]. You can find Minecraft's default resource sound index here: `\.minecraft\assets\indexes\1.15.json`; where `1.15` is the version we're using in this guide.<br>
 All of your sound files (`.ogg` files) should be saved in this directory.
 
 ___
 ## Implementing into the game with Denizen
 ### Custom Items
-Giving yourself the item is simple. If it's a one-off time you need the thing or you're just generally testing, you can use the `/ex` command[^7] like this:<br>
+Giving yourself the item is simple. If it's a one-off time you need the thing or you're just generally testing, you can use the `/ex` command[^6] like this:<br>
 `/ex give wooden_sword[custom_model_data=1]`
 
 The item script simply looks something like this:
@@ -244,13 +243,11 @@ The best template for modifying existing models and textures for Minecraft is th
 
 ___
 #### Source Links
-[^1]: https://ci.citizensnpcs.co/job/Webizen/ - For running a web server hosted off your server<br>
-      https://docs.google.com/document/d/11E1asJ92cpsTG1I8nUvFnfgv_duVgul8U1f2_59PBlA - Documentation on usage  for Webizen<br>
-[^2]: https://one.denizenscript.com/denizen/lngs/ - Denizen Language Meta<br>
+[^1]: https://one.denizenscript.com/denizen/lngs/ - Denizen Language Meta<br>
       https://guide.denizenscript.com/ - Denizen Beginner's Guide<br>
-[^3]: https://minecraft.gamepedia.com/Formatting_codes - Formatting codes for minecraft<br>
-[^4]: https://blockbench.net/ - Free modeling software for creating custom item models<br>
+[^2]: https://minecraft.gamepedia.com/Formatting_codes - Formatting codes for minecraft<br>
+[^3]: https://blockbench.net/ - Free modeling software for creating custom item models<br>
       https://cubik.studio/ - Advanced modeling software for creating custom item models<br>
-[^5]: https://audio.online-convert.com/convert-to-ogg - Converts sounds to ogg for usage in minecraft.<br>
-[^6]: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/SoundCategory.html - Valid Sound Categories<br>
-[^7]: https://guide.denizenscript.com/guides/first-steps/ex-command.html - Guide on the `/ex` command<br>
+[^4]: https://audio.online-convert.com/convert-to-ogg - Converts sounds to ogg for usage in minecraft.<br>
+[^5]: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/SoundCategory.html - Valid Sound Categories<br>
+[^6]: https://guide.denizenscript.com/guides/first-steps/ex-command.html - Guide on the `/ex` command<br>
