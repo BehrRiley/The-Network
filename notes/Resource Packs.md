@@ -27,7 +27,7 @@ The main directory within your resource pack folder should contain both:
 Optimally, you can also include:
 * `pack.png` - This is a `64x64` custom image for your pack!
 
-### File: `"pack.mcmeta"`
+### File: "`pack.mcmeta`"
 Inside, you'll find this is formatted in a json format. You need two named strings: `pack_format` and `description`. <br>
 Here's what it looks like inside: 
 ```json
