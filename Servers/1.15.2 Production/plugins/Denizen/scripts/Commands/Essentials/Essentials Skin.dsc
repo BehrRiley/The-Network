@@ -1,7 +1,7 @@
 Skin_Command:
     type: command
     name: skin
-    debug: true
+    debug: false
     description: Manages your player's skin.
     usage: /skin (Reset/Set <&lt>Name<&gt>/Save <&lt>Name<&gt> <&lt>URL<&gt> (Slim)/Delete <&lt>Name<&gt>/List)
     permission: Behrry.Essentials.Skin
