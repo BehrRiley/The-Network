@@ -6,7 +6,7 @@ Restart_Command:
     usage: /restart <&lt>Instant/Queue/Skip/Set<&gt> (Time (Speed))
     permission: behrry.moderation.restart
     tab complete:
-        - define Arg1 <list[Instant|Queue|Skip|Set]>
+        - define Args <list[Instant|Queue|Skip|Set]>
         - inject OneArg_Command_Tabcomplete Instantly
     script:
     # @ ██ [  Check for args ] ██
