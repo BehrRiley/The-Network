@@ -8,8 +8,8 @@ Restart_Handler:
         on server start:
             - wait 5s
             - repeat 5:
-                - if <bungee.server||null> == BanditCraft:
-                    - bungeeexecute "send Discord BanditCraft"
+                - if <bungee.server||null> == BehrCraft:
+                    - bungeeexecute "send Discord BehrCraft"
                     - stop
                 - else:
                     - wait 2s
@@ -19,7 +19,7 @@ Restart_Handler:
                     - flag server behrry.essentials.restartskip:!
                     - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> format:Colorize_yellow "Server restart queue skipped."
                     - stop
-                - announce "<&6>{<&e>▲<&6>}-<&e>Server will restart in five minutes.<&6>-{<&e>▲<&6>}"
+                - announce "<&6>--<&e>Server will restart in five minutes.<&6>--"
                 - run Server_Restart_Task def:<duration[300]>|20
 
 
@@ -29,7 +29,7 @@ Server_Restart_Task:
     definitions: time|speed
     Restart:
         - bossbar remove Restart
-        - bungeeexecute "Send all Discord"
+        - bungeeexecute "Send BehrCraft Discord"
         - wait 3s
         - adjust server restart
     script:
@@ -59,10 +59,4 @@ Server_Restart_Task:
  
         - inject Locally Restart
 
-quicktest:
-    type: task
-    script:
-        - define dur <duration[10s]>
-        - define sec <[Dur].in_seconds>
-        - narrate <[Sec]>
 
