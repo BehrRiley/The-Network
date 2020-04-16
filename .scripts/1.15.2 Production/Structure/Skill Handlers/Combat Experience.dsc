@@ -15,7 +15,7 @@ damage_handler:
                 - stop
             
         # @ ██ [  Determine Spawner or Exploit ] ██
-            - if <player.location.find.entities.within[5].size> > 25:
+            - if <player.location.find.entities.within[5].size||30> > 25:
                 - stop
 
         # @ ██ [  Determine damage style ] ██
@@ -40,8 +40,8 @@ Attack_Style:
     usage: /AttackStyle (Accurate/Aggressive/Defensive)
     permission: behrry.combat.attackstyle
     tab complete:
-        - define arg1 <list[Accurate|Aggressive|Defensive]>
-        - inject OneArg_Command_Tabcomplete Instantly
+        - define Args <list[Accurate|Aggressive|Defensive].escaped>
+        - determine <proc[OneArg_Command_Tabcomplete].context[1|<[Args]>]>
     script:
         - if <context.args.size||0> != 1:
             - inject Command_Syntax Instantly
