@@ -10,7 +10,8 @@ Fly_Command:
     usage: /fly (player) (on/off)
     permission: Behrry.Essentials.Fly
     tab complete:
-        - inject Online_Player_Tabcomplete Instantly
+        - if <player.in_group[Moderation]>:
+            - inject Online_Player_Tabcomplete Instantly
     script:
         - if <context.args.size> > 2:
             - inject Command_Syntax Instantly
