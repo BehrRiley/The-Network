@@ -11,13 +11,6 @@ Chat_Handler:
                 - if <player.flag[behrry.chat.experience]> > 1000:
                     - execute as_server "upc removeGroup <player.name> Visitor"
                     - execute as_server "upc addGroup <player.name> Patron"
-    NameplateFormat:
-        #- define Hover "<script[Ranks].yaml_key[<player.groups.get[1]>.HoverNP].parsed>"
-        - define Text "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.display_name><&r>"
-        #- define Command "<script[Ranks].yaml_key[<player.groups.get[1]>.CmdNP].parsed>"
-        #- define NamePlate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
-        - define NamePlate <[Text]>
-        - define DiscordNamePlate "**<player.display_name>**"
     events:
         on player chats bukkit_priority:lowest:
             - determine passively cancelled
@@ -47,14 +40,14 @@ Chat_Handler:
                 - stop
 
         # @ ██ [  Message Formatting ] ██
-            - if <player.groups.contains_any[Moderation|Producer]>:
+            - if <player.groups.contains_any[Moderation|Producer|Sponsor]>:
                 - define Prefix "<script[Ranks].yaml_key[<player.groups.get[1]>.Prefix.<player.groups.get[2]>].parsed><player.display_name><&r>"
             - else:
                 - define Prefix "<&7><player.display_name><&r>"
             - define Hover "<proc[Colorize].context[Real Name:|green]><&nl><player.name><&nl><proc[Colorize].context[Click to Message|green]>"
             - define Text "<[Prefix]><&b>:<&r> <[Message]>"
             - define Command "message <player.name> "
-            - define NewMessage "<proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>"
+            - define NewMessage "<proc[MsgHint].context[<[Hover].escaped>|<[Text].escaped>|<[Command]>]>"
             - define DiscordMessage "**<player.display_name.strip_color>**: <[Message].strip_color>"
                 
         # @ ██ [  Run individual player checks ] ██
@@ -109,7 +102,7 @@ Discord_Relay:
             - inject Chat_Logger Instantly
 
         # @ ██ [ Print to Chat ] ██
-            - narrate targets:<server.list_online_players.exclude[<[BlackList]>]> "<[Message].unescaped>"
+            - narrate targets:<server.list_online_players.exclude[<[BlackList]||>]> "<[Message].unescaped>"
             #- announce "<[Message].unescaped>"
     
 
@@ -134,23 +127,23 @@ Ranks:
     type: yaml data
     Moderation:
         Prefix:
-            CMeme: <&a>☼<&sp><&r>
-            Administrator: ☼<&sp><&r>
-            Moderator: ☼<&sp><&r>
-            Support: ▓<&sp><&r>
+            CMeme: <&2>[<&a>Mod<&2>]<&sp><&r>
+            Administrator: <&6>[<&e>Mod<&6>]<&sp><&r>
+            Moderator: <&6>[<&e>Mod<&6>]<&sp><&r>
+            Support: <&b>[<&3>Support<&b>]<&sp><&r>
         HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Report Issue|yellow]>"
         CmdNP: "snp message: "
     Producers:
         Prefix:
-            Developer: ▓<&sp>
-            Architect: ▓<&sp>
-            Constructor: ▓<&sp>
-            Builder: ▓<&sp>
+            Developer: <&1>[<&9>Dev<&1>]<&r>
+            Architect: na
+            Constructor: <&6>[<&e>C<&6>]<&r>
+            Builder: na
         HoverNP: "<&2>R<&a>eal <&2>N<&a>ame<&2>: <&e><player.name><&nl><proc[Colorize].context[Click to Private Message|yellow]>"
         CmdNP: "msg <player.name> "
     Public:
         Prefix:
-            Sponsor: ""
+            Sponsor: <&1>[<&b>Sponsor<&1>]<&sp><&r>
             Patron: ""
             Visitor: <&2>[<&a>New<&2>]<&sp><&r>
             Silent: ""
