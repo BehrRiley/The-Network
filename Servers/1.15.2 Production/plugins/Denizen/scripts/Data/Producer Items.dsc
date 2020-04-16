@@ -9,3 +9,12 @@ World_Edit_Selector:
     lore:
         - <&3>M<&b>ode<&3>: <&2>[<&a>Selection<&2>]
     
+
+BehrEdit_Wand:
+    type: command
+    name: behreditwand
+    usage: /behreditwand
+    description: gives you the behredit wand
+    permission: Behrry.Constructor.BehreditWand
+    script:
+    - give World_Edit_Selector
