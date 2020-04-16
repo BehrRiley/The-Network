@@ -9,14 +9,13 @@ Essentials:
     events:
         on system time hourly:
             - execute as_server "acball 100"
-        #on restart command:
-        #    - bungeeexecute "send <bungee.server> MainHub"
+        on restart command:
+            - bungeeexecute "send <bungee.server> Discord"
         on player clicks block in:golden_shovel:
-            #- if <context.location> == <location[29,64,197,Bees]>:
             - if <player.inventory.list_contents.parse[material.name].contains[golden_shovel]>:
                 - stop
             - else:
-                - give i@golden_shovel
+                - give golden_shovel
                 - execute as_op "claimbook <player.name>"
         on hanging breaks because obstruction:
                 - determine cancelled
@@ -35,34 +34,18 @@ Essentials:
                 - foreach <yaml[<player.uuid>].read[<[Key]>].get[1].to[<[YamlSize].sub[9]>]>:
                     - yaml id:<player.uuid> set <[Key]>:<-:<[Value]>
             - yaml id:<player.uuid> set <[Key]>:->:<[UID].add[1]>Lasagna<player.inventory.list_contents>
-            - yaml id:<player.uuid> savefile:data/pData/<player.uuid>.yml
+            - yaml id:<player.uuid> savefile:../../../../.playerdata/<player.uuid>.dsc
         on player respawns:
             - if <player.flag[settings.essentials.bedspawn]||false> == true:
                 - determine passively <player.bed_spawn>
             - else:
                 - determine passively <player.world.spawn_location>
-        on pl command:
+        on pl|plugin|plugins command:
             - determine passively fulfilled
-            - narrate "Plguins (4): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>"
-        on resource pack status:
-            #- narrate targets:<server.match_player[behr]> "<context.status>"
-            - if <context.status> == accepted:
-                - flag player Resource_Accepted duration:40s
-            - if <context.status> == declined:
-                - narrate "<&c>You must accept the resource pack. This does not affect textures - only moderation font specs."
-                - wait 1s
-                - narrate "<&c>Kicking in 25 seconds - please accept resource pack."
-                - title "title:<&4>Warning" "subtitle:<&c>Please accept resource pack."
-                - actionbar "<&4>This resource pack does not change game textures."
-                - wait 5s
-                - narrate "<&c>Tip: Edit Server > Server Resource Packs: ENABLED"
-                - wait 20s
-                - if !<server.has_flag[behrry.essentials.resourcecheckspam.<player>]>:
-                    - flag server behrry.essentials.resourcecheckspam.<player> duration:1m
-                    - announce format:Colorize_yellow "Player declined resource pack."
-                - if <player.has_flag[Resource_Accepted]>:
-                    - stop
-                - kick <player> "reason:Must accept resource pack. This does not affect textures."
+            - narrate "Plugins (4): <&a>BehrEdit<&f>, <&a>BehrryEssentials<&f>, <&a>Citizens<&f>, <&a>Denizen<&f>"
+        on player enters minecart:
+            - define Vehicle <context.vehicle>
+            - adjust <[Vehicle]> speed:0.5
         on player changes gamemode:
             - if <context.gamemode> == Creative && <player.has_flag[Behrry.Moderation.CreativeBan]>:
                 - narrate format:Colorize_Red "You are currently Creative-Banned."
@@ -80,6 +63,30 @@ Essentials:
             - determine <context.new.parse[parse_color]>
         on entity spawns because:natural in:1152Spawn:
             - determine cancelled
+        on entity spawns because:natural in:TestingRoom:
+            - if <context.reason> == natural:
+                - determine cancelled
+        on player enters TestingRoom:
+            - cast Night_Vision d:9999
+        on player exits TestingRoom:
+            - cast Night_Vision remove
+
+VillageLeasher:
+    type: world
+    events:
+        on player right clicks Villager with:Lead:
+            - if !<context.entity.has_flag[ClickDedupe]>:
+                - flag <context.entity> ClickDedupe duration:1t
+                - if <context.entity.is_leashed>:
+                    - if <context.entity.leash_holder> != <player>:
+                        - determine cancelled
+                    - else:
+                        - stop
+                - wait 1t
+                - adjust <context.entity> leash_holder:<player>
+                - take iteminhand
+            - determine passively cancelled
+
         #on player damages player:
         #    - if <context.entity.gamemode||null> == creative:
         #        - if !<context.entity.has_flag[smacked]>:
