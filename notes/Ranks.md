@@ -1,20 +1,26 @@
-### Ranks
+# Ranks
+### Me, Bots
 - Coordinator
   - Industrialization
   - Mechanization
   - Computerization
 
+### Staff
 - Moderation
   - Administrator
   - Moderator
-  - Support
+#### "Intro/trial" staff
+    - Support
 
+### Production Team
 - Producers
   - Developer
   - Architect
   - Constructor
-  - Builder
+#### "Intro/trial" Producer
+    - Builder
 
+### Public Roles / Player Ranks
 - Publics
   - Sponsor
   - Patron
