@@ -19,7 +19,7 @@ Lighter_Handler:
                 - else:
                     - stop
                 - define ClosePlayers <[Loc].find.players.within[16]>
-                - define FarPlayers<[Loc].find.players.within[80].exclude[<[ClosePlayers]>]>
+                - define FarPlayers <[Loc].find.players.within[80].exclude[<[ClosePlayers]>]>
                 - playsound <[ClosePlayers]> ENTITY_TNT_PRIMED volume:1 pitch:<util.random.decimal.add[0.5]>
                 - playsound <[ClosePlayers]> ENTITY_FIREWORK_ROCKET_TWINKLE volume:1 pitch:<util.random.decimal.add[0.5]>
                 - playsound <[FarPlayers]> ENTITY_FIREWORK_ROCKET_TWINKLE_FAR pitch:<util.random.decimal.add[0.5]> volume:5
