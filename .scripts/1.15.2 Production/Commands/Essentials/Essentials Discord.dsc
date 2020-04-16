@@ -11,7 +11,7 @@ Discord_Command:
             - inject Command_Syntax Instantly
         
         #@ Print Discord Link
-        - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[https://discord.gg/ypHfzkr|blue]>"
+        - define Hover "<proc[Colorize].context[Click to follow Link:|green]><&nl><proc[Colorize].context[https://discord.gg/4beFHHv|blue]>"
         - define Text "<proc[Colorize].context[Click for the Link to:|yellow]> <&b>┤ <&3><&n>D<&b><&n>iscord"
-        - define URL "https://discord.gg/ypHfzkr"
+        - define URL "https://discord.gg/4beFHHv"
         - narrate <proc[msgUrl].context[<def[Hover]>|<def[Text]>|<def[URL]>]>
