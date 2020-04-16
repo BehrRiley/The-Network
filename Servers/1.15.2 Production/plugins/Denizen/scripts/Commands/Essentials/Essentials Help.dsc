@@ -5,8 +5,9 @@ Help_Command:
     description: Prints commands and command info.
     usage: /help (#)
     permission: Behrry.Essentials.Help
-    tab complete:
-        - determine ""
+    #tab complete:
+    #    - define Arg1 <util.list_numbers_to[5]>
+    #    - inject OneArg_Command_Tabcomplete
     script:
         - execute as_server "denizen do_nothing"
 
@@ -17,7 +18,7 @@ Help_Handler:
     usage: /help (#)
     permission: Behrry.Essentials.Help
     events:
-        on help command:
+        on ?|help command:
         # @ ██ [  Verify command syntax ] ██
             - determine passively fulfilled
             - if <context.args.get[2]||null> != null:
