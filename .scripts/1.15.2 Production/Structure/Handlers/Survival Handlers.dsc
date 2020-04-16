@@ -19,14 +19,10 @@ Silk_Spawners:
             - define Type <context.location.spawner_type.entity_type.to_titlecase>
             - determine <context.material.item.with[display_name=<[Type]><&sp>Spawner;nbt=key/<[Type]>]>
         on player places spawner:
-            - if !<player.item_in_hand.has_nbt[key]>:
+            - if !<context.item_in_hand.has_nbt[key]>:
                 - stop
-            - if <context.hand> == HAND:
-                - define Type <player.item_in_hand.nbt[key]>
-            - else:
-                - define Type <player.item_in_offhand.nbt[key]>
+            - define Type <context.item_in_hand.nbt[key]>
             - wait 1t
-            - modifyblock <context.location> spawner
             - adjust <context.location> spawner_type:<[Type]>
 
 Bed_Fix:
