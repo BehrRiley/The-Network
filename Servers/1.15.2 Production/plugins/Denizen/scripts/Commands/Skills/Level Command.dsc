@@ -6,8 +6,8 @@ Level_Command:
     usage: /level (Skill)
     permission: behrry.skill.level
     tab complete:
-        - define arg1 <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
-        - inject OneArg_Command_Tabcomplete Instantly
+        - define Args <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction].escaped>
+        - determine <proc[OneArg_Command_Tabcomplete].context[1|<[Args]>]>
     script:
         #@ Verify args
         - if <context.args.size||0> > 1:
