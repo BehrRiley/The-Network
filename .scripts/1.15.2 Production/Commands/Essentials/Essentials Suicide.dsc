@@ -17,7 +17,10 @@ Suicide_Command:
 
     # @ ██ [  Check player's Gamemode ] ██
         - if <list[spectator|creative].contains[<player.gamemode>]>:
-            - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
+            - repeat 10:
+                - animate <player> animation:hurt
+                - wait 2t
+            - adjust <player> health:0
             - stop
     #@ Check for Cooldown
         - if <player.has_flag[Behrry.Essentials.SucideCooldown]>:
