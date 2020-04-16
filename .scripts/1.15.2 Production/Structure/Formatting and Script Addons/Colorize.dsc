@@ -27,20 +27,19 @@ Colorize:
                 - define 2 <&7>
 
         # - First-Letter-Case
-        - define Text li@
-        - foreach <[String].split[<&sp>]>:
+        - foreach <[String].unescaped.replace[&pipe].with[<&chr[6969]>].replace[<&pc>].with[<&chr[4200]>].split[<&sp>]>:
             - define String1 <[1]><[value].split[].get[1]>
             - if <[value].split[].size> == 1:
                 - define String2 <[2]>
             - else:
                 - define String2 <[2]><[value].split[].get[2].to[99].separated_by[]>
-            - define Text <[Text].include[<[String1]><[String2]>]>
+            - define Text:->:<[String1]><[String2]>
         # - Separate
         - define Text <[Text].separated_by[<&sp>]>
         #$REGEX
         #| wow, why did i do this
-        - define Regex (<element[!@#$%^&*(),.:;'"{}].split[].after[li@]>)
-        - define Text <[Text].replace[regex:(<&lt>|<&gt>|\.|,|\#|\$|%|\^|\&|\*|-|_|/|\{|\}|\(|\)|\<&lb>|@|:|;|\<&rb>)].with[<[1]>$1<[2]>]>
+        #- define Regex (<element[!@#$%^&*(),.:;'"{}].split[].after[li@]>)
+        - define Text <[Text].replace[regex:(<&lt>|<&gt>|\.|,|\#|\$|\^|\&|\*|'|`|-|_|/|\{|\}|\(|\)|\<&lb>|@|:|;|\<&rb>)].with[<[1]>$1<[2]>].replace[<&chr[6969]>].with[|].replace[<&chr[4200]>].with[<&pc>]>
         ## - Brackets
         #- define Text <[Text].replace[<&lb>].with[<[1]><&lb><[2]>].replace[<&rb>].with[<[1]><&rb><[2]>]>
         ## - Braces
