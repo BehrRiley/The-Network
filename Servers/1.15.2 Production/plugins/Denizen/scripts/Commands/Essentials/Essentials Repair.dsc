@@ -28,16 +28,16 @@ Repair_Command:
         # @ ██ [ Run as Self ] ██
         - else:
             # $ ██ [ To-Do: Determine Different based on Sponsor Levels ] ██
-            #@ Check if player has flags
-            - if !<player.has_flag[Behrry.Essentials.Repair.Limit]>:
-                - flag player Behrry.Essentials.RepairLimit:3
-            - if !<player.has_Flag[Behrry.Essentials.Repair.Cooldown]>:
-                - flag player Behrry.Essentials.RepairLimit:0
+            ##@ Check if player has flags
+            #- if !<player.has_flag[Behrry.Essentials.Repair.Limit]>:
+            #    - flag player Behrry.Essentials.RepairLimit:3
+            #- if !<player.has_Flag[Behrry.Essentials.Repair.Cooldown]>:
+            #    - flag player Behrry.Essentials.RepairLimit:0
 
-            #@ Check Flags
-            - if <player.flag[Behrry.Essentials.Repair.Cooldown]> > <player.flag[Behrry.Essentials.Repair.Limit]>:
-                - narrate "Repair Limit Cooldown"
-                - stop
+            ##@ Check Flags
+            #- if <player.flag[Behrry.Essentials.Repair.Cooldown]||0> > <player.flag[Behrry.Essentials.Repair.Limit]>:
+            #    - narrate "Repair Limit Cooldown"
+            #    - stop
             
             #@ Check Item
             - if <player.item_in_hand.max_durability||null> == null:
