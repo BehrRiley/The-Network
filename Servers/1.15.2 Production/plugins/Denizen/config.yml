@@ -76,7 +76,7 @@ Triggers:
   Chat:
     Enabled: true
     Use asynchronous event: false
-    Cooldown: 2s
+    Cooldown: 0.25s
     Range: 3
     Overhearing range: 4
     Prerequisites:
@@ -91,7 +91,7 @@ Triggers:
       If NPC uninteractable: true
   Click:
     Enabled: true
-    Cooldown: 2s
+    Cooldown: 0.1s
   Damage:
     Enabled: true
     Cooldown: 0.5s
