@@ -10,7 +10,7 @@ npc_skin_save_command:
     permission: denizen.saveskin
     script:
     - inject npc_skin_validate
-    - flag server npc.skin.<context.args.get[1].escaped>:<player.selected_npc.skin_blob>;<player.selected_npc.name>
+    - flag server Behrry.Meeseeks.Skin.<context.args.get[1].escaped>:<player.selected_npc.skin_blob>;<player.selected_npc.name>
 
 npc_skin_load_command:
     type: command
@@ -21,7 +21,7 @@ npc_skin_load_command:
     permission: denizen.saveskin
     script:
     - inject npc_skin_validate
-    - if !<server.has_flag[npc.skin.<context.args.get[1].escaped>]>:
+    - if !<server.has_flag[Behrry.Meeseeks.Skin.<context.args.get[1].escaped>]>:
       - narrate "No skin found"
       - stop
     - adjust <player.selected_npc> skin_blob:<server.flag[npc_skins.<context.args.get[1].escaped>]>
