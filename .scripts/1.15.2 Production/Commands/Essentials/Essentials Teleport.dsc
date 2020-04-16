@@ -6,6 +6,9 @@ Teleport_Command:
     usage: /teleport <&lt>PlayerName<&gt>
     adminusage: /teleport <&lt>PlayerName<&gt> (<&lt>PlayerName<&gt>)*
     permission: behrry.essentials.teleport
+    tab complete:
+        - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
+        - inject Online_Player_Tabcomplete
     aliases:
         - tp
         - tpa
@@ -16,7 +19,7 @@ Teleport_Command:
 
     # @ ██ [  Check player arg ] ██
         - define User <context.args.get[1]>
-        - inject Player_Verification Instantly
+        - inject Player_Verification_Offline Instantly
 
     # @ ██ [  Check for multi-player teleporting ] ██
         - if <context.args.get[2]||null> == null:
