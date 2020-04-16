@@ -13,7 +13,7 @@ Lore_Command:
             - inject Command_Syntax Instantly
 
     # @ ██ [ Check Item ] ██
-        - if <player.item_in_hand.name> == air:
+        - if <player.item_in_hand.material.name> == air:
             - narrate colorize_red "Hold a valid item."
             - stop
         
