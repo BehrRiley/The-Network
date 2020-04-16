@@ -10,10 +10,8 @@ TPAccept_Command:
     usage: /tpaccept (<&lt>Player<&gt>)
     permission: behrry.essentials.tpaccept
     tab complete:
-        - if <context.args.size||0> == 0:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>]>
-        - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.parse[name].exclude[<player.name>].filter[starts_with[<context.args.get[1]>]]>
+        - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
+        - Inject Online_Player_Tabcomplete
     script:
         - if <context.args.get[2]||null> != null:
             - inject Command_Syntax Instantly
