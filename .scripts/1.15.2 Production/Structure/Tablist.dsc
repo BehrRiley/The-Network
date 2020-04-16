@@ -3,18 +3,18 @@ tablist:
     debug: false
     header:
         - "<&a><&m><element[].pad_left[40].with[-]>"
-        - "<&f>Welcome to <&2>B<&a>andit <&2>C<&a>raft!"
+        - "<&f>Welcome to <&2>B<&a>ehr <&2>C<&a>raft!"
         - "<&7>Players Online<&3>:<&r> <&6>[<&f><server.list_online_players.size.sub[<[Hidden].size>]><&6>/<&f><server.max_players><&6>]<&f>    <&7>Ping<&3>:<&r> <&6>[<&f><[Player].ping><&6>]"
         - "<&a><&m><element[].pad_left[40].with[-]>"
     footer:
         - "<&a><&m><element[].pad_left[40].with[-]>"
         #     <&7>Server<&3>:<&r> <&6>[<&f><bungee.server><&6>]
-        - "<&7>World<&3>:<&r> <&6>[<&f><[Player].world.name.to_titlecase><&6>]<&f>                  <&7>Coins<&3>:<&r> <&6>[<&f><[Player].flag[Behrry.Economy.Coins]||0><&6>]"
+        - "<&7>World<&3>:<&r> <&6>[<&f><[Player].world.name.to_titlecase><&6>]<&f>                  <&7>Coins<&3>:<&r> <&6>[<&f><[Player].flag[Behrry.Economy.Coins].format_number||0><&6>]"
         - "<&7>Server<&3>: <&6>[<&f><bungee.server><&6>]                 <&7>Time<&3>:<&r> <&6>[<&f><util.date.time.hour><&6><&3>:<&r><&f><util.date.time.minute><&6><&3>:<&r><&f><util.date.time.second><&6>]"
         - "<&a><&m><element[].pad_left[40].with[-]>"
     moderatorheader:
         - "<&a><&m><element[].pad_left[40].with[-]>"
-        - "<&f>Welcome to <&2>B<&a>andit <&2>C<&a>raft!"
+        - "<&f>Welcome to <&2>B<&a>ehr <&2>C<&a>raft!"
         - "<&7>Players Online<&3>:<&r> <&6>[<&f><server.list_online_players.size><&6>/<&f><server.max_players><&6>]<&f>    <&7>Ping<&3>:<&r> <&6>[<&f><[Player].ping><&6>]"
         - "<&a><&m><element[].pad_left[40].with[-]>"
     events:
