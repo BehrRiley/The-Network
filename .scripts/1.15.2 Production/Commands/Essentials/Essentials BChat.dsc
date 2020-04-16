@@ -5,9 +5,6 @@ bchat_Command:
     description: Enables or disables bchat
     permission: Behrry.Essentials.BChat
     usage: /bchat ((on/off)/(Message))/<&lt>Message<&gt>
-    tab complete:
-        - define Arg1 <list[on|off]>
-        - inject OneArg_Command_Tabcomplete Instantly
     aliases:
         - b
     chat:
