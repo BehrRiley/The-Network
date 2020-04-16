@@ -26,5 +26,5 @@ HeadFixer:
     type: world
     events:
         on player right clicks player_head:
-            - if <player.gamemode> == creative:
+            - if <player.gamemode> == creative && <player.is_sneaking>:
                 - adjust <player> item_in_hand:<item[player_head].with[skull_skin=<player.location.cursor_on.skull_skin.full>]>
