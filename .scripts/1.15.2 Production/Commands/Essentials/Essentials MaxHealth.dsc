@@ -8,6 +8,7 @@ MaxHealth_Command:
         - maxhp
     permission: Behrry.Essentials.MaxHealth
     tab complete:
+        - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
         - inject Online_Player_Tabcomplete Instantly
     script:
     # @ ██ [  Check Args ] ██
