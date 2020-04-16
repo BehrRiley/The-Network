@@ -7,7 +7,7 @@ Rules_Command:
     permission: behrry.essentials.rules
     script:
     # @ ██ [  Check for args ] ██
-        - if <context.args.get[1]||null> != null:S
+        - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
         
     # @ ██ [  print ] ██
