@@ -64,7 +64,7 @@ Home_Command:
                     - define Name <context.args.get[1]>
                 - define Remove true
             - else:
-                - if <context.args.get[1]> == remove:
+                - if <context.args.get[1]> == Relocate:
                     - define Name <context.args.get[2]>
                 - else:
                     - define Name <context.args.get[1]>
@@ -79,7 +79,7 @@ Home_Command:
         - define Location <player.flag[Behrry.Essentials.Homes].map_get[<[Name]>].as_location>
         
     # @ ██ [  Run removal if removing ] ██
-        - if <[Remove]>:
+        - if <[Remove]||false>:
             - flag player Behrry.Essentials.Homes:<-:<[Name]>/<[Location]>
             - narrate "<&2>H<&a>ome <proc[Colorize].context[[<[Name]>]|yellow]> <&2>R<&a>emoved<&2>."
             - stop
