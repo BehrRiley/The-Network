@@ -24,3 +24,35 @@ Mining_Handler:
         on player breaks diamond_ore|emerald_ore:
             - define XP 15
             - inject Locally ExpGet Instantly
+        on player clicks block with *pickaxe using either_hand:
+            - if <player.has_flag[Behrry.Skill.Mining.Ability.PowerMining.Queued]>:
+                - flag player Behrry.Skill.Mining.Ability.PowerMining.Queued:!
+                - flag player Behrry.Skill.Mining.Ability.PowerMining.Cooldown duration:300s
+                - narrate "<&a>Power-Mining enabled!"
+                - playsound <player> BLOCK_BEACON_ACTIVATE
+                - define Duration <player.flag[Behrry.Skill.Mining.Level].mul[0.25].add[10]>s
+                - cast fast_digging duration:<[Duration]> power:1 no_ambient hide_particles
+                - wait <[Duration]>
+                - cast fast_digging remove
+                - narrate "<&c>Fast Digging wore off."
+                - playsound <player> BLOCK_BEACON_DEACTIVATE
+                - wait 300s
+                - narrate "<&a>Power-Mining ability is now refreshed."
+            - else if <player.is_sneaking> && <context.click_type.contains[right]>:
+                - if <player.has_flag[Behrry.Skill.Mining.Ability.PowerMining.Cooldown]>:
+                    - define Cooldown <player.flag[Behrry.Skill.Mining.Ability.PowerMining.Cooldown].expiration.formatted>
+                    - narrate "<&4>Power-Mining: <&c>Currently on cooldown. <&6>[<&e><[Cooldown]><&6>]"
+                - else:
+                    - narrate "<&e>You ready your pickaxe..."
+                    - flag player Behrry.Skill.Mining.Ability.PowerMining.Queued
+                    - wait 3s
+                    - if <player.has_flag[Behrry.Skill.Mining.Ability.PowerMining.Queued]>:
+                        - flag player Behrry.Skill.Mining.Ability.PowerMining.Queued:!
+                        - narrate "<&c>You lower your pickaxe."
+
+Ability_Command:
+    type: command
+    name: Ability
+    permission: test
+    script:
+        - flag player Behrry.Skill.Mining.Ability.PowerMining.Cooldown:!
