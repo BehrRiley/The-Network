@@ -7,7 +7,8 @@ Hiscores_Command:
     permission: behrry.skill.hiscores
     tab complete:
         - define arg1 <list[Attack|Strength|Defense|Hitpoints|Ranged|Mining|Woodcutting|Farming|Construction]>
-        - inject OneArg_Command_Tabcomplete Instantly
+        #- inject OneArg_Command_Tabcomplete Instantly
+        - determine <proc[OneArg_Command_Tabcomplete].context[1|<[Arg1].escaped>]>
     script:
         #@ Verify args
         - if <context.args.size||0> > 1:
