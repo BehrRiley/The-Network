@@ -46,6 +46,10 @@ Nickname_Command:
         - if !<[Nickname].matches[[a-zA-Z0-9-_\&]+]>:
             - narrate "<proc[Colorize].context[Nicknames should be alphanumerical.|red]>"
             - stop
+    # @ ██ [  No name ? ] ██
+        - if <[Nickname].parse_color.strip_color.length> < 1:
+            - narrate format:Colorize_Red "Nickname must have letters."
+            - stop
     # @ ██ [  too long ? ] ██
         - if <[Nickname].parse_color.strip_color.length> > 16:
             - narrate "<proc[Colorize].context[Nicknames should be less than 16 charaters.|red]>"
@@ -54,7 +58,10 @@ Nickname_Command:
         - if <[Nickname].contains_any[&k]>:
             - narrate "<proc[Colorize].context[Obfuscated names are blacklisted.|red]>"
             - stop
-        - define Blacklist "<server.list_players.filter[in_group[moderation]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley]>"
+        - define Blacklist "<server.list_players.filter[in_group[moderation]].parse[name].include[Admin|a d m i n|owner|owna|administrator|moderator|server|behr_riley|Founder]>"
+        - if <[Nickname].contains_any[Mod&|Admin&|Helper&|Owner&|Founder&]>:
+            - narrate format:Colorize_Red "Illegal Name."
+            - stop
         - if <[Nickname].parse_color.strip_color.contains_any[<[Blacklist]>]>:
             - narrate "<proc[Colorize].context[Illegal Name.|red]>"
             - stop
@@ -76,4 +83,5 @@ Nickname_Command:
         - if <[User]> != <player>:
             - narrate "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s nickname changed to:|green]> <&r><[Nickname].parse_color>"
         - adjust <[User]> display_name:<[Nickname].parse_color>
+        - adjust <[User]> name:<[Nickname].parse_color>
         - flag <[User]> behrry.essentials.display_name:<[Nickname].parse_color>
