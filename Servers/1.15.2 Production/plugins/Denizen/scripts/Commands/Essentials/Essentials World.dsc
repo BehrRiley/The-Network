@@ -8,11 +8,15 @@ World_Command:
     adminusage: /world (Player) <&lt>WorldName<&gt>
     permission: behrry.essentials.world
     tab complete:
-        - define blacklist <list[World_Nether|World_The_End|Runescape50px1|Bandit-Craft]>
+        #- define blacklist <list[World_Nether|World_The_End|Runescape50px1|Bandit-Craft]>
+        - if !<player.groups.contains_any[Coordinator|Administrator|Developer]>:
+            - define List <list[World|Creative]>
+        - else:
+            - define list <server.list_worlds.parse[name]>
         - if <context.args.size||0> == 0:
-            - determine <server.list_worlds.parse[name].exclude[<[Blacklist]>]>
+            - determine <[List]>
         - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_worlds.parse[name].exclude[<[Blacklist]>].filter[starts_with[<context.args.get[1]>]]>
+            - determine <[List].filter[starts_with[<context.args.get[1]>]]>
     script:
         # @ ██ [ Check Args ] ██
         - if <context.args.size> != 1:
