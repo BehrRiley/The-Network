@@ -10,8 +10,17 @@ Restart_Command:
         - inject OneArg_Command_Tabcomplete Instantly
     script:
     # @ ██ [  Check for args ] ██
-        - if <context.args.get[1]||null> == null:
+        - if <context.args.size> == 0:
+            - if <context.source_type> == server:
+                - inject Server_Restart_Task path:Restart Instantly
+                - stop
             - inject Command_Syntax Instantly
+
+    # @ ██ [ Check if Console Ran ] ██
+        - if <context.source_type>:
+            - if <context.args.get[1]> != instant:
+                - announce to_console format:Colorize_Red "Can only be instant from Console."
+                - stop
 
     # @ ██ [  Run sub-command ] ██
         - choose <context.args.get[1]>:
