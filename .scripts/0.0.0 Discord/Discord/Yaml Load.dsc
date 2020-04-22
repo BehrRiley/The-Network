@@ -11,3 +11,11 @@ Yaml_DCommand:
         - Coordinator
     script:
         - narrate test
+
+
+ReceiveTest:
+    type: task
+    debug: false
+    script:
+        - flag server test:<server.list_players>
+        - announce to_console <&c><queue.time_ran>"
