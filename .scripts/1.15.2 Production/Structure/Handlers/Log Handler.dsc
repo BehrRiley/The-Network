@@ -4,9 +4,17 @@ Login_Handler:
     events:
         on bungee server connects:
         # @ ██ [ Message Discord ] ██
+            - if !<bungee.connected>:
+                - define wait:+:1
+                - if <[Wait]> > 5:
+                    - announce to_console format:Colorize_Red "Bungee could not establish a connection in time."
+                    - announce to_console format:Colorize_Red "<script.file_name> // lines: [5] - [13]"
+                    - stop
+                - wait 5t
             - if <bungee.list_servers.contains[Discord]||false>:
-                - define e :white_check_mark:
-                - define DiscordMessage "<[E]> **<context.server>** is now connected."
+                - define DiscordMessage ":white_check_mark: **<context.server>** is now connected."
+                - wait 1s
+                - announce <bungee.connected>
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
         # $ ██ [ To-Do: Send players back to BanditCraft ] ██
         on bungee server disconnects:
