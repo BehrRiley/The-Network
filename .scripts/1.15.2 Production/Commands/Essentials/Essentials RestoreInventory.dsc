@@ -49,7 +49,7 @@ RestoreInventory_Command:
                     - flag <[User]> Behrry.Essentials.inventory.backup:<[User].inventory.list_contents>
                     - inventory clear d:<[User].inventory>
                     - inventory set d:<[User].inventory> o:<[Cache].after[Lasagna]>
-                    #- yaml id:<[User]> set <[Key]>:<-:<[Cache]>
+                # - ██ [ yaml id:<[User]> set <[Key]>:<-:<[Cache]> ] ██
                     - yaml id:<[User].uuid> savefile:data/pData/<player.uuid>.yml
                     - if <[User]> != <player>:
                         - narrate targets:<player> "<&e>Player<&6><&co> <&f><[User].display_name><&r> <&e>Inventory<&6><&co><&f>[<context.args.get[2]||1>]<&f> Restored."
