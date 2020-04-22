@@ -267,3 +267,18 @@ Boaty_Tester:
         - choose <context.args.get[1]>:
             - case ClearFlag:
                 - flag server Test:!
+
+
+romannumeralprocedure:
+  type: procedure
+  definitions: num
+  debug: false
+  script:
+  - define romanlist <list[M/1000|CM/900|D/500|CD/400|C/100|XC/90|L/50|XL/40|X/10|IX/9|V/5|IV/4|I/1]>
+  - foreach <[romanlist]>:
+    - define sym <[value].split[/].get[1]>
+    - define val <[value].split[/].get[2]>
+    - while <[num]> >= <[val]>:
+      - define roman:|:<[sym]>
+    	- define num:-:<[val]>
+  - determine <[roman].separated_by[]>
