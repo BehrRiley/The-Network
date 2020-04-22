@@ -128,9 +128,9 @@ Online_Player_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.list_online_players.exclude[<[Blacklist].unescaped||null>].parse[name]>
+            - determine <server.list_online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_online_players.exclude[<[Blacklist].unescaped||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.list_online_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -163,9 +163,9 @@ All_Player_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <server.list_players.exclude[<[Blacklist].unescaped||null>].parse[name]>
+            - determine <server.list_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <server.list_players.exclude[<[Blacklist].unescaped||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <server.list_players.exclude[<[Blacklist].unescaped.as_list||null>].parse[name].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -185,10 +185,10 @@ OneArg_Command_Tabcomplete:
     script:
         - if !<[iArg].exists>:
             - define iArg 1
-        - if <context.args.size||0> == <[iArg].sub[1]>:
+        - if <context.args.size> == <[iArg].sub[1]>:
             - determine <[Args].unescaped>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[Args].unescaped.filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <[Args].unescaped.as_list.filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
