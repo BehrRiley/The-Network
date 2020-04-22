@@ -4,7 +4,11 @@ Restart_Handler:
     events:
         on restart command:
             - determine passively fulfilled
-            - inject Restart_Command
+            - if <context.source_type> == server:
+                - inject Restart_Command
+                - stop
+            - if <player.has_permission[behrry.moderation.restart]>:
+                - inject Restart_Command
         on server start:
             - wait 5s
             - repeat 5:
@@ -28,7 +32,6 @@ Server_Restart_Task:
     debug: false
     definitions: time|speed
     Restart:
-        - bossbar remove Restart
         - bungeeexecute "Send BehrCraft Discord"
         - wait 3s
         - adjust server restart
@@ -56,6 +59,7 @@ Server_Restart_Task:
             - define Timer <[Time].in_seconds.div[<[TimeInt]>]>
 
             - bossbar update Restart players:<server.list_online_players> "title:<&4><&l>S<&c><&l>erver <&4><&l>R<&c><&l>estart<&4>: <[Clock]>" color:red progress:<[Timer]>
+        - bossbar remove Restart
  
         - inject Locally Restart
 
