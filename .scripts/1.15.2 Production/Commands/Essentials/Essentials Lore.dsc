@@ -3,7 +3,7 @@ Lore_Command:
     name: lore
     debug: false
     description:  Applies Lore to the item in hand.
-    usage: /lore <&lt>Lore Line 1<&gt>(|Lore Line #)*
+    usage: /lore <&lt>Lore Line 1<&gt>(Lore Line #)*
     permission: Behrry.Essentials.Lore
     tab complete:
         - determine ""
