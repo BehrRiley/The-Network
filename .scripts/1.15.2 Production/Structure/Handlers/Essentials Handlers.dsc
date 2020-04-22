@@ -9,8 +9,6 @@ Essentials:
     events:
         on system time hourly:
             - execute as_server "acball 100"
-        on restart command:
-            - bungeeexecute "send <bungee.server> Discord"
         on player clicks block in:golden_shovel:
             - if <player.inventory.list_contents.parse[material.name].contains[golden_shovel]>:
                 - stop
@@ -62,7 +60,8 @@ Essentials:
         on player changes sign:
             - determine <context.new.parse[parse_color]>
         on entity spawns because:natural in:1152Spawn:
-            - determine cancelled
+            - if <context.reason> == natural:
+                - determine cancelled
         on entity spawns because:natural in:TestingRoom:
             - if <context.reason> == natural:
                 - determine cancelled
