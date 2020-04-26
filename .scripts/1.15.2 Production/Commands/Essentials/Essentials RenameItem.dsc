@@ -12,12 +12,12 @@ RenameItem_Command:
         - if <context.args.size> == 0:
             - inject Command_Syntax Instantly
     # @ ██ [ Check Item ] ██
-        - if <player.item_in_hand.name> == air:
+        - if <player.item_in_hand.material.name> == air:
             - narrate colorize_red "Hold a valid item."
             - stop
         
     # @ ██ [ Format Lore ] ██
-        - define DisplayName <context.args.get[1].parse_color>
+        - define DisplayName <context.raw_args.parse_color>
 
     # @ ██ [ Adjust Item ] ██
         - inventory adjust slot:<player.held_item_slot> display_name:<[DisplayName]>
