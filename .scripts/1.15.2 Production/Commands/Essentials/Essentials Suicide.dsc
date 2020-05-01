@@ -23,8 +23,8 @@ Suicide_Command:
             - adjust <player> health:0
             - stop
     #@ Check for Cooldown
-        - if <player.has_flag[Behrry.Essentials.SucideCooldown]>:
-            - narrate "<proc[Colorize].context[Suicide Cooldown:|red]> <player.flag[Behrry.Essentials.SuicideCooldown].expiration.formatted>"
+        - if <player.has_flag[Behrry.Essentials.SucideCooldown]> && !<player.in_group[Moderation]>:
+            - narrate "<proc[Colorize].context[Suicide Cooldown:|red]> <player.flag[Behrry.Essentials.SucideCooldown].expiration.formatted>"
             - stop
 
     # @ ██ [  Kill Self ] ██
