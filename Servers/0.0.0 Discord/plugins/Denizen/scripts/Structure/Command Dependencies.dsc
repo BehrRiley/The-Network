@@ -22,7 +22,7 @@ RoleCheck:
 # @ ██            - inject ArgSizeCheck
 ArgSizeCheck:
     type: task
-    debug: true
+    debug: false
     script:
         #@ Check Size
         - if <[Args].size||0> > <[MaxArgs]>:
