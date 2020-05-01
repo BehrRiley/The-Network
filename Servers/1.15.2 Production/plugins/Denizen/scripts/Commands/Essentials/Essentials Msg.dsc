@@ -11,7 +11,7 @@ Message_Command:
         - define Blacklist <server.list_online_players.filter[has_flag[Behrry.Moderation.Hide]].include[<Player>]>
         - inject Online_Player_Tabcomplete Instantly
     script:
-        - if <context.args.size||0> < 2:
+        - if <context.args.size> < 2:
             - inject Command_Syntax Instantly
 
         - define User <context.args.get[1]>
@@ -48,5 +48,5 @@ Reply_Command:
                 - narrate format:Colorize_Red "Nobody to respond to."
                 - stop
         - define Message <context.raw_args.parse_color>
-        - narrate targets:<player>  "<&7>[<&8><[User].name><&7>] <&1><&chr[00ab]> <&9><[Message]>"
-        - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>] <&1><&chr[00bb]> <&9><[Message]>"
+        - narrate targets:<player>  "<&7>[<&8><[User].name><&7>] <&1><&l><&chr[00ab]>- <&9><[Message]>"
+        - narrate targets:<[User]>  "<&7>[<&8><player.name><&7>] <&1><&l>-<&chr[00bb]> <&9><[Message]>"
