@@ -51,7 +51,8 @@ Chat_Relay:
         
     # @ ██ [ Compile message ] ██
         - define User <[Author].nickname[<[Group]>]||<[Author].name>>
-        - define UserFormatted <&b>┤<&3><[User]>
+        #- define UserFormatted <&b>┤<&3><[User]>
+        - define UserFormatted "<&b>[<&3>D<&b>] <&3><[User]>"
         - define Message <[Strings].space_separated.unescaped.parse_color||>
         - define Chat "<[UserFormatted]><&3>: <&r><[Message]>"
 
