@@ -1,8 +1,3 @@
-# | ███████████████████████████████████████████████████████████
-# % ██    /hide - returns you to where you teleported from
-# | ██
-# % ██  [ Command ] ██
-# $ ██  [ TO-DO   ] ██ | furnish script, create out of combat bypass | cooldown | Bypass monsters near
 Hide_Command:
   type: command
   name: hide
@@ -11,11 +6,11 @@ Hide_Command:
   usage: /hide (on/off)
   permission: behrry.moderation.hide
   script:
-    #@ Check for args
-    - if <context.args.get[1]||null> != null:
+# @ ██ [ Check for args ] ██
+    - if !<list[0|1].contains[<context.args.size>]>:
       - inject Command_Syntax Instantly
     
-    #@ Define definitions
+# @ ██ [ Define definitions ] ██
     - define Arg <context.args.get[1]||null>
     - define ModeFlag "behrry.moderation.hide"
     - define ModeName "Invisibility mode"
@@ -23,6 +18,8 @@ Hide_Command:
     - define Moderators <server.list_online_players.filter[in_group[Moderation]]>
 
     - if <player.has_flag[behrry.moderation.hide]>:
+      - execute as_server "dynmap:dynmap hide <player.name>"
+      - inject Chat_Event_Messages path:Quit_Event
       - foreach <server.list_online_players.exclude[<[Moderators]>]> as:Player:
         - adjust <[Player]> hide_entity:<player>
       - run Invisible def:<player>|<[Moderators].escaped>|true|HiddenModerators
@@ -32,6 +29,8 @@ Hide_Command:
         - while next
     - else:
       - adjust <player> show_to_players
+      - execute as_server "dynmap:dynmap show <player.name>"
+      - inject Chat_Event_Messages path:Join_Event
       - run Invisible def:<player>|<[Moderators].escaped>|false|HiddenModerators
     - repeat 3:
       - playsound <player.location> sound:ENTITY_BLAZE_AMBIENT
@@ -54,7 +53,18 @@ Hide_Handler:
             - team name:HiddenModerator add:<player>
           - else:
             - adjust <player> hide_entity:<[Mod]>
-
+                
+  # @ ██ [ Check if a hidden mod ] ██
+      - if <player.has_flag[behrry.moderation.hide]>:
+        - execute as_server "dynmap:dynmap hide <player.name>"
+        - inject Chat_Event_Messages path:Quit_Event
+        - foreach <server.list_online_players.exclude[<[Moderators]>]> as:Player:
+          - adjust <[Player]> hide_entity:<player>
+        - run Invisible def:<player>|<[Moderators].escaped>|true|HiddenModerators
+        - while <player.is_online> && <player.has_flag[behrry.moderation.hide]>:
+          - actionbar "<&7>You are hidden from players."
+          - wait 5s
+          - while next
 
 Invisible:
   type: task
