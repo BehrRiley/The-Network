@@ -27,7 +27,7 @@ Colorize:
                 - define 2 <&7>
 
         # - First-Letter-Case
-        - foreach <[String].unescaped.replace[&pipe].with[<&chr[6969]>].replace[<&pc>].with[<&chr[4200]>].split[<&sp>]>:
+        - foreach <[String].unescaped.replace[&pipe].with[<&chr[6969]>].split[<&sp>]>:
             - define String1 <[1]><[value].split[].get[1]>
             - if <[value].split[].size> == 1:
                 - define String2 <[2]>
@@ -39,7 +39,7 @@ Colorize:
         #$REGEX
         #| wow, why did i do this
         #- define Regex (<element[!@#$%^&*(),.:;'"{}].split[].after[li@]>)
-        - define Text <[Text].replace[regex:(<&lt>|<&gt>|\.|,|\#|\$|\^|\&|\*|'|`|-|_|/|\{|\}|\(|\)|\<&lb>|@|:|;|\<&rb>)].with[<[1]>$1<[2]>].replace[<&chr[6969]>].with[|].replace[<&chr[4200]>].with[<&pc>]>
+        - define Text <[Text].replace[regex:(<&lt>|<&gt>|\.|,|\#|\$|\^|\&|\*|'|`|-|_|/|\{|\}|\(|\)|\<&lb>|@|:|;|\<&rb>)].with[<[1]>$1<[2]>].replace[<&chr[6969]>].with[|]>
         ## - Brackets
         #- define Text <[Text].replace[<&lb>].with[<[1]><&lb><[2]>].replace[<&rb>].with[<[1]><&rb><[2]>]>
         ## - Braces
