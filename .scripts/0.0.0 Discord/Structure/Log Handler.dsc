@@ -1,9 +1,7 @@
 Login_Handler:
-    type: world
+    type: yaml data
     debug: false
     events:
-        none:
-            - narrate hi
 #        on bungee player joins network:
 #        # % <context.name> returns the connecting player's name.
 #        # % <context.uuid> returns the connection player's UUID.
