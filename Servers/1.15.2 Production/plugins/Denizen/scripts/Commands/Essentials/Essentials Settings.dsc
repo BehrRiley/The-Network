@@ -3,24 +3,53 @@ settings_Command:
     name: settings
     debug: false
     description: Adjusts your personal settings.
-    usage: /settings (Setting (On/Off))
+    usage: /settings (Setting (On/Off)/default)
     permission: behrry.essentials.settings
     script:
     # @ ██ [  Check for args ] ██
         #- to-do: GUI
-        - if <context.args.get[1]||null> != null:
+        - if <context.args.size> != 1:
             - inject Command_Syntax Instantly
+        
+        - if <context.args.get[1]> == Default:
+            - foreach <script.key[Settings.Defaults]> as:Flag:
+                - flag <player> <[Flag]>
 
-    # @ ██ [  Define Settings ] ██
-        - define Essentials <list[bedspawn]>
-        - define ChatLogs <list[FirstJoined|Joined|Switched|Quit|Players]>
-        - define Settings <list[]>
+        - else:
+            - narrate format:colorize_yellow "Nothing interesting happens."
+    Settings:
+        Defaults:
+            - Behrry.Settings.ChatHistory.FirstJoined
+            - Behrry.Settings.ChatHistory.Joined
+            - Behrry.Settings.ChatHistory.Switched
+            - Behrry.Settings.ChatHistory.Quit
+            - Behrry.Settings.ChatHistory.Players
+            
+            - Behrry.Chat.Joins
+            - Behrry.Chat.Quit
 
-        - foreach <list[<[Essentials]>]> as:Flag:
-            - if !<player.has_flag[Behrry.Essentials.<[Flag]>]>:
-                - flag player Behrry.Essentials.<[Flag]>
-            - define EssentialsFlags:->:Behrry.Essentials.<[Flag]>
-        - foreach <list[<[ChatLogs]>]> as:Flag:
-            - define ChatLogFlags:->:Behrry.Settings.ChatHistory.<[Flag]>
-        - foreach <list[<[Settings]>]> as:Flag:
-            - define ChatLogFlags:->:Behrry.Essentials.<[Flag]>
+            - Behrry.Essentials.BedSpawn
+
+        #@ Chat History Loading
+        #% Settings for enabling/disabling these settings when Chat History loads
+        Behrry.Settings.ChatHistory:
+            - FirstJoined
+            - Joined
+            - Switched
+            - Quit
+            - Players
+            - PrivateMessage
+        
+        #@ Chat
+        #% Settings for what messages players receive in-game
+        Behrry.Settings.Chat:
+            - Joins
+            - Quit
+
+        #@ Essentials
+        #% Settings for enabling/disabling Survival Settings
+        Behrry.Settings.Essentials:
+            - BedSpawn
+        
+        SponsorExclusive:
+            - Behrry.Settings.Chat.FirstJoined
