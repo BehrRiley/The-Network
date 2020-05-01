@@ -6,10 +6,6 @@ World_Handler:
             - if <player.gamemode> == Creative:
                 - if <player.name> != Behr_Riley:
                     - determine cancelled
-        on world command:
-            - if <context.args.get[1]> == creative && <player.has_flag[Behrry.Moderation.CreativeBan]>:
-                - narrate format:Colorize_Red "You are currently Creative-Banned."
-                - determine cancelled
         on player changes world to creative:
             - if <player.has_flag[Behrry.Moderation.CreativeBan]>:
                 - wait 1t
