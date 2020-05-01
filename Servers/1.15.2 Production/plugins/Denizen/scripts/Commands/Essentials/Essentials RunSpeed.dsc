@@ -6,8 +6,8 @@ runSpeed_Command:
     type: command
     name: runspeed
     debug: false
-    description: Adjusts your run-speed up to Plad-Speed (10). Default is (2).
-    admindescription: Adjusts yours or another player's run-speed up to Plad-Speed (10). Default is (2).
+    description: Adjusts your run-speed up to Plaid-Speed (10). Default is (2).
+    admindescription: Adjusts yours or another player's run-speed up to Plaid-Speed (10). Default is (2).
     usage: /runspeed #/Default
     adminusage: /runspeed (Player) #/Default
     aliases:
@@ -46,7 +46,7 @@ runSpeed_Command:
     # @ ██ [  Check Speed Arg ] ██
         - if !<[Speed].is_integer>:
         # @ ██ [  Check if speed is a valid speed Style ] ██
-            - if <list[Lightspeed|ludicrous|Plad].contains[<[Speed]>]>:
+            - if <list[Lightspeed|ludicrous|Plaid].contains[<[Speed]>]>:
                 - if <[Speed]> == Default:
                     - define Speed 2
                 - else:
@@ -61,7 +61,7 @@ runSpeed_Command:
                     - case ludicrous:
                         - adjust <[User]> walk_speed:0.7
                         - narrate targets:<[User]> "<proc[Colorize].context[Run Speed adjusted to:|green]> <&e>Ludicrous"
-                    - case Plad:
+                    - case Plaid:
                         - adjust <[User]> walk_speed:1.0
                         - narrate targets:<[User]> "<&c>G<&a>o<&c>i<&a>n<&c>g <&c>P<&a>l<&c>a<&a>d<&c>.<&a>.<&c>."
                 - stop
