@@ -36,4 +36,4 @@ silentchest_listener:
     on player right clicks chest|*shulker*|trapped_chest:
         - if <player.has_flag[behrry.moderation.silentchest]>:
             - determine passively cancelled
-            - inventory open <player.location.cursor_on.inventory>
+            - inventory open <context.location.inventory>
