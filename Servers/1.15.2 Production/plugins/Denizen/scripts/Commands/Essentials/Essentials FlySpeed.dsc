@@ -2,8 +2,8 @@ FlySpeed_Command:
     type: command
     name: flyspeed
     debug: false
-    description: Adjusts your fly-speed up to Plad-Speed (10). Default is (1).
-    admindescription: Adjusts yours or another player's fly-speed up to Plad-Speed (10). Default is (1).
+    description: Adjusts your fly-speed up to Plaid-Speed (10). Default is (1).
+    admindescription: Adjusts yours or another player's fly-speed up to Plaid-Speed (10). Default is (1).
     usage: /flyspeed #/Default
     adminusage: /flyspeed (Player) #/Default
     aliases:
@@ -11,7 +11,7 @@ FlySpeed_Command:
     permission: Behrry.Essentials.Flyspeed
     tab complete:
         - if <player.groups.contains[Moderation]>:
-            - define Arg2 <list[Lightspeed|ludicrous|Plad]>
+            - define Arg2 <list[Lightspeed|ludicrous|Plaid]>
             - if <context.args.size||0> == 0:
                 - determine <server.list_players.parse[name].exclude[<player.name>]>
             - else if <context.args.size> == 1 && !<context.raw_args.ends_with[<&sp>]>:
@@ -35,7 +35,7 @@ FlySpeed_Command:
             - define Speed <context.args.get[1]>
 
         - if !<[Speed].is_integer>:
-            - if !<list[Lightspeed|ludicrous|Plad|Default].contains[<[Speed]>]>:
+            - if !<list[Lightspeed|ludicrous|Plaid|Default].contains[<[Speed]>]>:
                 - if <[Speed]> == Default:
                     - define Speed 1
                 - else:
@@ -53,7 +53,7 @@ FlySpeed_Command:
                         - narrate targets:<[User]> "<proc[Colorize].context[Fly Speed adjusted to:|green]> <&e>Ludicrous"
                         - if <[User]> != <player>:
                             - narrate targets:<player> "<proc[User_Display_Simple].context[<[User]>]><proc[Colorize].context['s Fly Speed set to:|green]> <&e>Ludicrous"
-                    - case Plad:
+                    - case Plaid:
                         - adjust <[User]> fly_speed:1.0
                         - narrate targets:<[User]> "<&c>G<&a>o<&c>i<&a>n<&c>g <&c>P<&a>l<&c>a<&a>d<&c>.<&a>.<&c>."
                         - if <[User]> != <player>:
