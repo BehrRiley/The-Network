@@ -7,7 +7,7 @@ Friend_Command:
     permission: behrry.Essentials.Friend
     script:
     # @ ██ [  Check for args ] ██
-        - if <context.args.get[1]||null> == null || <context.args.get[3]||null> != null:
+        - if !<list[1|2].contains[<context.args.size>]>:
             - inject Command_Syntax Instantly
         
     # @ ██ [  Check for player ] ██
@@ -15,7 +15,7 @@ Friend_Command:
         - inject Player_Verification_Offline
         
     # @ ██ [  Check for removal arg ] ██
-        - if <context.args.get[2]||null> != null:
+        - if <context.args.size> == 2:
             - if <context.args.get[2]> != remove:
                 - inject Command_Syntax Instantly
 
