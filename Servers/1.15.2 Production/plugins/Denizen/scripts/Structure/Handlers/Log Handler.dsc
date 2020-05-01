@@ -4,7 +4,7 @@ Login_Handler:
     events:
         on bungee server connects:
         # @ ██ [ Message Discord ] ██
-            - if !<bungee.connected>:
+            - while !<bungee.connected>:
                 - define wait:+:1
                 - if <[Wait]> > 5:
                     - announce to_console format:Colorize_Red "Bungee could not establish a connection in time."
@@ -14,27 +14,25 @@ Login_Handler:
             - if <bungee.list_servers.contains[Discord]||false>:
                 - define DiscordMessage ":white_check_mark: **<context.server>** is now connected."
                 - wait 1s
-                - announce <bungee.connected>
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
-        # $ ██ [ To-Do: Send players back to BanditCraft ] ██
+
         on bungee server disconnects:
             - if <bungee.list_servers.contains[Discord]||false>:
                 - define e <&lt>a:WeeWoo2:592074452896972822<&gt>
                 - define DiscordMessage "<[E]> **<context.server>** disconnected."
                 - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
+
         on player logs in:
-            #$ This should move to on player joins network--
+        # $ ██ [ This should move to on player joins network-- ] ██
             - if !<server.list_files[../../../../.playerdata/].contains[<player.uuid>.dsc]>:
                 - yaml id:<player.uuid> create
                 - yaml id:<player.uuid> savefile:../../../../.playerdata/<player.uuid>.dsc
             - else:
                 - yaml id:<player.uuid> load:../../../../.playerdata/<player.uuid>.dsc
 
-            #    - yaml id:<player.uuid> create
-            #    - yaml id:<player.uuid> savefile:data/pData/<player.uuid>.yml
-            #- else:
-            #    - yaml id:<player.uuid> load:data/pData/<player.uuid>.yml
         on player joins:
+            - determine passively NONE
+
         # @ ██ [ Adjust Flags ] ██
             - define BlackFlags <list[behrry.protecc.prospecting]>
             - foreach <[BlackFlags]> as:BlackFlag:
@@ -57,6 +55,18 @@ Login_Handler:
                 - if <player.flag[<[Flag]>]>:
                     - narrate <[LogMessage]>
 
+        # @ ██ [ Check for first login ] ██
+            - if !<player.has_flag[Behrry.Essentials.FirstLogin]>:
+                - flag player Behrry.Essentials.FirstLogin
+                - define Message "<&6><player.name> <&d>joined BehrCraft for the first time!"
+                - define DiscordMessage "<&lt>a:sheep:693346095249752066<&gt> **<player.name>** joined BehrCraft for the first time! <&lt>a:sheep:693346095249752066<&gt>"
+                - foreach <server.list_online_players> as:Player:
+                # $ ██ [ Implement with /Settings Command ] ██
+                    #- if <[Player].has_flag[Behrry.Settings.Chat.FirstJoined]>:
+                    - narrate targets:<[Player]> <[Message]>
+                - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
+                - stop
+
         # @ ██ [ Adjust Displayname ] ██
             - wait 1s
             - if <player.has_flag[behrry.essentials.display_name]>:
@@ -67,39 +77,65 @@ Login_Handler:
                 - flag player Behrry.Essentials.ServerSwitching:!
                 - stop
 
-        # @ ██ [ Format the message ] ██
-            - inject Locally ServerName Instantly
-            - if <player.has_flag[behrry.essentials.display_name]>:
-                - define Name <player.flag[behrry.essentials.display_name]>
-            - else:
-                - define Name <player.name>
-            - define Message "<[Name]> <proc[Colorize].context[joined the network on:|yellow]> <&a><[Server]><&6>."
-            - determine <[Message]>
+        # @ ██ [ Check if a hidden mod ] ██
+            - if <player.has_flag[behrry.moderation.hide]>:
+                - stop
+
+            - inject Chat_Event_Messages path:Join_Event
         on player quits:
+            - determine passively NONE
+
         # @ ██ [ Remove Flags ] ██
             - define BlacklistFlags <list[behrry.chat.lastreply|behrry.essentials.inbed|Behrry.Essentials.Sitting]>
             - foreach <[BlacklistFlags]> as:Flag:
                 - flag player <[Flag]>:!
             
-        # @ ██ [ Message ] ██
-            #- determine <[Message]>
-            
-        # - ██ [ Cancel if player was kicked ] ██
-        # - - if <player.has_flag[behrry.moderation.kicked]>:
-        # -     - determine NONE
-    ServerName:
-        - choose <bungee.server>:
-            - case BehrCraft:
-                - define Server "BehrCraft"
-            - case Discord:
-                - define Server "Discord | Test Server"
-            - case 1152Construction:
-                - define Server "Test Server | 1.15.2"
-            - case 1122Construction:
-                - define Server "Test Server | 1.12.2"
-            - case default:
-                - define Server "A Test Server"
+        # @ ██ [ Cancel if player was kicked ] ██
+            - if <player.has_flag[behrry.moderation.kicked]>:
+                - stop
+                
+        # @ ██ [ Check if a hidden mod ] ██
+            - if <player.has_flag[behrry.moderation.hide]>:
+                - stop
 
+            - inject Chat_Event_Messages path:Quit_Event
+
+
+Chat_Event_Messages:
+    type: task
+    script:
+        - narrate hello
+    Join_Event:
+    # @ ██ [ Format the message ] ██
+        - if <player.has_flag[behrry.essentials.display_name]>:
+            - define Name <player.flag[behrry.essentials.display_name]>
+        - else:
+            - define Name <player.name>
+        - define Message "<[Name]> <proc[Colorize].context[joined the game.|yellow]>"
+        - define DiscordMessage ":heavy_plus_sign: **<player.name>** joined the game."
+
+    # @ ██ [ Print the message ] ██
+        - foreach <server.list_online_players> as:Player:
+        # $ ██ [ Implement with /Settings Command ] ██
+            #- if <[Player].has_flag[Behrry.Settings.Chat.Joins]>:
+            - narrate targets:<[Player]> <[Message]>
+        - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
+
+    Quit_Event:
+    # @ ██ [ Format the message ] ██
+        - if <player.has_flag[behrry.essentials.display_name]>:
+            - define Name <player.flag[behrry.essentials.display_name]>
+        - else:
+            - define Name <player.name>
+        - define Message "<[Name]> <proc[Colorize].context[left the game.|yellow]>"
+        - define DiscordMessage ":heavy_minus_sign: **<player.name>** left the game."
+
+    # @ ██ [ Print the message ] ██
+        - foreach <server.list_online_players> as:Player:
+        # $ ██ [ Implement with /Settings Command ] ██
+            #- if <[Player].has_flag[Behrry.Settings.Chat.quits]>:
+            - narrate targets:<[Player]> <[Message]>
+        - bungeerun Discord Discord_Message def:LoudGeneral|<[DiscordMessage]>
 ChatEvent_Message:
     type: task
     debug: false

@@ -31,6 +31,11 @@ Chat_Handler:
                 - define Prefix "<&e>{▲}<&6>-<&e><player.display_name.strip_color><&6>:"
                 - narrate targets:<[Targets]> "<[Prefix]> <&7><[Message].parse_color>"
                 - stop
+            
+        # @ ██ [ Check if hidden moderator ] ██
+            - if <player.has_flag[behrry.moderation.hide]>:
+                - narrate format:Colorize_red "You are currently hidden."
+                - stop
 
         # @ ██ [  VoiceChat Check, Formatting & Print ] ██
             - if <player.has_flag[Behrry.Essentials.VoiceChat]>:
