@@ -1,4 +1,4 @@
-Hunger_Command:
+Oxygen_Command:
     type: command
     name: Oxygen
     debug: false
