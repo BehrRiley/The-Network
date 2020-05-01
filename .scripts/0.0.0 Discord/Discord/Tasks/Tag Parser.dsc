@@ -52,7 +52,7 @@ TagParser_Task:
         - flag server tag_parser_result_temp:!
 
     crunch_result:
-        - define final_result <empty>
+        - define final_result ''
         - foreach <[result].split[;]>:
             - if <[value].starts_with[VALID=]>:
                 - define final_result "<[final_result]><[value].after[VALID=].replace[&sc].with[;]><n>"
@@ -68,7 +68,7 @@ TagParser_Task:
                 - else:
                     - define final_result "<[final_result]>Got failure '<[fail_reason]>'.<n>"
         - if <[final_result].trim.length> == 0:
-            - define final_result <empty>
+            - define final_result ''
         - if <[final_result].length> > 1500 || <[tag].length.add[<[final_result].length>]> > 1875:
             - define tag "(Spam)"
             - define final_result "Input too long, refused."
