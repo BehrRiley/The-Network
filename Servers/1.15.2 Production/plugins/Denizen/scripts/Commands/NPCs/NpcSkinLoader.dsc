@@ -5,7 +5,7 @@
 # | Just drop this file into the Denizen/scripts folder and you're done!
 
 skin_url_handler:
-    type: world
+    type: yaml data
     debug: false
     events:
         on npc command:
