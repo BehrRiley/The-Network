@@ -55,6 +55,7 @@ Chat_Relay:
         - define UserFormatted "<&b>[<&3>D<&b>] <&3><[User]>"
         - define Message <[Strings].space_separated.unescaped.parse_color||>
         - define Chat "<[UserFormatted]><&3>: <&r><[Message]>"
+        - define ConsoleMessage "<&b>[<&7>Discord<&b>] <&7><[User]><&b>: <&7><[Message].unescaped>"
 
     # $ ██ [ To-Do:                                                         ] ██
     # - ██ | Add UserLinks as secondary definition for ignoring players     | ██
@@ -63,5 +64,5 @@ Chat_Relay:
 
     # @ ██ [ Message Servers ] ██
         - foreach <bungee.list_servers.exclude[<bungee.server>]> as:Server:
-            - bungeerun <[Server]> Discord_Relay def:<[Chat].escaped>
-                                                                  #$ |<[UserLink]>
+            - bungeerun <[Server]> Discord_Relay def:<[Chat].escaped>|<[ConsoleMessage].escaped>
+                                                                                             #$ |<[UserLink]>
