@@ -41,7 +41,7 @@ CreativeBan_Command:
             - define Reason <context.raw_args.after[<context.args.get[1]><&sp>]>
             - if <[User].is_online>:
                 - narrate targets:<[User]> "<proc[Colorize].context[You were banned from Creative for:|red]> <[Reason]>"
-                - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> <proc[User_Display_Simple].context[<[User]>]> <&e>was banned from creative for: <&a><[Reason]>"
+            - narrate targets:<server.list_online_players.filter[in_group[Moderation]]> <proc[User_Display_Simple].context[<[User]>]> <&e>was banned from creative for: <&a><[Reason]>"
             - flag <[User]> Behrry.Moderation.CreativeBan:<[Reason]> duration:<[Duration]>
         - else:
             - narrate targets:<[User]> "<proc[Colorize].context[You were banned from Creative.|red]>"
