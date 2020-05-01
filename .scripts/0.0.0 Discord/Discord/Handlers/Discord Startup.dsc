@@ -36,6 +36,7 @@ Discord_Startup_Handler:
         on server start:
             - inject locally RestartBots
             - yaml "load:data/Developer Code Blocks.dsc" "id:DeveloperCodeBlocks"
+            - adjust system redirect_logging:true
 
 Discordc_Command:
     type: command
