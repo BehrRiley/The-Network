@@ -3,10 +3,10 @@ Lore_Command:
     name: lore
     debug: false
     description:  Applies Lore to the item in hand.
-    usage: /lore <&lt>Lore Line 1<&gt>(Lore Line #)*
+    usage: /lore <&lt>Lore Line 1<&gt>/(Lore Line #)*
     permission: Behrry.Essentials.Lore
     tab complete:
-        - determine ""
+        - determine <empty>
     script:
     # @ ██ [ Check Args ] ██
         - if <context.args.size> == 0:
@@ -18,7 +18,7 @@ Lore_Command:
             - stop
         
     # @ ██ [ Format Lore ] ██
-        - define Lore <context.args.escape_contents.space_separated.unescaped.split[|].parse[trim.parse_color]>
+        - define Lore <context.args.escape_contents.space_separated.unescaped.split[/].parse[trim.parse_color]>
 
     # @ ██ [ Adjust Item ] ██
         - inventory adjust slot:<player.held_item_slot> lore:<[Lore]>
