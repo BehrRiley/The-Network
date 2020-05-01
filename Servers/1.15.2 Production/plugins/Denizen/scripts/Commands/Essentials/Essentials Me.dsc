@@ -8,5 +8,5 @@ Me_Command:
         - if <context.args.size> == 0:
             - inject Command_Syntax Instantly
             
-        - announce "<&5><player.name> <context.raw_args>"
+        - announce "<&5><player.name> <context.raw_args.parse_color.strip_color>"
         
