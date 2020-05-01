@@ -10,7 +10,7 @@ Top_Command:
         - if <context.args.get[1]||null> != null:
             - inject Command_Syntax Instantly
     # @ ██ [  check if they're already at the top ] ██
-        - if <player.location.y> > <player.location.highest>:
+        - if <player.location.y> > <player.location.highest.y>:
             - narrate "<proc[Colorize].context[Nothing Interesting Happens.|yellow]>"
             - stop
         - else:
