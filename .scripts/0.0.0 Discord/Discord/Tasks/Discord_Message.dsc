@@ -15,4 +15,4 @@ Discord_Message:
   script:
     - define Channel <script.yaml_key[Channels.<[ChannelKey]>]>
     - define Message <[Message].unescaped.replace[`].with[']>
-    - discord id:BehrBot Message channel:<[Channel]> "<[Message]>"
+    - discord id:GeneralBot Message channel:<[Channel]> "<[Message]>"
