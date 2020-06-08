@@ -23,10 +23,7 @@ Scripts/*
 Servers/*
 Resource/*
 widget/*
-docs/*
 Web/*
-
-#.scripts/archives/*
 
 # ██ [ Server Directories      ] ██
 # ██ | 1.15.2 Gateway          | ██
