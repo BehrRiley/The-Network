@@ -1,0 +1,2753 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FreneticUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration">
+            <summary>
+            Extend this class to create an automatic FDS configuration utility.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.ConfigComment">
+            <summary>
+            Adds comment lines to a configuration value.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.ConfigComment.Comments">
+            <summary>
+            The comments to add (separated via newline).
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.ConfigComment.#ctor(System.String)">
+            <summary>
+            Construct the config comment.
+            </summary>
+            <param name="_comment">The comment to add.</param>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal">
+            <summary>
+            Internal tooling for <see cref="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration"/>.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.AutoConfigData">
+            <summary>
+            Represents type-specific data for <see cref="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.AutoConfigData.SaveSection">
+            <summary>
+            Callable function that saves the config data to an FDS document.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.AutoConfigData.LoadSection">
+            <summary>
+            Callable action that loads the config data from an FDS document.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.DataConverter">
+            <summary>
+            Helper class that represents the tools needed to convert <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> to the final output type.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.DataConverter.Getter">
+            <summary>
+            Method that gets the data from an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> instance.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.DataConverter.ValueGrabber">
+            <summary>
+            Method that gets the value of the data from a nullable instance (if needed).
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.TypeMap">
+            <summary>
+            Static map of C# class type to the internal executable data needed to process it.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.GenerationLock">
+            <summary>
+            Locker for generating new config data.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.ConfigSaveMethod">
+            <summary>
+            A reference to the <see cref="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Save"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.ConfigLoadMethod">
+            <summary>
+            A reference to the <see cref="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Load(FreneticUtilities.FreneticDataSyntax.FDSSection)"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.SectionSetRootDataMethod">
+            <summary>
+            A reference to the <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSSection.SetRootData(System.String,FreneticUtilities.FreneticDataSyntax.FDSData)"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.SectionGetSectionMethod">
+            <summary>
+            A reference to the <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetSection(System.String)"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.SectionGetRootDataMethod">
+            <summary>
+            A reference to the <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetRootData(System.String)"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FixNullMethod">
+            <summary>
+            A reference to the <see cref="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FixNull``1(System.Nullable{``0})"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataListAddMethod">
+            <summary>
+            A reference to the <see cref="M:System.Collections.Generic.List`1.Add(`0)"/> method for lists of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataListGetEnumeratorMethod">
+            <summary>
+            A reference to the <see cref="M:System.Collections.Generic.List`1.GetEnumerator"/> method for lists of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataListEnumeratorMoveNextMethod">
+            <summary>
+            A reference to the <see cref="M:System.Collections.Generic.List`1.Enumerator.MoveNext"/> method for a list of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.IDisposableDisposeMethod">
+            <summary>
+            A reference to the <see cref="M:System.IDisposable.Dispose"/> method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataListEnumeratorCurrentGetter">
+            <summary>
+            A reference to the <see cref="P:System.Collections.Generic.List`1.Enumerator.Current"/> property getter for a list of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataAsDataListGetter">
+            <summary>
+            A reference to the <see cref="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsDataList"/> property getter method.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.SectionConstructor">
+            <summary>
+            A reference to the <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/> no-arguments constructor.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataObjectConstructor">
+            <summary>
+            A reference to the <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> one-argument constructor.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataObjectCommentConstructor">
+            <summary>
+            A reference to the <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> two-arguments constructor.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataListConstructor">
+            <summary>
+            A reference to the <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> no-arguments constructor.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FDSDataFieldsByType">
+            <summary>
+            A mapping of core object types to the method that converts <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> to them.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.#cctor">
+            <summary>
+            Init required static data.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.FixNull``1(System.Nullable{``0})">
+            <summary>
+            Utility method to perform "Nullable<typeparamref name="T"/>.Value" since CIL is very bad at emitting this properly.
+            </summary>
+            <typeparam name="T">The ValueType that will be Nullable.</typeparam>
+            <param name="val">The instance to convert.</param>
+            <returns>The non-nullable value.</returns>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.ListLoaders">
+            <summary>
+            A mapping of types to methods that load a list of that type from a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.ListSavers">
+            <summary>
+            A mapping of types to methods that save a list of that type to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.GetListLoader(System.Type)">
+            <summary>
+            Gets or creates a method that loads a list of the specified type from a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            Uses <see cref="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.ListLoaders"/> as a backing map.
+            </summary>
+            <param name="type">The list type to load to, like typeof 'List&lt;int&gt;'.</param>
+            <returns>The method that loads to it.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.GetListSaver(System.Type)">
+            <summary>
+            Gets or creates a method that saves a list of the specified type to a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            Uses <see cref="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.ListSavers"/> as a backing map.
+            </summary>
+            <param name="type">The list type to save from, like typeof 'List&lt;int&gt;'.</param>
+            <returns>The method that saves from it.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.CreateListConverter(System.Type,System.Boolean)">
+            <summary>
+            Generates a method that loads a list of the specified type from a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/>.
+            </summary>
+            <param name="type">The type to convert to/from.</param>
+            <param name="doLoad">True indicates load, false indicates save.</param>
+            <returns>The generated method.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.EmitTypeConverter(System.Type,System.Reflection.Emit.ILGenerator,System.Boolean)">
+            <summary>
+            Emits the appropriate <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> convert method for the applicable type.
+            <para>Expected stack condition for load is input one <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> on top of stack at start, output one object of type param <paramref name="type"/> on top of stack at end, and save is reverse of that.</para>
+            </summary>
+            <param name="type">The type to convert to/from.</param>
+            <param name="targetILGen">The IL Generator to emit to.</param>
+            <param name="doLoad">True indicates load, false indicates save.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Internal.GenerateData(System.Type)">
+            <summary>
+            Generate the raw internal data for the specific config class type.
+            </summary>
+            <param name="type">The config class type.</param>
+            <returns>The config data.</returns>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.InternalData">
+            <summary>
+            Internal-use only data.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.#ctor">
+            <summary>
+            Inits the <see cref="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Save">
+            <summary>
+            Saves this <see cref="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration"/> to an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/>.
+            </summary>
+            <returns>The section object with all save data.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.AutoConfiguration.Load(FreneticUtilities.FreneticDataSyntax.FDSSection)">
+            <summary>
+            Loads this <see cref="T:FreneticUtilities.FreneticDataSyntax.AutoConfiguration"/> from an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/>.
+            </summary>
+            <param name="section">The section to load from.</param>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.FDSData">
+            <summary>
+            Represents a piece of data within an FDS Section.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSData.#ctor">
+            <summary>
+            Constructs an empty <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> instance.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSData.#ctor(System.Object)">
+            <summary>
+            Constructs an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> instance of the specified object.
+            </summary>
+            <param name="_internal">The object.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSData.#ctor(System.Object,System.String)">
+            <summary>
+            Constructs an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSData"/> instance of the specified object and the specified comments.
+            </summary>
+            <param name="_internal">The object.</param>
+            <param name="comment">The comments to apply (newline separated).</param>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSData.PrecedingComments">
+            <summary>
+            The list of comments preceding this data piece.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSData.AddComment(System.String)">
+            <summary>
+            Adds a preceding comment to this data piece.
+            </summary>
+            <param name="comment">The comment to add.</param>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSData.Internal">
+            <summary>
+            The internal represented data.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsString">
+            <summary>
+            Gets the internal represented data as a string. Can stringify non-string values.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsBool">
+            <summary>
+            Gets the internal represented data as a boolean.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsDataList">
+            <summary>
+            Gets the internal represented data as a list of data.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsStringList">
+            <summary>
+            Gets the internal represented data as a list of strings.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsDecimal">
+            <summary>
+            Gets the internal represented data as a C# decimal value. Returns null if not a valid decimal.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsDouble">
+            <summary>
+            Gets the internal represented data as a double-precision (64-bit) floating point value. Returns null if not a valid double.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsFloat">
+            <summary>
+            Gets the internal represented data as a single-precision (32-bit) floating point value. Returns null if not a valid float.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsLong">
+            <summary>
+            Gets the internal represented data as a 64-bit signed integer. Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsInt">
+            <summary>
+            Gets the internal represented data as a 32-bit signed integer. Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsShort">
+            <summary>
+            Gets the internal represented data as a 16-bit signed integer. Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsSByte">
+            <summary>
+            Gets the internal represented data as an 8-bit signed integer (sbyte). Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsULong">
+            <summary>
+            Gets the internal represented data as a 64-bit unsigned integer. Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsUInt">
+            <summary>
+            Gets the internal represented data as a 32-bit unsigned integer. Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsUShort">
+            <summary>
+            Gets the internal represented data as a 16-bit unsigned integer. Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsByte">
+            <summary>
+            Gets the internal represented data as an 8-bit unsigned integer (byte). Returns null if not a valid integer.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticDataSyntax.FDSData.AsByteArray">
+            <summary>
+            Gets the internal represented data as an array of bytes. Returns null if not a valid array of bytes.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSData.Outputable">
+            <summary>
+            Returns the output-able string representation of this data.
+            </summary>
+            <returns>The resultant data.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.FDSInputException">
+            <summary>
+            Represents an exception thrown while inputting data to an FDS section.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSInputException.#ctor(System.String)">
+            <summary>
+            Construct the FDS exception.
+            </summary>
+            <param name="message">The message explaining the error.</param>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.FDSParser">
+            <summary>
+            Helper class for parsing out FDS data.
+            <para>Generally only for internal use. Use <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/> for most external access.</para>
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSParser.Parse(System.String,FreneticUtilities.FreneticDataSyntax.FDSSection)">
+            <summary>
+            Parses the input text into the given <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/> object.
+            <para>Generally only for internal use. Use <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/> for most external access.</para>
+            </summary>
+            <param name="text">The text to parse.</param>
+            <param name="section">The section object to output into.</param>
+            <exception cref="T:FreneticUtilities.FreneticDataSyntax.FDSInputException">If parsing fails.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSParser.Exception(System.Int32,System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSInputException"/>.
+            </summary>
+            <param name="linenumber">The line number where the exception occurred.</param>
+            <param name="line">The text of the line that caused the exception.</param>
+            <param name="reason">The reason for an exception.</param>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.FDSSection">
+            <summary>
+            Represents a FreneticDataSyntax section or file.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.#ctor(System.String)">
+            <summary>
+            Constructs the FDS Section from textual data.
+            </summary>
+            <param name="contents">The contents of the data file.</param>
+            <exception cref="T:FreneticUtilities.FreneticDataSyntax.FDSInputException">If parsing fails.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.#ctor">
+            <summary>
+            Constructs the FDS section from no data, preparing it for usage as a new section.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSSection.Data">
+            <summary>
+            All data contained by this section.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSSection.DataLowered">
+            <summary>
+            Lowercase-stored data for this section.
+            For lookup assistance only.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSSection.PostComments">
+            <summary>
+            Comments at the end of the section (usually only on the file root section).
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSSection.SectionPathSplit">
+            <summary>
+            The section path splitter for this section.
+            Will initially hold a value obtained from <see cref="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.DefaultSectionPathSplit"/> at instance construction time.
+            That field is initially a dot value. Altering that default or this value may cause issues (in particular with escaping) depending on the chosen value.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.IsEmpty">
+            <summary>
+            Returns a boolean indicating whether the section is empty.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetRootKeys">
+            <summary>
+            Returns the set of all keys at the root of this section.
+            </summary>
+            <returns>All keys.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetStringList(System.String)">
+            <summary>
+            Gets a list of strings from the section. Can stringify non-string values.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetDataList(System.String)">
+            <summary>
+            Gets a list of data from the section.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetBool(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Gets a bool from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetString(System.String,System.String)">
+            <summary>
+            Gets a string from the section. Can stringify non-string values.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetFloat(System.String,System.Nullable{System.Single})">
+            <summary>
+            Gets an optional float from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetDouble(System.String,System.Nullable{System.Double})">
+            <summary>
+            Gets an optional double from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetUInt(System.String,System.Nullable{System.UInt32})">
+            <summary>
+            Gets an optional uint from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetInt(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Gets an optional int from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetLong(System.String,System.Nullable{System.Int64})">
+            <summary>
+            Gets an optional long from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetUlong(System.String,System.Nullable{System.UInt64})">
+            <summary>
+            Gets an optional ulong from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetObject(System.String,System.Object)">
+            <summary>
+            Gets an object from the section.
+            Returns def if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <param name="def">The default object.</param>
+            <returns>The data found, or the default.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.SetRoot(System.String,System.Object)">
+            <summary>
+            Sets data to the root of the section.
+            May throw an FDSInputException if Set failed!
+            </summary>
+            <param name="key">The key to set data from.</param>
+            <param name="input">The key to set data to.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.Set(System.String,System.Object)">
+            <summary>
+            Sets data to the section.
+            May throw an FDSInputException if Set failed!
+            </summary>
+            <param name="key">The key to set data from.</param>
+            <param name="input">The key to set data to.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.SetData(System.String,FreneticUtilities.FreneticDataSyntax.FDSData)">
+            <summary>
+            Sets data to the section.
+            May throw an FDSInputException if SetData failed!
+            </summary>
+            <param name="key">The key to set data from.</param>
+            <param name="data">The key to set data to.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.Default(System.String,System.Object)">
+            <summary>
+            Defaults data to the section (IE, sets it if not present).
+            </summary>
+            <param name="key">The key to set data from.</param>
+            <param name="input">The key to set data to.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.DefaultData(System.String,FreneticUtilities.FreneticDataSyntax.FDSData)">
+            <summary>
+            Defaults data to the section (IE, sets it if not present).
+            </summary>
+            <param name="key">The key to set data from.</param>
+            <param name="data">The key to set data to.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.HasKey(System.String)">
+            <summary>
+            Checks if a key exists in the FDS section.
+            </summary>
+            <param name="key">The key to check for.</param>
+            <returns>Whether the key is present.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.HasRootKey(System.String)">
+            <summary>
+            Checks if a key exists in the root of the FDS section.
+            </summary>
+            <param name="key">The key to check for.</param>
+            <returns>Whether the key is present.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.HasKeyLowered(System.String)">
+            <summary>
+            Checks if a case-insensitive key exists in the FDS section.
+            </summary>
+            <param name="key">The key to check for.</param>
+            <returns>Whether the key is present.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.HasRootKeyLowered(System.String)">
+            <summary>
+            Checks if a case-insensitive key exists in the root of the FDS section.
+            </summary>
+            <param name="key">The key to check for.</param>
+            <returns>Whether the key is present.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetData(System.String)">
+            <summary>
+            Gets data from the section.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <returns>The data found, or null.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetDataLowered(System.String)">
+            <summary>
+            Gets data from the section.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <returns>The data found, or null.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetSection(System.String)">
+            <summary>
+            Gets a sub-section of this FDS section.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key of the section.</param>
+            <returns>The subsection.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetSectionLowered(System.String)">
+            <summary>
+            Gets a sub-section of this FDS section.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key of the section.</param>
+            <returns>The subsection.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetSectionInternal(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets a sub-section of this FDS section.
+            </summary>
+            <param name="key">The key of the section.</param>
+            <param name="allowNull">Whether to allow null returns, otherwise enforce the section's existence. If true, can throw an FDSInputException!</param>
+            <param name="lowered">Whether to read lowercase section names. If set, expects lowercased input key!</param>
+            <returns>The subsection.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.SetRootData(System.String,FreneticUtilities.FreneticDataSyntax.FDSData)">
+            <summary>
+            Sets data direct on the root level.
+            </summary>
+            <param name="key">The key to set data to.</param>
+            <param name="data">The data to read.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetRootData(System.String)">
+            <summary>
+            Gets data direct from the root level.
+            Returns null if not found.
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <returns>The data found, or null.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.RemoveRoot(System.String)">
+            <summary>
+            Removes data direct from the root level.
+            </summary>
+            <param name="key">The key to remove.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.Remove(System.String)">
+            <summary>
+            Removes data from the section.
+            </summary>
+            <param name="key">The key to remove.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.GetRootDataLowered(System.String)">
+            <summary>
+            Gets data direct from the root level.
+            Returns null if not found.
+            Assumes input is already lowercase!
+            </summary>
+            <param name="key">The key to get data from.</param>
+            <returns>The data found, or null.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSSection.SaveToString(System.Int32,System.String)">
+            <summary>
+            Converts this FDSSection to a textual representation of itself.
+            </summary>
+            <param name="tabulation">How many tabs to start with. Generally do not set this.</param>
+            <param name="newline">What string to use as a new line. Generally do not set this.</param>
+            <returns>The string.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.FDSUtility">
+            <summary>
+            Utilities for the FreneticDataSyntax engine.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.DEFAULT_SECTION_PATH_SPLIT">
+            <summary>
+            The default splitter character for section paths.
+            To change to or a custom default, use <see cref="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.DefaultSectionPathSplit"/>.
+            To change for a specific section, use <see cref="F:FreneticUtilities.FreneticDataSyntax.FDSSection.SectionPathSplit"/>.
+            This is a dot value.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.DefaultSectionPathSplit">
+            <summary>
+            The default splitter character for section paths.
+            For the internal unmodified default, use <see cref="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.DEFAULT_SECTION_PATH_SPLIT"/>.
+            To change for a specific section, use <see cref="F:FreneticUtilities.FreneticDataSyntax.FDSSection.SectionPathSplit"/>.
+            This is initially a dot value. Altering this may cause issues (in particular with escaping) depending on the chosen value.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.ReadFile(System.String)">
+            <summary>
+            Reads a file into an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/>. Throws normal exceptions on any issue.
+            Uses simple journalling save logic to protect against data loss.
+            </summary>
+            <param name="filename">The name of the file to read.</param>
+            <returns>An <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/> containing the same data as the file (if successfully read).</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.SaveToFile(FreneticUtilities.FreneticDataSyntax.FDSSection,System.String)">
+            <summary>
+            Saves an <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSSection"/> into a file. Throws normal exceptions on any issue.
+            Uses simple journalling save logic to protect against data loss.
+            </summary>
+            <param name="section">The data to save.</param>
+            <param name="filename">The name of the file to save to.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.FromBase64(System.String)">
+            <summary>
+            Converts a Base64 string to a byte array.
+            </summary>
+            <param name="inputString">The input string to convert.</param>
+            <returns>The byte array output.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.CleanFileData(System.String)">
+            <summary>
+            Cleans file line endings, tabs, and any other data that may cause issues.
+            </summary>
+            <param name="contents">The original file data.</param>
+            <returns>The cleaned file data.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticDataSyntax.FDSUtility.Internal">
+            <summary>
+            Values used internally by <see cref="T:FreneticUtilities.FreneticDataSyntax.FDSUtility"/> that generally don't need external reference.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.Internal.EMPTY_BYTES">
+            <summary>
+            A premade, reusable, empty byte array, for <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.FromBase64(System.String)"/> to return when the input is empty.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.Internal.NeedsEscapingMatcher">
+            <summary>
+            Quick-matcher for text codes that need to be escaped by <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.Escape(System.String)"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticDataSyntax.FDSUtility.Internal.NeedsKeyEscapingMatcher">
+            <summary>
+            Quick-matcher for text codes that need to be escaped by <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.EscapeKey(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.Escape(System.String)">
+            <summary>
+            Escapes a string for output.
+            <para>Only good for values. For keys, use <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.EscapeKey(System.String)"/>.</para>
+            </summary>
+            <param name="str">The string to escape.</param>
+            <returns>The escaped string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.EscapeKey(System.String)">
+            <summary>
+            Escapes a string for usage as a section key.
+            </summary>
+            <param name="str">The string to escape.</param>
+            <returns>The escaped string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.UnEscape(System.String)">
+            <summary>
+            UnEscapes a string for output.
+            <para>Only good for values. For keys, use <see cref="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.UnEscapeKey(System.String)"/>.</para>
+            </summary>
+            <param name="str">The string to unescape.</param>
+            <returns>The unescaped string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.UnEscapeKey(System.String)">
+            <summary>
+            UnEscapes a string for usage as a section key.
+            </summary>
+            <param name="str">The string to unescape.</param>
+            <returns>The unescaped string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.InterpretType(System.String)">
+            <summary>
+            Interprets the type of the input text.
+            </summary>
+            <param name="input">The input text.</param>
+            <returns>The correctly typed result.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticDataSyntax.FDSUtility.ProcessObject(System.Object)">
+            <summary>
+            Processes an input object to standardize it for FDS.
+            </summary>
+            <param name="input">The original input object.</param>
+            <returns>The cleaned proper FDS object.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticExtensions.EnumerableExtensions">
+            <summary>
+            Helper extensions for <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.IList`1"/>, and related types.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.SwapKeyValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Generates a new dictionary with keys and values swapped around.
+            </summary>
+            <typeparam name="TKey">The original key type.</typeparam>
+            <typeparam name="TValue">The original value type.</typeparam>
+            <param name="dictionary">The original dictionary.</param>
+            <returns>The new dictionary.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.ToDictionaryWithNoDup``2(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``1})">
+            <summary>
+            Creates a dictionary mapping the keys array to the values array, such that keys[i] maps to values[i], for all integer "i" in range.
+            <para>This will throw an <see cref="T:System.ArgumentException"/> if there are duplicate keys, or the two lists do not have the same size.</para>
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="keys">Key list.</param>
+            <param name="values">Value list.</param>
+            <returns>Dictionary.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.ToDictionaryWith``2(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``1})">
+            <summary>
+            Creates a dictionary mapping the keys array to the values array, such that keys[i] maps to values[i], for all integer "i" in range.
+            <para>This will throw an <see cref="T:System.ArgumentException"/> if the two lists do not have the same size.</para>
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="keys">Key list.</param>
+            <param name="values">Value list.</param>
+            <returns>Dictionary.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.AddAll``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Adds all entries from a separate <see cref="T:System.Collections.Generic.Dictionary`2"/> to this <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            Does not allow duplicates.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="self">This <see cref="T:System.Collections.Generic.Dictionary`2"/>.</param>
+            <param name="toAdd">The entries to add.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.UnionWith``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Adds all entries from a separate <see cref="T:System.Collections.Generic.Dictionary`2"/> to this <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            For any keys present in both <see cref="T:System.Collections.Generic.Dictionary`2"/>s, the new values are used (and old values discarded).
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="self">This <see cref="T:System.Collections.Generic.Dictionary`2"/>.</param>
+            <param name="toAdd">The entries to add.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.StopWhen``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Stops an enumerable processing when a function returns true for an item.
+            </summary>
+            <typeparam name="T">List item type.</typeparam>
+            <param name="list">Item list.</param>
+            <param name="stopFunction">Function that controls when to stop (true return = stop, false return = continue).</param>
+            <returns>The list again.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.GetOrCreate``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1})">
+            <summary>
+            Gets a value from a Dictionary, or creates a new value (and adds it to the dictionary).
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue">The value type.</typeparam>
+            <param name="dictionary">The dictionary.</param>
+            <param name="key">The key to search for.</param>
+            <param name="createFunction">A function to create a value.</param>
+            <returns>The value from the dictionary or the newly created value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.AsEnumerable``1(System.Collections.IEnumerator)">
+            <summary>
+            Converts a <see cref="T:System.Collections.IEnumerator"/> to a generic Enumerable.
+            </summary>
+            <typeparam name="T">The expected Enumerable type.</typeparam>
+            <param name="enumerator">The original Enumerator.</param>
+            <returns>The enumerable.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.AsEnumerable``1(System.Collections.Generic.IEnumerator{``0})">
+            <summary>
+            Converts an <see cref="T:System.Collections.Generic.IEnumerator`1"/> to an Enumerable.
+            </summary>
+            <typeparam name="T">The expected Enumerable type.</typeparam>
+            <param name="enumerator">The original Enumerator.</param>
+            <returns>The enumerable.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.JoinWith``1(``0[],``0[])">
+            <summary>
+            Returns an array where additional objects are joined into the array.
+            No checks are done, the two arrays are simply combined into one larger array.
+            </summary>
+            <typeparam name="T">The array type.</typeparam>
+            <param name="originalArray">The main array.</param>
+            <param name="addtionalObjects">The additional objects to append to the end.</param>
+            <returns>The joined result.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.JoinWith``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns a list where additional objects are joined into the list.
+            No checks are done, the two lists are simply combined into one larger list.
+            <para>Similar to the LINQ-Provided "Enumerable.Join" extension, but without the equality checking
+            (the LINQ version does deduplication, this version does not).</para>
+            </summary>
+            <typeparam name="T">The list type.</typeparam>
+            <param name="originalList">The main list.</param>
+            <param name="addtionalObjects">The additional objects to append to the end.</param>
+            <returns>The joined result.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.EnumerableExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns whether a stream is empty. Invert of "Any()" call.
+            </summary>
+            <typeparam name="T">The stream type.</typeparam>
+            <param name="inp">The input stream.</param>
+            <returns>Whether the stream is empty.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticExtensions.OtherExtensions">
+            <summary>
+            Helper extensions for various types without better extension files.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.OtherExtensions.NextGaussian(System.Random)">
+            <summary>
+            Gets a Gaussian random value from a Random object.
+            </summary>
+            <param name="input">The random object.</param>
+            <returns>The Gaussian value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.OtherExtensions.AutoS(System.Int32)">
+            <summary>
+            Utility for "AutoFormatResult" to automatically apply an "s" when needed.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.OtherExtensions.AutoFormatResult(System.Int32,System.String,System.Int32,System.String)">
+            <summary>
+            Utility for <see cref="M:FreneticUtilities.FreneticExtensions.OtherExtensions.SimpleFormat(System.TimeSpan,System.Boolean)"/> for building a result.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.OtherExtensions.SimpleFormat(System.TimeSpan,System.Boolean)">
+            <summary>
+            Gets a simple human-friendly formatted text version of this timespan.
+            <para>Contains 2 points of information, starting at the first non-zero value from: Years, Days, Hours, Minutes, Seconds, Milliseconds.</para>
+            <para>Example result would be: "5 hours and 15 minutes".</para>
+            <para>For timespans of zero, returns "0 seconds".</para>
+            <para>Negative timespans will have their negative value ignored unless <paramref name="addAgo"/> is set.</para>
+            <para>This is for human-friendly output and will NOT reliably reconstruct, as it loses precision.</para>
+            </summary>
+            <param name="duration">The duration of time.</param>
+            <param name="addAgo">For positive timespans, ends the result with "from now". For negative timespans, ends the result with "ago".</param>
+            <returns>The text formatting of the timespan.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticExtensions.StreamExtensions">
+            <summary>
+            Helper extensions for <see cref="T:System.IO.Stream"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StreamExtensions.AllLinesOfText(System.IO.Stream)">
+            <summary>
+            Returns all the lines of text within a readable stream.
+            </summary>
+            <param name="input">The input stream.</param>
+            <returns>All lines of text, separated.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticExtensions.StringExtensions">
+            <summary>
+            Helper extensions for <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.ToLowerFast(System.String)">
+            <summary>
+            Rapidly converts an ASCII string to a lowercase representation.
+            <para>Does not work with non-ASCII text (no support for unicode/multi-language/etc).</para>
+            <para>Operates explicitly on the ASCII 'a-z' and 'A-Z' range.</para>
+            <para>Can be slow if the string is already lowercase (Consider using <see cref="M:FreneticUtilities.FreneticExtensions.StringExtensions.IsAllLowerFast(System.String)"/> if that is likely).</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <returns>A lowercase version.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.ReverseFast(System.String)">
+            <summary>
+            Produces a reversed copy of the string, using relatively efficient logic.
+            <para>This purely reverses the underlying array of 16-bit characters, and therefore does not account for unicode character groups or other special cases.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <returns>The reversed string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.Before(System.String,System.String)">
+            <summary>
+            Gets the part of a string before a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.Before(System.String,System.Char)">
+            <summary>
+            Gets the part of a string before a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.BeforeLast(System.String,System.String)">
+            <summary>
+            Gets the part of a string before the last occurence of a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.BeforeLast(System.String,System.Char)">
+            <summary>
+            Gets the part of a string before the last occurence of a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.BeforeAndAfter(System.String,System.String,System.String@)">
+            <summary>
+            Gets the parts of a string before and after a specified portion.
+            <para>If no match is found, the full input string will be returned as the 'before', and the after will be an empty string.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <param name="after">The output of the latter portion.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.BeforeAndAfter(System.String,System.Char,System.String@)">
+            <summary>
+            Gets the parts of a string before and after a specified portion.
+            <para>If no match is found, the full input string will be returned as the 'before', and the after will be an empty string.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <param name="after">The output of the latter portion.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.BeforeAndAfterLast(System.String,System.Char,System.String@)">
+            <summary>
+            Gets the parts of a string before and after the last occurence of a specified portion.
+            <para>If no match is found, the full input string will be returned as the 'before', and the after will be an empty string.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <param name="after">The output of the latter portion.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.BeforeAndAfterLast(System.String,System.String,System.String@)">
+            <summary>
+            Gets the parts of a string before and after the last occurence of a specified portion.
+            <para>If no match is found, the full input string will be returned as the 'before', and the after will be an empty string.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <param name="after">The output of the latter portion.</param>
+            <returns>The prior portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.AfterLast(System.String,System.Char)">
+            <summary>
+            Gets the part of a string after the last occurence of a specified character.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The latter portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.AfterLast(System.String,System.String)">
+            <summary>
+            Gets the part of a string after the last occurence of a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The latter portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.After(System.String,System.Char)">
+            <summary>
+            Gets the part of a string after a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The latter portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.After(System.String,System.String)">
+            <summary>
+            Gets the part of a string after a specified portion.
+            <para>If no match is found, the full input string will be returned.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="match">The end marker.</param>
+            <returns>The latter portion.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.IndexEquals(System.String,System.Int32,System.Char)">
+            <summary>
+            Returns whether the string has a specific character at a specific index.
+            <para>Accepts values out of range (less than zero or greater than length) and returns false for those values.</para>
+            </summary>
+            <param name="input">The input string.</param>
+            <param name="index">The 0-based index to check.</param>
+            <param name="character">The character to check against.</param>
+            <returns>True if that index equals that character, otherwise false.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.StartsWithNull(System.String)">
+            <summary>
+            Returns whether the string starts with a null character.
+            </summary>
+            <param name="input">The input string.</param>
+            <returns>True if the first character of the string is a null, otherwise false.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.StartsWithFast(System.String,System.Char)">
+            <summary>
+            Returns whether the string starts with the specified character.
+            </summary>
+            <param name="input">The input string.</param>
+            <param name="firstChar">The character being checked.</param>
+            <returns>True if the first character of the string is equal to the specified character, otherwise false.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.EndsWithNull(System.String)">
+            <summary>
+            Returns whether the string ends with a null character.
+            </summary>
+            <param name="input">The input string.</param>
+            <returns>True if the last character of the string is a null, otherwise false.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.EndsWithFast(System.String,System.Char)">
+            <summary>
+            Returns whether the string ends with the specified character.
+            </summary>
+            <param name="input">The input string.</param>
+            <param name="firstChar">The character being checked for.</param>
+            <returns>True if the last character of the string is equal to the specified character, otherwise false.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.IsAllLowerFast(System.String)">
+            <summary>
+            Returns whether the string contains only lowercase ASCII letters (or more specifically: that it does not contain uppercase ASCII letters).
+            <para>Does not work with non-ASCII text (no support for unicode/multi-language/etc).</para>
+            <para>Operates explicitly on the ASCII 'a-z' and 'A-Z' range.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <returns>True if there are no uppercase letters, false if there are uppercase letters found.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.ToUpperFast(System.String)">
+            <summary>
+            Rapidly converts an ASCII string to a uppercase representation.
+            <para>Does not work with non-ASCII text (no support for unicode/multi-language/etc).</para>
+            <para>Operates explicitly on the ASCII 'a-z' and 'A-Z' range.</para>
+            <para>Can be slow if the string is already uppercase (Consider using <see cref="M:FreneticUtilities.FreneticExtensions.StringExtensions.IsAllUpperFast(System.String)"/> if that is likely).</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <returns>An uppercase version.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.IsAllUpperFast(System.String)">
+            <summary>
+            Returns whether the string contains only uppercase ASCII letters (or more specifically: that it does not contain uppercase ASCII letters).
+            <para>Does not work with non-ASCII text (no support for unicode/multi-language/etc).</para>
+            <para>Operates explicitly on the ASCII 'a-z' and 'A-Z' range.</para>
+            </summary>
+            <param name="input">The original string.</param>
+            <returns>True if there are no lowercase letters, false if there are lowercase letters found.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.CountCharacter(System.String,System.Char)">
+            <summary>
+            Counts instances of a character in a string.
+            </summary>
+            <param name="input">The input string.</param>
+            <param name="charToCount">The character to count.</param>
+            <returns>The number of times the character is in the string (0 if none).</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.SplitFast(System.String,System.Char)">
+            <summary>
+            Quickly split a string around a splitter character, with an optional max split count.
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="splitChar">What to split it by.</param>
+            <returns>The split string pieces.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticExtensions.StringExtensions.SplitFast(System.String,System.Char,System.Int32)">
+            <summary>
+            Quickly split a string around a splitter character, with a max split count.
+            </summary>
+            <param name="input">The original string.</param>
+            <param name="splitChar">What to split it by.</param>
+            <param name="maxCount">The maximum number of times to split it.
+            Note that the result array will have a length 1 greater than this input value.</param>
+            <returns>The split string pieces.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPackage">
+            <summary>
+            The centerpoint class for the Frenetic File Package system. Handles a single file package.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPackage.#ctor(System.IO.Stream,System.Action{System.String})">
+            <summary>
+            Construct a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/> from a data stream. Generally a <see cref="F:FreneticUtilities.FreneticFilePackage.FFPackage.FileStream"/> is the stream type to use.
+            </summary>
+            <param name="dataStream">The stream.</param>
+            <param name="warning">An action to give warnings. Can be null if warnings should be ignored.</param>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPackage.InternalData">
+            <summary>
+            The internal data for this <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPackage.InternalData.FileDataStart">
+            <summary>
+            Where file data starts at in the backing stream.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPackage.Internal">
+            <summary>
+            The internal data for this <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPackage.FileStream">
+            <summary>
+            The backing data stream.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPackage.Files">
+            <summary>
+            A mapping of all files contained within the <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPackage.RootFolder">
+            <summary>
+            The root <see cref="T:FreneticUtilities.FreneticFilePackage.FFPFolder"/> of this <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPackage.GetFileData(System.String)">
+            <summary>
+            Gets the data of a file at the specified path.
+            </summary>
+            <param name="fileName">The name of the file, with path separated by '/'.</param>
+            <returns>The file data.</returns>
+            <exception cref="T:System.IO.FileNotFoundException">If the file is not present.</exception>
+            <exception cref="T:System.InvalidOperationException">If there is a file reading error.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPackage.TryGetFileData(System.String,System.Byte[]@)">
+            <summary>
+            Tries to get the data of a file at the specified path.
+            </summary>
+            <param name="fileName">The name of the file, with path separated by '/'.</param>
+            <param name="data">The file data, if found.</param>
+            <returns>Whether the file was found.</returns>
+            <exception cref="T:System.InvalidOperationException">If there is a file reading error.</exception>
+        </member>
+        <member name="P:FreneticUtilities.FreneticFilePackage.FFPackage.FileCount">
+            <summary>
+            Gets the number of files in this <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPBuilder">
+            <summary>
+            A helper class to create new <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>s.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPBuilder.FFPBuilderFile">
+            <summary>
+            Represents a single file that will go into a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPBuilder.FFPBuilderFile.Name">
+            <summary>
+            The name (in the final package) of the file.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPBuilder.FFPBuilderFile.FileObject">
+            <summary>
+            The file object.
+            May be a <see cref="T:System.String"/> of a file name on file system,
+            a <see cref="T:System.Byte"/>[] of raw file data,
+            or a <see cref="T:System.IO.Stream"/> of file data.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPBuilder.Options">
+            <summary>
+            Options for building a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPBuilder.Options.MayGZip">
+            <summary>
+            Whether GZip compression is allowed.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPBuilder.Options.MinimumCompression">
+            <summary>
+            Minimum length before compression is considered.
+            The default value is 1024 (1 kilobyte).
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPBuilder.Options.MaximumCompression">
+            <summary>
+            Maximum length to consider compressing.
+            The default value is (1024 * 1024 * 32) (32 megabytes).
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPBuilder.Options.RequiredCompressionPercentage">
+            <summary>
+            The minimum compression ratio (percentage) to store.
+            The default value is 70, meaning the compressed size must be 70% or less of the raw size.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPBuilder.CreateFromFolder(System.String,System.String,FreneticUtilities.FreneticFilePackage.FFPBuilder.Options)">
+            <summary>
+            Creates a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/> from a file system folder and saves it to a new file.
+            </summary>
+            <param name="folder">The file system folder.</param>
+            <param name="outputFile">The file to output to.</param>
+            <param name="options">The building options.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPBuilder.CreateFromFolder(System.String,System.IO.Stream,FreneticUtilities.FreneticFilePackage.FFPBuilder.Options)">
+            <summary>
+            Creates a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/> from a file system folder.
+            </summary>
+            <param name="folder">The file system folder.</param>
+            <param name="output">The stream to output to.</param>
+            <param name="options">The building options.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPBuilder.CreateFromFiles(FreneticUtilities.FreneticFilePackage.FFPBuilder.FFPBuilderFile[],System.IO.Stream,FreneticUtilities.FreneticFilePackage.FFPBuilder.Options)">
+            <summary>
+            Creates a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/> from an array of on-disk files, in-memory files, and stream-backed files.
+            </summary>
+            <param name="files">List of files.</param>
+            <param name="output">The stream to output to.</param>
+            <param name="options">The building options.</param>
+            <exception cref="T:System.InvalidOperationException">If there are duplicate files, or the file cannot be created.</exception>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPEncoding">
+            <summary>
+            The valid options for how to encode a file in a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPEncoding.RAW">
+            <summary>
+            The binary data in the file is the actual data.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPEncoding.GZIP">
+            <summary>
+            The binary data in the file is encoded by the GZip compression algorithm.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPFile">
+            <summary>
+            Represents a single file in a <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPFile.InternalData">
+            <summary>
+            The internal data for this <see cref="T:FreneticUtilities.FreneticFilePackage.FFPFile"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.InternalData.StartPosition">
+            <summary>
+            The index in the backing stream this file starts at.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.InternalData.FileLength">
+            <summary>
+            The length in the backing stream.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.InternalData.Encoding">
+            <summary>
+            The encoding in use.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.Internal">
+            <summary>
+            The internal data for this <see cref="T:FreneticUtilities.FreneticFilePackage.FFPFile"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.Package">
+            <summary>
+            The backing file package.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.Length">
+            <summary>
+            The length of the file.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.FullName">
+            <summary>
+            The full name of the file, with any path data.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFile.SimpleName">
+            <summary>
+            The simple name of the file (path data removed).
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFile.ReadFileData">
+            <summary>
+            Returns a byte array of the actual file data.
+            </summary>
+            <returns>The actual file data.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPFolder">
+            <summary>
+            A folder within a package.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.SplitPath(System.String)">
+            <summary>
+            Splits a string into a path.
+            </summary>
+            <param name="path">The string of the path, separated by '/'.</param>
+            <returns>The split path.</returns>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPFolder.Contents">
+            <summary>
+            The contents of the package.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.AddFile(System.String,FreneticUtilities.FreneticFilePackage.FFPFile,System.Boolean)">
+            <summary>
+            Adds a file to the folder.
+            </summary>
+            <param name="path">The full file path, separated by the '/' character.</param>
+            <param name="file">The actual file.</param>
+            <param name="overwrite">Whether to overwrite existing files.</param>
+            <exception cref="T:System.InvalidOperationException">If the file cannot be added.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.AddFile(System.String[],FreneticUtilities.FreneticFilePackage.FFPFile,System.Boolean)">
+            <summary>
+            Adds a file to the folder.
+            </summary>
+            <param name="path">The full file path.</param>
+            <param name="file">The actual file.</param>
+            <param name="overwrite">Whether to overwrite existing files.</param>
+            <exception cref="T:System.InvalidOperationException">If the file cannot be added.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.GetObjectAt(System.String[])">
+            <summary>
+            Gets the object at a specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The object.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.ErrorTest(System.Object)">
+            <summary>
+            Performs an inline error test on a value, throwing an exception if an error is found.
+            </summary>
+            <param name="value">The value to test.</param>
+            <returns>The value, unmodified.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.HasFile(System.String[])">
+            <summary>
+            Returns whether a file exists at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>Whether the file exists.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.HasFile(System.String)">
+            <summary>
+            Returns whether a file exists at the specified path.
+            </summary>
+            <param name="path">The path, separated by the '/' symbol.</param>
+            <returns>Whether the file exists.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.HasSubFolder(System.String[])">
+            <summary>
+            Returns whether a sub-folder exists at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>Whether the sub-folder exists.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.HasSubFolder(System.String)">
+            <summary>
+            Returns whether a sub-folder exists at the specified path.
+            </summary>
+            <param name="path">The path, separated by the '/' symbol.</param>
+            <returns>Whether the sub-folder exists.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.GetSubFolder(System.String[])">
+            <summary>
+            Gets a sub-folder at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The folder.</returns>
+            <exception cref="T:System.InvalidOperationException">If the path does not point to a folder.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.GetSubFolder(System.String)">
+            <summary>
+            Gets a sub-folder at the specified path.
+            </summary>
+            <param name="path">The path, separated by the '/' symbol.</param>
+            <returns>The folder.</returns>
+            <exception cref="T:System.InvalidOperationException">If the path does not point to a folder.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.TryGetSubFolder(System.String[],FreneticUtilities.FreneticFilePackage.FFPFolder@)">
+            <summary>
+            Tries to get a sub-folder at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="folder">The folder, if found.</param>
+            <returns>Whether a folder was gotten.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.TryGetSubFolder(System.String,FreneticUtilities.FreneticFilePackage.FFPFolder@)">
+            <summary>
+            Tries to get a sub-folder at the specified path.
+            </summary>
+            <param name="path">The path, separated by the '/' symbol.</param>
+            <param name="folder">The folder, if found.</param>
+            <returns>Whether a folder was gotten.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.GetFile(System.String[])">
+            <summary>
+            Gets a file at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The file.</returns>
+            <exception cref="T:System.InvalidOperationException">If the path does not point to a file.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.GetFile(System.String)">
+            <summary>
+            Gets a file at the specified path.
+            </summary>
+            <param name="path">The path, separated by the '/' symbol.</param>
+            <returns>The file.</returns>
+            <exception cref="T:System.InvalidOperationException">If the path does not point to a file.</exception>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.TryGetFile(System.String[],FreneticUtilities.FreneticFilePackage.FFPFile@)">
+            <summary>
+            Gets a file at the specified path.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="file">The file, if found.</param>
+            <returns>Whether a file was gotten.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.TryGetFile(System.String,FreneticUtilities.FreneticFilePackage.FFPFile@)">
+            <summary>
+            Gets a file at the specified path.
+            </summary>
+            <param name="path">The path, separated by the '/' symbol.</param>
+            <param name="file">The file, if found.</param>
+            <returns>Whether a file was gotten.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.EnumerateFiles">
+            <summary>
+            Enumerates all files (not folders) contained in this folder.
+            </summary>
+            <returns>The file enumerable.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPFolder.EnumerateFolders">
+            <summary>
+            Enumerates all folders (not files) contained in this folder.
+            </summary>
+            <returns>The folders enumerable.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticFilePackage.FFPUtilities">
+            <summary>
+            Helper utilities for <see cref="T:FreneticUtilities.FreneticFilePackage.FFPackage"/>.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticFilePackage.FFPUtilities.FileNameValidator">
+            <summary>
+            An <see cref="T:FreneticUtilities.FreneticToolkit.AsciiMatcher"/> for file-name-valid symbols.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.CleanFileName(System.String)">
+            <summary>
+            Cleans a string to only valid symbols for a file name to contain.
+            </summary>
+            <param name="input">The input string.</param>
+            <returns>The cleaned file name.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.Decode(System.Byte[],FreneticUtilities.FreneticFilePackage.FFPEncoding)">
+            <summary>
+            Decodes data stored with a specified encoding.
+            </summary>
+            <param name="input">The input binary data.</param>
+            <param name="encoding">The encoding in use.</param>
+            <returns>The output data.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.CompressGZip(System.Byte[])">
+            <summary>
+            Compresses the data using the GZip compression algorithm.
+            </summary>
+            <param name="input">The input data (uncompressed).</param>
+            <returns>The output data (compressed).</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.Encode(System.Byte[],FreneticUtilities.FreneticFilePackage.FFPEncoding)">
+            <summary>
+            Encodes data stored with a specified encoding.
+            </summary>
+            <param name="input">The input binary data.</param>
+            <param name="encoding">The encoding in use.</param>
+            <returns>The output data.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.DecodeStream(System.IO.Stream,FreneticUtilities.FreneticFilePackage.FFPEncoding)">
+            <summary>
+            Provides a decoding stream for data stored with a specified encoding.
+            </summary>
+            <param name="input">The input binary data stream.</param>
+            <param name="encoding">The encoding in use.</param>
+            <returns>The output data stream.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.EncodeStream(System.IO.Stream,FreneticUtilities.FreneticFilePackage.FFPEncoding)">
+            <summary>
+            Provides an encoding stream for data stored with a specified encoding.
+            </summary>
+            <param name="input">The input binary data stream.</param>
+            <param name="encoding">The encoding in use.</param>
+            <returns>The output data stream.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticFilePackage.FFPUtilities.ReadBytesGuaranteed(System.IO.Stream,System.Byte[],System.Int32)">
+            <summary>
+            Reads a required number of bytes from the input stream. Does not return until all bytes are read.
+            </summary>
+            <param name="input">The input stream.</param>
+            <param name="outputArray">The output byte array.</param>
+            <param name="length">The length to read.</param>
+            <exception cref="T:System.InvalidOperationException">When the stream closes without providing the require byte count.</exception>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.AsciiMatcher">
+            <summary>
+            Helper class to match ASCII characters efficiently.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.AsciiMatcher.MAX_ASCII">
+            <summary>
+            Maximum value considered part of the ASCII range (127).
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.AsciiMatcher.MIN_NON_ASCII">
+            <summary>
+            Minimum value considered outside the ASCII range (128) (<see cref="F:FreneticUtilities.FreneticToolkit.AsciiMatcher.MAX_ASCII"/> + 1).
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.AsciiMatcher.Chars">
+            <summary>
+            Array of booleans, sized as <see cref="F:FreneticUtilities.FreneticToolkit.AsciiMatcher.MIN_NON_ASCII"/>, such that "Chars[c]" where 'c' is any ASCII character is the validity of that character.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.#ctor(System.String)">
+            <summary>
+            Construct the matcher from a string of valid symbols.
+            </summary>
+            <param name="valid">The valid symbol string.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.#ctor(System.Func{System.Char,System.Boolean})">
+            <summary>
+            Construct the matcher from a function that evaluates whether any symbol is valid.
+            </summary>
+            <param name="isMatch">The validation function.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.IsMatch(System.Char)">
+            <summary>
+            Returns whether a character is considered valid.
+            </summary>
+            <param name="c">The character to check.</param>
+            <returns>Whether it is valid.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.ContainsAnyMatch(System.String)">
+            <summary>
+            Returns whether a string contains at least one matching character.
+            </summary>
+            <param name="s">The string to check.</param>
+            <returns>Whether any match was found.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.IsOnlyMatches(System.String)">
+            <summary>
+            Returns whether a string only contains matching symbols.
+            </summary>
+            <param name="s">The string to check.</param>
+            <returns>Whether it is exclusively valid.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.TrimToMatches(System.String)">
+            <summary>
+            Returns the string with only matching characters included (and non-matches removed).
+            </summary>
+            <param name="s">The original string.</param>
+            <returns>The trimmed string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.AsciiMatcher.TrimToNonMatches(System.String)">
+            <summary>
+            Returns the string with only non-matching characters included (and matches removed).
+            </summary>
+            <param name="s">The original string.</param>
+            <returns>The trimmed string.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.EnumHelper`1">
+            <summary>
+            Helper for <see cref="T:System.Enum"/> types.
+            </summary>
+            <typeparam name="T">The enum type.</typeparam>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.NameValueMap">
+            <summary>
+            A map of names to values for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.LoweredNameValueMap">
+            <summary>
+            A map of lowercased names to values for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.ValueNameMap">
+            <summary>
+            A map of values to names for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.Names">
+            <summary>
+            An array of all names for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.NameSet">
+            <summary>
+            A set of all names for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.LoweredNames">
+            <summary>
+            An array of all lowercased names for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.LoweredNameSet">
+            <summary>
+            A set of all lowercased names for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.Values">
+            <summary>
+            An array of all values for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.ValueSet">
+            <summary>
+            A set of all values for this enum.
+            Do not set to this instance, it will construct and fill itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.UnderlyingType">
+            <summary>
+            Gets the underlying type for the enum type.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.IsFlags">
+            <summary>
+            Whether this is a flags enum.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.LongConverter">
+            <summary>
+            A long converter function. Should only be used for very special case situations - usually, a normal cast works fine.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.EnumHelper`1.FlagTester">
+            <summary>
+            A flag tester function. Ideally there will be a way to do this cleanly without dynamic code gen some day...
+            (Other than just implementing the mathematical comparison inline).
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.CreateLongConverter">
+            <summary>
+            This is a gross hack used since C# handles enum types poorly. This should be destroyed and replaced as soon as C# does it better. (Or perhaps a T4 generator should be used?)
+            </summary>
+            <returns>A long converter function.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.CreateFlagTester">
+            <summary>
+            This is a gross hack used since C# handles enum types poorly. This should be destroyed and replaced as soon as C# does it better. (Or perhaps a T4 generator should be used?)
+            </summary>
+            <returns>A flag tester function.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.TryParseIgnoreCase(System.String,`0@)">
+            <summary>
+            Gets the value for the name, ignoring case.
+            Returns whether the name was found.
+            </summary>
+            <param name="name">The name input.</param>
+            <param name="val">The value output (when returning true).</param>
+            <returns>Success state.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.TryParse(System.String,`0@)">
+            <summary>
+            Gets the value for the name.
+            Returns whether the name was found.
+            </summary>
+            <param name="name">The name input.</param>
+            <param name="val">The value output (when returning true).</param>
+            <returns>Success state.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.ParseIgnoreCase(System.String)">
+            <summary>
+            Gets the value for the name, ignoring case.
+            Throws an exception if name is invalid.
+            </summary>
+            <param name="name">The name to look up.</param>
+            <returns>The enum value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.Parse(System.String)">
+            <summary>
+            Gets the value for the name.
+            Throws an exception if name is invalid.
+            </summary>
+            <param name="name">The name to look up.</param>
+            <returns>The enum value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.IsNameDefinedIgnoreCase(System.String)">
+            <summary>
+            Returns whether the name is defined in the enumeration, ignoring case.
+            </summary>
+            <param name="name">The name to test.</param>
+            <returns>Whether it's defined.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.IsNameDefined(System.String)">
+            <summary>
+            Returns whether the name is defined in the enumeration.
+            </summary>
+            <param name="name">The name to test.</param>
+            <returns>Whether it's defined.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.IsDefined(`0)">
+            <summary>
+            Returns whether the value is defined in the enumeration.
+            </summary>
+            <param name="val">The value to test.</param>
+            <returns>Whether it's defined.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.HasFlag(`0,`0)">
+            <summary>
+            Returns whether the mainVal (as a bitflag set) has the required testVal (as a bitflag set).
+            </summary>
+            <param name="mainVal">The set of flags present.</param>
+            <param name="testVal">The set of flags required.</param>
+            <returns>Whether the flags are present as required.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.TryGetName(`0,System.String@)">
+            <summary>
+            Gets the name for a value (if it is defined).
+            Returns success state.
+            </summary>
+            <param name="val">The value.</param>
+            <param name="name">The name output (when returning true).</param>
+            <returns>Success state.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.EnumHelper`1.GetName(`0)">
+            <summary>
+            Gets the name for a value (if it is defined).
+            </summary>
+            <param name="val">The value.</param>
+            <returns>The name.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEvent`1">
+            <summary>
+            Represents an event within the Frenetic Game Engine.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.Handlers">
+            <summary>
+            All event handlers for this event.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlersBySource">
+            <summary>
+            A map of sources to what they handle.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerIndex">
+            <summary>
+            Represents the index of a handler in the event handler list.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerIndex.SetObject">
+            <summary>
+            The handler set object itself.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerIndex.SetIndex">
+            <summary>
+            The index within the handler set.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerSet">
+            <summary>
+            Represents a set of handlers with the same priority.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerSet.Priority">
+            <summary>
+            The script priority.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerSet.Index">
+            <summary>
+            The index within the main handler list.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.HandlerSet.Handlers">
+            <summary>
+            The event handlers contained in the set.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEvent`1.Helper">
+            <summary>
+            Helper for various usages, primarily scheduling.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.#ctor(FreneticUtilities.FreneticToolkit.FreneticEventHelper)">
+            <summary>
+            Constructs the <see cref="T:FreneticUtilities.FreneticToolkit.FreneticEvent`1"/>.
+            </summary>
+            <param name="_helper">The relevant helper object.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.IsHandled">
+            <summary>
+            Returns whether the <see cref="T:FreneticUtilities.FreneticToolkit.FreneticEvent`1"/> has any handlers. If this returns false, firing the event will do nothing.
+            </summary>
+            <returns>Whether the event is handled.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.Fire(`0,System.Collections.Generic.List{FreneticUtilities.FreneticToolkit.FreneticEventWaiter})">
+            <summary>
+            Fire the event with the given arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+            <param name="waiters">A list of waiters to output into, if any.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.Fire(`0,System.Action)">
+            <summary>
+            Fire the event with the given arguments, with a callback action to indicate delayed completion.
+            </summary>
+            <param name="args">The arguments.</param>
+            <param name="complete">Action to fire when completed.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.IsHandledBySource(System.Object)">
+            <summary>
+            Returns whether the event is handled by a specific source.
+            </summary>
+            <param name="sourceTracker">The source.</param>
+            <returns>Whether it is handled.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.RemoveBySource(System.Object)">
+            <summary>
+            Removes all event handlers from a given source.
+            </summary>
+            <param name="sourceTracker">The source.</param>
+            <returns>Whether anything was removed.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.RemoveByIndex(FreneticUtilities.FreneticToolkit.FreneticEvent{`0}.HandlerIndex)">
+            <summary>
+            Removes the specific handler at a given index.
+            </summary>
+            <param name="index">The index.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.AddEvent(FreneticUtilities.FreneticToolkit.FreneticEventFirer{`0},System.Object,System.Double)">
+            <summary>
+            Adds an event firer to the event.
+            </summary>
+            <param name="firer">The firer.</param>
+            <param name="sourceTracker">The object sourcing this event (for example, a plugin object).</param>
+            <param name="priority">The priority of the handler.</param>
+            <returns>The index of the added handler.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.AddEvent(System.Action{`0},System.Object,System.Double)">
+            <summary>
+            Add a non-waitable event handler to this event.
+            </summary>
+            <param name="act">The handler.</param>
+            <param name="sourceTracker">The object sourcing this event (for example, a plugin object).</param>
+            <param name="priority">The priority of the handler.</param>
+            <returns>The index of the added handler.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEvent`1.AddEvent(System.Action{`0,FreneticUtilities.FreneticToolkit.FreneticEventWaiter},System.Object,System.Double)">
+            <summary>
+            Add a waitable event handler to this event.
+            </summary>
+            <param name="act">The handler.</param>
+            <param name="sourceTracker">The object sourcing this event (for example, a plugin object).</param>
+            <param name="priority">The priority of the handler.</param>
+            <returns>The index of the added handler.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.ICancellableEvent">
+            <summary>
+            Represents a cancellable event.
+            </summary>
+        </member>
+        <member name="P:FreneticUtilities.FreneticToolkit.ICancellableEvent.Cancelled">
+            <summary>
+            Gets or sets whether the event is cancelled.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEventHelper">
+            <summary>
+            A helper class for events.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventHelper.StartAsync(System.Action)">
+            <summary>
+            Start an asynchronous action.
+            </summary>
+            <param name="act">The relevant action.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventHelper.ScheduleSync(System.Action)">
+            <summary>
+            Schedules a synchronous action.
+            </summary>
+            <param name="act">The relevant action.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventHelper.ScheduleSync(System.Action,System.Double)">
+            <summary>
+            Schedules a synchronous action.
+            </summary>
+            <param name="act">The relevant action.</param>
+            <param name="delay">The delay before starting.</param>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEventArgs">
+            <summary>
+            Base class for event arguments.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventArgs.Priority">
+            <summary>
+            The event priority currently firing.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEventWaiter">
+            <summary>
+            Helper to wait inside events.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Helper">
+            <summary>
+            Helper for various usages, primarily scheduling.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Used">
+            <summary>
+            Whether this waiter has been used to create a wait.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.MRECompletion">
+            <summary>
+            The marker for completetion of the waiter.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.MREFirst">
+            <summary>
+            Locked until the first pass of the wait run is complete.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.MREFinalComplete">
+            <summary>
+            Locked until the wait is entirely complete.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Wait(System.Double)">
+            <summary>
+            Waits for a delay in seconds.
+            </summary>
+            <param name="delay">The delay, in seconds.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.WaitFor(System.Threading.ManualResetEvent)">
+            <summary>
+            Waits for an MRE to be set - the runs at the next frame tick.
+            Waits minimum one frame.
+            </summary>
+            <param name="mre"></param>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.AutoComplete">
+            <summary>
+            Whether to automatically complete this waiter at the end of the event system.
+            If turned to false, must call <see cref="M:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Complete"/> to end the waiter when the event is done.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Complete">
+            <summary>
+            Marks the Waiter complete. MUST be run if waiting is ever used! Called automatically by the event system.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Dispose(System.Boolean)">
+            <summary>
+            Screw microsoft.
+            </summary>
+            <param name="disposing">If you input false, screw you.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventWaiter.Dispose">
+            <summary>
+            Dispose and destroy the event.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1">
+            <summary>
+            Helper to fire an event.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.Fire(FreneticUtilities.FreneticToolkit.FreneticEventHelper,`0)">
+            <summary>
+            Used to fire the event.
+            </summary>
+            <param name="helper">The event helper.</param>
+            <param name="args">The event arguments.</param>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.FireAction">
+            <summary>
+            The action used to fire the FreneticEventArgs without a water.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.FireWaiter">
+            <summary>
+            The action used to fire the FreneticEventArgs with a waiter.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.#ctor(System.Action{`0})">
+            <summary>
+            Constructs the firer without a waitable option.
+            </summary>
+            <param name="noWaitEvent">The standard event.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.#ctor(System.Action{`0,FreneticUtilities.FreneticToolkit.FreneticEventWaiter})">
+            <summary>
+            Constructs the firer with a waitable option.
+            </summary>
+            <param name="waitedEvent">The waiter.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.FireNoWait(`0)">
+            <summary>
+            Fires the event, not returning a waiter.
+            </summary>
+            <param name="args">The arguments to the event.</param>
+            <returns>No waiter.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.FreneticEventFirer`1.FireWait(FreneticUtilities.FreneticToolkit.FreneticEventHelper,`0)">
+            <summary>
+            Fires the event, potentially returning a waiter.
+            </summary>
+            <param name="helper">The event helper.</param>
+            <param name="args">The arguments to the event.</param>
+            <returns>A waiter if needed.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.LockObject">
+            <summary>
+            Used for C# locking (which requires an arbitrary object reference to map the monitor lock to).
+            Serves as a better placeholder empty object to use instead of just raw 'object'.
+            </summary>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.MathHelper">
+            <summary>
+            A special helper for various mathematical functions.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.MathHelper.NextPowerOfTwo(System.Int32)">
+            <summary>
+            Returns the next power of two.
+            Meaning, the next number in the sequence:
+            2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, ...
+            Result is >= input.
+            </summary>
+            <param name="x">The value, less than or equal to the result.</param>
+            <returns>The result, greater than or equal to the value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.MathHelper.StepTowards(System.Double,System.Double,System.Double)">
+            <summary>
+            Steps a value towards a goal by a specified amount, automatically moving the correct direction (positive or negative) and preventing going past the goal.
+            </summary>
+            <param name="start">The initial value.</param>
+            <param name="target">The goal value.</param>
+            <param name="amount">The amount to step by.</param>
+            <returns>The result.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.MathHelper.IsCloseTo(System.Double,System.Double,System.Double)">
+            <summary>
+            Returns whether a number is close to another number, within a specified range.
+            </summary>
+            <param name="one">The first number.</param>
+            <param name="target">The second number.</param>
+            <param name="amount">The range.</param>
+            <returns>Whether it's close.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.MathHelper.Clamp(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Clamps an integer value to within a range.
+            </summary>
+            <param name="value">The current value.</param>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum value.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.MathHelper.Clamp(System.Single,System.Single,System.Single)">
+            <summary>
+            Clamps a float value to within a range.
+            </summary>
+            <param name="value">The current value.</param>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum value.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.MathHelper.Clamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Clamps a double value to within a range.
+            </summary>
+            <param name="value">The current value.</param>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum value.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.ObjectConversionHelper">
+            <summary>
+            A special helper for converting arbitrary Object input to and from various types.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.ObjectConversionHelper.ObjectToLong(System.Object,System.Nullable{System.Int64})">
+            <summary>
+            Converts an object value to the long-integer value it represents.
+            Returns the specified default value (or null if unset) if the object does not represent a long-integer.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a nullable long-integer value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.ObjectConversionHelper.ObjectToULong(System.Object,System.Nullable{System.UInt64})">
+            <summary>
+            Converts an object value to the unsigned long-integer value it represents.
+            Returns the specified default value (or null if unset) if the object does not represent an unsigned long-integer.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a nullable unsigned long-integer value.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper">
+            <summary>
+            Helper class for primitive conversion.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyInputBytes16(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase16@,System.Byte[])">
+            <summary>
+            Helper for filling a 16-bit byte union helper struct section from byte array input.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyInputBytes16(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase16@,System.Byte[],System.Int32)">
+            <summary>
+            Helper for filling a 16-bit byte union helper struct section from byte array input.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyOutputBytes16(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase16@,System.Byte[],System.Int32)">
+            <summary>
+            Helper for filling an array of 2 bytes from a 16-bit byte union helper struct section.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.GetOutputBytes16(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase16@)">
+            <summary>
+            Helper to create a byte array from a 16-bit byte union helper struct section.
+            Returns 2 bytes.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyInputBytes32(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase32@,System.Byte[])">
+            <summary>
+            Helper for filling a 32-bit byte union helper struct section from byte array input.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyInputBytes32(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase32@,System.Byte[],System.Int32)">
+            <summary>
+            Helper for filling a 32-bit byte union helper struct section from byte array input.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyOutputBytes32(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase32@,System.Byte[],System.Int32)">
+            <summary>
+            Helper for filling an array of 4 bytes from a 32-bit byte union helper struct section.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.GetOutputBytes32(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase32@)">
+            <summary>
+            Helper to create a byte array from a 32-bit byte union helper struct section.
+            Returns 4 bytes.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyInputBytes64(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase64@,System.Byte[])">
+            <summary>
+            Helper for filling a 64-bit byte union helper struct section from byte array input.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyInputBytes64(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase64@,System.Byte[],System.Int32)">
+            <summary>
+            Helper for filling a 64-bit byte union helper struct section from byte array input.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.CopyOutputBytes64(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase64@,System.Byte[],System.Int32)">
+            <summary>
+            Helper for filling an array of 8 bytes from a 64-bit byte union helper struct section.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.GetOutputBytes64(FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ByteUnionBase64@)">
+            <summary>
+            Helper to create a byte array from a 64-bit byte union helper struct section.
+            Returns 8 bytes.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToShort16(System.Byte[])">
+            <summary>
+            Converts a byte array to a 16-bit signed integer.
+            Input must contain 2 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output short16.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToShort16(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 16-bit signed integer.
+            Input must contain 2 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output short16.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Short16ToBytes(System.Int16)">
+            <summary>
+            Converts a 16-bit signed integer to a byte array.
+            Output contains 2 bytes.
+            </summary>
+            <param name="inputShort16">The input short16.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Short16ToBytes(System.Int16,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 16-bit signed integer to a byte array.
+            Fills 2 bytes.
+            </summary>
+            <param name="inputShort16">The input short16.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToUShort16(System.Byte[])">
+            <summary>
+            Converts a byte array to a 16-bit unsigned integer.
+            Input must contain 2 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output ushort16.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToUShort16(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 16-bit unsigned integer.
+            Input must contain 2 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output ushort16.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.UShort16ToBytes(System.UInt16)">
+            <summary>
+            Converts a 16-bit unsigned integer to a byte array.
+            Output contains 2 bytes.
+            </summary>
+            <param name="inputUShort16">The input ushort16.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.UShort16ToBytes(System.UInt16,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 16-bit unsigned integer to a byte array.
+            Fills 2 bytes.
+            </summary>
+            <param name="inputUShort16">The input ushort16.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToInt32(System.Byte[])">
+            <summary>
+            Converts a byte array to a 32-bit signed integer.
+            Input must contain 4 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output int32.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToInt32(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 32-bit signed integer.
+            Input must contain 4 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output int32.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Int32ToBytes(System.Int32)">
+            <summary>
+            Converts a 32-bit signed integer to a byte array.
+            Output contains 4 bytes.
+            </summary>
+            <param name="inputInt32">The input int32.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Int32ToBytes(System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 32-bit signed integer to a byte array.
+            Fills 4 bytes.
+            </summary>
+            <param name="inputInt32">The input int32.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToUInt32(System.Byte[])">
+            <summary>
+            Converts a byte array to a 32-bit unsigned integer.
+            Input must contain 4 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output uint32.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToUInt32(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 32-bit unsigned integer.
+            Input must contain 4 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output uint32.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.UInt32ToBytes(System.UInt32)">
+            <summary>
+            Converts a 32-bit unsigned integer to a byte array.
+            Output contains 4 bytes.
+            </summary>
+            <param name="inputUInt32">The input uint32.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.UInt32ToBytes(System.UInt32,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 32-bit unsigned integer to a byte array.
+            Fills 4 bytes.
+            </summary>
+            <param name="inputUInt32">The input uint32.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToLong64(System.Byte[])">
+            <summary>
+            Converts a byte array to a 64-bit signed integer.
+            Input must contain 8 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output long64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToLong64(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 64-bit signed integer.
+            Input must contain 8 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output long64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Long64ToBytes(System.Int64)">
+            <summary>
+            Converts a 64-bit signed integer to a byte array.
+            Output contains 8 bytes.
+            </summary>
+            <param name="inputLong64">The input long64.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Long64ToBytes(System.Int64,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 64-bit signed integer to a byte array.
+            Fills 8 bytes.
+            </summary>
+            <param name="inputLong64">The input long64.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToULong64(System.Byte[])">
+            <summary>
+            Converts a byte array to a 64-bit unsigned integer.
+            Input must contain 8 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output ulong64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToULong64(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 64-bit unsigned integer.
+            Input must contain 8 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output ulong64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ULong64ToBytes(System.UInt64)">
+            <summary>
+            Converts a 64-bit unsigned integer to a byte array.
+            Output contains 8 bytes.
+            </summary>
+            <param name="inputULong64">The input ulong64.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ULong64ToBytes(System.UInt64,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 64-bit unsigned integer to a byte array.
+            Fills 8 bytes.
+            </summary>
+            <param name="inputULong64">The input ulong64.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToFloat32(System.Byte[])">
+            <summary>
+            Converts a byte array to a 32-bit floating point number.
+            Input must contain 4 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output float32.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToFloat32(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 32-bit floating point number.
+            Input must contain 4 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output float32.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Float32ToBytes(System.Single)">
+            <summary>
+            Converts a 32-bit floating point number to a byte array.
+            Output contains 4 bytes.
+            </summary>
+            <param name="inputFloat32">The input float32.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Float32ToBytes(System.Single,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 32-bit floating point number to a byte array.
+            Fills 4 bytes.
+            </summary>
+            <param name="inputFloat32">The input float32.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToDouble64(System.Byte[])">
+            <summary>
+            Converts a byte array to a 64-bit double-width floating point number.
+            Input must contain 8 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <returns>The output double64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.BytesToDouble64(System.Byte[],System.Int32)">
+            <summary>
+            Converts a byte array to a 64-bit double-width floating point number.
+            Input must contain 8 bytes.
+            </summary>
+            <param name="inputBytes">The input bytes.</param>
+            <param name="offset">The starting offset within the input bytes.</param>
+            <returns>The output double64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Double64ToBytes(System.Double)">
+            <summary>
+            Converts a 64-bit double-width floating point number to a byte array.
+            Output contains 8 bytes.
+            </summary>
+            <param name="inputDouble64">The input double64.</param>
+            <returns>The output byte array.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Double64ToBytes(System.Double,System.Byte[],System.Int32)">
+            <summary>
+            Converts a 64-bit double-width floating point number to a byte array.
+            Fills 8 bytes.
+            </summary>
+            <param name="inputDouble64">The input double64.</param>
+            <param name="outputBytes">The output byte array.</param>
+            <param name="offset">The starting offset in the byte array.</param>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.ULongToDouble64(System.UInt64)">
+            <summary>
+            Converts a 64-bit unsigned long integer to a 64-bit double-width floating point number.
+            </summary>
+            <param name="inputUlong">The input ulong.</param>
+            <returns>The output double64.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.PrimitiveConversionHelper.Double64ToULong(System.Double)">
+            <summary>
+            Converts a 64-bit double-width floating point number to a 64-bit unsigned long integer.
+            </summary>
+            <param name="inputDouble">The input double64.</param>
+            <returns>The output ulong64.</returns>
+        </member>
+        <member name="T:FreneticUtilities.FreneticToolkit.StringConversionHelper">
+            <summary>
+            A special helper for converting <see cref="T:System.String"/> input to and from various types.
+            </summary>
+        </member>
+        <member name="F:FreneticUtilities.FreneticToolkit.StringConversionHelper.UTF8Encoding">
+            <summary>
+            A standard UTF-8 encoding helper object instance.
+            <para>This is not equivalent to <see cref="P:System.Text.Encoding.UTF8"/> as that will output BOM when converting a <see cref="T:System.String"/> to binary data (which is usually bad).</para>
+            <para>This instance, by contrast, is guaranteed to not do that.</para>
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToUShort(System.String,System.UInt16)">
+            <summary>
+            Converts a string value to the unsigned short-integer value it represents.
+            Returns the specified default value (or zero if unset) if the string does not represent a unsigned short-integer.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a unsigned short-integer value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToShort(System.String,System.Int16)">
+            <summary>
+            Converts a string value to the short-integer value it represents.
+            Returns the specified default value (or zero if unset) if the string does not represent a short-integer.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a short-integer value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToLong(System.String,System.Int64)">
+            <summary>
+            Converts a string value to the long-integer value it represents.
+            Returns the specified default value (or zero if unset) if the string does not represent a long-integer.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a long-integer value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToInt(System.String,System.Int32)">
+            <summary>
+            Converts a string value to the integer value it represents.
+            Returns the specified default value (or zero if unset) if the string does not represent an integer.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>an integer value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToDouble(System.String,System.Double)">
+            <summary>
+            Converts a string value to the double value it represents.
+            Returns the specified default value (or zero if unset) if the string does not represent a double.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a double value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToFloat(System.String,System.Single)">
+            <summary>
+            Converts a string value to the float value it represents.
+            Returns the specified default value (or zero if unset) if the string does not represent a float.
+            </summary>
+            <param name="input">The string to get the value from.</param>
+            <param name="defaultValue">The default value to use.</param>
+            <returns>a float value.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToDateTime(System.String)">
+            <summary>
+            Converts a string to a date-time.
+            <para>Parsing errors will give a null result.</para>
+            <para>Expected format is "YYYY/MM/DD hh:mm:ss UTC+OO:oo".</para>
+            <para>YYYY = 4 digit year, MM = 2 digit month, DD = 2 digit day.</para>
+            <para>hh = 2 digit hour, mm = 2 digit minute, ss = 2 digit second.</para>
+            <para>OO = 2 digit offset hours, oo = 2 digit offset minutes. Can be prefixed with a '+' or '-'.</para>
+            <para>Optionally add 4-digit millisecond, like "YYYY/MM/DD hh:mm:ss:tttt UTC+OO:oo".</para>
+            <para>Inverted by <see cref="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.DateTimeToString(System.DateTimeOffset,System.Boolean)"/>.</para>
+            </summary>
+            <param name="input">The input string.</param>
+            <returns>The date-time.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.QPad(System.Int32,System.Int32)">
+            <summary>
+            Local utility used for <see cref="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.DateTimeToString(System.DateTimeOffset,System.Boolean)"/>.
+            </summary>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.DateTimeToString(System.DateTimeOffset,System.Boolean)">
+            <summary>
+            Returns a string representation of the specified time.
+            <para>Format is "YYYY/MM/DD hh:mm:ss UTC+OO:oo".</para>
+            <para>YYYY = 4 digit year, MM = 2 digit month, DD = 2 digit day.</para>
+            <para>hh = 2 digit hour, mm = 2 digit minute, ss = 2 digit second.</para>
+            <para>OO = 2 digit offset hours, oo = 2 digit offset minutes. Can be prefixed with a '+' or '-'.</para>
+            <para>if 'showMilliseconds' is true, will add 4-digit millisecond, like "YYYY/MM/DD hh:mm:ss:tttt UTC+OO:oo".</para>
+            <para>Inverted by <see cref="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.StringToDateTime(System.String)"/>.</para>
+            </summary>
+            <param name="input">The datetime object.</param>
+            <param name="showMilliseconds">Whether to include milliseconds.</param>
+            <returns>The time as a string.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.FindClosestString(System.Collections.Generic.IEnumerable{System.String},System.String,System.Int32)">
+            <summary>
+            Finds the closest string in a list to a searched string, using Levenshtein comparison logic.
+            See also <see cref="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.GetLevenshteinDistance(System.String,System.String)"/>.
+            </summary>
+            <param name="allStrs">The list of all valid strings.</param>
+            <param name="searchString">The string to search for.</param>
+            <param name="maxDistance">The maximum Levenshtein distance, if any.</param>
+            <returns>The found string, or null if none.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.FindClosestString(System.Collections.Generic.IEnumerable{System.String},System.String,System.Int32@,System.Int32)">
+            <summary>
+            Finds the closest string in a list to a searched string, using Levenshtein comparison logic.
+            See also <see cref="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.GetLevenshteinDistance(System.String,System.String)"/>.
+            </summary>
+            <param name="allStrs">The list of all valid strings.</param>
+            <param name="searchString">The string to search for.</param>
+            <param name="maxDistance">The maximum Levenshtein distance, if any.</param>
+            <param name="dist">An output parameter for the lowest distance value.</param>
+            <returns>The found string, or null if none.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.GetLevenshteinDistance(System.String,System.String)">
+            <summary>
+            Gets the approximate distance between two strings, based on Levenshtein comparison logic.
+            Useful for finding "Did you mean ...?" suggestions (see also <see cref="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.FindClosestString(System.Collections.Generic.IEnumerable{System.String},System.String,System.Int32)"/>).
+            </summary>
+            <param name="firstString">The first string.</param>
+            <param name="secondString">The second string to compare against the first.</param>
+            <returns>A numerical value indicating how different the two strings are.</returns>
+        </member>
+        <member name="M:FreneticUtilities.FreneticToolkit.StringConversionHelper.FindFirstDifference(System.String,System.String)">
+            <summary>
+            Finds the index of the first different character between two strings (case sensitive).
+            <para>For example, input of "My text" and "My word" returns '3' (character 't' in <paramref name="a"/> vs character 'w' in <paramref name="b"/>).</para>
+            <para>For input like "My text" and "My text2", returns '7' (the index of character '2').</para>
+            <para>Returns -1 for exactly equal strings.</para>
+            </summary>
+            <param name="a">The first string.</param>
+            <param name="b">The second string.</param>
+            <returns>The index of first difference, or -1 if no difference.</returns>
+        </member>
+    </members>
+</doc>
