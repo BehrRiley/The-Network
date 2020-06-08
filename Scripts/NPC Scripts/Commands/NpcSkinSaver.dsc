@@ -30,8 +30,8 @@ npc_skin_validate:
     type: task
     debug: false
     script:
-    - if !<player.has_permission[denizen.saveskin]||<<player.is_op||context.server>>>:
-      - narrate "Nope!"
+    - if !<player.has_permission[denizen.saveskin]||<player.is_op||context.server>>:
+      - narrate Nope!
       - stop
     - if <context.args.size> == 0:
       - narrate "/saveskin <&lt>Name<&gt>"
