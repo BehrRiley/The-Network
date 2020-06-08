@@ -54,5 +54,7 @@ Ability_Command:
     type: command
     name: Ability
     permission: test
+    usage: /ability
+    description: ability reset
     script:
         - flag player Behrry.Skill.Mining.Ability.PowerMining.Cooldown:!
