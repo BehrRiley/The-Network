@@ -19,7 +19,7 @@ Archive Scripts/*
 .backups/*
 .control/*
 .jars/*
-.scripts/*
+Scripts/*
 Servers/*
 Resource/*
 widget/*
