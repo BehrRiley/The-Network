@@ -21,22 +21,46 @@ Command_Error:
     type: task
     debug: false
     script:
-        - define Hover "<proc[Colorize].context[You typed:|red]><&r><&nl><&c>/<context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <queue.script.yaml_key[Usage].parsed>"
+        - define Hover "<proc[Colorize].context[You Typed:|red]><&r><&nl><&4>/<&c><context.alias||<context.command>> <context.raw_args><&nl><&2>C<&a>lick to <&2>I<&a>nsert<&nl><&6>Syntax<&co> <proc[Colorize].context[<queue.script.yaml_key[Usage].parsed>|yellow]>"
         - define Text "<proc[Colorize].context[<[Reason]>|red]>"
         - define Command "<queue.script.yaml_key[aliases].get[1]||<context.alias||<context.command>>> "
         - narrate <proc[MsgHint].context[<[Hover]>|<[Text]>|<[Command]>]>
         - stop
 
-# % ██  [ Specifically not moderation, no permission message ] ██
-# - ██  [ Usage ] - inject Admin_Permission_Denied instantly
-Admin_Permission_Denied:
+
+# % ██  [ U ] ██
+# - ██  [ Usage ] - define Reason "no"
+# - ██  [       ] - inject Permission_Error
+Permission_Error:
     type: task
     debug: false
     script:
         - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
-        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6>Moderation"
+        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6><queue.script.yaml_key[adminpermission]>"
         - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
         - stop
+
+
+# % ██  [ U ] ██
+# - ██  [ Usage ] - define Reason "no"
+# - ██  [       ] - inject Command_Error
+Admin_Verification:
+    type: task
+    debug: false
+    script:
+        - if !<player.has_permission[<queue.script.yaml_key[adminpermission]>]>:
+            - inject Permission_Error
+
+#$# % ██  [ Specifically not moderation, no permission message ] ██
+#$# - ██  [ Usage ] - inject Admin_Permission_Denied instantly
+#$Admin_Permission_Denied:
+#$    type: task
+#$    debug: false
+#$    script:
+#$        - define Text "<proc[Colorize].context[You don't have permission to do that.|red]>"
+#$        - define Hover "<proc[Colorize].context[Permission Required:|red]> <&6>Moderation"
+#$        - narrate <proc[HoverMsg].context[<[Hover]>|<[Text]>]>
+#$        - stop
 
 # % ██  [ Verifies a player online ] ██
 # - ██  [ Usage ]  - define User playername
@@ -204,9 +228,9 @@ OneArg_Command_Tabcomplete:
         - if !<[iArg].exists>:
             - define iArg 1
         - if <context.args.size> == <[iArg].sub[1]>:
-            - determine <[Args].unescaped>
+            - determine <[Args]>
         - else if <context.args.size> == <[iArg]> && !<context.raw_args.ends_with[<&sp>]>:
-            - determine <[Args].unescaped.as_list.filter[starts_with[<context.args.get[<[iArg]>]>]]>
+            - determine <[Args].filter[starts_with[<context.args.get[<[iArg]>]>]]>
 
 
 
@@ -336,13 +360,17 @@ MultiArg_With_MultiArgs_Excess_Command_Tabcomplete:
 # % ██
 # @ ██  [ Activates or Deactivates a toggle command ] ██
 # @ ██  [ Usage ] - define Arg <context.args.get[1]||null>
-# @ ██  [       ] - define ModeFlag "behrry.essentials.example"
+# @ ██  [       ] - define ModeFlag "Behr.Essentials.Example"
 # @ ██  [       ] - define ModeName "Mode Name"
 # @ ██  [       ] - inject Activation_Arg_Command Instantly
+# @ ██  [       ]
+# @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name"
+# @ ██  [       ] - run Activation_Arg_Command "def:Behr.Essentials.Example|Mode Name|on"
 
 Activation_Arg:
     type: task
     debug: false
+    definitions: Flag|Mode|Arg
     Activate:
         - if <player.has_flag[<[ModeFlag]>]>:
             - narrate "<proc[Colorize].context[Nothing interesting happens.|yellow]>"
@@ -356,17 +384,17 @@ Activation_Arg:
             - flag player <[ModeFlag]>:!
             - narrate "<proc[Colorize].context[<[ModeName]> Disabled.|green]>"
     script:
-        - choose <[Arg]>:
+        - choose <[Arg]||null>:
             - case on true activate:
                 - inject locally Activate Instantly
             - case off false deactivate:
                 - inject locally Deactivate Instantly
-            - case "null":
+            - case null:
                 - if <player.has_flag[<[ModeFlag]>]>:
                     - inject locally Deactivate Instantly
                 - else:
                     - inject locally Activate Instantly
-            - case default:
+            - default:
                 - inject Command_Syntax Instantly
 
 
