@@ -20,6 +20,7 @@ Archive Scripts/*
 .backups/*
 .control/*
 .jars/*
+.scripts/*
 Servers/*
 Resource/*
 widget/*
