@@ -26,34 +26,7 @@ Colorize:
                 - define 1 <&8>
                 - define 2 <&7>
 
-        # - First-Letter-Case
-        - foreach <[String].unescaped.replace[&pipe].with[<&chr[6969]>].split[<&sp>]>:
-            - define String1 <[1]><[value].split[].get[1]>
-            - if <[value].split[].size> == 1:
-                - define String2 <[2]>
-            - else:
-                - define String2 <[2]><[value].split[].get[2].to[99].separated_by[]>
-            - define Text:->:<[String1]><[String2]>
-        # - Separate
-        - define Text <[Text].separated_by[<&sp>]>
-        #$REGEX
-        #| wow, why did i do this
-        #- define Regex (<element[!@#$%^&*(),.:;'"{}].split[].after[li@]>)
-        - define Text <[Text].replace[regex:(<&lt>|<&gt>|\.|,|\#|\$|\^|\&|\*|'|`|-|_|/|\{|\}|\(|\)|\<&lb>|@|:|;|\<&rb>)].with[<[1]>$1<[2]>].replace[<&chr[6969]>].with[|]>
-        ## - Brackets
-        #- define Text <[Text].replace[<&lb>].with[<[1]><&lb><[2]>].replace[<&rb>].with[<[1]><&rb><[2]>]>
-        ## - Braces
-        #- define Text <[Text].replace[{].with[<[1]>{<[2]>].replace[}].with[<[1]>}<[2]>]>
-        ## - Parentheses
-        #- define Text <[Text].replace[(].with[<[1]>(<[2]>].replace[)].with[<[1]>)<[2]>]>
-        ## - Carrots
-        #- define Text <[Text].replace[<&gt>].with[<[1]><&gt><[2]>].replace[<&lt>].with[<[1]><&lt><[2]>]>
-        ## - Periods & Comma
-        #- define Text <[Text].replace[.].with[<[1]>.<[2]>].replace[,].with[<[1]>,<[2]>]>
-        ## - Exclamation & Colons
-        #- define Text <[Text].replace[!].with[<[1]>!<[2]>].replace[<&co>].with[<[1]><&co><[2]>]>
-        ## - Forward and Backward Slash
-        #- define Text <[Text].replace[/].with[<[1]>/<[2]>].replace[<&bs>].with[<[1]><&bs><[2]>]>
+        - define Text <[String].split[].parse_tag[<tern[<[parse_value].matches_character_set[!@#$<&pc>^&*<&pipe>()<&lt><&gt>{}<&lb><&rb>:;'<&dq>-_,.?/ABCDEFGHIJKLMNOPQRSTUVWXYZ]>].pass[<[1]><[parse_value]>].fail[<[2]><[parse_value]>]>].unseparated>
         - Determine <[Text]>
 
 Colorize_Green:
